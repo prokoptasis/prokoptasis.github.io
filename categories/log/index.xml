@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Log on Prokoptasis</title>
+    <link>http://prokoptasis.github.io/categories/log/</link>
+    <description>Recent content in Log on Prokoptasis</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>kr-ko</language>
+    <lastBuildDate>Sun, 27 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://prokoptasis.github.io/categories/log/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>기록을 시작합니다.</title>
+      <link>http://prokoptasis.github.io/posts/200928/</link>
+      <pubDate>Sun, 27 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://prokoptasis.github.io/posts/200928/</guid>
+      <description>Hugo 선택 과정 #  웹 기록을 위한 검토 과정은 다음과 같았습니다. 정적 웹 생성기 중 Jekyll과 Hugo를 놓고 고민하였습니다.
+   구분 Jekyll Hugo     장점 GitHub 연동 빠른 빌드   단점 느린 빌드 테마 부족    다음과 같은 사유로 HUGO로 선택하게 되었습니다.
+ 빠른 빌드 속도 Golang과의 접점 적정한 문서기록용 테마  향후 다음 사항에 익숙해져야 할것 같습니다.
+ Markdown 숙지 구조 체계 정리 추가적인 Custom  일다은 지속적으로 써봐야 익숙해질 것 같습니다.</description>
+    </item>
+    
+  </channel>
+</rss>

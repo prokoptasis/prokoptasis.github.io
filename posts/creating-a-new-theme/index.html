@@ -10,14 +10,25 @@ We&rsquo;ll start with creating a new site with a very basic template.">
 <meta property="og:description" content="Introduction #  This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content. I&rsquo;ll explain how Hugo uses templates and how you can organize your templates to create a theme. I won&rsquo;t cover using CSS to style your theme.
 We&rsquo;ll start with creating a new site with a very basic template." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://example.org/posts/creating-a-new-theme/" />
+<meta property="og:url" content="http://prokoptasis.github.io/posts/creating-a-new-theme/" />
 <meta property="article:published_time" content="2014-09-28T00:00:00+00:00" />
 <meta property="article:modified_time" content="2014-09-28T00:00:00+00:00" />
-<title>Creating a New Theme | My New Hugo Site</title>
+<title>Creating a New Theme | Prokoptasis</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.134b70e5316650a530cb42e4e8630b2a01d532bebfc0337028211175336e4806.css" integrity="sha256-E0tw5TFmUKUwy0Lk6GMLKgHVMr6/wDNwKCERdTNuSAY=">
-<script defer src="/en.search.min.b058edf587cc787855b3d071254fe14f8dde3f72958d02e619e4aa992f47ef07.js" integrity="sha256-sFjt9YfMeHhVs9BxJU/hT43eP3KVjQLmGeSqmS9H7wc="></script>
+<script defer src="/en.search.min.048e5e9cab2d64f6b5e2d78ab8662aa611a0316b0291212147010f4f52a597d1.js" integrity="sha256-BI5enKstZPa14teKuGYqphGgMWsCkSEhRwEPT1Kll9E="></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-176412981-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -34,7 +45,7 @@ https://github.com/alex-shpak/hugo-book
       
   <nav>
 <h2 class="book-brand">
-  <a href="/"><span>My New Hugo Site</span>
+  <a href="/"><span>Prokoptasis</span>
   </a>
 </h2>
 
@@ -63,72 +74,15 @@ https://github.com/alex-shpak/hugo-book
   <ul>
     
       
-        <li class="book-section-flat" >
-          
-  
-  
-
-  
-    <a href="http://example.org/docs/example/" class="">Example Site</a>
-  
-
-          
-  <ul>
-    
-      
         <li>
           
   
   
 
   
-    <a href="http://example.org/docs/example/table-of-contents/" class="">Table of Contents</a>
-  
-
-          
-  <ul>
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="http://example.org/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="http://example.org/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
-  
-
-        </li>
-      
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-4e46b01272d410b3a99461d79326ddf4" class="toggle"  />
-    <label for="section-4e46b01272d410b3a99461d79326ddf4" class="flex justify-between">
-      <a  class="">Collapsed</a>
+    <input type="checkbox" id="section-57a933ec8525b0c28bab7735b8b960cb" class="toggle"  />
+    <label for="section-57a933ec8525b0c28bab7735b8b960cb" class="flex justify-between">
+      <a href="http://prokoptasis.github.io/docs/frontend/" class="">Front End</a>
       <span>▾</span>
     </label>
   
@@ -143,12 +97,17 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+    <a href="http://prokoptasis.github.io/docs/frontend/css/" class="">CSS</a>
   
 
           
   <ul>
     
+  </ul>
+
+        </li>
+      
+    
       
         <li>
           
@@ -156,49 +115,13 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
-  
-
-        </li>
-      
-    
-  </ul>
-
-        </li>
-      
-    
-  </ul>
-
-        </li>
-      
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li class="book-section-flat" >
-          
-  
-  
-
-  
-    <span>Shortcodes</span>
+    <a href="http://prokoptasis.github.io/docs/frontend/html/" class="">HTML</a>
   
 
           
   <ul>
     
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="http://example.org/docs/shortcodes/buttons/" class="">Buttons</a>
-  
+  </ul>
 
         </li>
       
@@ -210,8 +133,13 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/shortcodes/columns/" class="">Columns</a>
+    <a href="http://prokoptasis.github.io/docs/frontend/javascript/" class="">Java Script</a>
   
+
+          
+  <ul>
+    
+  </ul>
 
         </li>
       
@@ -223,8 +151,13 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/shortcodes/details/" class="">Details</a>
+    <a href="http://prokoptasis.github.io/docs/frontend/hugo/" class="">Hugo</a>
   
+
+          
+  <ul>
+    
+  </ul>
 
         </li>
       
@@ -236,8 +169,18 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/shortcodes/expand/" class="">Expand</a>
+    <a href="http://prokoptasis.github.io/docs/frontend/markdown/" class="">Markdown</a>
   
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
 
         </li>
       
@@ -249,48 +192,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/shortcodes/hints/" class="">Hints</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="http://example.org/docs/shortcodes/katex/" class="">Katex</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="http://example.org/docs/shortcodes/mermaid/" class="">Mermaid</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="toggle"  />
-    <label for="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="flex justify-between">
-      <a href="http://example.org/docs/shortcodes/section/" class="">Section</a>
+    <input type="checkbox" id="section-7761561808c1f7405e0edd8dff5c2254" class="toggle"  />
+    <label for="section-7761561808c1f7405e0edd8dff5c2254" class="flex justify-between">
+      <a href="http://prokoptasis.github.io/docs/backend/" class="">Back End</a>
       <span>▾</span>
     </label>
   
@@ -305,8 +209,13 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/shortcodes/section/page1/" class="">Page1</a>
+    <a href="http://prokoptasis.github.io/docs/backend/plsql/" class="">PL/SQL</a>
   
+
+          
+  <ul>
+    
+  </ul>
 
         </li>
       
@@ -318,8 +227,31 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/shortcodes/section/page2/" class="">Page2</a>
+    <a href="http://prokoptasis.github.io/docs/backend/go/" class="">GO</a>
   
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/backend/rust/" class="">RUST</a>
+  
+
+          
+  <ul>
+    
+  </ul>
 
         </li>
       
@@ -336,8 +268,262 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/shortcodes/tabs/" class="">Tabs</a>
+    <input type="checkbox" id="section-2af6a70294eb0b54b31a050af16e50d4" class="toggle"  />
+    <label for="section-2af6a70294eb0b54b31a050af16e50d4" class="flex justify-between">
+      <a href="http://prokoptasis.github.io/docs/devops/" class="">Dev ops</a>
+      <span>▾</span>
+    </label>
   
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/devops/oracle/" class="">Oracle</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/devops/synology/" class="">Synology</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/devops/ubuntu/" class="">Ubuntu</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/devops/docker/" class="">Docker</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-30d76e5fcee60ad0a60fff5a405c2340" class="toggle"  />
+    <label for="section-30d76e5fcee60ad0a60fff5a405c2340" class="flex justify-between">
+      <a href="http://prokoptasis.github.io/docs/devops/aws/" class="">AWS</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7a09fe8521d170268b304a9e5e03cfa5" class="toggle"  />
+    <label for="section-7a09fe8521d170268b304a9e5e03cfa5" class="flex justify-between">
+      <a href="http://prokoptasis.github.io/docs/deeplearning/" class="">Deep Learning</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/deeplearning/python/" class="">Python</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/deeplearning/tensorflow/" class="">Tensorflow</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-0d52339e44a1df6de3022770be2ff4c8" class="toggle"  />
+    <label for="section-0d52339e44a1df6de3022770be2ff4c8" class="flex justify-between">
+      <a href="http://prokoptasis.github.io/docs/business/" class="">Business</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/business/supplychain/" class="">Supply Chain</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5a9889aa356edfc6520b82b7f3816913" class="toggle"  />
+    <label for="section-5a9889aa356edfc6520b82b7f3816913" class="flex justify-between">
+      <a href="http://prokoptasis.github.io/docs/gamedev/" class="">Game Dev</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/gamedev/c/" class="">C</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/gamedev/c&#43;&#43;/" class="">C&#43;&#43;</a>
+  
+
+          
+  <ul>
+    
+  </ul>
 
         </li>
       
@@ -364,7 +550,31 @@ https://github.com/alex-shpak/hugo-book
   
   <li>
     <a href="/posts/" >
-        Blog
+        Personal Logs
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/prokoptasis/prokoptasis" target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://twitter.com/prokoptasis" target="_blank" rel="noopener">
+        Twitter
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://www.facebook.com/c.exigua/" target="_blank" rel="noopener">
+        Facebook
+      </a>
+  </li>
+  
+  <li>
+    <a href="mailto:c.exigua@gmail.com" target="_blank" rel="noopener">
+        Gmail
       </a>
   </li>
   
@@ -409,60 +619,64 @@ https://github.com/alex-shpak/hugo-book
     
   <nav id="TableOfContents">
   <ul>
-    <li><a href="#introduction">Introduction</a></li>
-    <li><a href="#some-definitions">Some Definitions</a>
+    <li>
       <ul>
-        <li><a href="#skins">Skins</a></li>
-        <li><a href="#the-home-page">The Home Page</a></li>
-        <li><a href="#site-configuration-file">Site Configuration File</a></li>
-        <li><a href="#content">Content</a></li>
-        <li><a href="#template-files">Template Files</a></li>
-      </ul>
-    </li>
-    <li><a href="#create-a-new-site">Create a New Site</a>
-      <ul>
-        <li><a href="#generate-the-html-for-the-new-site">Generate the HTML For the New Site</a></li>
-        <li><a href="#test-the-new-site">Test the New Site</a></li>
-      </ul>
-    </li>
-    <li><a href="#create-a-new-theme">Create a New Theme</a>
-      <ul>
-        <li><a href="#create-a-skeleton">Create a Skeleton</a></li>
-        <li><a href="#update-the-configuration-file-to-use-the-theme">Update the Configuration File to Use the Theme</a></li>
-        <li><a href="#generate-the-site">Generate the Site</a></li>
-      </ul>
-    </li>
-    <li><a href="#the-theme-development-cycle">The Theme Development Cycle</a>
-      <ul>
-        <li><a href="#purge-the-public-directory">Purge the public/ Directory</a></li>
-        <li><a href="#hugos-watch-option">Hugo&rsquo;s Watch Option</a></li>
-        <li><a href="#live-reload">Live Reload</a></li>
-        <li><a href="#development-commands">Development Commands</a></li>
-      </ul>
-    </li>
-    <li><a href="#update-the-home-page-template">Update the Home Page Template</a>
-      <ul>
-        <li><a href="#make-a-static-home-page">Make a Static Home Page</a></li>
-        <li><a href="#build-a-dynamic-home-page">Build a &ldquo;Dynamic&rdquo; Home Page</a></li>
-        <li><a href="#list-and-single-templates">List and Single Templates</a></li>
-        <li><a href="#add-content-to-the-homepage">Add Content to the Homepage</a></li>
-        <li><a href="#add-content-to-the-posts">Add Content to the Posts</a></li>
-        <li><a href="#linking-to-content">Linking to Content</a></li>
-        <li><a href="#create-a-post-listing">Create a Post Listing</a></li>
-      </ul>
-    </li>
-    <li><a href="#creating-top-level-pages">Creating Top Level Pages</a></li>
-    <li><a href="#sharing-templates">Sharing Templates</a>
-      <ul>
-        <li><a href="#create-the-header-and-footer-partials">Create the Header and Footer Partials</a></li>
-        <li><a href="#update-the-home-page-template-to-use-the-partials">Update the Home Page Template to Use the Partials</a></li>
-        <li><a href="#update-the-default-single-template-to-use-the-partials">Update the Default Single Template to Use the Partials</a></li>
-      </ul>
-    </li>
-    <li><a href="#add-date-published-to-posts">Add “Date Published” to Posts</a>
-      <ul>
-        <li><a href="#add-date-published-to-the-template">Add “Date Published” to the Template</a></li>
-        <li><a href="#dont-repeat-yourself">Don&rsquo;t Repeat Yourself</a></li>
+        <li><a href="#introduction">Introduction</a></li>
+        <li><a href="#some-definitions">Some Definitions</a>
+          <ul>
+            <li><a href="#skins">Skins</a></li>
+            <li><a href="#the-home-page">The Home Page</a></li>
+            <li><a href="#site-configuration-file">Site Configuration File</a></li>
+            <li><a href="#content">Content</a></li>
+            <li><a href="#template-files">Template Files</a></li>
+          </ul>
+        </li>
+        <li><a href="#create-a-new-site">Create a New Site</a>
+          <ul>
+            <li><a href="#generate-the-html-for-the-new-site">Generate the HTML For the New Site</a></li>
+            <li><a href="#test-the-new-site">Test the New Site</a></li>
+          </ul>
+        </li>
+        <li><a href="#create-a-new-theme">Create a New Theme</a>
+          <ul>
+            <li><a href="#create-a-skeleton">Create a Skeleton</a></li>
+            <li><a href="#update-the-configuration-file-to-use-the-theme">Update the Configuration File to Use the Theme</a></li>
+            <li><a href="#generate-the-site">Generate the Site</a></li>
+          </ul>
+        </li>
+        <li><a href="#the-theme-development-cycle">The Theme Development Cycle</a>
+          <ul>
+            <li><a href="#purge-the-public-directory">Purge the public/ Directory</a></li>
+            <li><a href="#hugos-watch-option">Hugo&rsquo;s Watch Option</a></li>
+            <li><a href="#live-reload">Live Reload</a></li>
+            <li><a href="#development-commands">Development Commands</a></li>
+          </ul>
+        </li>
+        <li><a href="#update-the-home-page-template">Update the Home Page Template</a>
+          <ul>
+            <li><a href="#make-a-static-home-page">Make a Static Home Page</a></li>
+            <li><a href="#build-a-dynamic-home-page">Build a &ldquo;Dynamic&rdquo; Home Page</a></li>
+            <li><a href="#list-and-single-templates">List and Single Templates</a></li>
+            <li><a href="#add-content-to-the-homepage">Add Content to the Homepage</a></li>
+            <li><a href="#add-content-to-the-posts">Add Content to the Posts</a></li>
+            <li><a href="#linking-to-content">Linking to Content</a></li>
+            <li><a href="#create-a-post-listing">Create a Post Listing</a></li>
+          </ul>
+        </li>
+        <li><a href="#creating-top-level-pages">Creating Top Level Pages</a></li>
+        <li><a href="#sharing-templates">Sharing Templates</a>
+          <ul>
+            <li><a href="#create-the-header-and-footer-partials">Create the Header and Footer Partials</a></li>
+            <li><a href="#update-the-home-page-template-to-use-the-partials">Update the Home Page Template to Use the Partials</a></li>
+            <li><a href="#update-the-default-single-template-to-use-the-partials">Update the Default Single Template to Use the Partials</a></li>
+          </ul>
+        </li>
+        <li><a href="#add-date-published-to-posts">Add “Date Published” to Posts</a>
+          <ul>
+            <li><a href="#add-date-published-to-the-template">Add “Date Published” to the Template</a></li>
+            <li><a href="#dont-repeat-yourself">Don&rsquo;t Repeat Yourself</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -617,13 +831,13 @@ INFO: 2014/09/29 Using config file: config.toml
 INFO: 2014/09/29 syncing from /Users/quoha/Sites/zafta/static/ to /Users/quoha/Sites/zafta/public/
 WARN: 2014/09/29 Unable to locate layout: [index.html _default/list.html _default/single.html]
 WARN: 2014/09/29 Unable to locate layout: [404.html]
-0 draft content 
-0 future content 
-0 pages created 
+0 draft content
+0 future content
+0 pages created
 0 tags created
 0 categories created
 in 2 ms
-$ 
+$
 </code></pre><p>The &ldquo;<code>--verbose</code>&rdquo; flag gives extra information that will be helpful when we build the template. Every line of the output that starts with &ldquo;INFO:&rdquo; or &ldquo;WARN:&rdquo; is present because we used that flag. The lines that start with &ldquo;WARN:&rdquo; are warning messages. We&rsquo;ll go over them later.</p>
 <p>We can verify that the command worked by looking at the directory again.</p>
 <pre><code>$ ls -l
@@ -640,7 +854,7 @@ $
 total 16
 -rw-r--r--  1 quoha  staff  416 Sep 29 17:02 index.xml
 -rw-r--r--  1 quoha  staff  262 Sep 29 17:02 sitemap.xml
-$ 
+$
 </code></pre><p>Hugo created two XML files, which is standard, but there are no HTML files.</p>
 <h3 id="test-the-new-site">
   Test the New Site
@@ -652,9 +866,9 @@ INFO: 2014/09/29 Using config file: /Users/quoha/Sites/zafta/config.toml
 INFO: 2014/09/29 syncing from /Users/quoha/Sites/zafta/static/ to /Users/quoha/Sites/zafta/public/
 WARN: 2014/09/29 Unable to locate layout: [index.html _default/list.html _default/single.html]
 WARN: 2014/09/29 Unable to locate layout: [404.html]
-0 draft content 
-0 future content 
-0 pages created 
+0 draft content
+0 future content
+0 pages created
 0 tags created
 0 categories created
 in 2 ms
@@ -705,7 +919,7 @@ $ find themes -type f | xargs ls -l
 -rw-r--r--  1 quoha  staff     0 Sep 29 17:31 themes/zafta/layouts/partials/footer.html
 -rw-r--r--  1 quoha  staff     0 Sep 29 17:31 themes/zafta/layouts/partials/header.html
 -rw-r--r--  1 quoha  staff    93 Sep 29 17:31 themes/zafta/theme.toml
-$ 
+$
 </code></pre><p>The skeleton includes templates (the files ending in .html), license file, a description of your theme (the theme.toml file), and an empty archetype.</p>
 <p>Please take a minute to fill out the theme.toml and LICENSE.md files. They&rsquo;re optional, but if you&rsquo;re going to be distributing your theme, it tells the world who to praise (or blame). It&rsquo;s also nice to declare the license so that people will know how they can use the theme.</p>
 <pre><code>$ vi themes/zafta/theme.toml
@@ -752,9 +966,9 @@ INFO: 2014/09/29 Using config file: /Users/quoha/Sites/zafta/config.toml
 INFO: 2014/09/29 syncing from /Users/quoha/Sites/zafta/themes/zafta/static/ to /Users/quoha/Sites/zafta/public/
 INFO: 2014/09/29 syncing from /Users/quoha/Sites/zafta/static/ to /Users/quoha/Sites/zafta/public/
 WARN: 2014/09/29 Unable to locate layout: [404.html theme/404.html]
-0 draft content 
-0 future content 
-0 pages created 
+0 draft content
+0 future content
+0 pages created
 0 tags created
 0 categories created
 in 2 ms
@@ -787,7 +1001,7 @@ $
 <pre><code>$ find . -name index.html | xargs ls -l
 -rw-r--r--  1 quoha  staff  0 Sep 29 20:21 ./public/index.html
 -rw-r--r--  1 quoha  staff  0 Sep 29 17:31 ./themes/zafta/layouts/index.html
-$ 
+$
 </code></pre><h4 id="the-magic-of-static">
   The Magic of Static
   <a class="anchor" href="#the-magic-of-static">#</a>
@@ -803,7 +1017,7 @@ drwxr-xr-x  4 quoha  staff  136 Sep 29 17:31 themes/zafta/layouts/partials
 drwxr-xr-x  4 quoha  staff  136 Sep 29 17:31 themes/zafta/static
 drwxr-xr-x  2 quoha  staff   68 Sep 29 17:31 themes/zafta/static/css
 drwxr-xr-x  2 quoha  staff   68 Sep 29 17:31 themes/zafta/static/js
-$ 
+$
 </code></pre><h2 id="the-theme-development-cycle">
   The Theme Development Cycle
   <a class="anchor" href="#the-theme-development-cycle">#</a>
@@ -854,9 +1068,9 @@ INFO: 2014/09/29 Using config file: /Users/quoha/Sites/zafta/config.toml
 INFO: 2014/09/29 syncing from /Users/quoha/Sites/zafta/themes/zafta/static/ to /Users/quoha/Sites/zafta/public/
 INFO: 2014/09/29 syncing from /Users/quoha/Sites/zafta/static/ to /Users/quoha/Sites/zafta/public/
 WARN: 2014/09/29 Unable to locate layout: [404.html theme/404.html]
-0 draft content 
-0 future content 
-0 pages created 
+0 draft content
+0 future content
+0 pages created
 0 tags created
 0 categories created
 in 2 ms
@@ -868,9 +1082,9 @@ INFO: 2014/09/29 File System Event: [&quot;/Users/quoha/Sites/zafta/themes/zafta
 Change detected, rebuilding site
 
 WARN: 2014/09/29 Unable to locate layout: [404.html theme/404.html]
-0 draft content 
-0 future content 
-0 pages created 
+0 draft content
+0 future content
+0 pages created
 0 tags created
 0 categories created
 in 1 ms
@@ -891,12 +1105,12 @@ in 1 ms
 </h3>
 <p>Right now, that page is empty because we don&rsquo;t have any content and we don&rsquo;t have any logic in the template. Let&rsquo;s change that by adding some text to the template.</p>
 <pre><code>$ vi themes/zafta/layouts/index.html
-&lt;!DOCTYPE html&gt; 
-&lt;html&gt; 
-&lt;body&gt; 
-  &lt;p&gt;hugo says hello!&lt;/p&gt; 
-&lt;/body&gt; 
-&lt;/html&gt; 
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+  &lt;p&gt;hugo says hello!&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
 :wq
 
 $
@@ -906,9 +1120,9 @@ INFO: 2014/09/29 Using config file: /Users/quoha/Sites/zafta/config.toml
 INFO: 2014/09/29 syncing from /Users/quoha/Sites/zafta/themes/zafta/static/ to /Users/quoha/Sites/zafta/public/
 INFO: 2014/09/29 syncing from /Users/quoha/Sites/zafta/static/ to /Users/quoha/Sites/zafta/public/
 WARN: 2014/09/29 Unable to locate layout: [404.html theme/404.html]
-0 draft content 
-0 future content 
-0 pages created 
+0 draft content
+0 future content
+0 pages created
 0 tags created
 0 categories created
 in 2 ms
@@ -916,26 +1130,26 @@ in 2 ms
 $ find public -type f -name '*.html' | xargs ls -l
 -rw-r--r--  1 quoha  staff  78 Sep 29 21:26 public/index.html
 
-$ cat public/index.html 
-&lt;!DOCTYPE html&gt; 
-&lt;html&gt; 
-&lt;body&gt; 
-  &lt;p&gt;hugo says hello!&lt;/p&gt; 
+$ cat public/index.html
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+  &lt;p&gt;hugo says hello!&lt;/p&gt;
 &lt;/html&gt;
 </code></pre><h4 id="live-reload-1">
   Live Reload
   <a class="anchor" href="#live-reload-1">#</a>
 </h4>
 <p>Note: If you&rsquo;re running the server with the <code>--watch</code> option, you&rsquo;ll see different content in the file:</p>
-<pre><code>$ cat public/index.html 
-&lt;!DOCTYPE html&gt; 
-&lt;html&gt; 
-&lt;body&gt; 
-  &lt;p&gt;hugo says hello!&lt;/p&gt; 
-&lt;script&gt;document.write('&lt;script src=&quot;http://' 
-        + (location.host || 'localhost').split(':')[0] 
-    + ':1313/livereload.js?mindelay=10&quot;&gt;&lt;/' 
-        + 'script&gt;')&lt;/script&gt;&lt;/body&gt; 
+<pre><code>$ cat public/index.html
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+  &lt;p&gt;hugo says hello!&lt;/p&gt;
+&lt;script&gt;document.write('&lt;script src=&quot;http://'
+        + (location.host || 'localhost').split(':')[0]
+    + ':1313/livereload.js?mindelay=10&quot;&gt;&lt;/'
+        + 'script&gt;')&lt;/script&gt;&lt;/body&gt;
 &lt;/html&gt;
 </code></pre><p>When you use <code>--watch</code>, the Live Reload script is added by Hugo. Look for live reload in the documentation to see what it does and how to disable it.</p>
 <h3 id="build-a-dynamic-home-page">
@@ -955,7 +1169,7 @@ INFO: 2014/09/29 attempting to create  post/first.md of post
 INFO: 2014/09/29 curpath: /Users/quoha/Sites/zafta/themes/zafta/archetypes/default.md
 ERROR: 2014/09/29 Unable to Cast &lt;nil&gt; to map[string]interface{}
 
-$ 
+$
 </code></pre><p>That wasn&rsquo;t very nice, was it?</p>
 <p>The &ldquo;new&rdquo; command uses an archetype to create the post file. Hugo created an empty default archetype file, but that causes an error when there&rsquo;s a theme. For me, the workaround was to create an archetypes file specifically for the post type.</p>
 <pre><code>$ vi themes/zafta/archetypes/post.md
@@ -989,7 +1203,7 @@ total 16
 -rw-r--r--  1 quoha  staff  104 Sep 29 21:54 first.md
 -rw-r--r--  1 quoha  staff  105 Sep 29 21:57 second.md
 
-$ cat content/post/first.md 
+$ cat content/post/first.md
 +++
 Categories = []
 Description = &quot;&quot;
@@ -1000,7 +1214,7 @@ title = &quot;first&quot;
 +++
 my first post
 
-$ cat content/post/second.md 
+$ cat content/post/second.md
 +++
 Categories = []
 Description = &quot;&quot;
@@ -1011,7 +1225,7 @@ title = &quot;second&quot;
 +++
 my second post
 
-$ 
+$
 </code></pre><p>Build the web site and then verify the results.</p>
 <pre><code>$ rm -rf public
 $ hugo --verbose
@@ -1020,9 +1234,9 @@ INFO: 2014/09/29 syncing from /Users/quoha/Sites/zafta/themes/zafta/static/ to /
 INFO: 2014/09/29 syncing from /Users/quoha/Sites/zafta/static/ to /Users/quoha/Sites/zafta/public/
 INFO: 2014/09/29 found taxonomies: map[string]string{&quot;category&quot;:&quot;categories&quot;, &quot;tag&quot;:&quot;tags&quot;}
 WARN: 2014/09/29 Unable to locate layout: [404.html theme/404.html]
-0 draft content 
-0 future content 
-2 pages created 
+0 draft content
+0 future content
+2 pages created
 0 tags created
 0 categories created
 in 4 ms
@@ -1047,7 +1261,7 @@ $
   <a class="anchor" href="#add-content-to-the-homepage">#</a>
 </h3>
 <p>The home page will contain a list of posts. Let&rsquo;s update its template to add the posts that we just created. The logic in the template will run every time we build the site.</p>
-<pre><code>$ vi themes/zafta/layouts/index.html 
+<pre><code>$ vi themes/zafta/layouts/index.html
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;body&gt;
@@ -1077,26 +1291,26 @@ INFO: 2014/09/29 syncing from /Users/quoha/Sites/zafta/themes/zafta/static/ to /
 INFO: 2014/09/29 syncing from /Users/quoha/Sites/zafta/static/ to /Users/quoha/Sites/zafta/public/
 INFO: 2014/09/29 found taxonomies: map[string]string{&quot;tag&quot;:&quot;tags&quot;, &quot;category&quot;:&quot;categories&quot;}
 WARN: 2014/09/29 Unable to locate layout: [404.html theme/404.html]
-0 draft content 
-0 future content 
-2 pages created 
+0 draft content
+0 future content
+2 pages created
 0 tags created
 0 categories created
 in 4 ms
-$ find public -type f -name '*.html' | xargs ls -l 
+$ find public -type f -name '*.html' | xargs ls -l
 -rw-r--r--  1 quoha  staff  94 Sep 29 22:23 public/index.html
 -rw-r--r--  1 quoha  staff   0 Sep 29 22:23 public/post/first/index.html
 -rw-r--r--  1 quoha  staff   0 Sep 29 22:23 public/post/index.html
 -rw-r--r--  1 quoha  staff   0 Sep 29 22:23 public/post/second/index.html
-$ cat public/index.html 
+$ cat public/index.html
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;body&gt;
-  
+
     &lt;h1&gt;second&lt;/h1&gt;
-  
+
     &lt;h1&gt;first&lt;/h1&gt;
-  
+
 &lt;/body&gt;
 &lt;/html&gt;
 $
@@ -1118,7 +1332,7 @@ $
   Update the Template File
   <a class="anchor" href="#update-the-template-file">#</a>
 </h4>
-<pre><code>$ vi themes/zafta/layouts/_default/single.html 
+<pre><code>$ vi themes/zafta/layouts/_default/single.html
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -1140,9 +1354,9 @@ INFO: 2014/09/29 syncing from /Users/quoha/Sites/zafta/themes/zafta/static/ to /
 INFO: 2014/09/29 syncing from /Users/quoha/Sites/zafta/static/ to /Users/quoha/Sites/zafta/public/
 INFO: 2014/09/29 found taxonomies: map[string]string{&quot;tag&quot;:&quot;tags&quot;, &quot;category&quot;:&quot;categories&quot;}
 WARN: 2014/09/29 Unable to locate layout: [404.html theme/404.html]
-0 draft content 
-0 future content 
-2 pages created 
+0 draft content
+0 future content
+2 pages created
 0 tags created
 0 categories created
 in 4 ms
@@ -1153,7 +1367,7 @@ $ find public -type f -name '*.html' | xargs ls -l
 -rw-r--r--  1 quoha  staff    0 Sep 29 22:40 public/post/index.html
 -rw-r--r--  1 quoha  staff  128 Sep 29 22:40 public/post/second/index.html
 
-$ cat public/post/first/index.html 
+$ cat public/post/first/index.html
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -1166,7 +1380,7 @@ $ cat public/post/first/index.html
 &lt;/body&gt;
 &lt;/html&gt;
 
-$ cat public/post/second/index.html 
+$ cat public/post/second/index.html
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -1202,9 +1416,9 @@ INFO: 2014/09/29 syncing from /Users/quoha/Sites/zafta/themes/zafta/static/ to /
 INFO: 2014/09/29 syncing from /Users/quoha/Sites/zafta/static/ to /Users/quoha/Sites/zafta/public/
 INFO: 2014/09/29 found taxonomies: map[string]string{&quot;tag&quot;:&quot;tags&quot;, &quot;category&quot;:&quot;categories&quot;}
 WARN: 2014/09/29 Unable to locate layout: [404.html theme/404.html]
-0 draft content 
-0 future content 
-2 pages created 
+0 draft content
+0 future content
+2 pages created
 0 tags created
 0 categories created
 in 4 ms
@@ -1215,15 +1429,15 @@ $ find public -type f -name '*.html' | xargs ls -l
 -rw-r--r--  1 quoha  staff    0 Sep 29 22:44 public/post/index.html
 -rw-r--r--  1 quoha  staff  128 Sep 29 22:44 public/post/second/index.html
 
-$ cat public/index.html 
+$ cat public/index.html
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;body&gt;
-  
+
     &lt;h1&gt;&lt;a href=&quot;/post/second/&quot;&gt;second&lt;/a&gt;&lt;/h1&gt;
-  
+
     &lt;h1&gt;&lt;a href=&quot;/post/first/&quot;&gt;first&lt;/a&gt;&lt;/h1&gt;
-  
+
 &lt;/body&gt;
 &lt;/html&gt;
 
@@ -1243,7 +1457,7 @@ $
 </h2>
 <p>Let&rsquo;s add an &ldquo;about&rdquo; page and display it at the top level (as opposed to a sub-level like we did with posts).</p>
 <p>The default in Hugo is to use the directory structure of the content/ directory to guide the location of the generated html in the public/ directory. Let&rsquo;s verify that by creating an &ldquo;about&rdquo; page at the top level:</p>
-<pre><code>$ vi content/about.md 
+<pre><code>$ vi content/about.md
 +++
 title = &quot;about&quot;
 description = &quot;about this site&quot;
@@ -1453,7 +1667,26 @@ $ vi themes/zafta/layouts/_default/single.html
       
   
   <div class="book-comments">
-
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "prokoptasis" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 </div>
   
  
@@ -1466,60 +1699,64 @@ $ vi themes/zafta/layouts/_default/single.html
       
   <nav id="TableOfContents">
   <ul>
-    <li><a href="#introduction">Introduction</a></li>
-    <li><a href="#some-definitions">Some Definitions</a>
+    <li>
       <ul>
-        <li><a href="#skins">Skins</a></li>
-        <li><a href="#the-home-page">The Home Page</a></li>
-        <li><a href="#site-configuration-file">Site Configuration File</a></li>
-        <li><a href="#content">Content</a></li>
-        <li><a href="#template-files">Template Files</a></li>
-      </ul>
-    </li>
-    <li><a href="#create-a-new-site">Create a New Site</a>
-      <ul>
-        <li><a href="#generate-the-html-for-the-new-site">Generate the HTML For the New Site</a></li>
-        <li><a href="#test-the-new-site">Test the New Site</a></li>
-      </ul>
-    </li>
-    <li><a href="#create-a-new-theme">Create a New Theme</a>
-      <ul>
-        <li><a href="#create-a-skeleton">Create a Skeleton</a></li>
-        <li><a href="#update-the-configuration-file-to-use-the-theme">Update the Configuration File to Use the Theme</a></li>
-        <li><a href="#generate-the-site">Generate the Site</a></li>
-      </ul>
-    </li>
-    <li><a href="#the-theme-development-cycle">The Theme Development Cycle</a>
-      <ul>
-        <li><a href="#purge-the-public-directory">Purge the public/ Directory</a></li>
-        <li><a href="#hugos-watch-option">Hugo&rsquo;s Watch Option</a></li>
-        <li><a href="#live-reload">Live Reload</a></li>
-        <li><a href="#development-commands">Development Commands</a></li>
-      </ul>
-    </li>
-    <li><a href="#update-the-home-page-template">Update the Home Page Template</a>
-      <ul>
-        <li><a href="#make-a-static-home-page">Make a Static Home Page</a></li>
-        <li><a href="#build-a-dynamic-home-page">Build a &ldquo;Dynamic&rdquo; Home Page</a></li>
-        <li><a href="#list-and-single-templates">List and Single Templates</a></li>
-        <li><a href="#add-content-to-the-homepage">Add Content to the Homepage</a></li>
-        <li><a href="#add-content-to-the-posts">Add Content to the Posts</a></li>
-        <li><a href="#linking-to-content">Linking to Content</a></li>
-        <li><a href="#create-a-post-listing">Create a Post Listing</a></li>
-      </ul>
-    </li>
-    <li><a href="#creating-top-level-pages">Creating Top Level Pages</a></li>
-    <li><a href="#sharing-templates">Sharing Templates</a>
-      <ul>
-        <li><a href="#create-the-header-and-footer-partials">Create the Header and Footer Partials</a></li>
-        <li><a href="#update-the-home-page-template-to-use-the-partials">Update the Home Page Template to Use the Partials</a></li>
-        <li><a href="#update-the-default-single-template-to-use-the-partials">Update the Default Single Template to Use the Partials</a></li>
-      </ul>
-    </li>
-    <li><a href="#add-date-published-to-posts">Add “Date Published” to Posts</a>
-      <ul>
-        <li><a href="#add-date-published-to-the-template">Add “Date Published” to the Template</a></li>
-        <li><a href="#dont-repeat-yourself">Don&rsquo;t Repeat Yourself</a></li>
+        <li><a href="#introduction">Introduction</a></li>
+        <li><a href="#some-definitions">Some Definitions</a>
+          <ul>
+            <li><a href="#skins">Skins</a></li>
+            <li><a href="#the-home-page">The Home Page</a></li>
+            <li><a href="#site-configuration-file">Site Configuration File</a></li>
+            <li><a href="#content">Content</a></li>
+            <li><a href="#template-files">Template Files</a></li>
+          </ul>
+        </li>
+        <li><a href="#create-a-new-site">Create a New Site</a>
+          <ul>
+            <li><a href="#generate-the-html-for-the-new-site">Generate the HTML For the New Site</a></li>
+            <li><a href="#test-the-new-site">Test the New Site</a></li>
+          </ul>
+        </li>
+        <li><a href="#create-a-new-theme">Create a New Theme</a>
+          <ul>
+            <li><a href="#create-a-skeleton">Create a Skeleton</a></li>
+            <li><a href="#update-the-configuration-file-to-use-the-theme">Update the Configuration File to Use the Theme</a></li>
+            <li><a href="#generate-the-site">Generate the Site</a></li>
+          </ul>
+        </li>
+        <li><a href="#the-theme-development-cycle">The Theme Development Cycle</a>
+          <ul>
+            <li><a href="#purge-the-public-directory">Purge the public/ Directory</a></li>
+            <li><a href="#hugos-watch-option">Hugo&rsquo;s Watch Option</a></li>
+            <li><a href="#live-reload">Live Reload</a></li>
+            <li><a href="#development-commands">Development Commands</a></li>
+          </ul>
+        </li>
+        <li><a href="#update-the-home-page-template">Update the Home Page Template</a>
+          <ul>
+            <li><a href="#make-a-static-home-page">Make a Static Home Page</a></li>
+            <li><a href="#build-a-dynamic-home-page">Build a &ldquo;Dynamic&rdquo; Home Page</a></li>
+            <li><a href="#list-and-single-templates">List and Single Templates</a></li>
+            <li><a href="#add-content-to-the-homepage">Add Content to the Homepage</a></li>
+            <li><a href="#add-content-to-the-posts">Add Content to the Posts</a></li>
+            <li><a href="#linking-to-content">Linking to Content</a></li>
+            <li><a href="#create-a-post-listing">Create a Post Listing</a></li>
+          </ul>
+        </li>
+        <li><a href="#creating-top-level-pages">Creating Top Level Pages</a></li>
+        <li><a href="#sharing-templates">Sharing Templates</a>
+          <ul>
+            <li><a href="#create-the-header-and-footer-partials">Create the Header and Footer Partials</a></li>
+            <li><a href="#update-the-home-page-template-to-use-the-partials">Update the Home Page Template to Use the Partials</a></li>
+            <li><a href="#update-the-default-single-template-to-use-the-partials">Update the Default Single Template to Use the Partials</a></li>
+          </ul>
+        </li>
+        <li><a href="#add-date-published-to-posts">Add “Date Published” to Posts</a>
+          <ul>
+            <li><a href="#add-date-published-to-the-template">Add “Date Published” to the Template</a></li>
+            <li><a href="#dont-repeat-yourself">Don&rsquo;t Repeat Yourself</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
