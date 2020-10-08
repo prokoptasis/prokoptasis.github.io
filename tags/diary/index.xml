@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>diary on Prokoptasis</title>
+    <link>http://prokoptasis.github.io/tags/diary/</link>
+    <description>Recent content in diary on Prokoptasis</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>kr-ko</language>
+    <lastBuildDate>Thu, 08 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://prokoptasis.github.io/tags/diary/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Let&#39;s start blog</title>
+      <link>http://prokoptasis.github.io/posts/2010081207/</link>
+      <pubDate>Thu, 08 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://prokoptasis.github.io/posts/2010081207/</guid>
+      <description>Let&amp;rsquo;s start blog #  </description>
+    </item>
+    
+    <item>
+      <title>Hello World!</title>
+      <link>http://prokoptasis.github.io/posts/2009281207/</link>
+      <pubDate>Mon, 28 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://prokoptasis.github.io/posts/2009281207/</guid>
+      <description>My Hello World! Collection! #   ASP.NET #  &amp;lt;%= &amp;#34;Hello World!&amp;#34; %&amp;gt;  언제 : 밀레니엄 즈음&amp;hellip;
+이유 : 개인 홈페이지 만든답시고&amp;hellip;
+ BASIC #  10 PRINT &amp;#34;Hello World!&amp;#34;  언제 : 중딩시절&amp;hellip;
+이유 : 텍스트 기반 게임 제작한답시고&amp;hellip;
+ C (Windows) #  #include &amp;lt;windows.h&amp;gt; int PASCAL WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR CmdLine, int Show) { MessageBox(GetActiveWindw(), &amp;#34;Hello World!&amp;#34;, &amp;#34;Hello Windows&amp;#34;, MB_OK); return 0; }  언제 : 대딩시절&amp;hellip;</description>
+    </item>
+    
+  </channel>
+</rss>
