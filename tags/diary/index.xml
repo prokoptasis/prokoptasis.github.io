@@ -8,12 +8,13 @@
     <language>kr-ko</language>
     <lastBuildDate>Thu, 08 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://prokoptasis.github.io/tags/diary/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Let&#39;s start blog</title>
+      <title>Principles...</title>
       <link>http://prokoptasis.github.io/posts/2010081207/</link>
       <pubDate>Thu, 08 Oct 2020 00:00:00 +0000</pubDate>
       
       <guid>http://prokoptasis.github.io/posts/2010081207/</guid>
-      <description>Let&amp;rsquo;s start blog #  </description>
+      <description>항상 시작이 어렵네요. 여러가지로 고민을 해보았습니다. 도대체 무엇을 위한 걸까요? 누구를 위한 걸까요? 왜 하는 걸까요? 등등. 오히려 이런 것 때문에 시간만 잡아 먹고 본질을 놓치는 건 아닐까요? 그러다가 결국 욕심들을 버리고 몇가지 결론으로 생각이 모아지게 되었습니다.
+ 욕심부리지 말자  늘 하고 싶은게 많아서 모든걸 잘 해보려다 제풀에 지쳐버렸던 것 같습니다. 투자하는 시간도 노력도 확줄여야 겠다고 생각했습니다.   차근 차근 가자  성격이 급한거 같습니다. 뭔가 다그쳐서 빨리 올라 갈 수 있는게 있고 길게 보아야 할게 있는거 같습니다.</description>
     </item>
     
     <item>
@@ -22,11 +23,7 @@
       <pubDate>Mon, 28 Sep 2020 00:00:00 +0000</pubDate>
       
       <guid>http://prokoptasis.github.io/posts/2009281207/</guid>
-      <description>My Hello World! Collection! #   ASP.NET #  &amp;lt;%= &amp;#34;Hello World!&amp;#34; %&amp;gt;  언제 : 밀레니엄 즈음&amp;hellip;
-이유 : 개인 홈페이지 만든답시고&amp;hellip;
- BASIC #  10 PRINT &amp;#34;Hello World!&amp;#34;  언제 : 중딩시절&amp;hellip;
-이유 : 텍스트 기반 게임 제작한답시고&amp;hellip;
- C (Windows) #  #include &amp;lt;windows.h&amp;gt; int PASCAL WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR CmdLine, int Show) { MessageBox(GetActiveWindw(), &amp;#34;Hello World!&amp;#34;, &amp;#34;Hello Windows&amp;#34;, MB_OK); return 0; }  언제 : 대딩시절&amp;hellip;</description>
+      <description>누구나 프로그래밍 언어를 배울때 항상 시작은 &amp;ldquo;Hello World&amp;quot;였지 않았을까요? 시작 하는 화면을 고민하다가 &amp;ldquo;Hello World!&amp;ldquo;를 떠올렸습니다. 그간 제 손을 거쳤던 &amp;ldquo;Hello World&amp;quot;를 쭉 되짚어 보았는데 좀 부끄러워졌네요. 제대로 할 줄 아는게 몇 개 없다고 생각했습니다. 그나마 먹고 살기 위해 손에 달고 있던 몇 개 정도 뿐이였습니다. 나름 꽤 열심히 산다고 살았는데 먹고 살기만 했나 봅니다. 돌이켜보면 이것저것 나름 시도는 많이 해보았는데 꾸준히는 못했던 것 같습니다. 이번에는 좀 꾸준히 끌고 가보자 생각했습니다.</description>
     </item>
     
   </channel>
