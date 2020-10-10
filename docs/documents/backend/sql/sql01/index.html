@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ko" dir=>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="SQL Basic Concept">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="SQL Basic 1" />
+<meta property="og:description" content="SQL Basic Concept" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://prokoptasis.github.io/docs/documents/backend/sql/sql01/" />
+
+<title>SQL Basic 1 | Prokoptasis</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
+<script defer src="/ko.search.min.0fa38896ffacbc8c406342878e5d5ff8ad717244308b524da4aa63bdb22b04c1.js" integrity="sha256-D6OIlv&#43;svIxAY0KHjl1f&#43;K1xckQwi1JNpKpjvbIrBME="></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-176412981-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+ 
+</head>
+
+<body dir=>
+    <input type="checkbox" class="hidden toggle" id="menu-control" />
+    <input type="checkbox" class="hidden toggle" id="toc-control" />
+    <main class="container flex">
+        <aside class="book-menu">
+             <nav>
+<h2 class="book-brand" style="text-align: center;">
+    <a href="/"><span>Prokoptasis</span>
+  </a>
+</h2>
+<hr>
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+ 
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Documents</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-bc65bd57d9bab5039e9a79b5ae591c72" class="toggle"  />
+    <label for="section-bc65bd57d9bab5039e9a79b5ae591c72" class="flex justify-between">
+      <a href="http://prokoptasis.github.io/docs/documents/projects/" class="">Projects</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/documents/projects/hugogirl/" class="">hU-Go-Girl</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-53481227639f164d3f7ead2411c43315" class="toggle"  />
+    <label for="section-53481227639f164d3f7ead2411c43315" class="flex justify-between">
+      <a href="http://prokoptasis.github.io/docs/documents/frontend/" class="">Front End</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/documents/frontend/markdown/" class="">Markdown</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7cff03fc158d9929dd882d45e5e83f84" class="toggle" checked />
+    <label for="section-7cff03fc158d9929dd882d45e5e83f84" class="flex justify-between">
+      <a href="http://prokoptasis.github.io/docs/documents/backend/" class="">Back End</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/documents/backend/sql/" class="">SQL</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/documents/backend/sql/sql01/" class=" active">SQL Basic 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/documents/backend/sql/sql02/" class="">SQL Basic 2</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+ 
+<ul>
+    
+    <li>
+        <a href="/posts/" >
+        Blog
+      </a>
+    </li>
+    
+    <li>
+        <a href="mailto:c.exigua@gmail.com" target="_blank" rel="noopener" >
+        Gmail
+      </a>
+    </li>
+    
+    <li>
+        <a href="https://github.com/prokoptasis/prokoptasis" target="_blank" rel="noopener" >
+        Github
+      </a>
+    </li>
+    
+    <li>
+        <a href="https://twitter.com/prokoptasis" target="_blank" rel="noopener" >
+        Twitter
+      </a>
+    </li>
+    
+    <li>
+        <a href="https://www.facebook.com/c.exigua/" target="_blank" rel="noopener" >
+        Facebook
+      </a>
+    </li>
+    
+</ul>
+<br>
+<hr>
+<div style="display: block; text-align: center;">
+    <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="prokoptasis" data-color="#e9e9e9" data-emoji="" data-font="Arial" data-text="" data-outline-color="#000" data-font-color="#000"
+        data-coffee-color="#6f4e37"></script>
+</div>
+  
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+ 
+            
+        </aside>
+
+        <div class="book-page">
+            <header class="book-header">
+                 <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>SQL Basic 1</strong>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+  
+                
+            </header>
+
+            
+<article class="markdown"><h2 id="sql-basic-1">
+  SQL Basic 1
+  <a class="anchor" href="#sql-basic-1">#</a>
+</h2>
+<hr>
+<h3 id="ddl--dml--dcl">
+  DDL / DML / DCL
+  <a class="anchor" href="#ddl--dml--dcl">#</a>
+</h3>
+<p>회사에서 필요에 의해 교육을 할때는 보통 Select 부터 설명드립니다만 Oracle Live SQL 특성상 조회를 할만한 예제 테이블이 없어서 앞으로 하게될 개념이해를 위해 DDL, DML, DCL 개념 부터 먼저 설명드립니다.</p>
+<h3 id="ddl-data-definition-language">
+  DDL (Data Definition Language)
+  <a class="anchor" href="#ddl-data-definition-language">#</a>
+</h3>
+<p>데이터 정의 언어로 데이터베이스에 오브젝트를 생성,삭제,변경 및 제거하는 명령문을 이야기 합니다.</p>
+<p>create : 데이터베이스에 오브젝트를 생성합니다.
+drop : 데이터베이스에 오브젝트를 삭제합니다.
+alter : 데이터베이스에 오브젝트를 변경합니다.
+truncate : 테이블에서 데이터를 삭제합니다.</p>
+<h3 id="dml-data-manipulation-languge">
+  DML (Data Manipulation Languge)
+  <a class="anchor" href="#dml-data-manipulation-languge">#</a>
+</h3>
+<p>데디터 조작 언어로 데이터베이스 테이블에서 데이터를 질의,생성,수정 및 삭제하는 질의문을 이야기 합니다.</p>
+<p>select : 테이블에서 데이터를 검색
+insert : 테이블에 데이터를 생성
+update : 테이블에서 데이터를 변경
+delete : 데이블에서 데이터를 삭제</p>
+<h3 id="dcl-data-control-language">
+  DCL (Data Control Language)
+  <a class="anchor" href="#dcl-data-control-language">#</a>
+</h3>
+<p>데이터 제어 언어로 데이터베이스의 권한을 관리하는데 사용하는 명령문을 이야기 합니다.</p>
+<p>grant : 데이터베이스 사용자에게 특정 권한을 부여
+revoke : 데이터베이스 사용자에게 특정 권한을 제거</p>
+<h3 id="table-creation">
+  Table Creation
+  <a class="anchor" href="#table-creation">#</a>
+</h3>
+<p>실습을 위해 예제 테이블을 생성하고 단순 질의문을 통해 결과를 조회해보도록 하겠습니다.</p>
+
+
+
+
+<div class="book-tabs"><input type="radio" class="toggle" name="tabs-create my_table_1" id="tabs-create my_table_1-0" checked="checked" />
+  <label for="tabs-create my_table_1-0">작성쿼리</label>
+  <div class="book-tabs-content markdown-inner"><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> my_table_1
+(
+    column_1 varchar2(<span style="color:#ae81ff">10</span>),
+    column_2 number,
+    column_3 date
+)
+;
+
+<span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> my_table_1 (column_1,column_2,column_3) <span style="color:#66d9ef">values</span> (<span style="color:#e6db74">&#39;홍길동&#39;</span>,<span style="color:#ae81ff">23</span>,sysdate);
+<span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> my_table_1 (column_1,column_2,column_3) <span style="color:#66d9ef">values</span> (<span style="color:#e6db74">&#39;김철수&#39;</span>,<span style="color:#ae81ff">19</span>,sysdate);
+<span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> my_table_1 (column_1,column_2,column_3) <span style="color:#66d9ef">values</span> (<span style="color:#e6db74">&#39;이영희&#39;</span>,<span style="color:#ae81ff">32</span>,sysdate);
+<span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> my_table_1 (column_1,column_2,column_3) <span style="color:#66d9ef">values</span> (<span style="color:#e6db74">&#39;박민호&#39;</span>,<span style="color:#ae81ff">22</span>,sysdate);
+<span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> my_table_1 (column_1,column_2,column_3) <span style="color:#66d9ef">values</span> (<span style="color:#e6db74">&#39;김종철&#39;</span>,<span style="color:#ae81ff">45</span>,sysdate);
+</code></pre></div></div><input type="radio" class="toggle" name="tabs-create my_table_1" id="tabs-create my_table_1-1"  />
+  <label for="tabs-create my_table_1-1">실행결과</label>
+  <div class="book-tabs-content markdown-inner"><p>Table created.</p>
+<p>1 row(s) inserted.</p>
+<p>1 row(s) inserted.</p>
+<p>1 row(s) inserted.</p>
+<p>1 row(s) inserted.</p>
+<p>1 row(s) inserted.</p>
+</div></div>
+
+<p>데이터 생성 결과를 조회해보도록 하겠습니다. 아래 쿼리를 작성하고 실행하실때 아래 부분만 블록으로 선택하시고 실행하시거나 또는 앞의 내용을 지우고 실행하셔야 됩니다. 만일 블록 선택없이 실행시 create table 구문은 에러가 나고 insert는 중보처리되면서 select는 10건의 결과를 보여 줄 수 있습니다.</p>
+
+
+
+
+<div class="book-tabs"><input type="radio" class="toggle" name="tabs-create my_table_2" id="tabs-create my_table_2-0" checked="checked" />
+  <label for="tabs-create my_table_2-0">작성쿼리</label>
+  <div class="book-tabs-content markdown-inner"><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span>  <span style="color:#f92672">*</span>
+<span style="color:#66d9ef">from</span>    my_table_1
+;
+</code></pre></div></div><input type="radio" class="toggle" name="tabs-create my_table_2" id="tabs-create my_table_2-1"  />
+  <label for="tabs-create my_table_2-1">실행결과</label>
+  <div class="book-tabs-content markdown-inner"><table>
+<thead>
+<tr>
+<th style="text-align:center">COLUMN_1</th>
+<th style="text-align:center">COLUMN_2</th>
+<th style="text-align:center">COLUMN_3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">홍길동</td>
+<td style="text-align:center">23</td>
+<td style="text-align:center">10-OCT-20</td>
+</tr>
+<tr>
+<td style="text-align:center">김철수</td>
+<td style="text-align:center">19</td>
+<td style="text-align:center">10-OCT-20</td>
+</tr>
+<tr>
+<td style="text-align:center">이영희</td>
+<td style="text-align:center">32</td>
+<td style="text-align:center">10-OCT-20</td>
+</tr>
+<tr>
+<td style="text-align:center">박민호</td>
+<td style="text-align:center">22</td>
+<td style="text-align:center">10-OCT-20</td>
+</tr>
+<tr>
+<td style="text-align:center">김종철</td>
+<td style="text-align:center">45</td>
+<td style="text-align:center">10-OCT-20</td>
+</tr>
+</tbody>
+</table>
+<p>Download CSV
+5 rows selected.</div></div>
+
+<p>위의 실행결과와 같이 정상적으로 조회 되었다면 이제 본격적으로 SQL을 진행해보도록 하겠습니다.</p>
+<hr>
+<p><span style="float:left"><a href="../">[이전글]</a></span>
+<span style="float:right"><a href="../sql02">[다음글]</a></span></p>
+</article>
+
+            
+            
+
+            <footer class="book-footer">
+                 <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+ 
+                
+                
+            </footer>
+
+             
+<div class="book-comments">
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "prokoptasis" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+ 
+            
+
+            <label for="menu-control" class="hidden book-menu-overlay"></label>
+        </div>
+
+        
+    </main>
+
+    
+</body>
+
+</html>
+
+     

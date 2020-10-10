@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="Documents" />
-<meta property="og:description" content="" />
+<meta name="description" content="SQL Preparations">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="SQL" />
+<meta property="og:description" content="SQL Preparations" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="http://prokoptasis.github.io/docs/documents/" />
+<meta property="og:url" content="http://prokoptasis.github.io/docs/documents/backend/sql/" />
 
-<title>Documents | Prokoptasis</title>
+<title>SQL | Prokoptasis</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
@@ -26,7 +26,7 @@ if (!doNotTrack) {
 }
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
-<link rel="alternate" type="application/rss+xml" href="http://prokoptasis.github.io/docs/documents/index.xml" title="Prokoptasis" />
+<link rel="alternate" type="application/rss+xml" href="http://prokoptasis.github.io/docs/documents/backend/sql/index.xml" title="Prokoptasis" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -166,7 +166,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-7cff03fc158d9929dd882d45e5e83f84" class="toggle"  />
+    <input type="checkbox" id="section-7cff03fc158d9929dd882d45e5e83f84" class="toggle" checked />
     <label for="section-7cff03fc158d9929dd882d45e5e83f84" class="flex justify-between">
       <a href="http://prokoptasis.github.io/docs/documents/backend/" class="">Back End</a>
       <span>▾</span>
@@ -183,7 +183,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://prokoptasis.github.io/docs/documents/backend/sql/" class="">SQL</a>
+    <a href="http://prokoptasis.github.io/docs/documents/backend/sql/" class=" active">SQL</a>
   
 
           
@@ -301,7 +301,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>Documents</strong>
+  <strong>SQL</strong>
 
   <label for="toc-control">
     
@@ -312,7 +312,33 @@ https://github.com/alex-shpak/hugo-book
             </header>
 
             
-<article class="markdown"></article>
+<article class="markdown"><h2 id="sql">
+  SQL
+  <a class="anchor" href="#sql">#</a>
+</h2>
+<hr>
+<h3 id="introduction">
+  Introduction
+  <a class="anchor" href="#introduction">#</a>
+</h3>
+<p>SQL은 Sturctured Query Langugage의 약자로 데이터베이스의 데이터를 관리하기 위해 사용하는 언어입니다. 자료의 검색과 관리, 스키마의 생성과 수정, 객체의 접근 조정 및 관리의 기능을 하게됩니다. ANSI SQL 기본 문법은 원래 어떤 데이터베이스와도 호환이 가능해야 하지만 통상 Vendor들이 표준을 잘지키지않는 편이라 기본적인 수준에서만 호환이 가능합니다. NoSQL 계열의 데이터베이스에서는 사용되지 않습니다.</p>
+<p>저는 일단 통상 제조업에서 많이 사용되고 있는 오라클사의 SQL을 기준으로 설명드리겠습니다.</p>
+<h3 id="live-sql">
+  Live SQL
+  <a class="anchor" href="#live-sql">#</a>
+</h3>
+<p>정상적인 실습환경을 원한다면 XE버전이라도 오라클 데이터베이스를 설치하고 SQL Plus든 SQL Developer든 조회툴을 설치해야겠지만 개별 환경에 맞춰 설치하는 과정이 다소 까다롭습니다. 이에 오라클사의 Live SQL이라는 서비스로 대체해서 진행 하고자 합니다. 사용을 원하시면 <a href="https://www.oracle.com">Oracle</a>에 가입하시고 <a href="https://livesql.oracle.com/apex/f?p=590:1000::::::">Oracle Live SQL</a>로 접속하셔서 &ldquo;Start Coding Now&quot;로 Live SQL을 실행합니다.</p>
+<h3 id="live-sql-basic">
+  Live SQL Basic
+  <a class="anchor" href="#live-sql-basic">#</a>
+</h3>
+<p>SQL Worksheet 아래에 SQL을 쓰고 실행할 수 있는 Editor 창이 있고 그 밑에는 질의 결과를 조회할 수 있는 창이 있습니다. 오른쪽 위에는 &ldquo;Run&rdquo; Button이 있어 SQL을 실행할 수 있습니다. Ctrl-Enter를 통해도 역시 실행하실 수 있습니다. 다만 여러 문장을 적고 Ctrl-Enter나 Run을 실행하게되면 문장 모두가 수행되게 됩니다. 하나의 쿼리만을 개별적으로 실행하고 싶으시다면 블럭으로 선택 후 실행하셔야 합니다.</p>
+<p><img src="../../../../../201010_01_oracle_live.png" alt="Oracle Live SQL" /></p>
+<p>여기까지 되셨다면 실습환경은 준비된것 같습니다.
+격적으로 SQL을 진행해보도록 하겠습니다.</p>
+<hr>
+<p><span style="float:right"><a href="./sql01">[다음글]</a></span></p>
+</article>
 
             
             
@@ -330,7 +356,30 @@ https://github.com/alex-shpak/hugo-book
                 
             </footer>
 
-              
+             
+<div class="book-comments">
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "prokoptasis" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+ 
             
 
             <label for="menu-control" class="hidden book-menu-overlay"></label>
