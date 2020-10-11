@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Business #     Supply Chain Management   Description   ">
-<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="Business" />
-<meta property="og:description" content="" />
+<meta name="description" content="머신러닝/딥러닝 학습 자료">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="Machine Learning" />
+<meta property="og:description" content="머신러닝/딥러닝 학습 자료" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="http://prokoptasis.github.io/docs/documents/business/" />
+<meta property="og:url" content="http://prokoptasis.github.io/docs/documents/deeplearning/machinelearning/" />
 
-<title>Business | Prokoptasis</title>
+<title>Machine Learning | Prokoptasis</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
@@ -26,7 +26,7 @@ if (!doNotTrack) {
 }
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
-<link rel="alternate" type="application/rss+xml" href="http://prokoptasis.github.io/docs/documents/business/index.xml" title="Prokoptasis" />
+<link rel="alternate" type="application/rss+xml" href="http://prokoptasis.github.io/docs/documents/deeplearning/machinelearning/index.xml" title="Prokoptasis" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -236,7 +236,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-08315e14cb91d15111d683212f692de5" class="toggle"  />
+    <input type="checkbox" id="section-08315e14cb91d15111d683212f692de5" class="toggle" checked />
     <label for="section-08315e14cb91d15111d683212f692de5" class="flex justify-between">
       <a href="http://prokoptasis.github.io/docs/documents/deeplearning/" class="">Deep Learning</a>
       <span>▾</span>
@@ -253,7 +253,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://prokoptasis.github.io/docs/documents/deeplearning/machinelearning/" class="">Machine Learning</a>
+    <a href="http://prokoptasis.github.io/docs/documents/deeplearning/machinelearning/" class=" active">Machine Learning</a>
   
 
           
@@ -363,7 +363,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>Business</strong>
+  <strong>Machine Learning</strong>
 
   <label for="toc-control">
     
@@ -374,22 +374,206 @@ https://github.com/alex-shpak/hugo-book
             </header>
 
             
-<article class="markdown"><h2 id="business">
-  Business
-  <a class="anchor" href="#business">#</a>
+<article class="markdown"><h2 id="machine-learning">
+  Machine Learning
+  <a class="anchor" href="#machine-learning">#</a>
 </h2>
 <hr>
-<dl>
+<h3 id="introduction">
+  Introduction
+  <a class="anchor" href="#introduction">#</a>
+</h3>
+<p>머신 러닝 관련 학습 자료들을 정리한 내용입니다.</p>
+<h3 id="machine-learning-분류httpsopentutorialsorgcourse454828934">
+  <a href="https://opentutorials.org/course/4548/28934" target="_blank" rel="noopener">Machine Learning 분류</a>
+  <a class="anchor" href="#machine-learning-%eb%b6%84%eb%a5%98httpsopentutorialsorgcourse454828934">#</a>
+</h3>
+<p>머신 러닝은 지도학습, 비지도학습, 강화학습으로 분류하며 지도학습은 다시 회귀와 분류, 비지도 학습은 군집화,변환,연관으로 분류할 수 있습니다. 인터넷 상에 다양한 설명이 있습니다만 그림으로 직관적으로 분류 할 수 있는 egoing님의 자료를 참조하였습니다. 세부내용은 제목에 링크된 위키피디어를 참조해보시기 바랍니다.</p>
+<ol>
+<li><a href="https://en.wikipedia.org/wiki/Supervised_learning" target="_blank" rel="noopener">Supervised Learning</a>
+<ul>
+<li>Regression</li>
+<li>Classification</li>
+</ul>
+</li>
+<li><a href="https://en.wikipedia.org/wiki/Unsupervised_learning" target="_blank" rel="noopener">Unsupervised Learning</a>
+<ul>
+<li>Clustering</li>
+<li>Transform</li>
+<li>Association</li>
+</ul>
+</li>
+<li><a href="https://en.wikipedia.org/wiki/Reinforcement_learning" target="_blank" rel="noopener">Reinforcement Learning</a></li>
+</ol>
+<h3 id="linear-regression1">
+  Linear Regression<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>
+  <a class="anchor" href="#linear-regression1">#</a>
+</h3>
+<p>Regression이란 일정 데이터의 분포를 가장 잘 설명 할 수 있는 직선의 방정식을 나타냅니다.</p>
+<blockquote>
+<p><strong>Regression</strong> <br><br>
 
-  <dt>
-    <a href="/docs/documents/business/supplychain/">Supply Chain Management</a>
-  </dt>
-  <dd>
-    Description
-  </dd>
-
-</dl>
-
+<link rel="stylesheet" href="/katex/katex.min.css" />
+<script defer src="/katex/katex.min.js"></script>
+<script defer src="/katex/auto-render.min.js" onload="renderMathInElement(document.body);"></script><span>
+  \( H(X) = WX&#43;B ( y = ax &#43; b ) \)
+</span>
+ <br><br>
+<span>
+  \( H : Hypothesis (가설)  \)
+</span>
+ <br><br>
+<span>
+  \( W : Weight (기울기)  \)
+</span>
+ <br><br>
+<span>
+  \( B : Bias (절편)  \)
+</span>
+ <br><br>
+<span>
+  \( Cost : H(x) - y \)
+</span>
+ <br><br></p>
+</blockquote>
+<blockquote>
+<p><strong>Regression에서 Cost</strong> <br><br>
+<span>
+  \( \frac{(H(x_1)-y_1)^2 &#43; (H(x_2)-y_2)^2 &#43; ... &#43; (H(x_n)-y_n)^2 }{n} \)
+</span>
+ <br><br>
+<span>
+  \( cost(W) = \frac{1}{n}\, \textstyle\sum_{i=1}^n \,(Wx_i-y)^2 \)
+</span>
+ <br><br></p>
+</blockquote>
+<h3 id="derivative">
+  Derivative
+  <a class="anchor" href="#derivative">#</a>
+</h3>
+<blockquote>
+<p><strong>Derivative</strong> <br><br>
+<span>
+  \(  f&#39;(x) = \frac{\Delta f(x)}{\Delta x} = \lim\limits_{\Delta x \rightarrow 0 } \, \frac{f(x&#43;\Delta x)-f(x)}{\Delta x}   \)
+</span>
+ <br><br></p>
+</blockquote>
+<blockquote>
+<p><strong>Derivative Basic</strong> <br><br>
+<span>
+  \(  f(x) = constant -&gt; f&#39;(x) = 0 \)
+</span>
+<br> <br>
+<span>
+  \(  f&#39;(x) = e ^ x =&gt; f&#39;(x) = e ^ x \)
+</span>
+ <br><br>
+<span>
+  \(  f&#39;(x) = e ^ -x =&gt; f&#39;(x) = -e ^ -x \)
+</span>
+ <br><br>
+<span>
+  \(  f&#39;(x) = ax ^ x =&gt; f&#39;(x) = nax ^ n-1 \)
+</span>
+ <br><br>
+<span>
+  \(  f&#39;(x) = ln ^ x =&gt; f&#39;(x) = {1} /over {x} \)
+</span>
+ <br><br>
+<span>
+  \(  \frac{1}{x} = x ^ -1  \)
+</span>
+ <br><br></p>
+</blockquote>
+<blockquote>
+<p><strong>Partial Derivative</strong> <br><br>
+<span>
+  \(  f(x,y) = 2x &#43; 3xy &#43; y^3 \)
+</span>
+<br> <br>
+<span>
+  \(  \frac{\partial f(x,y)}{\partial x} = \frac{\partial(2x&#43;3xy&#43;y^3)}{\partial x} = 2 &#43; 3y \)
+</span>
+<br> <br></p>
+</blockquote>
+<blockquote>
+<p><strong>Chain Rule</strong> <br><br>
+<span>
+  \(  \frac{\partial f}{\partial x} = \frac{\partial f}{\partial t} \circ \frac{\partial t}{\partial x} \)
+</span>
+<br> <br>
+<span>
+  \(  f(x) = e ^ 3x^2 : e^t , t = 3x^2 \)
+</span>
+<br> <br>
+<span>
+  \(  \frac{\partial f(x,y)}{\partial x} = \frac{\partial(2x&#43;3xy&#43;y^3)}{\partial x} = 2 &#43; 3y \)
+</span>
+<br> <br></p>
+</blockquote>
+<blockquote>
+<p><strong>Numerical Derivative</strong> <br><br>
+<span>
+  \(  f(x) = x^2 \)
+</span>
+<br> <br>
+<span>
+  \(  f(x) = 3xe^x \)
+</span>
+<br> <br></p>
+</blockquote>
+<blockquote>
+<p><strong>Loss Function</strong> <br><br>
+<span>
+  \(  Loss Funtion = \frac{(t_1-y_1)^2 &#43; (t_2-y_2)^2 &#43; ... &#43; (t_n-y_n)^2}{n} \)
+</span>
+<br> <br>
+<span>
+  \(  = \frac{[t_1-(Wx_1&#43;b)]^2 &#43; [t_2-(Wx_2&#43;b)]^2 &#43; ... &#43; [t_n-(Wx_n&#43;b)]^2}{n} \)
+</span>
+<br> <br>
+<span>
+  \(  = \frac{1}{n} \, \displaystyle\sum_{i=1}^n \, [t_i-(Wx_i&#43;b)]^2 \)
+</span>
+<br> <br></p>
+</blockquote>
+<blockquote>
+<p><strong>Learning Rate</strong> <br><br>
+<span>
+  \(  W = W - \alpha \, \frac{\partial E(W,b)}{\partial W}  \)
+</span>
+<br> <br></p>
+</blockquote>
+<blockquote>
+<p><strong>Sigmoid</strong> <br><br>
+<span>
+  \(  Z = Wx &#43; b  \)
+</span>
+<br> <br>
+<span>
+  \(  y = sigmoid(Z) = \sigma (z) = \frac{1}{1&#43;e^-z}  \)
+</span>
+<br> <br></p>
+</blockquote>
+<blockquote>
+<p><strong>Cross Entropy</strong> <br><br>
+<span>
+  \(  y = \frac{1}{1&#43;e^-(Wx&#43;b)} , t_i = 0 or 1  \)
+</span>
+<br> <br>
+<span>
+  \(  E(W,b) = - \, \displaystyle\sum_{i=1}^n \, { \lbrace t_i \, \log y_i &#43; (1-t_i) \log (1-y_i) \rbrace } \)
+</span>
+<br> <br></p>
+</blockquote>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>&ldquo;Regression toward the mean&rdquo;, Sir Francis Galton (1822~1911) <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
 </article>
 
             
