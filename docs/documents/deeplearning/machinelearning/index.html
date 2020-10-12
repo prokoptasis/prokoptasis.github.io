@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.9ee1750404ea5c84cb43928d06e6311c77ca6d8744fa112e9bcfb53aa1f9126f.js" integrity="sha256-nuF1BATqXITLQ5KNBuYxHHfKbYdE&#43;hEum8&#43;1OqH5Em8="></script>
+<script defer src="/ko.search.min.f9aebd9030534b96b7c38f348fc51d6454fd0e5518345f8c6447c0e76a97c6af.js" integrity="sha256-&#43;a69kDBTS5a3w480j8UdZFT9DlUYNF&#43;MZEfA52qXxq8="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -409,7 +409,9 @@ https://github.com/alex-shpak/hugo-book
   Linear Regression<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>
   <a class="anchor" href="#linear-regression1">#</a>
 </h3>
-<p>Regression이란 일정 데이터의 분포를 가장 잘 설명 할 수 있는 직선의 방정식을 나타냅니다.</p>
+<p>Regression이란 &ldquo;Regression toward mean&quot;으로 특정한 데이터는 전체의 평균으로 회귀하려는 속성을 나타내며 일정 데이터의 분포를 가장 잘 설명 할 수 있는 직선의 방정식을 찾아내는 것을 나타냅니다. 말로는 설명이 아렵고 아래처럼 분포된 데이터의 점으로 표현되는 데이터들을 가장 잘 표현할 수 있는 직선을 찾는 것을 의미합니다.</p>
+<div><img width="600px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Linear_regression.svg/1920px-Linear_regression.svg.png" alt="linear_regression1" ></div>
+<p>위의 Linear Regression에서 직선의 방정식은 다음과 같이 나타낼 수 있습니다.</p>
 <blockquote>
 <p><strong>Regression</strong> <br><br>
 
@@ -430,22 +432,57 @@ https://github.com/alex-shpak/hugo-book
 <span>
   \( B : Bias (절편)  \)
 </span>
- <br><br>
+ <br><br></p>
+</blockquote>
+<p>그렇다면 데이터를 가장 잘 대변할 수 있는 직선은 무엇일까요? 아래 점으로 나타나는 데이터와 직선의 차이의 합이 가장 작을 수록 이들을 가장 잘 표현할 수 있다고 할 수 있습니다. 이러한 차이를 Cost라 하며 음수 차이와 양수 차이의 합이 상쇄되는 것을 막기 위해 제곱해서 사용하고 있습니다.</p>
+<div>
+<img width="250px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Linear_least_squares_example2.png/800px-Linear_least_squares_example2.png" alt="linear_regression2" >
+</div>
+<blockquote>
+<p><strong>Cost</strong> <br><br>
 <span>
   \( Cost : H(x) - y \)
 </span>
- <br><br></p>
-</blockquote>
-<blockquote>
-<p><strong>Regression에서 Cost</strong> <br><br>
+ <br><br>
 <span>
-  \( \frac{(H(x_1)-y_1)^2 &#43; (H(x_2)-y_2)^2 &#43; ... &#43; (H(x_n)-y_n)^2 }{n} \)
+  \( 전체 Cost : \frac{(H(x_1)-y_1)^2 &#43; (H(x_2)-y_2)^2 &#43; ... &#43; (H(x_n)-y_n)^2 }{n} \)
 </span>
  <br><br>
 <span>
-  \( cost(W) = \frac{1}{n}\, \textstyle\sum_{i=1}^n \,(Wx_i-y)^2 \)
+  \( 전체 Cost : cost(W) = \frac{1}{n}\, \textstyle\sum_{i=1}^n \,(Wx_i-y)^2 \)
+</span>
+ <br><br>
+<span>
+  \( Cost Function : cost(W,b) = \frac{1}{n}\, \textstyle\sum_{i=1}^n \,(H(x_i)-y_i)^2 \)
+</span>
+ <br><br>
+<span>
+  \( Goal : minimize_w,_b cost(W,b) \)
 </span>
  <br><br></p>
+</blockquote>
+<h3 id="gradient-descent">
+  Gradient Descent
+  <a class="anchor" href="#gradient-descent">#</a>
+</h3>
+<p>위의 Cost Function에서 임의 점에서 시작하여 학습률 만큼 기울기가 낮은 쪽으로 진해하며 최적의 값을 찾는 방식을 경사하강법이라 한다.</p>
+<div>
+<img width="400px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Gradient_descent.svg/1024px-Gradient_descent.svg.png" alt="linear_regression3" >
+</div>
+<blockquote>
+<p><strong>Gradient Descent</strong> <br><br>
+<span>
+  \(  W := W - \alpha \frac{\partial}{\partial W} \, \frac{1}{2m} \textstyle\sum_{i=1}^m (W(x_i)-y_i)^2  \)
+</span>
+<br> <br>
+<span>
+  \(  W := W - \alpha \frac{1}{2m} \, \textstyle\sum_{i=1}^m 2(W(x_i)-y_i)X_i  \)
+</span>
+<br> <br>
+<span>
+  \(  W := W - \alpha \frac{1}{m} \, \textstyle\sum_{i=1}^m 2(W(x_i)-y_i)X_i  \)
+</span>
+<br> <br></p>
 </blockquote>
 <h3 id="derivative">
   Derivative
