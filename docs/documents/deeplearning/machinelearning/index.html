@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.d0b1b6ff23aea3115126ca0caca746888266d352431df6e6994b4b92ca6b8627.js" integrity="sha256-0LG2/yOuoxFRJsoMrKdGiIJm01JDHfbmmUtLksprhic="></script>
+<script defer src="/ko.search.min.7608e6cc62efc96b1c59b95a1abbf2ae256f7b37cb30cf109b7404a371741c78.js" integrity="sha256-dgjmzGLvyWscWblaGrvyriVvezfLMM8Qm3QEo3F0HHg="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -485,11 +485,11 @@ https://github.com/alex-shpak/hugo-book
 </span>
  <br><br>
 <span>
-  \( 전체 Cost : \frac{(H(x_1)-y_1)^2 &#43; (H(x_2)-y_2)^2 &#43; ... &#43; (H(x_n)-y_n)^2 }{n} \)
+  \( Total Cost : \frac{(H(x_1)-y_1)^2 &#43; (H(x_2)-y_2)^2 &#43; ... &#43; (H(x_n)-y_n)^2 }{n} \)
 </span>
  <br><br>
 <span>
-  \( 전체 Cost : cost(W) = \frac{1}{n}\, \textstyle\sum_{i=1}^n \,(Wx_i-y)^2 \)
+  \( Total Cost : cost(W) = \frac{1}{n}\, \textstyle\sum_{i=1}^n \,(Wx_i-y)^2 \)
 </span>
  <br><br>
 <span>
@@ -501,11 +501,12 @@ https://github.com/alex-shpak/hugo-book
 </span>
  <br><br></p>
 </blockquote>
+<p>위 식에서와 같이 Goal은 가설과 실제 데이터의 차이의 제곱이 최소가 되는 기울기와 절편은 찾는 문제가 됩니다.</p>
 <h3 id="gradient-descent">
   Gradient Descent
   <a class="anchor" href="#gradient-descent">#</a>
 </h3>
-<p>위의 Cost Function에서 임의 점에서 시작하여 학습률 만큼 기울기가 낮은 쪽으로 진해하며 최적의 값을 찾는 방식을 경사하강법이라 한다.</p>
+<p>위의 Cost Function에서 임의 점에서 시작하여 학습률 만큼 기울기가 낮은 쪽으로 진해하며 최적의 값을 찾는 방식을 경사하강법이라고 합니다. 임의의 점에서 시작하여 Learning Rate 만큼 미분을 진행하며 최소점을 찾는 방식으로 Convext 상황에서는 잘 작동하게 됩니다.[^2]</p>
 <div>
 <img width="400px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Gradient_descent.svg/1024px-Gradient_descent.svg.png" alt="linear_regression3" >
 </div>
@@ -520,24 +521,32 @@ https://github.com/alex-shpak/hugo-book
 </span>
 <br> <br>
 <span>
-  \(  W := W - \alpha \frac{1}{m} \, \textstyle\sum_{i=1}^m 2(W(x_i)-y_i)X_i  \)
+  \(  W := W - \alpha \frac{1}{m} \, \textstyle\sum_{i=1}^m (W(x_i)-y_i)X_i  \)
+</span>
+<br> <br>
+<span>
+  \(  W := W - \alpha \frac{\partial}{\partial W} \, cost(W) \)
 </span>
 <br> <br></p>
 </blockquote>
+<p>위의 식을 보면 W에서 학습률*W에 편미분된 COST를 빼면서 경사 하강을 진행하게 됩니다. 오차의 기울기에 대한 편미분이 0이 되면 오차가 최소인 지점에 도달하며 최적해을 찾을 수 있게 됩니다. 이에 대한 수학적 유도는 다른 형태로 정리해보겠습니다.</p>
 <h3 id="derivative">
   Derivative
   <a class="anchor" href="#derivative">#</a>
 </h3>
+<p>수학적 유도는 다른 자료를 통해 공부를 했습니다. 그래서 몇가지 표현이 틀린데 양해 부탁드리겠습니다. 또한 설명의 순서도 좀 틀린데 일단 제가 다시 정리하기 전까지는 그대로 풀어보도록 하겠습니다.</p>
+<p>함수 f(x)에 대한 미분은 아래와 같습니다. 의미는 x의 변화량이 0으로 수렴할때 y의 변화량이 어떻게 되는지를 구하는 것을 미분이라 합니다. 바꿔말하면 함수 f(x)는 입력 x에 얼마나 민감하게 반응 하는지를 구한다는 이야기입니다.</p>
+<p><strong>Derivative</strong> <br><br></p>
 <blockquote>
-<p><strong>Derivative</strong> <br><br>
-<span>
+<p><span>
   \(  f&#39;(x) = \frac{\Delta f(x)}{\Delta x} = \lim\limits_{\Delta x \rightarrow 0 } \, \frac{f(x&#43;\Delta x)-f(x)}{\Delta x}   \)
 </span>
  <br><br></p>
 </blockquote>
+<p>고교수학과정입니다만 저처럼 기초가 없으신 분들을 위해 기본 풀이 부터 정리해 놓았습니다.</p>
+<p><strong>Derivative Basic</strong> <br><br></p>
 <blockquote>
-<p><strong>Derivative Basic</strong> <br><br>
-<span>
+<p><span>
   \(  f(x) = constant -&gt; f&#39;(x) = 0 \)
 </span>
 <br> <br>
@@ -550,11 +559,11 @@ https://github.com/alex-shpak/hugo-book
 </span>
  <br><br>
 <span>
-  \(  f&#39;(x) = ax ^ x =&gt; f&#39;(x) = nax ^ n-1 \)
+  \(  f&#39;(x) = ax ^ x =&gt; f&#39;(x) = nax ^ {n-1} \)
 </span>
  <br><br>
 <span>
-  \(  f&#39;(x) = ln ^ x =&gt; f&#39;(x) = {1} /over {x} \)
+  \(  f&#39;(x) = ln ^ x =&gt; f&#39;(x) = \frac{1}{x} \)
 </span>
  <br><br>
 <span>
@@ -562,40 +571,114 @@ https://github.com/alex-shpak/hugo-book
 </span>
  <br><br></p>
 </blockquote>
+<p>다시 미분의 문제로 돌아가서 아래와 같을 경우 미분의 의미를 살펴보겠습니다.</p>
+<p><img src="../../../../../201016_01_ml.gif" alt="x^2" /></p>
 <blockquote>
-<p><strong>Partial Derivative</strong> <br><br>
+<p><span>
+  \(  f(x) = x^2 일 경우 f&#39;(x) = 2 * x^ {2-1} = 2x \)
+</span>
+ <br><br>
 <span>
-  \(  f(x,y) = 2x &#43; 3xy &#43; y^3 \)
+  \(  f(2) = 2^2 = 4 일 경우 f&#39;(2) = 2*2 = 4  \)
+</span>
+ <br><br>
+<span>
+  \(  f(2) = 1^2 = 1 일 경우 f&#39;(2) = 2*1 = 2 \)
+</span>
+ <br><br>
+<span>
+  \(  f(2) = 0^2 = 0 일 경우 f&#39;(2) = 2*0 = 0 \)
+</span>
+ <br><br></p>
+</blockquote>
+<p>즉 x = 2 일때 미분 f(x)는 4의 변화를 가지게 됩니다.<br>
+즉 x = 1 일때 미분 f(x)는 2의 변화를 가지게 됩니다.<br>
+즉 x = 0 일때 미분 f(x)는 0의 변화를 가지게 됩니다.</p>
+<p>즉 x의 한점에서 y의 변화량을 통해 위의 x^2이 Cost라 가정하다고 반복한다면 Cost가 최저인 점을 구할 수 있습니다. 즉 Cost가 최소가 되는 최적해를 구할 수 있게 됩니다.</p>
+<blockquote>
+<p>Practice 1 <br><br>
+<span>
+  \(  f(x) = 3x^2 &#43; e^x &#43; 7 의 f&#39;(x) ? \)
+</span>
+ <br><br>
+<span>
+  \(       = 3*2*x^{2-1} &#43; e^x &#43; 0 = 6x &#43; e^x \)
+</span>
+ <br><br>
+Practice 2 <br><br>
+<span>
+  \(  f(x) = lnx &#43; \frac{1}{x} 의 f&#39;(x) ? \)
+</span>
+ <br><br>
+<span>
+  \(       = \frac{1}{x} - \frac{1}{x^2} \)
+</span>
+ <br><br></p>
+</blockquote>
+<p><strong>Partial Derivative</strong> <br><br></p>
+<p>다음은 입력변수가 하나 이상인 다변수 함수에서 사용하는 편미분에 대해 살펴 보겠습니다. 다변수 함수에서는 미분하고자 하는 변수 하나를 제외한 나머지 변수들은 상수로 취급하고 해당 변수를 미분하는 것을 의미합니다.</p>
+<blockquote>
+<p>Practice 1 <br><br>
+<span>
+  \(  f(x,y) = 2x &#43; 3xy &#43; y^3 변수 x에 대해 편미분 \)
 </span>
 <br> <br>
 <span>
-  \(  \frac{\partial f(x,y)}{\partial x} = \frac{\partial(2x&#43;3xy&#43;y^3)}{\partial x} = 2 &#43; 3y \)
+  \(  = \frac{\partial f(x,y)}{\partial x} = \frac{\partial(2x&#43;3xy&#43;y^3)}{\partial x} \)
+</span>
+<br> <br>
+<span>
+  \(  = \frac{\partial 2x}{\partial x} \frac{\partial 3xy}{\partial x} \frac{\partial y^3}{\partial x} \)
+</span>
+<br> <br>
+<span>
+  \(  = 2 &#43; 3y &#43; 0 \)
+</span>
+<br> <br>
+<span>
+  \(  = 2 &#43; 3y \)
+</span>
+<br> <br>
+<span>
+  \(  f(x,y) = 2x &#43; 3xy &#43; y^3 변수 y에 대해 편미분 \)
+</span>
+<br> <br>
+<span>
+  \(  = \frac{\partial f(x,y)}{\partial y} = \frac{\partial(2x&#43;3xy&#43;y^3)}{\partial y} \)
+</span>
+<br> <br>
+<span>
+  \(  = \frac{\partial 2x}{\partial y} \frac{\partial 3xy}{\partial y} \frac{\partial y^3}{\partial y} \)
+</span>
+<br> <br>
+<span>
+  \(  = 0 &#43; 3x &#43; 3y^2 \)
+</span>
+<br> <br>
+<span>
+  \(  = 3x &#43; 3y^2 \)
+</span>
+<br> <br></p>
+</blockquote>
+<p><strong>Chain Rule</strong> <br><br></p>
+<p>여러 함수로 구성된 합성 함수를 미분하기 위한 방법으로 Chain Rule이 있습니다. 여러 함수를 결합된 함수 중 특정 함수를 치환하여 약분 개념을 적용하여 미분하는 방식입니다.</p>
+<blockquote>
+<p><span>
+  \(  f(x) = e ^ {3x^2} \space \space \space e^t , \space t = 3x^2 \)
+</span>
+<br> <br>
+<span>
+  \(  \frac{\partial f}{\partial x} = \frac{\partial f}{\partial t} \circ \frac{\partial t}{\partial x} = \frac{\partial (e^t)}{\partial t} \circ \frac{\partial (3x^2)}{\partial x} = (e^t)(6x) = (e^{3x^2})(6x) = 6xe^{3x2} \)
 </span>
 <br> <br></p>
 </blockquote>
 <blockquote>
-<p><strong>Chain Rule</strong> <br><br>
-<span>
-  \(  \frac{\partial f}{\partial x} = \frac{\partial f}{\partial t} \circ \frac{\partial t}{\partial x} \)
+<p><span>
+  \(  f(x) = e^{-x} \space \space \space e^t , \space t = -x  \)
 </span>
 <br> <br>
 <span>
-  \(  f(x) = e ^ 3x^2 : e^t , t = 3x^2 \)
-</span>
-<br> <br>
-<span>
-  \(  \frac{\partial f(x,y)}{\partial x} = \frac{\partial(2x&#43;3xy&#43;y^3)}{\partial x} = 2 &#43; 3y \)
-</span>
-<br> <br></p>
-</blockquote>
-<blockquote>
-<p><strong>Numerical Derivative</strong> <br><br>
-<span>
-  \(  f(x) = x^2 \)
-</span>
-<br> <br>
-<span>
-  \(  f(x) = 3xe^x \)
+  \(  \frac{\partial f}{\partial x} = \frac{\partial f}{\partial t} \circ \frac{\partial t}{\partial x} = \frac{\partial (e^t)}{\partial t} \circ \frac{\partial (-x)}{\partial x} = (e^t)(-1) = (e^{-x})(-1) = -e^{-x} \)
 </span>
 <br> <br></p>
 </blockquote>
@@ -643,6 +726,7 @@ https://github.com/alex-shpak/hugo-book
 </span>
 <br> <br></p>
 </blockquote>
+<p>[^2] : <a href="https://towardsdatascience.com/why-gradient-descent-isnt-enough-a-comprehensive-introduction-to-optimization-algorithms-in-59670fd5c096" target="_blank" rel="noopener">굴곡진 인생의 정답을 찾아가는 험난한 여정</a></p>
 <section class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
