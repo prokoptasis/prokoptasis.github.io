@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.a95355a3223f593551e9713d3bdedf567367b2ae7a14109ed26c82da9d2947f8.js" integrity="sha256-qVNVoyI/WTVR6XE9O97fVnNnsq56FBCe0myC2p0pR/g="></script>
+<script defer src="/ko.search.min.85c857a931ef0f6a488d50791f531e51a8558a813171688f40191604320666b9.js" integrity="sha256-hchXqTHvD2pIjVB5H1MeUahVioExcWiPQBkWBDIGZrk="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -921,7 +921,23 @@ Practice 3 <br><br>
   Logistic Regression
   <a class="anchor" href="#logistic-regression">#</a>
 </h3>
-<p>행렬의 곱까지 잘 왔다면 이제 Regression을 통해 처리된 결과를 Classification 해야될 차례입니다.</p>
+<p>행렬의 곱까지 잘 왔다면 이제 Regression을 통해 처리된 결과를 Classification 해야될 차례입니다. 분류의 문제에 있어서 Linear Regression은 선형의 수치형 값을 가지게 됩니다. 하지만 분류의 문제에 있어서는 선택의 문제로 표현되어야 합니다. 즉 Linear한 결과를 Logistic Regression을 통해 특정 값으로 한정하고 이를 Decision Boundary를 통해 분류의 결과로 대치할 수 있는 필요가 생깁니다.</p>
+<div><img width="600px" src="../../../../../201020_09_ml_logistic_regression.png" alt="logistic regression" ></div>
+<p>분류의 문제를 위해 지수 함수 <span>
+  \( e^x \)
+</span>
+를 <span>
+  \( e^{-x} \)
+</span>
+로 전환 후 <span>
+  \( \frac{1}{1 &#43; e^{-x}} \)
+</span>
+에 대입하여 x의 좌측으로 진행할수로 <span>
+  \( \infty \)
+</span>
+에 가까워지며 0에 수렴하게되고 x의 우측으로 진행하게 될수록 0에 수렴하면서 1에 가까워지는 결과가 나오게 된다.</p>
+<div><img width="600px" src="../../../../../201020_10_ml_e_x.png" alt="e_x" ></div>
+<div><img width="600px" src="../../../../../201020_08_ml_sigmoid.png" alt="local_minima" ></div>
 <blockquote>
 <p><strong>Sigmoid</strong> <br><br>
 <span>
@@ -935,17 +951,61 @@ Practice 3 <br><br>
 <span>
   \(  y = sigmoid(Z) = \sigma (z) = \frac{1}{1&#43;e^-z}  \)
 </span>
-<br> <br></p>
+<br><br></p>
 </blockquote>
-<div><img width="600px" src="../../../../../201020_08_ml_sigmoid.png" alt="local_minima" ></div>
+<p>Logistic Regression의 Cost Function은 y = 1 일때와 y = 0 일때로 구분할 수 있는데 y = 1 일때는 <span>
+  \( \log(h(x)) \)
+</span>
+의 역 <span>
+  \( -\log(h(x)) \)
+</span>
+을 취해 0으로 근접할 수록 오차가 <span>
+  \( \infty \)
+</span>
+에 수렴하게 됩니다. 반대로 y = 0 일때는 <span>
+  \( \log(1 - h(x)) \)
+</span>
+ 와 같이 1에서 차감하여 1에 근접할 수록 오차가 <span>
+  \( \infty \)
+</span>
+에 수렴하게 합니다. 이 두 식을 합하면 Logistic Regression의 Convex한 Cost Funtion이 되게 됩니다.</p>
+<div><img width="600px" src="../../../../../201020_11_log_y_1.jpg" alt="log y=1" ></div>
+<div><img width="600px" src="../../../../../201020_12_log_y_0.jpg" alt="log y=0" ></div>
+<p>Cross-Entropy 유도의 또다른 설명은 다음과 같습니다.</p>
 <blockquote>
-<p><strong>Cross Entropy</strong> <br><br>
+<p>하나의 입력 x에 대해 출력이 1일 확률을 y로 정의. y는 0 또는 1일임으로 y = sigmodi(Wx+b)로 나타낼 수 있습니다.
 <span>
-  \(  y = \frac{1}{1&#43;e^-(Wx&#43;b)} , t_i = 0 or 1  \)
+  \(  p(C=1|x) = y = sigmoid(Wx&#43;b)  \)
+</span>
+<br><br>
+입력 x에 대해 출력이 0일 확률은 1이 나타날 확률의 나머지임으로 1-y 입니다.
+<span>
+  \(  p(C=0|x) = 1 - p(C=1|x) = 1 - y  \)
+</span>
+<br><br>
+확률 변수 C는 0 또는 1 이외에는 존재하지 않음으로 베르누이 시행을 전제로 하며 베르누이 분포의 확률질량함수(PMF)는 다음과 같이 정의됨
+<span>
+  \(  p(C=p|x) = y^p ( 1 - y )^{1-P}  \)
 </span>
 <br><br>
 <span>
-  \(  E(W,b) = - \, \displaystyle\sum_{i=1}^n \, { \lbrace t_i \, \log y_i &#43; (1-t_i) \log (1-y_i) \rbrace } \)
+  \( Likelyhood (W,b) = \displaystyle\prod_{i=1}^n p(C=p_i|x_i) = \displaystyle\prod_{i=1}^n y_i^{p_i} (1-y_i)^{1-p_i}  \)
+</span>
+<br><br>
+이를 Log 변환을 통해 Convex의 형태와 극점의 위치를 유지하며 곱을 선형의 조합 꼴로 풀 수 있도록 변환한다.<br><br>
+<span>
+  \( E(W,b) = - \log L(W,b) = -\displaystyle\sum_{i=1}^n \lbrace t_i \textstyle\log y_i &#43; (1-p_i) \log(1-y_i) \rbrace  \)
+</span>
+<br><br></p>
+</blockquote>
+<blockquote>
+<p><strong>Logistic Regression Cross Entropy</strong> <br><br>
+<span>
+  \(  y = \frac{1}{1&#43;e^{-(Wx&#43;b)}} , \space p_i = 0 \space or \space 1  \)
+</span>
+<br><br>
+<span>
+  \(  E(W,b) = - \, \displaystyle\sum_{i=1}^n \, \lbrace p_i \, \log y_i &#43; (1-p_i) \log (1-y_i) \rbrace \)
 </span>
 <br><br></p>
 </blockquote>
