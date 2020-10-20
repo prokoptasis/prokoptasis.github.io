@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.6eedf994bf3d97aec7db800a6384bb9930e363cd98c0ee03406c0d868c780475.js" integrity="sha256-bu35lL89l67H24AKY4S7mTDjY82YwO4DQGwNhox4BHU="></script>
+<script defer src="/ko.search.min.a95355a3223f593551e9713d3bdedf567367b2ae7a14109ed26c82da9d2947f8.js" integrity="sha256-qVNVoyI/WTVR6XE9O97fVnNnsq56FBCe0myC2p0pR/g="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -372,7 +372,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://prokoptasis.github.io/docs/documents/english/hinative/" class="">HiNative</a>
+    <a href="http://prokoptasis.github.io/docs/documents/english/engweb/" class="">English</a>
   
 
         </li>
@@ -519,7 +519,9 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#linear-regression1">#</a>
 </h3>
 <p>Regression이란 &ldquo;Regression toward mean&quot;으로 특정한 데이터는 전체의 평균으로 회귀하려는 속성을 나타내며 일정 데이터의 분포를 가장 잘 설명 할 수 있는 직선의 방정식을 찾아내는 것을 나타냅니다. 말로는 설명이 아렵고 아래처럼 분포된 데이터의 점으로 표현되는 데이터들을 가장 잘 표현할 수 있는 직선을 찾는 것을 의미합니다.</p>
-<div><img width="600px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Linear_regression.svg/1920px-Linear_regression.svg.png" alt="linear_regression1" ></div>
+ <div><img width="600px" src="../../../../../201020_01_ml_linear_regression.png" alt="linear_regression1" ></div>
+<!-- ![Linear Regression](../../../../../201020_01_ml_linear_regression.png) -->
+<!-- <div><img width="600px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Linear_regression.svg/1920px-Linear_regression.svg.png" alt="linear_regression1" ></div> -->
 <p>위의 Linear Regression에서 직선의 방정식은 다음과 같이 나타낼 수 있습니다.</p>
 <blockquote>
 <p><strong>Regression</strong> <br><br>
@@ -544,9 +546,11 @@ https://github.com/alex-shpak/hugo-book
  <br><br></p>
 </blockquote>
 <p>그렇다면 데이터를 가장 잘 대변할 수 있는 직선은 무엇일까요? 아래 점으로 나타나는 데이터와 직선의 차이의 합이 가장 작을 수록 이들을 가장 잘 표현할 수 있다고 할 수 있습니다. 이러한 차이를 Cost라 하며 음수 차이와 양수 차이의 합이 상쇄되는 것을 막기 위해 제곱해서 사용하고 있습니다.</p>
-<div>
+<div><img width="600px" src="../../../../../201020_02_ml_gradient_descent.png" alt="gradient_descent" ></div>
+<!-- ![x^2](../../../../../201020_02_ml_gradient_descent.png201020_02_ml_gradient_descent.png) -->
+<!-- <div>
 <img width="250px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Linear_least_squares_example2.png/800px-Linear_least_squares_example2.png" alt="linear_regression2" >
-</div>
+</div> -->
 <blockquote>
 <p><strong>Cost</strong> <br><br>
 <span>
@@ -576,27 +580,29 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#gradient-descent">#</a>
 </h3>
 <p>위의 Cost Function에서 임의 점에서 시작하여 학습률 만큼 기울기가 낮은 쪽으로 진해하며 최적의 값을 찾는 방식을 경사하강법이라고 합니다. 임의의 점에서 시작하여 Learning Rate 만큼 미분을 진행하며 최소점을 찾는 방식으로 Convext 상황에서는 잘 작동하게 됩니다.<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
-<div>
+<div><img width="600px" src="../../../../../201020_03_ml_minimize_goal.png" alt="minimize_goal" ></div>
+<!-- ![x^2](../../../../../201020_03_ml_minimize_goal.png) -->
+<!-- <div>
 <img width="400px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Gradient_descent.svg/1024px-Gradient_descent.svg.png" alt="linear_regression3" >
-</div>
+</div> -->
 <blockquote>
 <p><strong>Gradient Descent</strong> <br><br>
 <span>
   \(  W := W - \alpha \frac{\partial}{\partial W} \, \frac{1}{2m} \textstyle\sum_{i=1}^m (W(x_i)-y_i)^2  \)
 </span>
-<br> <br>
+ <br><br>
 <span>
   \(  W := W - \alpha \frac{1}{2m} \, \textstyle\sum_{i=1}^m 2(W(x_i)-y_i)X_i  \)
 </span>
-<br> <br>
+ <br><br>
 <span>
   \(  W := W - \alpha \frac{1}{m} \, \textstyle\sum_{i=1}^m (W(x_i)-y_i)X_i  \)
 </span>
-<br> <br>
+ <br><br>
 <span>
   \(  W := W - \alpha \frac{\partial}{\partial W} \, cost(W) \)
 </span>
-<br> <br></p>
+ <br> <br></p>
 </blockquote>
 <p>위의 식을 보면 W에서 학습률*W에 편미분된 COST를 빼면서 경사 하강을 진행하게 됩니다. 오차의 기울기에 대한 편미분이 0이 되면 오차가 최소인 지점에 도달하며 최적해을 찾을 수 있게 됩니다. 이에 대한 수학적 유도는 다른 형태로 정리해보겠습니다.</p>
 <h3 id="derivative">
@@ -618,7 +624,7 @@ https://github.com/alex-shpak/hugo-book
 <p><span>
   \(  f(x) = constant -&gt; f&#39;(x) = 0 \)
 </span>
-<br> <br>
+ <br><br>
 <span>
   \(  f&#39;(x) = e ^ x =&gt; f&#39;(x) = e ^ x \)
 </span>
@@ -641,7 +647,8 @@ https://github.com/alex-shpak/hugo-book
  <br><br></p>
 </blockquote>
 <p>다시 미분의 문제로 돌아가서 아래와 같을 경우 미분의 의미를 살펴보겠습니다.</p>
-<p><img src="../../../../../201016_01_ml.gif" alt="x^2" /></p>
+<div><img width="600px" src="../../../../../201020_04_ml_power_x_2.gif" alt="power_x_2" ></div>
+<!-- ![x^2](../../../../../201020_04_ml_power_x_2.gif) -->
 <blockquote>
 <p><span>
   \(  f(x) = x^2 일 경우 f&#39;(x) = 2 * x^ {2-1} = 2x \)
@@ -689,83 +696,169 @@ Practice 2 <br><br>
 <blockquote>
 <p>Practice 1 <br><br>
 <span>
-  \(  f(x,y) = 2x &#43; 3xy &#43; y^3 변수 x에 대해 편미분 \)
+  \(  f(x,y) = 2x &#43; 3xy &#43; y^3 \space 변수 \space x에 \space 대해 \space 편미분 \)
 </span>
-<br> <br>
+ <br><br>
 <span>
   \(  = \frac{\partial f(x,y)}{\partial x} = \frac{\partial(2x&#43;3xy&#43;y^3)}{\partial x} \)
 </span>
-<br> <br>
+ <br><br>
 <span>
-  \(  = \frac{\partial 2x}{\partial x} \frac{\partial 3xy}{\partial x} \frac{\partial y^3}{\partial x} \)
+  \(  = \frac{\partial 2x}{\partial x} &#43; \frac{\partial 3xy}{\partial x} &#43; \frac{\partial y^3}{\partial x} \)
 </span>
-<br> <br>
+ <br><br>
 <span>
   \(  = 2 &#43; 3y &#43; 0 \)
 </span>
-<br> <br>
+ <br><br>
 <span>
   \(  = 2 &#43; 3y \)
 </span>
-<br> <br>
+ <br><br>
 <span>
-  \(  f(x,y) = 2x &#43; 3xy &#43; y^3 변수 y에 대해 편미분 \)
+  \(  f(x,y) = 2x &#43; 3xy &#43; y^3 \space 변수 \space y에 \space 대해 \space 편미분 \)
 </span>
-<br> <br>
+ <br><br>
 <span>
   \(  = \frac{\partial f(x,y)}{\partial y} = \frac{\partial(2x&#43;3xy&#43;y^3)}{\partial y} \)
 </span>
-<br> <br>
+ <br><br>
 <span>
-  \(  = \frac{\partial 2x}{\partial y} \frac{\partial 3xy}{\partial y} \frac{\partial y^3}{\partial y} \)
+  \(  = \frac{\partial 2x}{\partial y} &#43; \frac{\partial 3xy}{\partial y} &#43; \frac{\partial y^3}{\partial y} \)
 </span>
-<br> <br>
+ <br><br>
 <span>
   \(  = 0 &#43; 3x &#43; 3y^2 \)
 </span>
-<br> <br>
+ <br><br>
 <span>
   \(  = 3x &#43; 3y^2 \)
 </span>
-<br> <br></p>
+ <br><br></p>
 </blockquote>
-<p><strong>Chain Rule</strong> <br><br></p>
-<p>여러 함수로 구성된 합성 함수를 미분하기 위한 방법으로 Chain Rule이 있습니다. 여러 함수를 결합된 함수 중 특정 함수를 치환하여 약분 개념을 적용하여 미분하는 방식입니다.</p>
+<p><strong>Chain Rule / Product Rule</strong> <br><br></p>
+<p>여러 함수로 구성된 합성 함수를 미분하기 위한 방법으로 Chain Rule이 있습니다. 여러 함수를 결합된 함수 중 특정 함수를 치환하여 약분 개념을 적용하여 미분하는 방식입니다. 두 함수가 곱해져 있는 형태의 미분은 단순 미분의 곱이 아니며 Product Rule이 성립합니다.</p>
 <blockquote>
-<p><span>
+<p>Chain rule <br><br>
+<span>
+  \(  \frac{\partial f}{\partial x} = \frac{\partial f}{\partial t} \circ \frac{\partial t}{\partial x} \)
+</span>
+ <br><br>
+Product rule <br><br>
+<span>
+  \(  \frac{\partial}{\partial x}[f(x)g(x)]=f(x)g&#39;(x)&#43;f&#39;(x)g(x)  \)
+</span>
+<br><br>
+Practice 1 <br><br>
+<span>
   \(  f(x) = e ^ {3x^2} \space \space \space e^t , \space t = 3x^2 \)
 </span>
-<br> <br>
+<br><br>
 <span>
   \(  \frac{\partial f}{\partial x} = \frac{\partial f}{\partial t} \circ \frac{\partial t}{\partial x} = \frac{\partial (e^t)}{\partial t} \circ \frac{\partial (3x^2)}{\partial x} = (e^t)(6x) = (e^{3x^2})(6x) = 6xe^{3x2} \)
 </span>
-<br> <br></p>
-</blockquote>
-<blockquote>
-<p><span>
+ <br><br>
+<span>
   \(  f(x) = e^{-x} \space \space \space e^t , \space t = -x  \)
 </span>
-<br> <br>
+<br><br>
+Practice 2 <br><br>
 <span>
   \(  \frac{\partial f}{\partial x} = \frac{\partial f}{\partial t} \circ \frac{\partial t}{\partial x} = \frac{\partial (e^t)}{\partial t} \circ \frac{\partial (-x)}{\partial x} = (e^t)(-1) = (e^{-x})(-1) = -e^{-x} \)
 </span>
-<br> <br></p>
+ <br><br>
+Practice 3 <br><br>
+<span>
+  \(  f(x) = 3xe^x  \)
+</span>
+ <br><br>
+<span>
+  \(  \frac{\partial}{\partial x}(3xe^x) = 3 \Big( \frac{\partial}{\partial x}(e^x x) \Big) \)
+</span>
+ <br><br>
+<span>
+  \( Product \space Rule을 \space 적용 \space \frac{\partial}{\partial x}(u v) = v \frac{\partial u}{\partial x} &#43; u \frac{\partial v}{\partial x} \space 다음으로 치환 \space u = e^x \space v = x  \)
+</span>
+ <br><br>
+<span>
+  \( 3 \Big( x \frac{\partial}{\partial x}(e^x) &#43; e^x \frac {\partial}{\partial x}(x) \Big) \)
+</span>
+ <br><br>
+<span>
+  \( Chain \space Rule을 \space 적용 \space \frac{\partial}{\partial x}(e^x) = \frac {\partial e^u}{\partial u} \frac{\partial u}{\partial x} \space 다음으로 \space 치환 \space u = x, \space \frac{\partial}{\partial u}(e^u)=e^u \)
+</span>
+ <br><br>
+<span>
+  \( = 3 \Big( x e^x \frac{\partial}{\partial x}(x)  &#43; e^x  \frac{\partial}{\partial x}(x) \Big) \)
+</span>
+ <br><br>
+<span>
+  \( = 3 \Big( x e^x 1 &#43; e^x \frac{\partial}{\partial x}(x) \Big) \)
+</span>
+ <br><br>
+<span>
+  \( = 3 \Big( x e^x &#43; e^x 1 \Big) \)
+</span>
+ <br><br>
+<span>
+  \( = 3 ( x e^x &#43; e^x ) \)
+</span>
+ <br><br>
+<span>
+  \( = 3 e^x( x &#43; 1 ) \)
+</span>
+ <br><br></p>
 </blockquote>
+<h3 id="loss-function">
+  Loss Function
+  <a class="anchor" href="#loss-function">#</a>
+</h3>
+<p>미분의 매력에 흠뻑 빠지셨다면 이제 다시 원점으로 돌아가서 Linear Regression에 있어 Loss Function에 대해 이야기해보겠습니다. Linear Regression은 실측되는 데이터와 이를 표현하는 직선의 방정식 f(x) = wx+b의 error가 최소가 되어야 합니다. 즉 Error가 최소가 되는 W,B를 연속적으로 탐색하는 과정에서 이를 측정하기 위해 사용되는 것이 손실함수입니다.</p>
+<div><img width="600px" src="../../../../../201020_02_ml_gradient_descent.png" alt="gradient_descent" ></div>
+<!-- ![Error](../../../../../201020_02_ml_gradient_descent.png) -->
 <blockquote>
 <p><strong>Loss Function</strong> <br><br>
 <span>
   \(  Loss Funtion = \frac{(t_1-y_1)^2 &#43; (t_2-y_2)^2 &#43; ... &#43; (t_n-y_n)^2}{n} \)
 </span>
-<br> <br>
+ <br><br>
 <span>
   \(  = \frac{[t_1-(Wx_1&#43;b)]^2 &#43; [t_2-(Wx_2&#43;b)]^2 &#43; ... &#43; [t_n-(Wx_n&#43;b)]^2}{n} \)
 </span>
-<br> <br>
+ <br><br>
 <span>
   \(  = \frac{1}{n} \, \displaystyle\sum_{i=1}^n \, [t_i-(Wx_i&#43;b)]^2 \)
 </span>
-<br> <br></p>
+ <br><br></p>
 </blockquote>
+<div><img width="600px" src="../../../../../201020_02_ml_gradient_descent.png" alt="gradient_descent" ></div>
+<p>Gradient Descent 알고리즘도 다시 보겠습니다. 원 기울기에서 학습률*미분만큼을 감소시키며 기울기가 0이 되는 지점 즉 오차가 최소화되는 지점으로 진행하기 위한 수식임을 알 수 있습니다.</p>
+<blockquote>
+<p><strong>Gradient Descent</strong> <br><br>
+<span>
+  \(  W := W - \alpha \frac{\partial}{\partial W} \, \frac{1}{2m} \textstyle\sum_{i=1}^m (W(x_i)-y_i)^2  \)
+</span>
+ <br><br>
+<span>
+  \(  W := W - \alpha \frac{1}{2m} \, \textstyle\sum_{i=1}^m 2(W(x_i)-y_i)X_i  \)
+</span>
+ <br><br>
+<span>
+  \(  W := W - \alpha \frac{1}{m} \, \textstyle\sum_{i=1}^m (W(x_i)-y_i)X_i  \)
+</span>
+ <br><br>
+<span>
+  \(  W := W - \alpha \frac{\partial}{\partial W} \, cost(W) \)
+</span>
+ <br> <br>
+<span>
+  \(  b := b - \alpha \frac{\partial}{\partial b} \, cost(b) \)
+</span>
+ <br> <br></p>
+</blockquote>
+<p>여기서 학습률은 최적해를 향한 진행 폭을 결정하게 됩니다. 작게 잡으면 성능이 저하되고 크게 잡으면 학습이 잘 진행되지 않을 수 있습니다.</p>
+<div><img width="600px" src="../../../../../201020_05_ml_learning_rate.png" alt="learning_rate" ></div>
+<!-- ![Learning Rate](../../../../../201020_05_ml_learning_rate.png) -->
 <blockquote>
 <p><strong>Learning Rate</strong> <br><br>
 <span>
@@ -773,27 +866,88 @@ Practice 2 <br><br>
 </span>
 <br> <br></p>
 </blockquote>
+<div><img width="600px" src="../../../../../201020_06_ml_convex_function.png" alt="convex_function" ></div>
+<p>이론적으로 Convex Function이라면 가장 잘 최적해를 찾을 수 있습니다. 하지만 문제에 따라 Convex가 아니라면 Parameter에 따라 적절치 위치에서 학습이 종료될 수도 있습니다.</p>
+<div><img width="600px" src="../../../../../201020_07_ml_local_minima.png" alt="local_minima" ></div>
+<h3 id="dot-product">
+  Dot Product
+  <a class="anchor" href="#dot-product">#</a>
+</h3>
+<p>Linear Regression 문제에 혜성처럼 행렬이 등장합니다. 다음과 같은 방정식에서 뭐든 요소들의 오차들은 행렬곱을 통해 한번에 계산될 수 있습니다.</p>
+<blockquote>
+<p><strong>Dot Product</strong> <br><br>
+<span>
+  \(  x_1 * W &#43; b_1 = y_1 \)
+</span>
+<br><br>
+<span>
+  \(  x_2 * W &#43; b_2 = y_2 \)
+</span>
+<br><br>
+<span>
+  \(  x_3 * W &#43; b_3 = y_3 \)
+</span>
+<br><br>
+<span>
+  \(  x_4 * W &#43; b_4 = y_4 \)
+</span>
+<br><br>
+<span>
+  \(  x_5 * W &#43; b_5 = y_5 \)
+</span>
+<br><br>
+행렬의 곱으로 전환 <br><br>
+<span>
+  \( \begin{pmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \\ x_5 \end{pmatrix} \circ (W) &#43; b =  \begin{pmatrix} y_1 \\ y_2 \\ y_3 \\ y_4 \\ y_5 \end{pmatrix} \)
+</span>
+<br><br>
+<span>
+  \( X \circ W &#43; b = Y \)
+</span>
+<br><br></p>
+</blockquote>
+<blockquote>
+<p><strong>Multi Variable Dot Product</strong> <br><br>
+<span>
+  \( \begin{pmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \\ x_5 \end{pmatrix} \circ \begin{pmatrix} w_1 \\ w_2 \\ w_3 \end{pmatrix} &#43; b =  \begin{pmatrix} y_1 \\ y_2 \\ y_3 \\ y_4 \\ y_5 \end{pmatrix} \)
+</span>
+<br><br>
+<span>
+  \( X \circ W &#43; b = Y \)
+</span>
+<br><br></p>
+</blockquote>
+<h3 id="logistic-regression">
+  Logistic Regression
+  <a class="anchor" href="#logistic-regression">#</a>
+</h3>
+<p>행렬의 곱까지 잘 왔다면 이제 Regression을 통해 처리된 결과를 Classification 해야될 차례입니다.</p>
 <blockquote>
 <p><strong>Sigmoid</strong> <br><br>
 <span>
   \(  Z = Wx &#43; b  \)
 </span>
-<br> <br>
+<br><br>
+<span>
+  \(  y = \frac {1}{1&#43;e^{-(Wx&#43;b)}}  \)
+</span>
+<br><br>
 <span>
   \(  y = sigmoid(Z) = \sigma (z) = \frac{1}{1&#43;e^-z}  \)
 </span>
 <br> <br></p>
 </blockquote>
+<div><img width="600px" src="../../../../../201020_08_ml_sigmoid.png" alt="local_minima" ></div>
 <blockquote>
 <p><strong>Cross Entropy</strong> <br><br>
 <span>
   \(  y = \frac{1}{1&#43;e^-(Wx&#43;b)} , t_i = 0 or 1  \)
 </span>
-<br> <br>
+<br><br>
 <span>
   \(  E(W,b) = - \, \displaystyle\sum_{i=1}^n \, { \lbrace t_i \, \log y_i &#43; (1-t_i) \log (1-y_i) \rbrace } \)
 </span>
-<br> <br></p>
+<br><br></p>
 </blockquote>
 <section class="footnotes" role="doc-endnotes">
 <hr>

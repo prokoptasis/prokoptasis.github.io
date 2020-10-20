@@ -63,16 +63,16 @@ package main func main() { // 선언 및 할당 	var a int var b float32 = 11.</
     </item>
     
     <item>
-      <title>HiNative</title>
-      <link>http://prokoptasis.github.io/docs/documents/english/hinative/</link>
+      <title>English</title>
+      <link>http://prokoptasis.github.io/docs/documents/english/engweb/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://prokoptasis.github.io/docs/documents/english/hinative/</guid>
-      <description>English Expression Diary #   HiNative에서 들었던 영어 관련 흥미로웠던 표현들을 정리해보겠습니다.
+      <guid>http://prokoptasis.github.io/docs/documents/english/engweb/</guid>
+      <description>English Expression Diary #   여기저기서 들었던 표현들을 정리해보겠습니다.
 Try telling me English is easy. #  &amp;lsquo;Try me&amp;rsquo;는 &amp;lsquo;How you dare&amp;rsquo;의 뜻으로 이 문장은 sarcastic 하고 twisted된 문장입니다. 그래서 해석은 &amp;ldquo;어디 한번 영어가 쉽다고 말해보시지?&amp;rdquo; 정도 되겠습니다.
 Ease into #  천천히 들듯이 적응하다는 의미입니다.
 Feel insecure about someone&amp;rsquo;s appearance #  외모에 자신감이 없다는 뜻입니다.
-Elbow me in the rib #  팔꿈치로 가격하는 건지를 놓고 고민했었습니다.</description>
+Elbow me in the rib #  팔꿈치로 가격하는 건지를 놓고 고민했었습니다. 옆구리를 쿡쿡 찌른다는 의미입니다.</description>
     </item>
     
     <item>
@@ -97,7 +97,7 @@ I&amp;rsquo;m in the middle of a metting.</description>
       
       <guid>http://prokoptasis.github.io/posts/201019/</guid>
       <description>매일 다니는 서울역인데 아래에 링크한 영상처럼 이쁜 줄은 오늘 처음 알았네요. 유튜브 iframe 링크에는 저작권 문제가 있다는 것도 역시 오늘 처음 알았습니다. 유튜브에 공유하는 기능은 있으나 침해의 소지가 있다 없다 등에 대한 의견은 매우 분분한 상황같습니다. 하여 아래 링크를 달아 놓으니 필요하시면 직접 가서 들으시는 걸로.
-몇가지 제 개인적인 생각 좀 정리해보겠습니다. 정적 사이트에 대한 고민이 영어로 번져서 한동안 일진광풍처럼 제 머리 속을 휩쓸고 지나갔습니다. 저도 참 성격이 급한 듯 합니다.</description>
+몇가지 제 개인적인 생각 좀 정리해보겠습니다. 정적 사이트에 대한 고민이 영어로 번져서 한동안 일진광풍처럼 제 머리 속을 휩쓸고 지나갔습니다. 시작은 영문사이트를 같이 유지할 수 있을까에 대한 고민이였는데 일단 현재로서는 역부족이라고 판단해야될 것 같습니다.</description>
     </item>
     
     <item>
@@ -129,17 +129,6 @@ I&amp;rsquo;m in the middle of a metting.</description>
       <description>인터넷에는 꽤 많은 정보들이 있습니다만. 어느 선을 넘어가게되면 분명 무료의 한계를 겪게 됩니다. 당연히 살아가는 생활인으로서 컨텐츠 제작자도 생활인입니다. 모든 인터넷 컨텐츠가 무료라는게 적절하지 않습니다. 하지만 상당한 품질에 왜 유료가 아닌지 모를 컨텐츠들이 있어 가끔 놀라울 따름입니다. 그런 사이트가 있어 감사한 마음으로 소개를 드리고자 합니다.
 오픈튜토리얼스
 안에는 다른 많은 수업들이 있는데 저는 egoing이라는 분의 생활코딩을 보면서 상당한 도움을 받았습니다. 정보기술 전반에 걸쳐 굉장히 많은 분야가 상세히 잘 설명되어 있어 정보기술을 처음 접하시는 분들에게 더할 나위 없는 길잡이가 될거라고 생각합니다.</description>
-    </item>
-    
-    <item>
-      <title>HiNative</title>
-      <link>http://prokoptasis.github.io/posts/201009/</link>
-      <pubDate>Fri, 09 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://prokoptasis.github.io/posts/201009/</guid>
-      <description>Hugo에는 다국어 지원 기능이 있습니다. 다국어 페이지를 구성해 놓으면 간단하게 옵션 버튼으로 전환 할 수 있는 기능입니다. 영어로 동시에 작성하는걸 좀 시도를 해보았는데 한글로만 작성하는 것도 꽤 시간이 걸리는데 영어로는 도저히 답이 안나오더군요.
-어찌되었건 이 시도과정에서 제 영어 실력의 미천함을 깨닫고 도움이 될만한 사이트를 찾다가 HiNative라는 사이트를 발견하였습니다.
-간단히 설명드리면 각국의 다른 유저들이 상대방 언어에 대해 궁금한 내용을 올리면 해당 언어의 네이티브가 답변을 해주는 사이트입니다. 최근에 유료로 전환된 듯 보이는데 답변에는 큰 문제는 없더군요.</description>
     </item>
     
     <item>
