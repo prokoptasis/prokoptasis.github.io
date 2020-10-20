@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GO on Prokoptasis</title>
+    <link>http://prokoptasis.github.io/docs/documents/backend/go/</link>
+    <description>Recent content in GO on Prokoptasis</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>kr-ko</language><atom:link href="http://prokoptasis.github.io/docs/documents/backend/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GO Basic 1</title>
+      <link>http://prokoptasis.github.io/docs/documents/backend/go/go01/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://prokoptasis.github.io/docs/documents/backend/go/go01/</guid>
+      <description>GO Basic 1 #   GO는 Google에서 개발한 최근 상승세가 가파른 Hot한 언어입니다. 쉽고 단순한 문법과 동시성에 대한 장점으로 생산성이 높다고 알려져 있습니다. Go의 기본적인 문법을 정리해보겠습니다. 저는 아래 사이트를 참조로 정리하였습니다.
+예제로 배우는 Go 프로그래밍
+Hello World #  우선 Hello World 부터 찍어야 겠죠?
+package main func main() { println(&amp;#34;Hello World!&amp;#34;) } Declare #  선언 및 할당은 방식은 다음과 같습니다.
+package main func main() { // 선언 및 할당 	var a int var b float32 = 11.</description>
+    </item>
+    
+    <item>
+      <title>GO Basic 2</title>
+      <link>http://prokoptasis.github.io/docs/documents/backend/go/go02/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://prokoptasis.github.io/docs/documents/backend/go/go02/</guid>
+      <description>GO Basic 2 #   정리중입니다.
+ 다음글  </description>
+    </item>
+    
+  </channel>
+</rss>

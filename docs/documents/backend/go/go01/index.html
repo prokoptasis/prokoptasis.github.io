@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Deep Learning #     Machine Learning   머신러닝/딥러닝 학습 자료   Python   Description   Tensorflow   Description   ">
-<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="Deep Learning" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="http://prokoptasis.github.io/docs/documents/deeplearning/" />
+<meta name="description" content="GO Basic 1">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="GO Basic 1" />
+<meta property="og:description" content="GO Basic 1" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://prokoptasis.github.io/docs/documents/backend/go/go01/" />
 
-<title>Deep Learning | Prokoptasis</title>
+<title>GO Basic 1 | Prokoptasis</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
@@ -26,7 +26,6 @@ if (!doNotTrack) {
 }
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
-<link rel="alternate" type="application/rss+xml" href="http://prokoptasis.github.io/docs/documents/deeplearning/index.xml" title="Prokoptasis" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -166,7 +165,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-7cff03fc158d9929dd882d45e5e83f84" class="toggle"  />
+    <input type="checkbox" id="section-7cff03fc158d9929dd882d45e5e83f84" class="toggle" checked />
     <label for="section-7cff03fc158d9929dd882d45e5e83f84" class="flex justify-between">
       <a href="http://prokoptasis.github.io/docs/documents/backend/" class="">Back End</a>
       <span>▾</span>
@@ -183,7 +182,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-0d89b8a13399f7331f6db819807b653c" class="toggle"  />
+    <input type="checkbox" id="section-0d89b8a13399f7331f6db819807b653c" class="toggle" checked />
     <label for="section-0d89b8a13399f7331f6db819807b653c" class="flex justify-between">
       <a href="http://prokoptasis.github.io/docs/documents/backend/go/" class="">GO</a>
       <span>▾</span>
@@ -200,7 +199,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://prokoptasis.github.io/docs/documents/backend/go/go01/" class="">GO Basic 1</a>
+    <a href="http://prokoptasis.github.io/docs/documents/backend/go/go01/" class=" active">GO Basic 1</a>
   
 
         </li>
@@ -297,9 +296,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-08315e14cb91d15111d683212f692de5" class="toggle" checked />
+    <input type="checkbox" id="section-08315e14cb91d15111d683212f692de5" class="toggle"  />
     <label for="section-08315e14cb91d15111d683212f692de5" class="flex justify-between">
-      <a href="http://prokoptasis.github.io/docs/documents/deeplearning/" class="active">Deep Learning</a>
+      <a href="http://prokoptasis.github.io/docs/documents/deeplearning/" class="">Deep Learning</a>
       <span>▾</span>
     </label>
   
@@ -472,7 +471,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>Deep Learning</strong>
+  <strong>GO Basic 1</strong>
 
   <label for="toc-control">
     
@@ -483,36 +482,77 @@ https://github.com/alex-shpak/hugo-book
             </header>
 
             
-<article class="markdown"><h2 id="deep-learning">
-  Deep Learning
-  <a class="anchor" href="#deep-learning">#</a>
+<article class="markdown"><h2 id="go-basic-1">
+  GO Basic 1
+  <a class="anchor" href="#go-basic-1">#</a>
 </h2>
 <hr>
-<dl>
+<p>GO는 Google에서 개발한 최근 상승세가 가파른 Hot한 언어입니다. 쉽고 단순한 문법과 동시성에 대한 장점으로 생산성이 높다고 알려져 있습니다. Go의 기본적인 문법을 정리해보겠습니다. 저는 아래 사이트를 참조로 정리하였습니다.</p>
+<p><a href="http://golang.site/" target="_blank" rel="noopener">예제로 배우는 Go 프로그래밍</a></p>
+<h3 id="hello-world">
+  Hello World
+  <a class="anchor" href="#hello-world">#</a>
+</h3>
+<p>우선 Hello World 부터 찍어야 겠죠?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
-  <dt>
-    <a href="/docs/documents/deeplearning/machinelearning/">Machine Learning</a>
-  </dt>
-  <dd>
-    머신러닝/딥러닝 학습 자료
-  </dd>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    println(<span style="color:#e6db74">&#34;Hello World!&#34;</span>)
+}
+</code></pre></div><h3 id="declare">
+  Declare
+  <a class="anchor" href="#declare">#</a>
+</h3>
+<p>선언 및 할당은 방식은 다음과 같습니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
-  <dt>
-    <a href="/docs/documents/deeplearning/python/">Python</a>
-  </dt>
-  <dd>
-    Description
-  </dd>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#75715e">// 선언 및 할당
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">a</span> <span style="color:#66d9ef">int</span>
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">b</span> <span style="color:#66d9ef">float32</span> = <span style="color:#ae81ff">11.</span>
 
-  <dt>
-    <a href="/docs/documents/deeplearning/tensorflow/">Tensorflow</a>
-  </dt>
-  <dd>
-    Description
-  </dd>
+	println(<span style="color:#a6e22e">a</span>, <span style="color:#a6e22e">b</span>)
 
-</dl>
+	<span style="color:#75715e">// 선언 및 할당
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">a</span> = <span style="color:#ae81ff">10</span>
+	<span style="color:#a6e22e">b</span> = <span style="color:#ae81ff">12.0</span>
 
+	println(<span style="color:#a6e22e">a</span>, <span style="color:#a6e22e">b</span>)
+
+	<span style="color:#75715e">// 상수
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">c</span> <span style="color:#66d9ef">int</span> = <span style="color:#ae81ff">10</span>
+	<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">d</span> <span style="color:#66d9ef">string</span> = <span style="color:#e6db74">&#34;Hello&#34;</span>
+
+	println(<span style="color:#a6e22e">c</span>, <span style="color:#a6e22e">d</span>)
+
+	<span style="color:#75715e">// 상수 나열
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">const</span> (
+		<span style="color:#a6e22e">Visa</span>   = <span style="color:#e6db74">&#34;Visa&#34;</span>
+		<span style="color:#a6e22e">Master</span> = <span style="color:#e6db74">&#34;MasterCard&#34;</span>
+		<span style="color:#a6e22e">Amex</span>   = <span style="color:#e6db74">&#34;American Express&#34;</span>
+	)
+
+	println(<span style="color:#a6e22e">Visa</span>, <span style="color:#a6e22e">Master</span>, <span style="color:#a6e22e">Amex</span>)
+
+	<span style="color:#75715e">// 상수 나열
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">const</span> (
+		<span style="color:#a6e22e">Apple</span> = <span style="color:#66d9ef">iota</span>
+		<span style="color:#a6e22e">Grape</span>
+		<span style="color:#a6e22e">Orage</span>
+	)
+
+	println(<span style="color:#a6e22e">Apple</span>, <span style="color:#a6e22e">Grape</span>, <span style="color:#a6e22e">Orage</span>)
+}
+</code></pre></div><h3 id="reserved-keywords">
+  Reserved Keywords
+  <a class="anchor" href="#reserved-keywords">#</a>
+</h3>
+<p>GO는 다음과 같은 25개의 예약어를 가지고 있습니다.</p>
+<pre><code>break, case, chan, const, continue, const, default, const, defer, else,fallthrough, for, func, go, goto, if, import, interface, map, package, range, return, select, struct, switch, type, var
+</code></pre>
+<br>
+<span style="float:left"><a href="../"><< 이전글</a></span>
+<span style="float:right"><a href="../go02">다음글 >></a></span>
 </article>
 
             

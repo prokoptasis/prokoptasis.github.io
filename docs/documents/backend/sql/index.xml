@@ -12,8 +12,9 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://prokoptasis.github.io/docs/documents/backend/sql/sql01/</guid>
-      <description>SQL Basic 1 #   Select / From #  가장 기본적인 조회 문입니다. &amp;ldquo;Select 컬럼명 from 테이블&amp;quot;로 테이블의 지정 컬럼명의 내용을 조회합니다.
--- 주석입니다. select * from my_table_1; -- 컬럼명을 지정합니다. select column_1,column_3 from my_table_1; Where / And #  Where 절을 통해 조회 데이터에 조건을 걸 수 있습니다. Excel의 필터개념입니다. 이때 부등호를 사용할 수 있으며 문자열의 경우 like 및 wildcard를 이용한 검색이 가능합니다. Between과 같은 조건도 가능하며 in/not in을 통해 특정 조건을 지정할 수 있습니다.</description>
+      <description>SQL Basic 1 #   SQL은 Sturctured Query Langugage의 약자로 데이터베이스의 데이터를 관리하기 위해 사용하는 언어입니다. 자료의 검색과 관리, 스키마의 생성과 수정, 객체의 접근 조정 및 관리의 기능을 하게됩니다. ANSI SQL 기본 문법은 원래 어떤 데이터베이스와도 호환이 가능해야 하지만 통상 Vendor들이 표준을 잘지키지않는 편이라 기본적인 수준에서만 호환이 가능합니다. NoSQL 계열의 데이터베이스에서는 사용되지 않습니다.
+저는 일단 통상 제가 사용하고 있는 오라클사의 SQL을 기준으로 설명드리겠습니다.
+Live SQL #  정상적인 실습환경을 원한다면 XE버전이라도 오라클 데이터베이스를 설치하고 SQL Plus든 SQL Developer든 조회툴을 설치해야겠지만 개별 환경에 맞춰 설치하는 과정이 다소 까다롭습니다.</description>
     </item>
     
     <item>
@@ -22,8 +23,19 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://prokoptasis.github.io/docs/documents/backend/sql/sql02/</guid>
-      <description>SQL Basic 2 #   현재 작성중입니다.
-  </description>
+      <description>SQL Basic 2 #   Select, Where, 기본적인 함수와 Union, Join에 대해 알아보겠습니다.
+Select / From #  가장 기본적인 조회 문입니다. &amp;ldquo;Select 컬럼명 from 테이블&amp;quot;로 테이블의 지정 컬럼명의 내용을 조회합니다.
+-- 주석입니다. select * from my_table_1; -- 컬럼명을 지정합니다. select column_1,column_3 from my_table_1; Where / And #  Where 절을 통해 조회 데이터에 조건을 걸 수 있습니다. Excel의 필터개념입니다. 이때 부등호를 사용할 수 있으며 문자열의 경우 like 및 wildcard를 이용한 검색이 가능합니다.</description>
+    </item>
+    
+    <item>
+      <title>SQL Basic 3</title>
+      <link>http://prokoptasis.github.io/docs/documents/backend/sql/sql03/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://prokoptasis.github.io/docs/documents/backend/sql/sql03/</guid>
+      <description>SQL Basic 3 #   현재 작성중입니다.
+ 다음글  </description>
     </item>
     
   </channel>
