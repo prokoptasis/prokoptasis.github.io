@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.85c857a931ef0f6a488d50791f531e51a8558a813171688f40191604320666b9.js" integrity="sha256-hchXqTHvD2pIjVB5H1MeUahVioExcWiPQBkWBDIGZrk="></script>
+<script defer src="/ko.search.min.5212fde38b3c9004e8e0de12806c17dff341e423cbad9a358824afb0cbd7ab33.js" integrity="sha256-UhL944s8kATo4N4SgGwX3/NB5CPLrZo1iCSvsMvXqzM="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -182,9 +182,57 @@ https://github.com/alex-shpak/hugo-book
   
 
   
+    <input type="checkbox" id="section-0480d4c0a3a48973d66dda9e8e9d50da" class="toggle"  />
+    <label for="section-0480d4c0a3a48973d66dda9e8e9d50da" class="flex justify-between">
+      <a href="http://prokoptasis.github.io/docs/documents/backend/rust/" class="">Rust</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/documents/backend/rust/rust01/" class="">Rust Basic 01</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/documents/backend/rust/rust02/" class="">Rust Basic 02</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <input type="checkbox" id="section-0d89b8a13399f7331f6db819807b653c" class="toggle" checked />
     <label for="section-0d89b8a13399f7331f6db819807b653c" class="flex justify-between">
-      <a href="http://prokoptasis.github.io/docs/documents/backend/go/" class="">GO</a>
+      <a href="http://prokoptasis.github.io/docs/documents/backend/go/" class="">Go</a>
       <span>▾</span>
     </label>
   
@@ -371,7 +419,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://prokoptasis.github.io/docs/documents/english/engweb/" class="">English</a>
+    <a href="http://prokoptasis.github.io/docs/documents/english/pickedup/" class="">Picked Up English</a>
   
 
         </li>
@@ -504,7 +552,16 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#declare">#</a>
 </h3>
 <p>선언 및 할당은 방식은 다음과 같습니다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Expand</span>
+      <span>↕</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
 	<span style="color:#75715e">// 선언 및 할당
@@ -543,14 +600,127 @@ https://github.com/alex-shpak/hugo-book
 
 	println(<span style="color:#a6e22e">Apple</span>, <span style="color:#a6e22e">Grape</span>, <span style="color:#a6e22e">Orage</span>)
 }
-</code></pre></div><h3 id="reserved-keywords">
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="reserved-keywords">
   Reserved Keywords
   <a class="anchor" href="#reserved-keywords">#</a>
 </h3>
 <p>GO는 다음과 같은 25개의 예약어를 가지고 있습니다.</p>
 <pre><code>break, case, chan, const, continue, const, default, const, defer, else,fallthrough, for, func, go, goto, if, import, interface, map, package, range, return, select, struct, switch, type, var
 </code></pre>
-<br>
+<h3 id="reserved-keywords-1">
+  Reserved Keywords
+  <a class="anchor" href="#reserved-keywords-1">#</a>
+</h3>
+<p>변수의 선언 및 연산자는 다음과 같습니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">textLine1</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">`첫번째 줄입니다.\n
+</span><span style="color:#e6db74">두번째 줄입니다.\n
+</span><span style="color:#e6db74">	세번째 줄입니다`</span>
+
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">textLine1</span>)
+
+	<span style="color:#a6e22e">textLine2</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;첫번째 줄입니다.\n두번째 줄입니다.\n세번째 줄입니다&#34;</span>
+
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">textLine2</span>)
+
+	<span style="color:#a6e22e">textLine3</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;첫번째 줄입니다.\n&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;두번째 줄입니다.\n&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;세번째 줄입니다&#34;</span>
+
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">textLine3</span>)
+
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">a</span> <span style="color:#66d9ef">int</span> = <span style="color:#ae81ff">100</span>
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">b</span> <span style="color:#66d9ef">uint</span> = uint(<span style="color:#a6e22e">a</span>)
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">c</span> <span style="color:#66d9ef">float32</span> = float32(<span style="color:#a6e22e">a</span>)
+
+	println(<span style="color:#a6e22e">a</span>, <span style="color:#a6e22e">b</span>, <span style="color:#a6e22e">c</span>)
+
+	<span style="color:#a6e22e">str</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;ABCDEFG&#34;</span>
+	<span style="color:#a6e22e">byt</span> <span style="color:#f92672">:=</span> []byte(<span style="color:#a6e22e">str</span>)
+	<span style="color:#a6e22e">stg</span> <span style="color:#f92672">:=</span> string(<span style="color:#a6e22e">byt</span>)
+	println(<span style="color:#a6e22e">str</span>, <span style="color:#a6e22e">byt</span>, <span style="color:#a6e22e">byt</span>[<span style="color:#ae81ff">0</span>], <span style="color:#a6e22e">byt</span>[<span style="color:#ae81ff">1</span>], <span style="color:#a6e22e">stg</span>)
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">a</span> <span style="color:#66d9ef">int</span> = <span style="color:#ae81ff">7</span>
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">b</span> <span style="color:#66d9ef">int</span> = <span style="color:#ae81ff">3</span>
+
+	<span style="color:#75715e">//산술연산자
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">c</span> = (<span style="color:#a6e22e">a</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">b</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">5</span>
+
+	println(<span style="color:#a6e22e">a</span>, <span style="color:#a6e22e">b</span>, <span style="color:#a6e22e">c</span>)
+
+	<span style="color:#a6e22e">c</span><span style="color:#f92672">++</span>
+	println(<span style="color:#a6e22e">c</span>)
+
+	<span style="color:#75715e">// 관계연산자
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">c</span> {
+		println(<span style="color:#e6db74">&#34;b==c&#34;</span>)
+	} <span style="color:#66d9ef">else</span> {
+		println(<span style="color:#e6db74">&#34;b!=c&#34;</span>)
+	}
+
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">!=</span> <span style="color:#a6e22e">b</span> {
+		println(<span style="color:#e6db74">&#34;a!=b&#34;</span>)
+	} <span style="color:#66d9ef">else</span> {
+		println(<span style="color:#e6db74">&#34;a==b&#34;</span>)
+	}
+
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">&gt;=</span> <span style="color:#a6e22e">b</span> {
+		println(<span style="color:#e6db74">&#34;a&gt;=b&#34;</span>)
+	} <span style="color:#66d9ef">else</span> {
+		println(<span style="color:#e6db74">&#34;a&lt; b&#34;</span>)
+	}
+
+	<span style="color:#75715e">// 논리 연산자
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">&gt;=</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">c</span> {
+		println(<span style="color:#e6db74">&#34;a&gt;=b &amp;&amp; b==c&#34;</span>)
+	} <span style="color:#66d9ef">else</span> {
+		println(<span style="color:#e6db74">&#34;not(a&gt;=b &amp;&amp; b==c)&#34;</span>)
+	}
+
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">&gt;=</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">b</span> &gt; <span style="color:#a6e22e">c</span> {
+		println(<span style="color:#e6db74">&#34;a&gt;=b || b&lt;&gt;c&#34;</span>)
+	} <span style="color:#66d9ef">else</span> {
+		println(<span style="color:#e6db74">&#34;not(a&gt;=b || b&lt;&gt;c)&#34;</span>)
+	}
+
+	<span style="color:#75715e">// Bitwise 연산자
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">d</span> = (<span style="color:#a6e22e">a</span> <span style="color:#f92672">&amp;</span> <span style="color:#a6e22e">b</span>)
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">e</span> = (<span style="color:#a6e22e">a</span> <span style="color:#f92672">&amp;</span> <span style="color:#a6e22e">b</span>) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>
+
+	println(<span style="color:#a6e22e">d</span>, <span style="color:#a6e22e">e</span>)
+
+	<span style="color:#75715e">// 할당연산자
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">a</span> = <span style="color:#ae81ff">10</span>
+	println(<span style="color:#a6e22e">a</span>)
+	<span style="color:#a6e22e">a</span> <span style="color:#f92672">*=</span> <span style="color:#ae81ff">10</span>
+	println(<span style="color:#a6e22e">a</span>)
+	<span style="color:#a6e22e">a</span> <span style="color:#f92672">&gt;&gt;=</span> <span style="color:#ae81ff">1</span>
+	println(<span style="color:#a6e22e">a</span>)
+	<span style="color:#a6e22e">a</span> <span style="color:#f92672">|=</span> <span style="color:#ae81ff">1</span>
+	println(<span style="color:#a6e22e">a</span>)
+
+	<span style="color:#75715e">// 포인터 연산자
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">x</span> <span style="color:#66d9ef">int</span> = <span style="color:#ae81ff">10</span>
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">p</span> = <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">x</span> <span style="color:#75715e">//x&#39;s address
+</span><span style="color:#75715e"></span>
+	<span style="color:#75715e">// x = value
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// &amp;x = x&#39;s address
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// p = &amp;x = x&#39;s address
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// *p = x&#39;s address&#39;s value
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// &amp;p = p&#39;s address
+</span><span style="color:#75715e"></span>	println(<span style="color:#a6e22e">x</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">p</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">p</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">p</span>)
+
+	<span style="color:#a6e22e">x</span><span style="color:#f92672">++</span>
+
+	println(<span style="color:#a6e22e">x</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">p</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">p</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">p</span>)
+}
+</code></pre></div><br>
 <span style="float:left"><a href="../"><< 이전글</a></span>
 <span style="float:right"><a href="../go02">다음글 >></a></span>
 </article>

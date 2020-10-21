@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>GO on Prokoptasis</title>
+    <title>Go on Prokoptasis</title>
     <link>http://prokoptasis.github.io/docs/documents/backend/go/</link>
-    <description>Recent content in GO on Prokoptasis</description>
+    <description>Recent content in Go on Prokoptasis</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>kr-ko</language><atom:link href="http://prokoptasis.github.io/docs/documents/backend/go/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -16,7 +16,7 @@
 예제로 배우는 Go 프로그래밍
 Hello World #  우선 Hello World 부터 찍어야 겠죠?
 package main func main() { println(&amp;#34;Hello World!&amp;#34;) } Declare #  선언 및 할당은 방식은 다음과 같습니다.
-package main func main() { // 선언 및 할당 	var a int var b float32 = 11.</description>
+ Expand ↕  package main func main() { // 선언 및 할당 	var a int var b float32 = 11.</description>
     </item>
     
     <item>

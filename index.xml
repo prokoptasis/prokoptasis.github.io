@@ -49,7 +49,7 @@ Select / From #  가장 기본적인 조회 문입니다. &amp;ldquo;Select 컬�
 예제로 배우는 Go 프로그래밍
 Hello World #  우선 Hello World 부터 찍어야 겠죠?
 package main func main() { println(&amp;#34;Hello World!&amp;#34;) } Declare #  선언 및 할당은 방식은 다음과 같습니다.
-package main func main() { // 선언 및 할당 	var a int var b float32 = 11.</description>
+ Expand ↕  package main func main() { // 선언 및 할당 	var a int var b float32 = 11.</description>
     </item>
     
     <item>
@@ -63,16 +63,37 @@ package main func main() { // 선언 및 할당 	var a int var b float32 = 11.</
     </item>
     
     <item>
-      <title>English</title>
-      <link>http://prokoptasis.github.io/docs/documents/english/engweb/</link>
+      <title>Rust Basic 01</title>
+      <link>http://prokoptasis.github.io/docs/documents/backend/rust/rust01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://prokoptasis.github.io/docs/documents/english/engweb/</guid>
+      <guid>http://prokoptasis.github.io/docs/documents/backend/rust/rust01/</guid>
+      <description>Rust Basic 1 #   Rust는 시스템 레벨의 프로그래밍 언어로 C/C++의 대체 언어로 주목받고 있습니다. 타입 안전성, 메모리 안전성, 동시성, 그리고 성능에도 초점을 맞추어 대규모, 고성능 소프트웨어의 개발을 작성하도록 설계되어 있습니다. 무효한 메모리 접근을 예방하기 위해 빌림 검사와 같은 독특한 특성을 지니고 있으며 컴파일러의 혹독함으로 프로그래머들 사이에서 명성(악명)이 자자합니다.
+이 글은 다음 글을 참조하여 작성하였습니다.
+The Rust Programming Language The Rust Programming Language (KOR)
+Hello World #  Hello World 부터 찍읍시다.</description>
+    </item>
+    
+    <item>
+      <title>Rust Basic 02</title>
+      <link>http://prokoptasis.github.io/docs/documents/backend/rust/rust02/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://prokoptasis.github.io/docs/documents/backend/rust/rust02/</guid>
+      <description>Rust Basic2 #   직성중입니다.
+ 다음글  </description>
+    </item>
+    
+    <item>
+      <title>Picked Up English</title>
+      <link>http://prokoptasis.github.io/docs/documents/english/pickedup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://prokoptasis.github.io/docs/documents/english/pickedup/</guid>
       <description>English Expression Diary #   여기저기서 들었던 표현들을 정리해보겠습니다.
-Try telling me English is easy. #  &amp;lsquo;Try me&amp;rsquo;는 &amp;lsquo;How you dare&amp;rsquo;의 뜻으로 이 문장은 sarcastic 하고 twisted된 문장입니다. 그래서 해석은 &amp;ldquo;어디 한번 영어가 쉽다고 말해보시지?&amp;rdquo; 정도 되겠습니다.
-Ease into #  천천히 들듯이 적응하다는 의미입니다.
-Feel insecure about someone&amp;rsquo;s appearance #  외모에 자신감이 없다는 뜻입니다.
-Elbow me in the rib #  팔꿈치로 가격하는 건지를 놓고 고민했었습니다. 옆구리를 쿡쿡 찌른다는 의미입니다.</description>
+A little bird told me #  동문서답으로 &amp;lsquo;그냥 주워들었어&amp;rsquo; 표현정도라네요. &amp;lsquo;Tell me. Where did you hear that?&amp;rsquo; &amp;lsquo;A little bird told me.&amp;rsquo;
+Bigger fish to fry #  &amp;lsquo;좀 더 중요하고 큰 다른 것&amp;rsquo;이란 의미랍니다. &amp;lsquo;Why did you turn down their offer?&amp;rsquo; &amp;lsquo;Oh, I have bigger fish to fry.&amp;rsquo;
+Can of Worms #  &amp;lsquo;심각한 문제를 초래할 수 있는 위험&amp;rsquo;이라네요.</description>
     </item>
     
     <item>
@@ -81,13 +102,13 @@ Elbow me in the rib #  팔꿈치로 가격하는 건지를 놓고 고민했었�
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://prokoptasis.github.io/docs/documents/english/seulsam/</guid>
-      <description>English Expression Diary - 구슬쌤 자신감 팍팍 영어 #   유튜버 구슬쌤이 자신감 팍팍 영어를 정리했습니다.
+      <description>English Expression Diary - 구슬쌤 자신감 팍팍 영어 #   구슬쌤의 자신감 팍팍 영어를 정리했습니다.
 구슬쌤의 자신감 팍팍 영어
 I find it doable #  할만해
 I find it challenging #  힘들긴하지만 해볼만해
 Did you eat at all? #  뭐 좀 먹었니?
-If you need anthing at all, please let me know. #  뭐라도 필요하시면 알려주세요. T..T 표현 감동입니다.
-I&amp;rsquo;m in the middle of a metting.</description>
+If you need anthing at all, please let me know. #  뭐라도 필요하시면 알려주세요. (T..T 표현 감동입니다.)
+I&amp;rsquo;m in the middle of a metting. Can I send back in just a minute?</description>
     </item>
     
     <item>
@@ -96,6 +117,16 @@ I&amp;rsquo;m in the middle of a metting.</description>
       <pubDate>Mon, 19 Oct 2020 00:00:00 +0000</pubDate>
       
       <guid>http://prokoptasis.github.io/posts/201019/</guid>
+      <description>매일 다니는 서울역인데 아래에 링크한 영상처럼 이쁜 줄은 오늘 처음 알았네요. 유튜브 iframe 링크에는 저작권 문제가 있다는 것도 역시 오늘 처음 알았습니다. 유튜브에 공유하는 기능은 있으나 침해의 소지가 있다 없다 등에 대한 의견은 매우 분분한 상황같습니다. 하여 아래 링크를 달아 놓으니 필요하시면 직접 가서 들으시는 걸로.
+몇가지 제 개인적인 생각 좀 정리해보겠습니다. 정적 사이트에 대한 고민이 영어로 번져서 한동안 일진광풍처럼 제 머리 속을 휩쓸고 지나갔습니다. 시작은 영문사이트를 같이 유지할 수 있을까에 대한 고민이였는데 일단 현재로서는 역부족이라고 판단해야될 것 같습니다.</description>
+    </item>
+    
+    <item>
+      <title>Jazz</title>
+      <link>http://prokoptasis.github.io/posts/201021/</link>
+      <pubDate>Mon, 19 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://prokoptasis.github.io/posts/201021/</guid>
       <description>매일 다니는 서울역인데 아래에 링크한 영상처럼 이쁜 줄은 오늘 처음 알았네요. 유튜브 iframe 링크에는 저작권 문제가 있다는 것도 역시 오늘 처음 알았습니다. 유튜브에 공유하는 기능은 있으나 침해의 소지가 있다 없다 등에 대한 의견은 매우 분분한 상황같습니다. 하여 아래 링크를 달아 놓으니 필요하시면 직접 가서 들으시는 걸로.
 몇가지 제 개인적인 생각 좀 정리해보겠습니다. 정적 사이트에 대한 고민이 영어로 번져서 한동안 일진광풍처럼 제 머리 속을 휩쓸고 지나갔습니다. 시작은 영문사이트를 같이 유지할 수 있을까에 대한 고민이였는데 일단 현재로서는 역부족이라고 판단해야될 것 같습니다.</description>
     </item>

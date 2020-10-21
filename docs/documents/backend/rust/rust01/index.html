@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="ko" dir=>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Rust Basic 01">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="Rust Basic 01" />
+<meta property="og:description" content="Rust Basic 01" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://prokoptasis.github.io/docs/documents/backend/rust/rust01/" />
+
+<title>Rust Basic 01 | Prokoptasis</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
+<script defer src="/ko.search.min.5212fde38b3c9004e8e0de12806c17dff341e423cbad9a358824afb0cbd7ab33.js" integrity="sha256-UhL944s8kATo4N4SgGwX3/NB5CPLrZo1iCSvsMvXqzM="></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-176412981-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+ 
+</head>
+
+<body dir=>
+    <input type="checkbox" class="hidden toggle" id="menu-control" />
+    <input type="checkbox" class="hidden toggle" id="toc-control" />
+    <main class="container flex">
+        <aside class="book-menu">
+             <nav>
+<h2 class="book-brand" style="text-align: center;">
+    <a href="/"><span>Prokoptasis</span>
+  </a>
+</h2>
+<hr>
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+ 
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Documents</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-bc65bd57d9bab5039e9a79b5ae591c72" class="toggle"  />
+    <label for="section-bc65bd57d9bab5039e9a79b5ae591c72" class="flex justify-between">
+      <a href="http://prokoptasis.github.io/docs/documents/projects/" class="">Projects</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/documents/projects/hugogirl/" class="">hU-Go-Girl</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-53481227639f164d3f7ead2411c43315" class="toggle"  />
+    <label for="section-53481227639f164d3f7ead2411c43315" class="flex justify-between">
+      <a href="http://prokoptasis.github.io/docs/documents/frontend/" class="">Front End</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/documents/frontend/markdown/" class="">Markdown</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7cff03fc158d9929dd882d45e5e83f84" class="toggle" checked />
+    <label for="section-7cff03fc158d9929dd882d45e5e83f84" class="flex justify-between">
+      <a href="http://prokoptasis.github.io/docs/documents/backend/" class="">Back End</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-0480d4c0a3a48973d66dda9e8e9d50da" class="toggle" checked />
+    <label for="section-0480d4c0a3a48973d66dda9e8e9d50da" class="flex justify-between">
+      <a href="http://prokoptasis.github.io/docs/documents/backend/rust/" class="">Rust</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/documents/backend/rust/rust01/" class=" active">Rust Basic 01</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/documents/backend/rust/rust02/" class="">Rust Basic 02</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-0d89b8a13399f7331f6db819807b653c" class="toggle"  />
+    <label for="section-0d89b8a13399f7331f6db819807b653c" class="flex justify-between">
+      <a href="http://prokoptasis.github.io/docs/documents/backend/go/" class="">Go</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/documents/backend/go/go01/" class="">GO Basic 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/documents/backend/go/go02/" class="">GO Basic 2</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-47bd3d4bf94d414a097efcbbc9ad3f79" class="toggle"  />
+    <label for="section-47bd3d4bf94d414a097efcbbc9ad3f79" class="flex justify-between">
+      <a href="http://prokoptasis.github.io/docs/documents/backend/sql/" class="">SQL</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/documents/backend/sql/sql01/" class="">SQL Basic 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/documents/backend/sql/sql02/" class="">SQL Basic 2</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/documents/backend/sql/sql03/" class="">SQL Basic 3</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-08315e14cb91d15111d683212f692de5" class="toggle"  />
+    <label for="section-08315e14cb91d15111d683212f692de5" class="flex justify-between">
+      <a href="http://prokoptasis.github.io/docs/documents/deeplearning/" class="">Deep Learning</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/documents/deeplearning/machinelearning/" class="">Machine Learning</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/documents/deeplearning/tensorflow/" class="">Tensorflow</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-ae112940aeb03e8cb2e77b93d2c01134" class="toggle"  />
+    <label for="section-ae112940aeb03e8cb2e77b93d2c01134" class="flex justify-between">
+      <a href="http://prokoptasis.github.io/docs/documents/english/" class="">English</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/documents/english/pickedup/" class="">Picked Up English</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/documents/english/seulsam/" class="">Seulsam</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+ 
+<ul>
+    
+    <li>
+        <a href="/posts/" >
+        Blog
+      </a>
+    </li>
+    
+    <li>
+        <a href="mailto:c.exigua@gmail.com" target="_blank" rel="noopener" >
+        Gmail
+      </a>
+    </li>
+    
+    <li>
+        <a href="https://github.com/prokoptasis/prokoptasis" target="_blank" rel="noopener" >
+        Github
+      </a>
+    </li>
+    
+    <li>
+        <a href="https://twitter.com/prokoptasis" target="_blank" rel="noopener" >
+        Twitter
+      </a>
+    </li>
+    
+    <li>
+        <a href="https://www.facebook.com/c.exigua/" target="_blank" rel="noopener" >
+        Facebook
+      </a>
+    </li>
+    
+</ul>
+<br>
+<hr>
+<div style="display: block; text-align: center;">
+    <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="prokoptasis" data-color="#e9e9e9" data-emoji="" data-font="Arial" data-text="" data-outline-color="#000" data-font-color="#000"
+        data-coffee-color="#6f4e37"></script>
+</div>
+  
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+ 
+            
+        </aside>
+
+        <div class="book-page">
+            <header class="book-header">
+                 <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Rust Basic 01</strong>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+  
+                
+            </header>
+
+            
+<article class="markdown"><h2 id="rust-basic-1">
+  Rust Basic 1
+  <a class="anchor" href="#rust-basic-1">#</a>
+</h2>
+<hr>
+<p>Rust는 시스템 레벨의 프로그래밍 언어로 C/C++의 대체 언어로 주목받고 있습니다. 타입 안전성, 메모리 안전성, 동시성, 그리고 성능에도 초점을 맞추어 대규모, 고성능 소프트웨어의 개발을 작성하도록 설계되어 있습니다. 무효한 메모리 접근을 예방하기 위해 빌림 검사와 같은 독특한 특성을 지니고 있으며 컴파일러의 혹독함으로 프로그래머들 사이에서 명성(<del>악명</del>)이 자자합니다.</p>
+<p>이 글은 다음 글을 참조하여 작성하였습니다.</p>
+<p><a href="https://doc.rust-lang.org/1.30.0/book/second-edition/foreword.html/" target="_blank" rel="noopener">The Rust Programming Language</a>
+<a href="https://rinthel.github.io/rust-lang-book-ko/" target="_blank" rel="noopener">The Rust Programming Language (KOR)</a></p>
+<h3 id="hello-world">
+  Hello World
+  <a class="anchor" href="#hello-world">#</a>
+</h3>
+<p>Hello World 부터 찍읍시다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust">cargo init rust_hello <span style="color:#f92672">--</span>bin
+cd rust_hello
+cargo run
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Hello, world!&#34;</span>);
+}
+
+</code></pre></div><p>간단하게 Hello World를 찍어 보았습니다.</p>
+<h3 id="guessing-game">
+  Guessing Game
+  <a class="anchor" href="#guessing-game">#</a>
+</h3>
+<p>원저자가 Guessing Game 작성으로 Rust를 쉽게 접근할 수 있도록 설명하고 있습니다. 기본 개념에 대한 좋은 예제임으로 처음 읽으시는 분들은 위 링크를 참조하시어 정독하시고 저는 별도 설명보다는 최종 결과물만 체크하고 넘어가도록 하겠습니다.</p>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Source</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">crate</span> rand;
+
+<span style="color:#66d9ef">use</span> rand::Rng;
+<span style="color:#66d9ef">use</span> std::cmp::Ordering;
+<span style="color:#66d9ef">use</span> std::io;
+
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#75715e">// 첫 줄 출력
+</span><span style="color:#75715e"></span>	println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Guess the number!&#34;</span>);
+
+	<span style="color:#75715e">// 1 부터 100까지의 숫자를 Rangdom으로 생성 후 secret_nmber로 선언
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> secret_number <span style="color:#f92672">=</span> rand::thread_rng().gen_range(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">101</span>);
+
+    <span style="color:#66d9ef">loop</span> {
+		<span style="color:#75715e">// 질문 출력
+</span><span style="color:#75715e"></span>        println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Please input your guess.&#34;</span>);
+
+		<span style="color:#75715e">// guess를 mutable 형태의 string으로 생성
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> guess <span style="color:#f92672">=</span> String::new();
+
+		<span style="color:#75715e">// guess의 입력을 받음
+</span><span style="color:#75715e"></span>        io::stdin()
+            .read_line(<span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> guess)
+            .expect(<span style="color:#e6db74">&#34;Failed to read line&#34;</span>);
+
+		<span style="color:#75715e">// guess를 trim하고 숫자로 전환
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">let</span> guess: <span style="color:#66d9ef">u32</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">match</span> guess.trim().parse() {
+            Ok(num) <span style="color:#f92672">=&gt;</span> num,
+            Err(_) <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">continue</span>,
+        };
+
+		<span style="color:#75715e">// 사용자의 guess를 재출력
+</span><span style="color:#75715e"></span>        println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;You guessed: {}&#34;</span>, guess);
+
+		<span style="color:#75715e">// secret_number의 숫자를 비교하여 결과를 출력
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">match</span> guess.cmp(<span style="color:#f92672">&amp;</span>secret_number) {
+            Ordering::Less <span style="color:#f92672">=&gt;</span> println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Too small!&#34;</span>),
+            Ordering::Greater <span style="color:#f92672">=&gt;</span> println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Too big!&#34;</span>),
+            Ordering::Equal <span style="color:#f92672">=&gt;</span> {
+                println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;You win!&#34;</span>);
+                <span style="color:#66d9ef">break</span>;
+            }
+        }
+    }
+}
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">let</span> foo <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;	<span style="color:#75715e">// immutable
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> bar <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;	<span style="color:#75715e">// mutable
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> baz <span style="color:#f92672">=</span> String::new();
+</code></pre></div><p>기본적으로 let과 let mut은 변수의 가변성에 차이를 두고 다르게 선언하는 것을 의미합니다. String::new는 String타입의 연관함수로 OO에서 클래스의 인스턴스 없이 호출할 수 있는 정적 메소드와 동일합니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust">io::stdin()
+	.read_line(<span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> guess)
+	.expect(<span style="color:#e6db74">&#34;Failed to read line&#34;</span>);
+</code></pre></div><p>프로그램의 시작점에 &lsquo;use std::io&rsquo;로 명시되었기 때문에 함수 호출시의 io::stdin은 표준 입력 핸들 타입인 std::io::Stdin을 돌려줍니다. &amp;mut guess를 넘겨받아 사용자의 입력을 저장하게 됩니다. 이때 사용자의 입력은 지속적으로 추가됨으로 가변 문자열이어야 합니다. 이때 &lsquo;&amp;mut&rsquo; 인 이유는 Rust에서는 &lsquo;&amp;&rsquo; c참조자의 기본 속성이 안전성을 위해 Immutable임으로 명시적으로 가변임을 지정할 필요가 있습니다. &lsquo;.expect&rsquo; 는 에러를 처리하는 메소드로 인스터스가 Error를 낼 경우 해당 메세지를 출력하며 동작을 멈추게 됩니다. 만일 &lsquo;expec&rsquo;없이 컴파일 한다면 경고가 표시됩니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#75715e">// place holder
+</span><span style="color:#75715e"></span>println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;You guessed: {}&#34;</span>, guess);
+<span style="color:#75715e">// place holder 지정
+</span><span style="color:#75715e"></span>println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;You guessed: {g} number {n}&#34;</span>, g<span style="color:#f92672">=</span> guess,n <span style="color:#f92672">=</span> number);
+</code></pre></div><p>위 문장에서 &lsquo;{}&rsquo; 부분은 변경자(Place Holder)로 guess의 표시 위치를 나타냅니다. 하나 이상의 Place Holder를 아래처럼 지정하여 사용할 수도 있습니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#a6e22e">Cargo</span>.<span style="color:#a6e22e">toml</span>
+[<span style="color:#a6e22e">dependencies</span>]
+<span style="color:#a6e22e">rand</span> = <span style="color:#e6db74">&#34;0.4.0&#34;</span>
+</code></pre></div><p>Random 처리를 위해 Cargo.toml에 의존성을 추가하여 rand crate를 명시하였습니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">match</span> guess.cmp(<span style="color:#f92672">&amp;</span>secret_number) {
+            Ordering::Less <span style="color:#f92672">=&gt;</span> println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Too small!&#34;</span>),
+            Ordering::Greater <span style="color:#f92672">=&gt;</span> println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Too big!&#34;</span>),
+            Ordering::Equal <span style="color:#f92672">=&gt;</span> {
+                println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;You win!&#34;</span>);
+                <span style="color:#66d9ef">break</span>;
+			}
+</code></pre></div><p>사용자가 입력한 guess 숫자와 Random으로 생성된 secret_number를 비교하는 메소드입니다. std 표준 라이브러리로부터 std::cmp::Ordering Scope를 가져와서 Ordering 타입을 사용하는 형태입니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">let</span> guess: <span style="color:#66d9ef">u32</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">match</span> guess.trim().parse() {
+	Ok(num) <span style="color:#f92672">=&gt;</span> num,
+	Err(_) <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">continue</span>,
+};
+</code></pre></div><p>입력된 guess의 문자열을 secret_number와 비교하기 위해 숫자로 바꾸는 라인입니다. 기존 guess 변수를 triming된 숫자로 Shadowing하여 재사용하는 방식으로 구현되었습니다. &lsquo;guess.trim()&lsquo;을 통해 사용자 입력시 들어온 Enter의 개행문자를 제거하고 &lsquo;parse()&lsquo;를 통해 숫자열로 파싱합니다.  이때 u32와 같이 정확한 타입을 명시해야합니다. 사용자가 입력한 숫자에 특수문자 같은 것이 포함되어 u32로 전환할 수 없을 경우를 대비해서 expect와 같은 별도 처리가 필요할 수도 있습니다. 여기서는 Error가 들어올경우 continue를 통해 다음 Loop로 다시 시작되도록 처리 되었습니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">loop</span> {
+...
+<span style="color:#66d9ef">match</span> guess.cmp(<span style="color:#f92672">&amp;</span>secret_number) {
+		...
+		Ordering::Equal <span style="color:#f92672">=&gt;</span> {
+			println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;You win!&#34;</span>);
+			<span style="color:#66d9ef">break</span>;
+		}
+}
+</code></pre></div><p>main 프로그램은 Ordering::Equal이 나올때까지 Loop로 들어가 반복되며 수행됩니다.</p>
+<p>위 예제는 내용 설명외에도 변수의 선언 조건 비교, 반복 등 기본적인 프로그래밍 언어의 속성을 체크하는데 매우 좋은 예인듯 합니다. Go Lang에서도 작성해보아야겠네요. 아니면 조금 더 다듬어서 이런걸 체크할 수 있는 기본 Template를 한번 만들어 봐야겠습니다. 이를테면 클래스 선언이나 참조 같은 것도 포함해서 말입니다.</p>
+<br>
+<span style="float:left"><a href="../"><< 이전글</a></span>
+<span style="float:right"><a href="../rust02">다음글 >></a></span>
+</article>
+
+            
+            
+
+            <footer class="book-footer">
+                 <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+ 
+                
+                
+            </footer>
+
+             
+<div class="book-comments">
+<br>
+<br>
+<hr> </hr>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "prokoptasis" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+ 
+            
+
+            <label for="menu-control" class="hidden book-menu-overlay"></label>
+        </div>
+
+        
+    </main>
+
+    
+</body>
+
+</html>
+
+     

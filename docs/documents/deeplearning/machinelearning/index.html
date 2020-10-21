@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.85c857a931ef0f6a488d50791f531e51a8558a813171688f40191604320666b9.js" integrity="sha256-hchXqTHvD2pIjVB5H1MeUahVioExcWiPQBkWBDIGZrk="></script>
+<script defer src="/ko.search.min.5212fde38b3c9004e8e0de12806c17dff341e423cbad9a358824afb0cbd7ab33.js" integrity="sha256-UhL944s8kATo4N4SgGwX3/NB5CPLrZo1iCSvsMvXqzM="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -183,9 +183,57 @@ https://github.com/alex-shpak/hugo-book
   
 
   
+    <input type="checkbox" id="section-0480d4c0a3a48973d66dda9e8e9d50da" class="toggle"  />
+    <label for="section-0480d4c0a3a48973d66dda9e8e9d50da" class="flex justify-between">
+      <a href="http://prokoptasis.github.io/docs/documents/backend/rust/" class="">Rust</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/documents/backend/rust/rust01/" class="">Rust Basic 01</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/documents/backend/rust/rust02/" class="">Rust Basic 02</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <input type="checkbox" id="section-0d89b8a13399f7331f6db819807b653c" class="toggle"  />
     <label for="section-0d89b8a13399f7331f6db819807b653c" class="flex justify-between">
-      <a href="http://prokoptasis.github.io/docs/documents/backend/go/" class="">GO</a>
+      <a href="http://prokoptasis.github.io/docs/documents/backend/go/" class="">Go</a>
       <span>▾</span>
     </label>
   
@@ -372,7 +420,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://prokoptasis.github.io/docs/documents/english/engweb/" class="">English</a>
+    <a href="http://prokoptasis.github.io/docs/documents/english/pickedup/" class="">Picked Up English</a>
   
 
         </li>
@@ -524,7 +572,7 @@ https://github.com/alex-shpak/hugo-book
 <!-- <div><img width="600px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Linear_regression.svg/1920px-Linear_regression.svg.png" alt="linear_regression1" ></div> -->
 <p>위의 Linear Regression에서 직선의 방정식은 다음과 같이 나타낼 수 있습니다.</p>
 <blockquote>
-<p><strong>Regression</strong> <br><br>
+<p><U>Regression</U> <br><br>
 
 <link rel="stylesheet" href="/katex/katex.min.css" />
 <script defer src="/katex/katex.min.js"></script>
@@ -552,7 +600,7 @@ https://github.com/alex-shpak/hugo-book
 <img width="250px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Linear_least_squares_example2.png/800px-Linear_least_squares_example2.png" alt="linear_regression2" >
 </div> -->
 <blockquote>
-<p><strong>Cost</strong> <br><br>
+<p><U>Cost</U> <br><br>
 <span>
   \( Cost : H(x) - y \)
 </span>
@@ -586,7 +634,7 @@ https://github.com/alex-shpak/hugo-book
 <img width="400px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Gradient_descent.svg/1024px-Gradient_descent.svg.png" alt="linear_regression3" >
 </div> -->
 <blockquote>
-<p><strong>Gradient Descent</strong> <br><br>
+<p><U>Gradient Descent</U> <br><br>
 <span>
   \(  W := W - \alpha \frac{\partial}{\partial W} \, \frac{1}{2m} \textstyle\sum_{i=1}^m (W(x_i)-y_i)^2  \)
 </span>
@@ -609,19 +657,18 @@ https://github.com/alex-shpak/hugo-book
   Derivative
   <a class="anchor" href="#derivative">#</a>
 </h3>
-<p>수학적 유도는 다른 자료를 통해 공부를 했습니다. 그래서 몇가지 표현이 틀린데 양해 부탁드리겠습니다. 또한 설명의 순서도 좀 틀린데 일단 제가 다시 정리하기 전까지는 그대로 풀어보도록 하겠습니다.</p>
 <p>함수 f(x)에 대한 미분은 아래와 같습니다. 의미는 x의 변화량이 0으로 수렴할때 y의 변화량이 어떻게 되는지를 구하는 것을 미분이라 합니다. 바꿔말하면 함수 f(x)는 입력 x에 얼마나 민감하게 반응 하는지를 구한다는 이야기입니다.</p>
-<p><strong>Derivative</strong> <br><br></p>
 <blockquote>
-<p><span>
+<p><U>Derivative</U> <br><br>
+<span>
   \(  f&#39;(x) = \frac{\Delta f(x)}{\Delta x} = \lim\limits_{\Delta x \rightarrow 0 } \, \frac{f(x&#43;\Delta x)-f(x)}{\Delta x}   \)
 </span>
  <br><br></p>
 </blockquote>
 <p>고교수학과정입니다만 저처럼 기초가 없으신 분들을 위해 기본 풀이 부터 정리해 놓았습니다.</p>
-<p><strong>Derivative Basic</strong> <br><br></p>
 <blockquote>
-<p><span>
+<p><U>Derivative Basic</U> <br><br>
+<span>
   \(  f(x) = constant -&gt; f&#39;(x) = 0 \)
 </span>
  <br><br>
@@ -642,7 +689,7 @@ https://github.com/alex-shpak/hugo-book
 </span>
  <br><br>
 <span>
-  \(  \frac{1}{x} = x ^ -1  \)
+  \(  \frac{1}{x} = x^{-1}  \)
 </span>
  <br><br></p>
 </blockquote>
@@ -691,10 +738,10 @@ Practice 2 <br><br>
 </span>
  <br><br></p>
 </blockquote>
-<p><strong>Partial Derivative</strong> <br><br></p>
 <p>다음은 입력변수가 하나 이상인 다변수 함수에서 사용하는 편미분에 대해 살펴 보겠습니다. 다변수 함수에서는 미분하고자 하는 변수 하나를 제외한 나머지 변수들은 상수로 취급하고 해당 변수를 미분하는 것을 의미합니다.</p>
 <blockquote>
-<p>Practice 1 <br><br>
+<p><U>Partial Derivative</U> <br><br>
+Practice 1 <br><br>
 <span>
   \(  f(x,y) = 2x &#43; 3xy &#43; y^3 \space 변수 \space x에 \space 대해 \space 편미분 \)
 </span>
@@ -736,10 +783,9 @@ Practice 2 <br><br>
 </span>
  <br><br></p>
 </blockquote>
-<p><strong>Chain Rule / Product Rule</strong> <br><br></p>
 <p>여러 함수로 구성된 합성 함수를 미분하기 위한 방법으로 Chain Rule이 있습니다. 여러 함수를 결합된 함수 중 특정 함수를 치환하여 약분 개념을 적용하여 미분하는 방식입니다. 두 함수가 곱해져 있는 형태의 미분은 단순 미분의 곱이 아니며 Product Rule이 성립합니다.</p>
 <blockquote>
-<p>Chain rule <br><br>
+<p><U>Chain rule</U> <br><br>
 <span>
   \(  \frac{\partial f}{\partial x} = \frac{\partial f}{\partial t} \circ \frac{\partial t}{\partial x} \)
 </span>
@@ -817,7 +863,7 @@ Practice 3 <br><br>
 <div><img width="600px" src="../../../../../201020_02_ml_gradient_descent.png" alt="gradient_descent" ></div>
 <!-- ![Error](../../../../../201020_02_ml_gradient_descent.png) -->
 <blockquote>
-<p><strong>Loss Function</strong> <br><br>
+<p><U>Loss Function</U> <br><br>
 <span>
   \(  Loss Funtion = \frac{(t_1-y_1)^2 &#43; (t_2-y_2)^2 &#43; ... &#43; (t_n-y_n)^2}{n} \)
 </span>
@@ -834,7 +880,7 @@ Practice 3 <br><br>
 <div><img width="600px" src="../../../../../201020_02_ml_gradient_descent.png" alt="gradient_descent" ></div>
 <p>Gradient Descent 알고리즘도 다시 보겠습니다. 원 기울기에서 학습률*미분만큼을 감소시키며 기울기가 0이 되는 지점 즉 오차가 최소화되는 지점으로 진행하기 위한 수식임을 알 수 있습니다.</p>
 <blockquote>
-<p><strong>Gradient Descent</strong> <br><br>
+<p><U>Gradient Descent</U> <br><br>
 <span>
   \(  W := W - \alpha \frac{\partial}{\partial W} \, \frac{1}{2m} \textstyle\sum_{i=1}^m (W(x_i)-y_i)^2  \)
 </span>
@@ -860,7 +906,7 @@ Practice 3 <br><br>
 <div><img width="600px" src="../../../../../201020_05_ml_learning_rate.png" alt="learning_rate" ></div>
 <!-- ![Learning Rate](../../../../../201020_05_ml_learning_rate.png) -->
 <blockquote>
-<p><strong>Learning Rate</strong> <br><br>
+<p><U>Learning Rate</U> <br><br>
 <span>
   \(  W = W - \alpha \, \frac{\partial E(W,b)}{\partial W}  \)
 </span>
@@ -875,7 +921,7 @@ Practice 3 <br><br>
 </h3>
 <p>Linear Regression 문제에 혜성처럼 행렬이 등장합니다. 다음과 같은 방정식에서 뭐든 요소들의 오차들은 행렬곱을 통해 한번에 계산될 수 있습니다.</p>
 <blockquote>
-<p><strong>Dot Product</strong> <br><br>
+<p><U>Dot Product</U> <br><br>
 <span>
   \(  x_1 * W &#43; b_1 = y_1 \)
 </span>
@@ -907,7 +953,7 @@ Practice 3 <br><br>
 <br><br></p>
 </blockquote>
 <blockquote>
-<p><strong>Multi Variable Dot Product</strong> <br><br>
+<p><U>Multi Variable Dot Product</U> <br><br>
 <span>
   \( \begin{pmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \\ x_5 \end{pmatrix} \circ \begin{pmatrix} w_1 \\ w_2 \\ w_3 \end{pmatrix} &#43; b =  \begin{pmatrix} y_1 \\ y_2 \\ y_3 \\ y_4 \\ y_5 \end{pmatrix} \)
 </span>
@@ -939,7 +985,7 @@ Practice 3 <br><br>
 <div><img width="600px" src="../../../../../201020_10_ml_e_x.png" alt="e_x" ></div>
 <div><img width="600px" src="../../../../../201020_08_ml_sigmoid.png" alt="local_minima" ></div>
 <blockquote>
-<p><strong>Sigmoid</strong> <br><br>
+<p><U>Sigmoid</U> <br><br>
 <span>
   \(  Z = Wx &#43; b  \)
 </span>
@@ -949,7 +995,7 @@ Practice 3 <br><br>
 </span>
 <br><br>
 <span>
-  \(  y = sigmoid(Z) = \sigma (z) = \frac{1}{1&#43;e^-z}  \)
+  \(  y = sigmoid(Z) = \sigma (z) = \frac{1}{1&#43;e^{-z}}  \)
 </span>
 <br><br></p>
 </blockquote>
@@ -983,7 +1029,7 @@ Practice 3 <br><br>
   \(  p(C=0|x) = 1 - p(C=1|x) = 1 - y  \)
 </span>
 <br><br>
-확률 변수 C는 0 또는 1 이외에는 존재하지 않음으로 베르누이 시행을 전제로 하며 베르누이 분포의 확률질량함수(PMF)는 다음과 같이 정의됨
+확률 변수 C는 0 또는 1 이외에는 존재하지 않음으로 베르누이 시행을 전제로 하며 베르누이 분포의 확률질량함수(PMF)는 다음과 같이 정의됩니다.
 <span>
   \(  p(C=p|x) = y^p ( 1 - y )^{1-P}  \)
 </span>
@@ -992,20 +1038,169 @@ Practice 3 <br><br>
   \( Likelyhood (W,b) = \displaystyle\prod_{i=1}^n p(C=p_i|x_i) = \displaystyle\prod_{i=1}^n y_i^{p_i} (1-y_i)^{1-p_i}  \)
 </span>
 <br><br>
-이를 Log 변환을 통해 Convex의 형태와 극점의 위치를 유지하며 곱을 선형의 조합 꼴로 풀 수 있도록 변환한다.<br><br>
+이를 Log 변환을 통해 Convex의 형태와 극점의 위치를 유지하며 곱을 선형의 조합 꼴로 풀 수 있도록 변환합니다.<br><br>
 <span>
   \( E(W,b) = - \log L(W,b) = -\displaystyle\sum_{i=1}^n \lbrace t_i \textstyle\log y_i &#43; (1-p_i) \log(1-y_i) \rbrace  \)
 </span>
 <br><br></p>
 </blockquote>
 <blockquote>
-<p><strong>Logistic Regression Cross Entropy</strong> <br><br>
+<p><U>Logistic Regression Cross Entropy</U> <br><br>
 <span>
   \(  y = \frac{1}{1&#43;e^{-(Wx&#43;b)}} , \space p_i = 0 \space or \space 1  \)
 </span>
 <br><br>
 <span>
   \(  E(W,b) = - \, \displaystyle\sum_{i=1}^n \, \lbrace p_i \, \log y_i &#43; (1-p_i) \log (1-y_i) \rbrace \)
+</span>
+<br><br></p>
+</blockquote>
+<h3 id="logit--sigmoid--softmax">
+  Logit / Sigmoid / Softmax
+  <a class="anchor" href="#logit--sigmoid--softmax">#</a>
+</h3>
+<p>Logit /Sigmoid /Softmax의 관계를 정리해보도록 하겠습니다.</p>
+<p><a href="https://velog.io/@gwkoo/logit-sigmoid-softmax%EC%9D%98-%EA%B4%80%EA%B3%84" target="_blank" rel="noopener">참고1</a><br>
+<a href="https://opentutorials.org/module/3653/22995" target="_blank" rel="noopener">참고2</a><br>
+<a href="https://chacha95.github.io/2019-04-04-logit/" target="_blank" rel="noopener">참고3</a><br>
+<a href="https://ratsgo.github.io/statistics/2017/07/01/bayes/" target="_blank" rel="noopener">참고4</a></p>
+<p>불확실성 하의 의사 결정의 문제를 수학적으로 다룰때 사용되는 베이즈의 정리(Bayes Theorem)와 전확률 법칙(law of total probability)는 다음과 같습니다.</p>
+<blockquote>
+<p><U>Bayes Theorem</U> <br><br>
+<span>
+  \(  P(Y|X) = \frac {P(X \bigcap Y)}{P(X)} \)
+</span>
+<br><br>
+<span>
+  \(  P(X|Y) = \frac {P(Y \bigcap X)}{P(Y)} \)
+</span>
+<br><br>
+<span>
+  \(  P(Y \bigcap X) = P(X \bigcap Y) = P(X|Y)P(Y) = P(Y|X)P(X) \)
+</span>
+<br><br>
+<span>
+  \( \therefore P(Y|X) = \frac {P(X|Y)P(Y)}{P(X)} \)
+</span>
+<br><br>
+<span>
+  \( P(Y|X) : 사후확률(Posterio probability) \)
+</span>
+<br><br>
+<span>
+  \( P(X|Y) : 가능도(likelihood) \)
+</span>
+<br><br>
+<span>
+  \( P(Y) : 확률변수 Y의 사전확률(prior probability) \)
+</span>
+<br><br>
+<span>
+  \( P(X) : 확률변수 X의 사전확률(prior probability) \)
+</span>
+<br><br></p>
+</blockquote>
+<p>표본 공간 S를 n개로 나누었을때 사건 A의 확률은 다음과 같이 나타나며 총합은 1이됩니다.</p>
+<blockquote>
+<p><U>Law of total probability</U> <br><br>
+<span>
+  \(  P(A) = P(A \bigcap B_1) &#43; P(A \bigcap B_2) &#43; ... &#43; P(A \bigcap B_n) \)
+</span>
+<br><br></p>
+</blockquote>
+<p>조금더 내용을 들어가 보도록 하겠습니다. 일반적으로 <span>
+  \( A_1,A_2,A_3 \)
+</span>
+가 서로 Mutually Exclusive이고 이들의 합집합이 표본공간과 S와 같으면 사건 <span>
+  \( A_1,A_2,A_3 \)
+</span>
+는 표본공간 S의 분할이라고 정의합니다 우리가 관심있는 사건 B가 나타날 확률은 전확률 공식에 의거 다음과 같이 표현할 수 있습니다.</p>
+<blockquote>
+<p><span>
+  \(  P(B)) = P(A_1)P(B|A_1)&#43; P(A_2)P(B|A_2) &#43; P(A_3)P(B|A_3) = \displaystyle\sum_{i=1}^3 P(A_i)P(B|A_i) \)
+</span>
+<br><br></p>
+</blockquote>
+<p><span>
+  \(P(A_1)\)
+</span>
+,<span>
+  \(P(A_2)\)
+</span>
+,<span>
+  \(P(A_3)\)
+</span>
+은 미리 알고 있다는 의미로 사전확률(Prior Probability)로 불리고, <span>
+  \(P(B|A_1)\)
+</span>
+,<span>
+  \(P(B|A_2)\)
+</span>
+,<span>
+  \(P(B|A_3)\)
+</span>
+는 우도(Likelihood Probability)라 부릅니다.</p>
+<p><span>
+  \( P(A_1|B) \)
+</span>
+는 사건 B를 관측한 후 원인이 되는 사건 A의 확률을 따졌다는 의미에서 사후확률(Posterior Probability)로 정의되며 다음과 같이 나타낼 수 있습니다.</p>
+<blockquote>
+<p><span>
+  \(  P(A_1|B)) = \frac {P(A_1)P(B|A_1)}{P(B)} = \frac {P(A_1)P(B|A_1)}{P(A_1)P(B|A_1)&#43;P(A_2)P(B|A_2)&#43;P(A_3)P(B|A_3)} \)
+</span>
+<br><br></p>
+</blockquote>
+<blockquote>
+<p>전체 인구의 1%가 어떤 병에 걸렸다고합시다. 이 병의 진단 정확도가 97% 오진률은 6%라고 가정하면 다음과 같습니다.</p>
+</blockquote>
+<blockquote>
+<p><U>Practice 1</U> <br><br>
+<span>
+  \( P(D) = 0.01 \)
+</span>
+ : 사전확률 <br>
+<span>
+  \( P( \backsim D) = 0.99 \)
+</span>
+ : 사전확률 <br>
+<span>
+  \( P(&#43;|D) = 0.97 \)
+</span>
+ : 우도 <br>
+<span>
+  \( P(&#43;| \backsim D) = 0.06 \)
+</span>
+ : 우도 <br>
+<span>
+  \( P(D|&#43;) \)
+</span>
+ = ????? : 사후확률 (진단테스트 양성일때 실제 환자일 확률 ) <br><br>
+<span>
+  \( P(&#43;) = P(D \cap &#43;)&#43;P( \backsim D \cap &#43;) \)
+</span>
+<br>
+<span>
+  \( = P(D)P(&#43;|D)&#43;P( \backsim D)P(&#43;| \backsim D) \)
+</span>
+<br>
+<span>
+  \( = 0.01 \times 0.97 &#43; 0.99 \times 0.06 \)
+</span>
+<br>
+<span>
+  \( = 0.691 \)
+</span>
+<br><br>
+<span>
+  \( P(D|&#43;) = \frac {P(D)P(&#43;|D)}{P(&#43;)} \)
+</span>
+<br>
+<span>
+  \( = \frac {0.01 \times 0.97}{0.691} \)
+</span>
+<br>
+<span>
+  \( = 0.014 \)
 </span>
 <br><br></p>
 </blockquote>

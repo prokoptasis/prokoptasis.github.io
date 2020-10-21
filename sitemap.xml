@@ -31,6 +31,10 @@
   </url>
   
   <url>
+    <loc>http://prokoptasis.github.io/docs/documents/backend/rust/</loc>
+  </url>
+  
+  <url>
     <loc>http://prokoptasis.github.io/docs/documents/backend/go/</loc>
   </url>
   
@@ -56,6 +60,14 @@
   
   <url>
     <loc>http://prokoptasis.github.io/docs/documents/backend/go/go02/</loc>
+  </url>
+  
+  <url>
+    <loc>http://prokoptasis.github.io/docs/documents/backend/rust/rust01/</loc>
+  </url>
+  
+  <url>
+    <loc>http://prokoptasis.github.io/docs/documents/backend/rust/rust02/</loc>
   </url>
   
   <url>
@@ -111,7 +123,7 @@
   </url>
   
   <url>
-    <loc>http://prokoptasis.github.io/docs/documents/english/engweb/</loc>
+    <loc>http://prokoptasis.github.io/docs/documents/english/pickedup/</loc>
   </url>
   
   <url>
@@ -166,6 +178,11 @@
   
   <url>
     <loc>http://prokoptasis.github.io/posts/201019/</loc>
+    <lastmod>2020-10-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://prokoptasis.github.io/posts/201021/</loc>
     <lastmod>2020-10-19T00:00:00+00:00</lastmod>
   </url>
   

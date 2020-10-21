@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rust on Prokoptasis</title>
+    <link>http://prokoptasis.github.io/docs/documents/backend/rust/</link>
+    <description>Recent content in Rust on Prokoptasis</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>kr-ko</language><atom:link href="http://prokoptasis.github.io/docs/documents/backend/rust/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Rust Basic 01</title>
+      <link>http://prokoptasis.github.io/docs/documents/backend/rust/rust01/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://prokoptasis.github.io/docs/documents/backend/rust/rust01/</guid>
+      <description>Rust Basic 1 #   Rust는 시스템 레벨의 프로그래밍 언어로 C/C++의 대체 언어로 주목받고 있습니다. 타입 안전성, 메모리 안전성, 동시성, 그리고 성능에도 초점을 맞추어 대규모, 고성능 소프트웨어의 개발을 작성하도록 설계되어 있습니다. 무효한 메모리 접근을 예방하기 위해 빌림 검사와 같은 독특한 특성을 지니고 있으며 컴파일러의 혹독함으로 프로그래머들 사이에서 명성(악명)이 자자합니다.
+이 글은 다음 글을 참조하여 작성하였습니다.
+The Rust Programming Language The Rust Programming Language (KOR)
+Hello World #  Hello World 부터 찍읍시다.</description>
+    </item>
+    
+    <item>
+      <title>Rust Basic 02</title>
+      <link>http://prokoptasis.github.io/docs/documents/backend/rust/rust02/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://prokoptasis.github.io/docs/documents/backend/rust/rust02/</guid>
+      <description>Rust Basic2 #   직성중입니다.
+ 다음글  </description>
+    </item>
+    
+  </channel>
+</rss>
