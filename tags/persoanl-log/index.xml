@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>diary on Prokoptasis</title>
-    <link>http://prokoptasis.github.io/tags/diary/</link>
-    <description>Recent content in diary on Prokoptasis</description>
+    <title>persoanl log on Prokoptasis</title>
+    <link>http://prokoptasis.github.io/tags/persoanl-log/</link>
+    <description>Recent content in persoanl log on Prokoptasis</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>kr-ko</language>
-    <lastBuildDate>Thu, 22 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://prokoptasis.github.io/tags/diary/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 22 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://prokoptasis.github.io/tags/persoanl-log/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Personal Log</title>
       <link>http://prokoptasis.github.io/posts/201022/</link>

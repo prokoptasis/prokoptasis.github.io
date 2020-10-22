@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.5212fde38b3c9004e8e0de12806c17dff341e423cbad9a358824afb0cbd7ab33.js" integrity="sha256-UhL944s8kATo4N4SgGwX3/NB5CPLrZo1iCSvsMvXqzM="></script>
+<script defer src="/ko.search.min.900156fa2aad480051b190bb09c407359a5d040609d7fcb7a3608b96c9607dd0.js" integrity="sha256-kAFW&#43;iqtSABRsZC7CcQHNZpdBAYJ1/y3o2CLlslgfdA="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -535,12 +535,11 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#sql-basic-2">#</a>
 </h2>
 <hr>
-<p>Select, Where, 기본적인 함수와 Union, Join에 대해 알아보겠습니다.</p>
+<p>Select, Where, 기본적인 함수, Union, Join</p>
 <h3 id="select--from">
   Select / From
   <a class="anchor" href="#select--from">#</a>
 </h3>
-<p>가장 기본적인 조회 문입니다. &ldquo;Select 컬럼명 from 테이블&quot;로 테이블의 지정 컬럼명의 내용을 조회합니다.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 주석입니다.
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my_table_1;
 
@@ -551,10 +550,6 @@ https://github.com/alex-shpak/hugo-book
   Where / And
   <a class="anchor" href="#where--and">#</a>
 </h3>
-<p>Where 절을 통해 조회 데이터에 조건을 걸 수 있습니다. Excel의 필터개념입니다.
-이때 부등호를 사용할 수 있으며 문자열의 경우 like 및 wildcard를 이용한 검색이 가능합니다.
-Between과 같은 조건도 가능하며 in/not in을 통해 특정 조건을 지정할 수 있습니다.
-Or 절을 통해 선택적 조건 조회가 가능하나 And절과 사용할 경우 개념을 유의하셔야 합니다.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- where
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">32</span>;
 
@@ -619,12 +614,6 @@ Or 절을 통해 선택적 조건 조회가 가능하나 And절과 사용할 경
   dual / + - * /
   <a class="anchor" href="#dual------">#</a>
 </h3>
-<p>dual은 가상테이블입니다. 아무런 테이블 조회 없이 Select의 사칙연산을 수행할 수 있습니다.
-mod, power, sign, cos, tan 와 같은 계산 함수들이 있습니다.
-숫자, 텍스트, 널, date와 같은 형태가 있습니다.
-number와 null은 계산되지 않습니다.
-number와 text는 text가 숫자일때 계산은 됩니다. (다만 여러가지 상황에서 에러가 발생될 수 있습니다.)
-number와 text에서 text가 문자일대는 에러가 발생됩니다.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- dual / + - * /
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span><span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">8</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">from</span> dual;
 
@@ -650,7 +639,6 @@ number와 text에서 text가 문자일대는 에러가 발생됩니다.</p>
   count / ditinct / alias / lower / upper
   <a class="anchor" href="#count--ditinct--alias--lower--upper">#</a>
 </h3>
-<p>기본적인 함수들을 사용해보겠습니다.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- count
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">count</span>(<span style="color:#f92672">*</span>) <span style="color:#66d9ef">from</span> my_table_1;
 
@@ -667,11 +655,6 @@ number와 text에서 text가 문자일대는 에러가 발생됩니다.</p>
   from / nested from / with as 1 / with as 2 / with as 3
   <a class="anchor" href="#from--nested-from--with-as-1--with-as-2--with-as-3">#</a>
 </h3>
-<p>from 을 nested로 배치하여 조회할 수 있습니다.
-with / as 문을 통해 위치를 바꿀 수 있습니다.
-with / as 문은 여러 필요에 따라 추가 할 수 있습니다.
-with / as 문에 nested from절을 같이 사용할 수도 있습니다.
-nested 된 from 절도 역시 추가가 가능합니다만 일단 지금은 넘어가겠습니다.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- from 1
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span>  column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3
 <span style="color:#66d9ef">from</span>    my_table_1
@@ -740,10 +723,6 @@ nested 된 from 절도 역시 추가가 가능합니다만 일단 지금은 넘�
   union all / union / intersect / minus
   <a class="anchor" href="#union-all--union--intersect--minus">#</a>
 </h3>
-<p>union all 두 테이블의 전체 항목이 이어져서 조회됩니다. 컬럼이 동일해야 됩니다.
-union 두 테이블의 전체 항목이 이어져서 조회되지만 중복항목은 제외됩니다.
-intersect 두 테이블의 공통 항목이 조회됩니다.
-minus 위의 조회테이블에서 아래 조회 테이블을 제외하고 남은 항목이 조회됩니다.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">
 <span style="color:#75715e">-- union all
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">with</span>    tab_1 <span style="color:#66d9ef">as</span> (<span style="color:#66d9ef">select</span> column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3 <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_1 <span style="color:#66d9ef">in</span> (<span style="color:#e6db74">&#39;홍길동&#39;</span>,<span style="color:#e6db74">&#39;김철수&#39;</span>,<span style="color:#e6db74">&#39;이영희&#39;</span>))
@@ -788,11 +767,6 @@ minus 위의 조회테이블에서 아래 조회 테이블을 제외하고 남�
   join 1 / join 2 / join 3 / join 4 / join 5
   <a class="anchor" href="#join-1--join-2--join-3--join-4--join-5">#</a>
 </h3>
-<p>join1 column_1 = column_1의 조건에 부합하는 공통항목이 조회된다.
-join2 column_1 = column_1과 column_2 = column_2의 조건에 부합하는 공통항목이 조회된다.
-join3 a table을 기준으로 left join 됩니다.
-join4 b table을 기준으로 right join 됩니다.
-join5 a와 b를 full join하게됩니다.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">
 <span style="color:#75715e">-- join 1 
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">with</span>    tab_1 <span style="color:#66d9ef">as</span> (<span style="color:#66d9ef">select</span> column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3 <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_1 <span style="color:#66d9ef">in</span> (<span style="color:#e6db74">&#39;홍길동&#39;</span>,<span style="color:#e6db74">&#39;김철수&#39;</span>,<span style="color:#e6db74">&#39;이영희&#39;</span>))

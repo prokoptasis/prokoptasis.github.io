@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.5212fde38b3c9004e8e0de12806c17dff341e423cbad9a358824afb0cbd7ab33.js" integrity="sha256-UhL944s8kATo4N4SgGwX3/NB5CPLrZo1iCSvsMvXqzM="></script>
+<script defer src="/ko.search.min.900156fa2aad480051b190bb09c407359a5d040609d7fcb7a3608b96c9607dd0.js" integrity="sha256-kAFW&#43;iqtSABRsZC7CcQHNZpdBAYJ1/y3o2CLlslgfdA="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -535,15 +535,15 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#rust-basic-1">#</a>
 </h2>
 <hr>
-<p>Rust는 시스템 레벨의 프로그래밍 언어로 C/C++의 대체 언어로 주목받고 있습니다. 타입 안전성, 메모리 안전성, 동시성, 그리고 성능에도 초점을 맞추어 대규모, 고성능 소프트웨어의 개발을 작성하도록 설계되어 있습니다. 무효한 메모리 접근을 예방하기 위해 빌림 검사와 같은 독특한 특성을 지니고 있으며 컴파일러의 혹독함으로 프로그래머들 사이에서 명성(<del>악명</del>)이 자자합니다.</p>
-<p>이 글은 다음 글을 참조하여 작성하였습니다.</p>
+<p>Rust는 시스템 레벨의 프로그래밍 언어. C/C++의 대체 언어의 특성. 타입 안전성, 메모리 안전성, 동시성, 그리고 성능에도 초점을 맞추어 대규모, 고성능 소프트웨어의 개발을 작성하도록 설계됨. 무효한 메모리 접근을 예방하기 위해 빌림 검사와 같은 독특한 특성을 지님.</p>
+<p>하기 링크 참조.</p>
 <p><a href="https://doc.rust-lang.org/1.30.0/book/second-edition/foreword.html/" target="_blank" rel="noopener">The Rust Programming Language</a>
 <a href="https://rinthel.github.io/rust-lang-book-ko/" target="_blank" rel="noopener">The Rust Programming Language (KOR)</a></p>
 <h3 id="hello-world">
   Hello World
   <a class="anchor" href="#hello-world">#</a>
 </h3>
-<p>Hello World 부터 찍읍시다.</p>
+<p>Hello World</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust">cargo init rust_hello <span style="color:#f92672">--</span>bin
 cd rust_hello
 cargo run
@@ -551,12 +551,10 @@ cargo run
     println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Hello, world!&#34;</span>);
 }
 
-</code></pre></div><p>간단하게 Hello World를 찍어 보았습니다.</p>
-<h3 id="guessing-game">
+</code></pre></div><h3 id="guessing-game">
   Guessing Game
   <a class="anchor" href="#guessing-game">#</a>
 </h3>
-<p>원저자가 Guessing Game 작성으로 Rust를 쉽게 접근할 수 있도록 설명하고 있습니다. 기본 개념에 대한 좋은 예제임으로 처음 읽으시는 분들은 위 링크를 참조하시어 정독하시고 저는 별도 설명보다는 최종 결과물만 체크하고 넘어가도록 하겠습니다.</p>
 
 <div class="book-expand">
   <label>
@@ -619,20 +617,20 @@ cargo run
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">let</span> foo <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;	<span style="color:#75715e">// immutable
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> bar <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;	<span style="color:#75715e">// mutable
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> baz <span style="color:#f92672">=</span> String::new();
-</code></pre></div><p>기본적으로 let과 let mut은 변수의 가변성에 차이를 두고 다르게 선언하는 것을 의미합니다. String::new는 String타입의 연관함수로 OO에서 클래스의 인스턴스 없이 호출할 수 있는 정적 메소드와 동일합니다.</p>
+</code></pre></div><p>기본적으로 let과 let mut은 변수의 가변성에 차이를 두고 다르게 선언하는 것을 의미.String::new는 String타입의 연관함수로 OO에서 클래스의 인스턴스 없이 호출할 수 있는 정적 메소드와 동일.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust">io::stdin()
 	.read_line(<span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> guess)
 	.expect(<span style="color:#e6db74">&#34;Failed to read line&#34;</span>);
-</code></pre></div><p>프로그램의 시작점에 &lsquo;use std::io&rsquo;로 명시되었기 때문에 함수 호출시의 io::stdin은 표준 입력 핸들 타입인 std::io::Stdin을 돌려줍니다. &amp;mut guess를 넘겨받아 사용자의 입력을 저장하게 됩니다. 이때 사용자의 입력은 지속적으로 추가됨으로 가변 문자열이어야 합니다. 이때 &lsquo;&amp;mut&rsquo; 인 이유는 Rust에서는 &lsquo;&amp;&rsquo; c참조자의 기본 속성이 안전성을 위해 Immutable임으로 명시적으로 가변임을 지정할 필요가 있습니다. &lsquo;.expect&rsquo; 는 에러를 처리하는 메소드로 인스터스가 Error를 낼 경우 해당 메세지를 출력하며 동작을 멈추게 됩니다. 만일 &lsquo;expec&rsquo;없이 컴파일 한다면 경고가 표시됩니다.</p>
+</code></pre></div><p>프로그램의 시작점에 &lsquo;use std::io&rsquo;로 명시되었기 때문에 함수 호출시의 io::stdin은 표준 입력 핸들 타입인 std::io::Stdin을 돌려줌. &amp;mut guess를 넘겨받아 사용자의 입력을 저장하게 됨. 이때 사용자의 입력은 지속적으로 추가됨으로 가변 문자열이어야 함. 이때 &lsquo;&amp;mut&rsquo; 인 이유는 Rust에서는 &lsquo;&amp;&rsquo; c참조자의 기본 속성이 안전성을 위해 Immutable임으로 명시적으로 가변임을 지정할 필요가 있음. &lsquo;.expect&rsquo; 는 에러를 처리하는 메소드로 인스터스가 Error를 낼 경우 해당 메세지를 출력하며 동작을 멈추게 됨. 만일 &lsquo;expec&rsquo;없이 컴파일 한다면 경고가 표시됨.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#75715e">// place holder
 </span><span style="color:#75715e"></span>println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;You guessed: {}&#34;</span>, guess);
 <span style="color:#75715e">// place holder 지정
 </span><span style="color:#75715e"></span>println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;You guessed: {g} number {n}&#34;</span>, g<span style="color:#f92672">=</span> guess,n <span style="color:#f92672">=</span> number);
-</code></pre></div><p>위 문장에서 &lsquo;{}&rsquo; 부분은 변경자(Place Holder)로 guess의 표시 위치를 나타냅니다. 하나 이상의 Place Holder를 아래처럼 지정하여 사용할 수도 있습니다.</p>
+</code></pre></div><p>위 문장에서 &lsquo;{}&rsquo; 부분은 변경자(Place Holder)로 guess의 표시 위치를 나타냄. 하나 이상의 Place Holder를 아래처럼 지정하여 사용할 수도 있음.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#a6e22e">Cargo</span>.<span style="color:#a6e22e">toml</span>
 [<span style="color:#a6e22e">dependencies</span>]
 <span style="color:#a6e22e">rand</span> = <span style="color:#e6db74">&#34;0.4.0&#34;</span>
-</code></pre></div><p>Random 처리를 위해 Cargo.toml에 의존성을 추가하여 rand crate를 명시하였습니다.</p>
+</code></pre></div><p>Random 처리를 위해 Cargo.toml에 의존성을 추가하여 rand crate를 명시함.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">match</span> guess.cmp(<span style="color:#f92672">&amp;</span>secret_number) {
             Ordering::Less <span style="color:#f92672">=&gt;</span> println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Too small!&#34;</span>),
             Ordering::Greater <span style="color:#f92672">=&gt;</span> println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Too big!&#34;</span>),
@@ -640,12 +638,12 @@ cargo run
                 println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;You win!&#34;</span>);
                 <span style="color:#66d9ef">break</span>;
 			}
-</code></pre></div><p>사용자가 입력한 guess 숫자와 Random으로 생성된 secret_number를 비교하는 메소드입니다. std 표준 라이브러리로부터 std::cmp::Ordering Scope를 가져와서 Ordering 타입을 사용하는 형태입니다.</p>
+</code></pre></div><p>사용자가 입력한 guess 숫자와 Random으로 생성된 secret_number를 비교하는 메소드. std 표준 라이브러리로부터 std::cmp::Ordering Scope를 가져와서 Ordering 타입을 사용하는 형태.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">let</span> guess: <span style="color:#66d9ef">u32</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">match</span> guess.trim().parse() {
 	Ok(num) <span style="color:#f92672">=&gt;</span> num,
 	Err(_) <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">continue</span>,
 };
-</code></pre></div><p>입력된 guess의 문자열을 secret_number와 비교하기 위해 숫자로 바꾸는 라인입니다. 기존 guess 변수를 triming된 숫자로 Shadowing하여 재사용하는 방식으로 구현되었습니다. &lsquo;guess.trim()&lsquo;을 통해 사용자 입력시 들어온 Enter의 개행문자를 제거하고 &lsquo;parse()&lsquo;를 통해 숫자열로 파싱합니다.  이때 u32와 같이 정확한 타입을 명시해야합니다. 사용자가 입력한 숫자에 특수문자 같은 것이 포함되어 u32로 전환할 수 없을 경우를 대비해서 expect와 같은 별도 처리가 필요할 수도 있습니다. 여기서는 Error가 들어올경우 continue를 통해 다음 Loop로 다시 시작되도록 처리 되었습니다.</p>
+</code></pre></div><p>입력된 guess의 문자열을 secret_number와 비교하기 위해 숫자로 바꾸는 라인. 기존 guess 변수를 triming된 숫자로 Shadowing하여 재사용하는 방식으로 구현됨. &lsquo;guess.trim()&lsquo;을 통해 사용자 입력시 들어온 Enter의 개행문자를 제거하고 &lsquo;parse()&lsquo;를 통해 숫자열로 파싱.  이때 u32와 같이 정확한 타입을 명시해야함. 사용자가 입력한 숫자에 특수문자 같은 것이 포함되어 u32로 전환할 수 없을 경우를 대비해서 expect와 같은 별도 처리가 필요할 수도 있음. 여기서는 Error가 들어올경우 continue를 통해 다음 Loop로 다시 시작되도록 처리 됨.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">loop</span> {
 ...
 <span style="color:#66d9ef">match</span> guess.cmp(<span style="color:#f92672">&amp;</span>secret_number) {
@@ -655,8 +653,7 @@ cargo run
 			<span style="color:#66d9ef">break</span>;
 		}
 }
-</code></pre></div><p>main 프로그램은 Ordering::Equal이 나올때까지 Loop로 들어가 반복되며 수행됩니다.</p>
-<p>위 예제는 내용 설명외에도 변수의 선언 조건 비교, 반복 등 기본적인 프로그래밍 언어의 속성을 체크하는데 매우 좋은 예인듯 합니다. Go Lang에서도 작성해보아야겠네요. 아니면 조금 더 다듬어서 이런걸 체크할 수 있는 기본 Template를 한번 만들어 봐야겠습니다. 이를테면 클래스 선언이나 참조 같은 것도 포함해서 말입니다.</p>
+</code></pre></div><p>main 프로그램은 Ordering::Equal이 나올때까지 Loop로 들어가 반복되며 수행됨.</p>
 <br>
 <span style="float:left"><a href="../"><< 이전글</a></span>
 <span style="float:right"><a href="../rust02">다음글 >></a></span>

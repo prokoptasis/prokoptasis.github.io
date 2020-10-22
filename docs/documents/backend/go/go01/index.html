@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.5212fde38b3c9004e8e0de12806c17dff341e423cbad9a358824afb0cbd7ab33.js" integrity="sha256-UhL944s8kATo4N4SgGwX3/NB5CPLrZo1iCSvsMvXqzM="></script>
+<script defer src="/ko.search.min.900156fa2aad480051b190bb09c407359a5d040609d7fcb7a3608b96c9607dd0.js" integrity="sha256-kAFW&#43;iqtSABRsZC7CcQHNZpdBAYJ1/y3o2CLlslgfdA="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -535,13 +535,12 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#go-basic-1">#</a>
 </h2>
 <hr>
-<p>GO는 Google에서 개발한 최근 상승세가 가파른 Hot한 언어입니다. 쉽고 단순한 문법과 동시성에 대한 장점으로 생산성이 높다고 알려져 있습니다. Go의 기본적인 문법을 정리해보겠습니다. 저는 아래 사이트를 참조로 정리하였습니다.</p>
+<p>Go 기본적인 문법 정리. 하기 사이트 참조.</p>
 <p><a href="http://golang.site/" target="_blank" rel="noopener">예제로 배우는 Go 프로그래밍</a></p>
 <h3 id="hello-world">
   Hello World
   <a class="anchor" href="#hello-world">#</a>
 </h3>
-<p>우선 Hello World 부터 찍어야 겠죠?</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
@@ -551,7 +550,7 @@ https://github.com/alex-shpak/hugo-book
   Declare
   <a class="anchor" href="#declare">#</a>
 </h3>
-<p>선언 및 할당은 방식은 다음과 같습니다.</p>
+<p>선언 및 할당 방식</p>
 
 <div class="book-expand">
   <label>
@@ -609,14 +608,14 @@ https://github.com/alex-shpak/hugo-book
   Reserved Keywords
   <a class="anchor" href="#reserved-keywords">#</a>
 </h3>
-<p>GO는 다음과 같은 25개의 예약어를 가지고 있습니다.</p>
+<p>GO 25개 예약어</p>
 <pre><code>break, case, chan, const, continue, const, default, const, defer, else,fallthrough, for, func, go, goto, if, import, interface, map, package, range, return, select, struct, switch, type, var
 </code></pre>
 <h3 id="reserved-keywords-1">
   Reserved Keywords
   <a class="anchor" href="#reserved-keywords-1">#</a>
 </h3>
-<p>변수의 선언 및 연산자는 다음과 같습니다.</p>
+<p>변수 선언 및 연산자</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
 	<span style="color:#a6e22e">textLine1</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">`첫번째 줄입니다.\n
 </span><span style="color:#e6db74">두번째 줄입니다.\n
