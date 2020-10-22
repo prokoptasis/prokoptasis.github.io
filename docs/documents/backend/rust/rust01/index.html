@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.900156fa2aad480051b190bb09c407359a5d040609d7fcb7a3608b96c9607dd0.js" integrity="sha256-kAFW&#43;iqtSABRsZC7CcQHNZpdBAYJ1/y3o2CLlslgfdA="></script>
+<script defer src="/ko.search.min.a7348efc4ed73a162fc0e875cef58808536d54fee4b124beed5a074c9fdb3456.js" integrity="sha256-pzSO/E7XOhYvwOh1zvWICFNtVP7ksSS&#43;7VoHTJ/bNFY="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -654,7 +654,107 @@ cargo run
 		}
 }
 </code></pre></div><p>main 프로그램은 Ordering::Equal이 나올때까지 Loop로 들어가 반복되며 수행됨.</p>
-<br>
+<h3 id="common-programming-concepts">
+  Common Programming Concepts
+  <a class="anchor" href="#common-programming-concepts">#</a>
+</h3>
+<p>Variables / Mutability / Data Types</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Rust" data-lang="Rust"><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#75715e">// immutable
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;The value of x is: {}&#34;</span>, x);
+    <span style="color:#75715e">// x = 7; // connot assign twice to immutable variable
+</span><span style="color:#75715e"></span>    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;The value of x is: {}&#34;</span>, x);
+
+    <span style="color:#75715e">// shadowing
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;The value of x is: {}&#34;</span>, x);
+
+    <span style="color:#75715e">// shadowing 2
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> spaces <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;   &#34;</span>;
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Spaces: {}&#34;</span>, spaces);
+    <span style="color:#66d9ef">let</span> spaces <span style="color:#f92672">=</span> spaces.len();
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Spaces: {}&#34;</span>, spaces);
+
+    <span style="color:#75715e">// mutable
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span>;
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;The value of x is: {}&#34;</span>, x);
+    x <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>; <span style="color:#75715e">// connot assign twice to immutable variable
+</span><span style="color:#75715e"></span>    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;The value of x is: {}&#34;</span>, x);
+
+    <span style="color:#75715e">// mutable
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> spaces <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;   &#34;</span>;
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Spaces: {}&#34;</span>, spaces);
+    <span style="color:#75715e">// spaces = spaces.len(); //expected `&amp;str`, found `usize`
+</span><span style="color:#75715e"></span>    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Spaces: {}&#34;</span>, spaces);
+
+    <span style="color:#75715e">// const
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> MAX_POINTS: <span style="color:#66d9ef">u32</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">100_000</span>;
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;MAX_POINTS: {}&#34;</span>, MAX_POINTS);
+
+    <span style="color:#75715e">// let guess = &#34;42&#34;.parse().expect(&#34;Not a number!&#34;); // consider giving `guess` a type
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> guess: <span style="color:#66d9ef">u32</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;42&#34;</span>.parse().expect(<span style="color:#e6db74">&#34;Not a number!&#34;</span>);
+
+    <span style="color:#75715e">// float
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> f1: <span style="color:#66d9ef">f64</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2.0</span>;
+    <span style="color:#66d9ef">let</span> f2: <span style="color:#66d9ef">f32</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3.0</span>;
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{},{}&#34;</span>, f1, f2);
+
+    <span style="color:#75715e">// let addition
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">10</span>;
+    <span style="color:#75715e">// let subtraction
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> difference <span style="color:#f92672">=</span> <span style="color:#ae81ff">95.5</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">4.3</span>;
+    <span style="color:#75715e">// let multiplication
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> product <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">30</span>;
+    <span style="color:#75715e">// let division
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> quotient <span style="color:#f92672">=</span> <span style="color:#ae81ff">56.7</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">32.2</span>;
+    <span style="color:#75715e">// let remainder
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> remainder <span style="color:#f92672">=</span> <span style="color:#ae81ff">43</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">5</span>;
+
+    println<span style="color:#f92672">!</span>(
+        <span style="color:#e6db74">&#34;let calc {},{},{},{},{}&#34;</span>,
+        sum, difference, product, quotient, remainder
+    );
+
+    <span style="color:#75715e">// boolean
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> t <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+    <span style="color:#66d9ef">let</span> f: <span style="color:#66d9ef">bool</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;let bool {},{}&#34;</span>, t, f);
+
+    <span style="color:#75715e">// character
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> c <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;z&#39;</span>;
+    <span style="color:#66d9ef">let</span> z <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;ℤ&#39;</span>;
+    <span style="color:#66d9ef">let</span> cat <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;😻&#39;</span>;
+
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;let char {},{},{}&#34;</span>, c, z, cat);
+
+    <span style="color:#75715e">// tuple
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> tup: (<span style="color:#66d9ef">i32</span>, <span style="color:#66d9ef">f64</span>, <span style="color:#66d9ef">u8</span>) <span style="color:#f92672">=</span> (<span style="color:#ae81ff">500</span>, <span style="color:#ae81ff">6.4</span>, <span style="color:#ae81ff">1</span>);
+    <span style="color:#66d9ef">let</span> (x, y, z) <span style="color:#f92672">=</span> tup;
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;x : {}, y : {}, z : {}&#34;</span>, x, y, z);
+
+    <span style="color:#66d9ef">let</span> x: (<span style="color:#66d9ef">i32</span>, <span style="color:#66d9ef">f64</span>, <span style="color:#66d9ef">u8</span>, <span style="color:#66d9ef">u8</span>, <span style="color:#66d9ef">u8</span>, <span style="color:#66d9ef">u8</span>, <span style="color:#66d9ef">u8</span>, <span style="color:#66d9ef">u8</span>, <span style="color:#66d9ef">u8</span>, <span style="color:#66d9ef">u8</span>, <span style="color:#66d9ef">u8</span>, <span style="color:#66d9ef">u8</span>, <span style="color:#66d9ef">u8</span>) <span style="color:#f92672">=</span>
+        (<span style="color:#ae81ff">500</span>, <span style="color:#ae81ff">6.4</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">11</span>);
+    <span style="color:#66d9ef">let</span> five_hundred <span style="color:#f92672">=</span> x.<span style="color:#ae81ff">0</span>;
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;five_hundred : {}, x11 : {}&#34;</span>, five_hundred, x.<span style="color:#ae81ff">11</span>);
+
+    <span style="color:#75715e">// Array
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> ary <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>];
+    <span style="color:#66d9ef">let</span> mon <span style="color:#f92672">=</span> [
+        <span style="color:#e6db74">&#34;Jan&#34;</span>, <span style="color:#e6db74">&#34;Feb&#34;</span>, <span style="color:#e6db74">&#34;Mar&#34;</span>, <span style="color:#e6db74">&#34;Apr&#34;</span>, <span style="color:#e6db74">&#34;May&#34;</span>, <span style="color:#e6db74">&#34;Jun&#34;</span>, <span style="color:#e6db74">&#34;Jul&#34;</span>, <span style="color:#e6db74">&#34;Aug&#34;</span>, <span style="color:#e6db74">&#34;Sep&#34;</span>, <span style="color:#e6db74">&#34;Oct&#34;</span>, <span style="color:#e6db74">&#34;Nov&#34;</span>, <span style="color:#e6db74">&#34;Dec&#34;</span>,
+    ];
+
+    <span style="color:#66d9ef">let</span> index <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;
+    <span style="color:#75715e">// let index = 12; // panicked at &#39;index out of bounds: the len is 12 but the index is 12&#39;
+</span><span style="color:#75715e"></span>
+    <span style="color:#66d9ef">let</span> frst <span style="color:#f92672">=</span> ary[<span style="color:#ae81ff">0</span>];
+    <span style="color:#66d9ef">let</span> scnd <span style="color:#f92672">=</span> mon[<span style="color:#ae81ff">1</span>];
+    <span style="color:#66d9ef">let</span> thrd <span style="color:#f92672">=</span> mon[index];
+
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;frst : {} , scnd : {} , thrd : {}&#34;</span>, frst, scnd, thrd);
+}
+</code></pre></div><br>
 <span style="float:left"><a href="../"><< 이전글</a></span>
 <span style="float:right"><a href="../rust02">다음글 >></a></span>
 </article>

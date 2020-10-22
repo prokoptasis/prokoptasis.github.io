@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.900156fa2aad480051b190bb09c407359a5d040609d7fcb7a3608b96c9607dd0.js" integrity="sha256-kAFW&#43;iqtSABRsZC7CcQHNZpdBAYJ1/y3o2CLlslgfdA="></script>
+<script defer src="/ko.search.min.a7348efc4ed73a162fc0e875cef58808536d54fee4b124beed5a074c9fdb3456.js" integrity="sha256-pzSO/E7XOhYvwOh1zvWICFNtVP7ksSS&#43;7VoHTJ/bNFY="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -1223,6 +1223,72 @@ Chain Rule을 적용  <span>
 </span>
 <br><br></p>
 </blockquote>
+<p>연습1 : 쿠키문제
+사탕주머니 1 : 딸기맛 30개, 포도맛 10
+사탕주머니 2 : 딸기맛 20개, 포도맛 20
+두 주머니에서 임의로 골랐을때 딸기였다면 주머니1에서 나왔을 확률은?</p>
+<blockquote>
+<p><span>
+  \( P(H) \)
+</span>
+ : 사전확률 -&gt; 주머니1을 고를 확률 <br><br>
+<span>
+  \( P(D|H) \)
+</span>
+ : 우도 -&gt; 주머니1의 딸기 확률 <br><br>
+<span>
+  \( P(D) \)
+</span>
+ : 한정상수 -&gt; 딸기를 고를 확률 <br><br>
+<span>
+  \( P(H|D)) \)
+</span>
+ : 사후확률 -&gt; 주머니1에서 딸기를 골랐을 확률 <br><br>
+<span>
+  \( P(H|D)) = \frac {P(H)P(D|H)}{P(D)} = \frac { \frac {1}{2} * \frac {3}{4} }{ \frac {5}{8} } = \frac {3}{5} \)
+</span>
+<br><br>
+이때 한정상수 <span>
+  \( P(D) \)
+</span>
+는 상호배제(Mutually Exclusive)와 전체포괄(Collectively Exhaustive)의 원칙에서 같은 값을 지니며 계산이 생략됨</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Point</th>
+<th>Theory1</th>
+<th>Theory2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>사전확률P(H)</td>
+<td>1/2</td>
+<td>1/2</td>
+</tr>
+<tr>
+<td>우도P(D</td>
+<td>H)</td>
+<td>3/4</td>
+</tr>
+<tr>
+<td>사전확률*우도</td>
+<td>3/8</td>
+<td>1/4</td>
+</tr>
+<tr>
+<td>한정상수P(D)</td>
+<td>5/8</td>
+<td>5/8</td>
+</tr>
+<tr>
+<td>사후확률P(H</td>
+<td>D)</td>
+<td>3/5</td>
+</tr>
+</tbody>
+</table>
 <br>
 <section class="footnotes" role="doc-endnotes">
 <hr>

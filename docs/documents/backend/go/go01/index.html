@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.900156fa2aad480051b190bb09c407359a5d040609d7fcb7a3608b96c9607dd0.js" integrity="sha256-kAFW&#43;iqtSABRsZC7CcQHNZpdBAYJ1/y3o2CLlslgfdA="></script>
+<script defer src="/ko.search.min.a7348efc4ed73a162fc0e875cef58808536d54fee4b124beed5a074c9fdb3456.js" integrity="sha256-pzSO/E7XOhYvwOh1zvWICFNtVP7ksSS&#43;7VoHTJ/bNFY="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -718,6 +718,263 @@ https://github.com/alex-shpak/hugo-book
 	<span style="color:#a6e22e">x</span><span style="color:#f92672">++</span>
 
 	println(<span style="color:#a6e22e">x</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">p</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">p</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">p</span>)
+}
+</code></pre></div><h3 id="조건문">
+  조건문
+  <a class="anchor" href="#%ec%a1%b0%ea%b1%b4%eb%ac%b8">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">a</span> = <span style="color:#ae81ff">1</span>
+
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> {
+		println(<span style="color:#e6db74">&#34;One&#34;</span>)
+	} <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span> {
+		println(<span style="color:#e6db74">&#34;Two&#34;</span>)
+	} <span style="color:#66d9ef">else</span> {
+		println(<span style="color:#e6db74">&#34;Other&#34;</span>)
+	}
+
+	<span style="color:#75715e">// Optional Statement
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">b</span> &lt; <span style="color:#ae81ff">10</span> {
+		println(<span style="color:#a6e22e">b</span>)
+	}
+
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">category</span> = <span style="color:#ae81ff">1</span>
+
+	<span style="color:#66d9ef">switch</span> <span style="color:#a6e22e">category</span> {
+	<span style="color:#66d9ef">case</span> <span style="color:#ae81ff">1</span>:
+		<span style="color:#a6e22e">name</span> = <span style="color:#e6db74">&#34;Paper Book&#34;</span>
+	<span style="color:#66d9ef">case</span> <span style="color:#ae81ff">2</span>:
+		<span style="color:#a6e22e">name</span> = <span style="color:#e6db74">&#34;eBook&#34;</span>
+	<span style="color:#66d9ef">case</span> <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>:
+		<span style="color:#a6e22e">name</span> = <span style="color:#e6db74">&#34;Blog&#34;</span>
+	<span style="color:#66d9ef">default</span>:
+		<span style="color:#a6e22e">name</span> = <span style="color:#e6db74">&#34;Other&#34;</span>
+	}
+	println(<span style="color:#a6e22e">name</span>)
+
+	<span style="color:#75715e">// Expression을 사용한 경우
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">switch</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">category</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">2</span>; <span style="color:#a6e22e">x</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> {
+	<span style="color:#75715e">//...
+</span><span style="color:#75715e"></span>	}
+
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">score</span> = <span style="color:#ae81ff">80</span>
+
+	<span style="color:#66d9ef">switch</span> {
+	<span style="color:#66d9ef">case</span> <span style="color:#a6e22e">score</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">90</span>:
+		println(<span style="color:#e6db74">&#34;A&#34;</span>)
+	<span style="color:#66d9ef">case</span> <span style="color:#a6e22e">score</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">80</span>:
+		println(<span style="color:#e6db74">&#34;B&#34;</span>)
+	<span style="color:#66d9ef">case</span> <span style="color:#a6e22e">score</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">70</span>:
+		println(<span style="color:#e6db74">&#34;C&#34;</span>)
+	<span style="color:#66d9ef">case</span> <span style="color:#a6e22e">score</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">60</span>:
+		println(<span style="color:#e6db74">&#34;D&#34;</span>)
+	<span style="color:#66d9ef">default</span>:
+		println(<span style="color:#e6db74">&#34;No Hope&#34;</span>)
+	}
+}
+</code></pre></div><h3 id="반복문">
+  반복문
+  <a class="anchor" href="#%eb%b0%98%eb%b3%b5%eb%ac%b8">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">sum</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
+
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">100</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+		<span style="color:#a6e22e">sum</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">i</span>
+	}
+
+	println(<span style="color:#a6e22e">sum</span>)
+
+	<span style="color:#a6e22e">n</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">2</span>
+
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">n</span> &lt; <span style="color:#ae81ff">100</span> {
+		<span style="color:#a6e22e">n</span> = <span style="color:#a6e22e">n</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">n</span>
+	}
+
+	println(<span style="color:#a6e22e">n</span>)
+
+	<span style="color:#a6e22e">names</span> <span style="color:#f92672">:=</span> []<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;abc&#34;</span>, <span style="color:#e6db74">&#34;def&#34;</span>, <span style="color:#e6db74">&#34;geh&#34;</span>}
+
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">index</span>, <span style="color:#a6e22e">name</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">names</span> {
+		println(<span style="color:#a6e22e">index</span>, <span style="color:#a6e22e">name</span>)
+	}
+
+	<span style="color:#a6e22e">b</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
+
+<span style="color:#a6e22e">L1</span>:
+	<span style="color:#66d9ef">for</span> {
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
+			<span style="color:#66d9ef">break</span> <span style="color:#a6e22e">L1</span>
+		}
+	}
+
+	println(<span style="color:#e6db74">&#34;L1&#34;</span>, <span style="color:#a6e22e">b</span>)
+
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">a</span> = <span style="color:#ae81ff">1</span>
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">a</span> &lt; <span style="color:#ae81ff">15</span> {
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">5</span> {
+			<span style="color:#a6e22e">a</span> <span style="color:#f92672">+=</span> <span style="color:#ae81ff">4</span>
+			<span style="color:#66d9ef">continue</span>
+		}
+		<span style="color:#a6e22e">a</span><span style="color:#f92672">++</span>
+		println(<span style="color:#e6db74">&#34;In&#34;</span>, <span style="color:#a6e22e">a</span>)
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">a</span> &gt; <span style="color:#ae81ff">9</span> {
+			println(<span style="color:#e6db74">&#34;Here&#34;</span>, <span style="color:#a6e22e">a</span>)
+			<span style="color:#66d9ef">break</span>
+		}
+	}
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">11</span> {
+		<span style="color:#66d9ef">goto</span> <span style="color:#a6e22e">END</span>
+	}
+	println(<span style="color:#a6e22e">a</span>)
+
+<span style="color:#a6e22e">END</span>:
+	println(<span style="color:#e6db74">&#34;End&#34;</span>, <span style="color:#a6e22e">a</span>)
+}
+</code></pre></div><p>&lsquo;goto END&rsquo;는 END 레이블로 이동
+&lsquo;break L1&rsquo;은 break 레이블로 위치를 이동.</p>
+<h3 id="method">
+  Method
+  <a class="anchor" href="#method">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">msg</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;Hello&#34;</span>
+
+	<span style="color:#75715e">// Function
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">say</span>(<span style="color:#a6e22e">msg</span>)
+	println(<span style="color:#e6db74">&#34;2&#34;</span>, <span style="color:#a6e22e">msg</span>)
+
+	<span style="color:#75715e">// Pass By Reference
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">sayC</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">msg</span>)
+	println(<span style="color:#e6db74">&#34;4&#34;</span>, <span style="color:#a6e22e">msg</span>)
+
+	<span style="color:#75715e">// Variadic Function
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">sayV</span>(<span style="color:#e6db74">&#34;this&#34;</span>, <span style="color:#e6db74">&#34;is&#34;</span>, <span style="color:#e6db74">&#34;a&#34;</span>, <span style="color:#e6db74">&#34;pen&#34;</span>)
+	<span style="color:#a6e22e">sayV</span>(<span style="color:#e6db74">&#34;and&#34;</span>, <span style="color:#e6db74">&#34;pineapple&#34;</span>)
+
+	<span style="color:#75715e">// Return Value
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">total</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">sum</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">9</span>)
+	println(<span style="color:#a6e22e">total</span>)
+
+	<span style="color:#75715e">// Return Multiple Value
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">count</span>, <span style="color:#a6e22e">total</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">sumC</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">9</span>)
+	println(<span style="color:#a6e22e">count</span>, <span style="color:#a6e22e">total</span>)
+
+	<span style="color:#75715e">// Named Return Parameter
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">count</span>, <span style="color:#a6e22e">total</span> = <span style="color:#a6e22e">sumN</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">9</span>)
+	println(<span style="color:#e6db74">&#34;Named Return Param&#34;</span>, <span style="color:#a6e22e">count</span>, <span style="color:#a6e22e">total</span>)
+
+	<span style="color:#75715e">// Anonymous Function
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">sumA</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">n</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> { <span style="color:#75715e">//익명함수 정의
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">s</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
+		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">n</span> {
+			<span style="color:#a6e22e">s</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">i</span>
+		}
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">s</span>
+	}
+
+	<span style="color:#a6e22e">result</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">sumA</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>)
+	println(<span style="color:#e6db74">&#34;result :&#34;</span>, <span style="color:#a6e22e">result</span>)
+
+	<span style="color:#75715e">// add anonymouse function
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">add</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">i</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">j</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">j</span>
+	}
+
+	<span style="color:#75715e">// send anonumous function to other function
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">r1</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">calc</span>(<span style="color:#a6e22e">add</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>)
+	println(<span style="color:#e6db74">&#34;r1 :&#34;</span>, <span style="color:#a6e22e">r1</span>)
+
+	<span style="color:#75715e">// directly
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">r2</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">calc</span>(<span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">x</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">y</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> { <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">y</span> }, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>)
+	println(<span style="color:#e6db74">&#34;r2 :&#34;</span>, <span style="color:#a6e22e">r2</span>)
+
+	<span style="color:#75715e">// prototype function
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">r3</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">calcP</span>(<span style="color:#a6e22e">add</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">25</span>)
+	println(<span style="color:#e6db74">&#34;r3 :&#34;</span>, <span style="color:#a6e22e">r3</span>)
+
+	<span style="color:#75715e">// closure
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">next1</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">nextValue</span>()
+	println(<span style="color:#e6db74">&#34;next1&#34;</span>, <span style="color:#a6e22e">next1</span>())
+	println(<span style="color:#e6db74">&#34;next1&#34;</span>, <span style="color:#a6e22e">next1</span>())
+	println(<span style="color:#e6db74">&#34;next1&#34;</span>, <span style="color:#a6e22e">next1</span>())
+
+	<span style="color:#a6e22e">next2</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">nextValue</span>()
+	println(<span style="color:#e6db74">&#34;next2&#34;</span>, <span style="color:#a6e22e">next2</span>())
+	println(<span style="color:#e6db74">&#34;next2&#34;</span>, <span style="color:#a6e22e">next2</span>())
+	println(<span style="color:#e6db74">&#34;next1&#34;</span>, <span style="color:#a6e22e">next1</span>())
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">say</span>(<span style="color:#a6e22e">msg</span> <span style="color:#66d9ef">string</span>) {
+	println(<span style="color:#e6db74">&#34;1&#34;</span>, <span style="color:#a6e22e">msg</span>)
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">sayC</span>(<span style="color:#a6e22e">msg</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">string</span>) {
+	println(<span style="color:#e6db74">&#34;3&#34;</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">msg</span>)
+	<span style="color:#f92672">*</span><span style="color:#a6e22e">msg</span> = <span style="color:#e6db74">&#34;World&#34;</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">sayV</span>(<span style="color:#a6e22e">msg</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">string</span>) {
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">s</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">msg</span> {
+		println(<span style="color:#a6e22e">s</span>)
+	}
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">sum</span>(<span style="color:#a6e22e">nums</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
+	<span style="color:#a6e22e">s</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">n</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">nums</span> {
+		<span style="color:#a6e22e">s</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">n</span>
+	}
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">s</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">sumC</span>(<span style="color:#a6e22e">nums</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">int</span>) (<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>) {
+	<span style="color:#a6e22e">s</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
+	<span style="color:#a6e22e">count</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">n</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">nums</span> {
+		<span style="color:#a6e22e">s</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">n</span>
+		<span style="color:#a6e22e">count</span><span style="color:#f92672">++</span>
+	}
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">count</span>, <span style="color:#a6e22e">s</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">sumN</span>(<span style="color:#a6e22e">nums</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">int</span>) (<span style="color:#a6e22e">count</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">total</span> <span style="color:#66d9ef">int</span>) {
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">n</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">nums</span> {
+		<span style="color:#a6e22e">total</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">n</span>
+	}
+	<span style="color:#a6e22e">count</span> = len(<span style="color:#a6e22e">nums</span>)
+	<span style="color:#66d9ef">return</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">calc</span>(<span style="color:#a6e22e">f</span> <span style="color:#66d9ef">func</span>(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">a</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">b</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
+	<span style="color:#a6e22e">result</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">f</span>(<span style="color:#a6e22e">a</span>, <span style="color:#a6e22e">b</span>)
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">result</span>
+}
+
+<span style="color:#75715e">// prototype
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">calculator</span> <span style="color:#66d9ef">func</span>(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span>
+
+<span style="color:#75715e">// use prototype function
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">calcP</span>(<span style="color:#a6e22e">f</span> <span style="color:#a6e22e">calculator</span>, <span style="color:#a6e22e">a</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">b</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
+	<span style="color:#a6e22e">result</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">f</span>(<span style="color:#a6e22e">a</span>, <span style="color:#a6e22e">b</span>)
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">result</span>
+}
+
+<span style="color:#75715e">// closure
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">nextValue</span>() <span style="color:#66d9ef">func</span>() <span style="color:#66d9ef">int</span> {
+	<span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
+	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>() <span style="color:#66d9ef">int</span> {
+		<span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">i</span>
+	}
 }
 </code></pre></div><br>
 <span style="float:left"><a href="../"><< 이전글</a></span>
