@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.9ac2e2d340ce7ba6847d6684992a673875b82e5876e3b39456eeae83cd4a0671.js" integrity="sha256-msLi00DOe6aEfWaEmSpnOHW4Llh247OUVu6ug81KBnE="></script>
+<script defer src="/ko.search.min.f12f526790a60a7a47aa20b3bf8689826bafdc85a435c653855f546fc3511eca.js" integrity="sha256-8S9SZ5CmCnpHqiCzv4aJgmuv3IWkNcZThV9Ub8NRHso="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -566,58 +566,66 @@ https://github.com/alex-shpak/hugo-book
  <div><img width="600px" src="../../../../../201020_01_ml_linear_regression.png" alt="linear_regression1" ></div>
 <!-- ![Linear Regression](../../../../../201020_01_ml_linear_regression.png) -->
 <!-- <div><img width="600px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Linear_regression.svg/1920px-Linear_regression.svg.png" alt="linear_regression1" ></div> -->
-<p>직선의 방정식은 다음과 같이 나타냄.</p>
-<blockquote>
-<p><U>Regression</U> <br><br>
 
-<link rel="stylesheet" href="/katex/katex.min.css" />
-<script defer src="/katex/katex.min.js"></script>
-<script defer src="/katex/auto-render.min.js" onload="renderMathInElement(document.body);"></script><span>
-  \( H(X) = WX&#43;B ( y = ax &#43; b ) \)
-</span>
- <br><br>
-<span>
-  \( H : Hypothesis \)
-</span>
- (가설) <br><br>
-<span>
-  \( W : Weight \)
-</span>
- (기울기) <br><br>
-<span>
-  \( B : Bias \)
-</span>
- (절변) <br><br></p>
-</blockquote>
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Linear Regression</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div>
+H(X) = WX+B ( y = ax + b ) <br><br>
+H : Hypothesis (가설) <br><br>
+W : Weight (기울기) <br><br>
+B : Bias (절변) <br>
+</div>
+    </div>
+  </label>
+</div>
+
 <p>Cost는 데이터와 직선 차이의 합. 음수, 양수 모두 존재함으로 제곱을 사용.</p>
 <div><img width="600px" src="../../../../../201020_02_ml_gradient_descent.png" alt="gradient_descent" ></div>
 <!-- ![x^2](../../../../../201020_02_ml_gradient_descent.png201020_02_ml_gradient_descent.png) -->
 <!-- <div>
 <img width="250px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Linear_least_squares_example2.png/800px-Linear_least_squares_example2.png" alt="linear_regression2" >
 </div> -->
-<blockquote>
-<p><U>Cost</U> <br><br>
-<span>
-  \( Cost : H(x) - y \)
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Cost</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+Cost : 
+<link rel="stylesheet" href="/katex/katex.min.css" />
+<script defer src="/katex/katex.min.js"></script>
+<script defer src="/katex/auto-render.min.js" onload="renderMathInElement(document.body);"></script><span>
+  \( H(x) - y \)
 </span>
  <br><br>
-<span>
-  \( Total Cost : \frac{(H(x_1)-y_1)^2 &#43; (H(x_2)-y_2)^2 &#43; ... &#43; (H(x_n)-y_n)^2 }{n} \)
+Total Cost : <span>
+  \( \frac{(H(x_1)-y_1)^2 &#43; (H(x_2)-y_2)^2 &#43; ... &#43; (H(x_n)-y_n)^2 }{n} \)
 </span>
  <br><br>
-<span>
-  \( Total Cost : cost(W) = \frac{1}{n}\, \textstyle\sum_{i=1}^n \,(Wx_i-y)^2 \)
+Total Cost : cost(W) = <span>
+  \( \frac{1}{n}\, \textstyle\sum_{i=1}^n \,(Wx_i-y)^2 \)
 </span>
  <br><br>
-<span>
-  \( Cost Function : cost(W,b) = \frac{1}{n}\, \textstyle\sum_{i=1}^n \,(H(x_i)-y_i)^2 \)
+Cost Function : cost(W,b) = <span>
+  \( \frac{1}{n}\, \textstyle\sum_{i=1}^n \,(H(x_i)-y_i)^2 \)
 </span>
  <br><br>
-<span>
-  \( Goal : minimize_w,_b cost(W,b) \)
-</span>
- <br><br></p>
-</blockquote>
+Goal : minimize_w,_b cost(W,b) <br>
+</div> 
+    </div>
+  </label>
+</div>
+
 <p>Goal은 가설과 실제 데이터 차이의 제곱이 최소가 되는 기울기와 절편은 찾는 문제.</p>
 <h3 id="gradient-descent">
   Gradient Descent
@@ -629,8 +637,16 @@ https://github.com/alex-shpak/hugo-book
 <!-- <div>
 <img width="400px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Gradient_descent.svg/1024px-Gradient_descent.svg.png" alt="linear_regression3" >
 </div> -->
-<blockquote>
-<p><U>Gradient Descent</U> <br><br>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Gradient Descent</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
 <span>
   \(  W := W - \alpha \frac{\partial}{\partial W} \, \frac{1}{2m} \textstyle\sum_{i=1}^m (W(x_i)-y_i)^2  \)
 </span>
@@ -638,67 +654,104 @@ https://github.com/alex-shpak/hugo-book
 <span>
   \(  W := W - \alpha \frac{1}{2m} \, \textstyle\sum_{i=1}^m 2(W(x_i)-y_i)X_i  \)
 </span>
- <br><br>
+ <br><br> 
 <span>
   \(  W := W - \alpha \frac{1}{m} \, \textstyle\sum_{i=1}^m (W(x_i)-y_i)X_i  \)
 </span>
- <br><br>
+ <br><br> 
 <span>
   \(  W := W - \alpha \frac{\partial}{\partial W} \, cost(W) \)
 </span>
- <br> <br></p>
-</blockquote>
+ <br>
+</div>
+    </div>
+  </label>
+</div>
+
 <h3 id="derivative">
   Derivative
   <a class="anchor" href="#derivative">#</a>
 </h3>
 <p>함수 f(x)에 대한 미분은 아래와 같음. x의 변화량이 0으로 수렴할때 y의 변화량을 의미.</p>
-<blockquote>
-<p><U>Derivative</U> <br><br>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Derivative</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
 <span>
   \(  f&#39;(x) = \frac{\Delta f(x)}{\Delta x} = \lim\limits_{\Delta x \rightarrow 0 } \, \frac{f(x&#43;\Delta x)-f(x)}{\Delta x}   \)
 </span>
- <br><br></p>
-</blockquote>
+ <br>
+</div>
+    </div>
+  </label>
+</div>
+
 <p>미분 기초 정리</p>
-<blockquote>
-<p><U>Derivative Basic</U> <br><br>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Derivative Basic</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
 <span>
   \(  f(x) = constant -&gt; f&#39;(x) = 0 \)
 </span>
- <br><br>
+ <br><br> 
 <span>
   \(  f&#39;(x) = e ^ x =&gt; f&#39;(x) = e ^ x \)
 </span>
- <br><br>
+ <br><br> 
 <span>
   \(  f&#39;(x) = e ^ -x =&gt; f&#39;(x) = -e ^ -x \)
 </span>
- <br><br>
+ <br><br> 
 <span>
   \(  f&#39;(x) = ax ^ x =&gt; f&#39;(x) = nax ^ {n-1} \)
 </span>
- <br><br>
+ <br><br> 
 <span>
   \(  f&#39;(x) = ln ^ x =&gt; f&#39;(x) = \frac{1}{x} \)
 </span>
- <br><br>
+ <br><br> 
 <span>
   \(  \frac{1}{x} = x^{-1}  \)
 </span>
- <br><br></p>
-</blockquote>
+ <br>
+</div>
+    </div>
+  </label>
+</div>
+
 <p>미분의 의미</p>
 <div><img width="400px" src="../../../../../201020_04_ml_power_x_2.gif" alt="power_x_2" ></div>
 <!-- ![x^2](../../../../../201020_04_ml_power_x_2.gif) -->
-<blockquote>
-<p><span>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Meaning of Derivative</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+<span>
   \(  f(x) = x^2 \)
 </span>
  일 경우 <span>
   \( f&#39;(x) = 2 * x^ {2-1} = 2x \)
 </span>
- <br><br>
+ <br><br> 
 <span>
   \(  f(2) = 2^2 = 4 \)
 </span>
@@ -712,140 +765,245 @@ https://github.com/alex-shpak/hugo-book
  일 경우 <span>
   \( f&#39;(2) = 2*1 = 2 \)
 </span>
- <br><br>
+ <br><br> 
 <span>
   \(  f(2) = 0^2 = 0 \)
 </span>
  일 경우 <span>
   \( f&#39;(2) = 2*0 = 0 \)
 </span>
- <br><br></p>
-</blockquote>
+ <br>
+</div>
+    </div>
+  </label>
+</div>
+
 <p>즉 x = 2 일때 미분 f(x)는 4의 변화를 가지게 됨
 즉 x = 1 일때 미분 f(x)는 2의 변화를 가지게 됨
 즉 x = 0 일때 미분 f(x)는 0의 변화를 가지게 됨
 즉 x의 한점에서 y의 변화량을 통해 위의 x^2이 Cost라 가정하고 반복한다면 기울기가 0이되는 즉 Cost가 최저인 점을 구할 수 있음.</p>
-<blockquote>
-<p>Practice 1 <br><br>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Practice 1 : Derivative</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
 <span>
   \(  f(x) = 3x^2 &#43; e^x &#43; 7 \)
 </span>
  의 <span>
   \( f&#39;(x) ? \)
 </span>
- <br><br>
+ <br><br> 
 <span>
   \(       = 3*2*x^{2-1} &#43; e^x &#43; 0 = 6x &#43; e^x \)
 </span>
- <br><br>
-Practice 2 <br><br>
+ <br>
+</div>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Practice 2 : Derivative</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
 <span>
   \(  f(x) = lnx &#43; \frac{1}{x} \)
 </span>
  의 <span>
   \( f&#39;(x) ? \)
 </span>
- <br><br>
-<span>
+ <br><br> 
+> <span>
   \(       = \frac{1}{x} - \frac{1}{x^2} \)
 </span>
- <br><br></p>
-</blockquote>
+ <br>
+</div>
+    </div>
+  </label>
+</div>
+
 <p>입력변수가 하나 이상인 다변수 함수에서 사용하는 편미분을 사용. 편미분은 미분하고자 하는 변수를 제외하고 나머지는 상수로 취급.</p>
-<blockquote>
-<p><U>Partial Derivative</U> <br><br>
-Practice 1 <br><br>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Practice 1 : Partial Derivative</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
 <span>
   \(  f(x,y) = 2x &#43; 3xy &#43; y^3 \)
 </span>
-  변수 x에 대해 편미분 <br><br>
+  변수 x에 대해 편미분 <br><br> 
 <span>
   \(  = \frac{\partial f(x,y)}{\partial x} = \frac{\partial(2x&#43;3xy&#43;y^3)}{\partial x} \)
 </span>
- <br><br>
+ <br><br> 
 <span>
   \(  = \frac{\partial 2x}{\partial x} &#43; \frac{\partial 3xy}{\partial x} &#43; \frac{\partial y^3}{\partial x} \)
 </span>
- <br><br>
+ <br><br> 
 <span>
   \(  = 2 &#43; 3y &#43; 0 \)
 </span>
- <br><br>
+ <br><br> 
 <span>
   \(  = 2 &#43; 3y \)
 </span>
- <br><br>
+ <br><br> 
 <span>
   \(  f(x,y) = 2x &#43; 3xy &#43; y^3 \)
 </span>
- 변수 y에 대해 편미분 <br><br>
+ 변수 y에 대해 편미분 <br><br> 
 <span>
   \(  = \frac{\partial f(x,y)}{\partial y} = \frac{\partial(2x&#43;3xy&#43;y^3)}{\partial y} \)
 </span>
- <br><br>
+ <br><br> 
 <span>
   \(  = \frac{\partial 2x}{\partial y} &#43; \frac{\partial 3xy}{\partial y} &#43; \frac{\partial y^3}{\partial y} \)
 </span>
- <br><br>
+ <br><br> 
 <span>
   \(  = 0 &#43; 3x &#43; 3y^2 \)
 </span>
- <br><br>
+ <br><br> 
 <span>
   \(  = 3x &#43; 3y^2 \)
 </span>
- <br><br></p>
-</blockquote>
+ <br>
+</div>
+    </div>
+  </label>
+</div>
+
 <p>복합 함수를 위해 Chain Rule을 통해 미분. 특정 함수를 치환하여 약분 개념을 적용. 두 함수 곱의 미분은 단순 곱이 아니며 Product Rule이 적용됨.</p>
-<blockquote>
-<p><U>Chain rule</U> <br><br>
+<p>
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Chain rule</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
 <span>
   \(  \frac{\partial f}{\partial x} = \frac{\partial f}{\partial t} \circ \frac{\partial t}{\partial x} \)
 </span>
- <br><br>
-Product rule <br><br>
+ <br>
+</div>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Product rule</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
 <span>
   \(  \frac{\partial}{\partial x}[f(x)g(x)]=f(x)g&#39;(x)&#43;f&#39;(x)g(x)  \)
 </span>
-<br><br>
-Practice 1 <br><br>
+<br>
+</div>
+    </div>
+  </label>
+</div>
+</p>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Practice 1 : Chain Rule</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
 <span>
   \(  f(x) = e ^ {3x^2} \space \space \space e^t , \space t = 3x^2 \)
 </span>
-<br><br>
+<br><br> 
 <span>
   \(  \frac{\partial f}{\partial x} = \frac{\partial f}{\partial t} \circ \frac{\partial t}{\partial x} = \frac{\partial (e^t)}{\partial t} \circ \frac{\partial (3x^2)}{\partial x} = (e^t)(6x) = (e^{3x^2})(6x) = 6xe^{3x2} \)
 </span>
- <br><br>
+ <br>
+</div>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Practice 2 : Chain Rule</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
 <span>
   \(  f(x) = e^{-x} \space \space \space e^t , \space t = -x  \)
 </span>
-<br><br>
-Practice 2 <br><br>
+<br><br> 
 <span>
   \(  \frac{\partial f}{\partial x} = \frac{\partial f}{\partial t} \circ \frac{\partial t}{\partial x} = \frac{\partial (e^t)}{\partial t} \circ \frac{\partial (-x)}{\partial x} = (e^t)(-1) = (e^{-x})(-1) = -e^{-x} \)
 </span>
- <br><br>
-Practice 3 <br><br>
+ <br> 
+</div>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Practice 3 : Chain/Product Rule</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
 <span>
   \(  f(x) = 3xe^x  \)
 </span>
- <br><br>
+ <br><br> 
 <span>
   \(  \frac{\partial}{\partial x}(3xe^x) = 3 \Big( \frac{\partial}{\partial x}(e^x x) \Big) \)
 </span>
- <br><br>
+ <br><br> 
 Product Rule을 적용 <span>
   \(  \frac{\partial}{\partial x}(u v) = v \frac{\partial u}{\partial x} &#43; u \frac{\partial v}{\partial x} \)
 </span>
  다음으로 치환 <span>
   \( u = e^x \space v = x  \)
 </span>
- <br><br>
+ <br><br> 
 <span>
   \( 3 \Big( x \frac{\partial}{\partial x}(e^x) &#43; e^x \frac {\partial}{\partial x}(x) \Big) \)
 </span>
- <br><br>
+ <br><br> 
 Chain Rule을 적용  <span>
   \( \frac{\partial}{\partial x}(e^x) = \frac {\partial e^u}{\partial u} \frac{\partial u}{\partial x} \)
 </span>
@@ -872,8 +1030,12 @@ Chain Rule을 적용  <span>
 <span>
   \( = 3 e^x( x &#43; 1 ) \)
 </span>
- <br><br></p>
-</blockquote>
+ <br>
+</div>
+    </div>
+  </label>
+</div>
+
 <h3 id="loss-function">
   Loss Function
   <a class="anchor" href="#loss-function">#</a>
@@ -881,25 +1043,45 @@ Chain Rule을 적용  <span>
 <p>다시 선형회귀에서 실측되는 데이터와 f(x) = wx+b간 error는 최소가 되어야함. Error가 최소가 되는 W,B를 연속적으로 측정하기 위해 사용되는 것이 손실함수임.</p>
 <div><img width="600px" src="../../../../../201020_02_ml_gradient_descent.png" alt="gradient_descent" ></div>
 <!-- ![Error](../../../../../201020_02_ml_gradient_descent.png) -->
-<blockquote>
-<p><U>Loss Function</U> <br><br>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Loss Function</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
 <span>
   \(  Loss Funtion = \frac{(t_1-y_1)^2 &#43; (t_2-y_2)^2 &#43; ... &#43; (t_n-y_n)^2}{n} \)
 </span>
- <br><br>
+ <br><br> 
 <span>
   \(  = \frac{[t_1-(Wx_1&#43;b)]^2 &#43; [t_2-(Wx_2&#43;b)]^2 &#43; ... &#43; [t_n-(Wx_n&#43;b)]^2}{n} \)
 </span>
- <br><br>
+ <br><br> 
 <span>
   \(  = \frac{1}{n} \, \displaystyle\sum_{i=1}^n \, [t_i-(Wx_i&#43;b)]^2 \)
 </span>
- <br><br></p>
-</blockquote>
+ <br><br> 
+</div>
+    </div>
+  </label>
+</div>
+
 <div><img width="600px" src="../../../../../201020_03_ml_minimize_goal.png" alt="gradient_descent" ></div>
 <p>원 기울기에서 학습률*미분만큼을 감소시키며 기울기가 0이 되는 최적해로 진행됨.</p>
-<blockquote>
-<p><U>Gradient Descent</U> <br><br>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Gradient Descent</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
 <span>
   \(  W := W - \alpha \frac{\partial}{\partial W} \, \frac{1}{2m} \textstyle\sum_{i=1}^m (W(x_i)-y_i)^2  \)
 </span>
@@ -907,30 +1089,46 @@ Chain Rule을 적용  <span>
 <span>
   \(  W := W - \alpha \frac{1}{2m} \, \textstyle\sum_{i=1}^m 2(W(x_i)-y_i)X_i  \)
 </span>
- <br><br>
+ <br><br> 
 <span>
   \(  W := W - \alpha \frac{1}{m} \, \textstyle\sum_{i=1}^m (W(x_i)-y_i)X_i  \)
 </span>
- <br><br>
+ <br><br> 
 <span>
   \(  W := W - \alpha \frac{\partial}{\partial W} \, cost(W) \)
 </span>
- <br> <br>
+ <br> <br> 
 <span>
   \(  b := b - \alpha \frac{\partial}{\partial b} \, cost(b) \)
 </span>
- <br> <br></p>
-</blockquote>
+ <br>
+</div>
+    </div>
+  </label>
+</div>
+
 <p>여기서 학습률은 최적해를 향한 진행 폭을 결정. 작을 경우 성능이 저하. 클 경우 학습이 진행되지 않음.</p>
 <div><img width="600px" src="../../../../../201020_05_ml_learning_rate.png" alt="learning_rate" ></div>
 <!-- ![Learning Rate](../../../../../201020_05_ml_learning_rate.png) -->
-<blockquote>
-<p><U>Learning Rate</U> <br><br>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Learning Rate</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
 <span>
   \(  W = W - \alpha \, \frac{\partial E(W,b)}{\partial W}  \)
 </span>
-<br> <br></p>
-</blockquote>
+<br>
+</div>
+    </div>
+  </label>
+</div>
+
 <div><img width="600px" src="../../../../../201020_06_ml_convex_function.png" alt="convex_function" ></div>
 <p>이론적으로 Convex Function이라면 대체로 최적해를 잘 찾을 수 있으나 그렇지 않다면 Parameter에 따라 결과가 상이할 수 있음.</p>
 <div><img width="600px" src="../../../../../201020_07_ml_local_minima.png" alt="local_minima" ></div>
@@ -939,49 +1137,73 @@ Chain Rule을 적용  <span>
   <a class="anchor" href="#dot-product">#</a>
 </h3>
 <p>모든 요소들의 행렬곱을 통해 계산.</p>
-<blockquote>
-<p><U>Dot Product</U> <br><br>
+<p>
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Dot Product</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
 <span>
   \(  x_1 * W &#43; b_1 = y_1 \)
 </span>
-<br><br>
+<br><br> 
 <span>
   \(  x_2 * W &#43; b_2 = y_2 \)
 </span>
-<br><br>
+<br><br> 
 <span>
   \(  x_3 * W &#43; b_3 = y_3 \)
 </span>
-<br><br>
+<br><br> 
 <span>
   \(  x_4 * W &#43; b_4 = y_4 \)
 </span>
-<br><br>
+<br><br> 
 <span>
   \(  x_5 * W &#43; b_5 = y_5 \)
 </span>
-<br><br>
+<br><br> 
 행렬의 곱으로 전환 <br><br>
 <span>
   \( \begin{pmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \\ x_5 \end{pmatrix} \circ (W) &#43; b =  \begin{pmatrix} y_1 \\ y_2 \\ y_3 \\ y_4 \\ y_5 \end{pmatrix} \)
 </span>
-<br><br>
+<br><br> 
 <span>
   \( X \circ W &#43; b = Y \)
 </span>
-<br><br></p>
-</blockquote>
-<blockquote>
-<p><U>Multi Variable Dot Product</U> <br><br>
+<br>
+</div>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Multi Variable Dot Product</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
 <span>
   \( \begin{pmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \\ x_5 \end{pmatrix} \circ \begin{pmatrix} w_1 \\ w_2 \\ w_3 \end{pmatrix} &#43; b =  \begin{pmatrix} y_1 \\ y_2 \\ y_3 \\ y_4 \\ y_5 \end{pmatrix} \)
 </span>
-<br><br>
+<br><br> 
 <span>
   \( X \circ W &#43; b = Y \)
 </span>
-<br><br></p>
-</blockquote>
+<br>
+</div>
+    </div>
+  </label>
+</div>
+</p>
 <h3 id="logistic-regression">
   Logistic Regression
   <a class="anchor" href="#logistic-regression">#</a>
@@ -1003,21 +1225,33 @@ Chain Rule을 적용  <span>
 에 가까워지며 0에 수렴하게되고 x의 우측으로 진행하게 될수록 0에 수렴하면서 1에 가까워지는 결과가 됨.</p>
 <div><img width="600px" src="../../../../../201020_10_ml_e_x.png" alt="e_x" ></div>
 <div><img width="600px" src="../../../../../201020_08_ml_sigmoid.png" alt="local_minima" ></div>
-<blockquote>
-<p><U>Sigmoid</U> <br><br>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Sigmoid</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
 <span>
   \(  Z = Wx &#43; b  \)
 </span>
-<br><br>
+<br><br> 
 <span>
   \(  y = \frac {1}{1&#43;e^{-(Wx&#43;b)}}  \)
 </span>
-<br><br>
+<br><br> 
 <span>
   \(  y = sigmoid(Z) = \sigma (z) = \frac{1}{1&#43;e^{-z}}  \)
 </span>
-<br><br></p>
-</blockquote>
+<br>
+</div>
+    </div>
+  </label>
+</div>
+
 <p>Logistic Regression의 Cost Function은 y = 1 일때와 y = 0 일때로 구분할 수 있는데 y = 1 일때는 <span>
   \( \log(h(x)) \)
 </span>
@@ -1037,18 +1271,25 @@ Chain Rule을 적용  <span>
 <div><img width="600px" src="../../../../../201020_11_log_y_1.jpg" alt="log y=1" ></div>
 <div><img width="600px" src="../../../../../201020_12_log_y_0.jpg" alt="log y=0" ></div>
 <p>Cross-Entropy 유도의 또다른 설명은 다음과 같음.</p>
-<blockquote>
-<p>하나의 입력 x에 대해 출력이 1일 확률을 y로 정의. y는 0 또는 1일임으로 y = sigmodi(Wx+b)로 나타낼 수 있음.
+<p>하나의 입력 x에 대해 출력이 1일 확률을 y로 정의. y는 0 또는 1일임으로 y = sigmoid(Wx+b)로 나타낼 수 있음. 입력 x에 대해 출력이 0일 확률은 1이 나타날 확률의 나머지임으로 1-y 임. 확률 변수 C는 0 또는 1 이외에는 존재하지 않음으로 베르누이 시행을 전제로 하며 베르누이 분포의 확률질량함수(PMF)는 아래와 같이 정의됨. 이를 Log 변환을 통해 Convex의 형태와 극점의 위치를 유지하며 곱을 선형의 조합 꼴로 풀 수 있도록 변환함.</p>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Bernoulli Distribution (PMF)</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
 <span>
   \(  p(C=1|x) = y = sigmoid(Wx&#43;b)  \)
 </span>
 <br><br>
-입력 x에 대해 출력이 0일 확률은 1이 나타날 확률의 나머지임으로 1-y 임.
 <span>
   \(  p(C=0|x) = 1 - p(C=1|x) = 1 - y  \)
 </span>
 <br><br>
-확률 변수 C는 0 또는 1 이외에는 존재하지 않음으로 베르누이 시행을 전제로 하며 베르누이 분포의 확률질량함수(PMF)는 다음과 같이 정의됨.
 <span>
   \(  p(C=p|x) = y^p ( 1 - y )^{1-P}  \)
 </span>
@@ -1057,75 +1298,104 @@ Chain Rule을 적용  <span>
   \( Likelyhood (W,b) = \displaystyle\prod_{i=1}^n p(C=p_i|x_i) = \displaystyle\prod_{i=1}^n y_i^{p_i} (1-y_i)^{1-p_i}  \)
 </span>
 <br><br>
-이를 Log 변환을 통해 Convex의 형태와 극점의 위치를 유지하며 곱을 선형의 조합 꼴로 풀 수 있도록 변환함.<br><br>
 <span>
   \( E(W,b) = - \log L(W,b) = -\displaystyle\sum_{i=1}^n \lbrace t_i \textstyle\log y_i &#43; (1-p_i) \log(1-y_i) \rbrace  \)
 </span>
-<br><br></p>
-</blockquote>
-<blockquote>
-<p><U>Logistic Regression Cross Entropy</U> <br><br>
+<br>
+</div>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Logistic Regression Cross Entropy</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
 <span>
   \(  y = \frac{1}{1&#43;e^{-(Wx&#43;b)}} , \space p_i = 0 \space or \space 1  \)
 </span>
-<br><br>
+<br><br> 
 <span>
   \(  E(W,b) = - \, \displaystyle\sum_{i=1}^n \, \lbrace p_i \, \log y_i &#43; (1-p_i) \log (1-y_i) \rbrace \)
 </span>
-<br><br></p>
-</blockquote>
+<br>
+</div>
+    </div>
+  </label>
+</div>
+
 <h3 id="bayes-theorem">
   Bayes Theorem
   <a class="anchor" href="#bayes-theorem">#</a>
 </h3>
 <p>Logit, Sigmoid, Softmax를 유도하기 위해 다음과 같은 확률의 개념이 선행되어야함.</p>
-<p><a href="https://www.synapsoft.co.kr/blog/6002" target="_blank" rel="noopener">베이지안 예제</a>
-<a href="https://namu.wiki/w/%EB%AA%AC%ED%8B%B0%20%ED%99%80%20%EB%AC%B8%EC%A0%9C" target="_blank" rel="noopener">몬티홀문제</a>
-<a href="https://j1w2k3.tistory.com/1009" target="_blank" rel="noopener">베이즈의 정리</a></p>
+<ul>
+<li><a href="https://www.synapsoft.co.kr/blog/6002" target="_blank" rel="noopener">베이지안 예제</a></li>
+<li><a href="https://namu.wiki/w/%EB%AA%AC%ED%8B%B0%20%ED%99%80%20%EB%AC%B8%EC%A0%9C" target="_blank" rel="noopener">몬티홀문제</a></li>
+<li><a href="https://j1w2k3.tistory.com/1009" target="_blank" rel="noopener">베이즈의 정리</a></li>
+</ul>
 <p>불확실성 하의 의사 결정의 문제를 수학적으로 다룰때 사용되는 베이즈의 정리(Bayes Theorem)와 전확률 법칙(law of total probability)는 다음과 같음.</p>
-<blockquote>
-<p><U>Bayes Theorem</U> <br><br>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Bayes Theorem</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
 <span>
   \(  P(Y|X) = \frac {P(X \bigcap Y)}{P(X)} \)
 </span>
-<br><br>
+<br><br> 
 <span>
   \(  P(X|Y) = \frac {P(Y \bigcap X)}{P(Y)} \)
 </span>
-<br><br>
+<br><br> 
 <span>
   \(  P(Y \bigcap X) = P(X \bigcap Y) = P(X|Y)P(Y) = P(Y|X)P(X) \)
 </span>
-<br><br>
+<br><br> 
 <span>
   \( \therefore P(Y|X) = \frac {P(X|Y)P(Y)}{P(X)} \)
 </span>
-<br><br>
-<span>
-  \( P(Y|X) : 사후확률(Posterio probability) \)
-</span>
-<br><br>
-<span>
-  \( P(X|Y) : 가능도(likelihood) \)
-</span>
-<br><br>
-<span>
-  \( P(Y) : 확률변수 Y의 사전확률(prior probability) \)
-</span>
-<br><br>
-<span>
-  \( P(X) : 확률변수 X의 사전확률(prior probability) \)
-</span>
-<br><br></p>
-</blockquote>
+<br><br> 
+P(Y|X) : 사후확률(Posterio probability)<br><br> 
+P(X|Y) : 가능도(likelihood)<br><br> 
+P(Y) : 확률변수 Y의 사전확률(prior probability)<br><br> 
+P(X) : 확률변수 X의 사전확률(prior probability)<br>
+</div>
+    </div>
+  </label>
+</div>
+
 <p>표본 공간 S를 n개로 나누었을때 사건 A의 확률은 다음과 같이 나타나며 총합은 1이됨.</p>
-<blockquote>
-<p><U>Law of total probability</U> <br><br>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Law of total probability</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
 <span>
   \(  P(A) = P(A \bigcap B_1) &#43; P(A \bigcap B_2) &#43; ... &#43; P(A \bigcap B_n) \)
 </span>
-<br><br></p>
-</blockquote>
+<br>
+</div>
+    </div>
+  </label>
+</div>
+
 <p>일반적으로 <span>
   \( A_1,A_2,A_3 \)
 </span>
@@ -1133,12 +1403,25 @@ Chain Rule을 적용  <span>
   \( A_1,A_2,A_3 \)
 </span>
 는 표본공간 S의 분할이라고 정의. 특정 사건 B가 나타날 확률은 전확률 공식에 의거 다음과 같이 표현할 수 있음.</p>
-<blockquote>
-<p><span>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>B : Law of total probability</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+<span>
   \(  P(B)) = P(A_1)P(B|A_1)&#43; P(A_2)P(B|A_2) &#43; P(A_3)P(B|A_3) = \displaystyle\sum_{i=1}^3 P(A_i)P(B|A_i) \)
 </span>
-<br><br></p>
-</blockquote>
+<br>
+</div>
+    </div>
+  </label>
+</div>
+
 <p><span>
   \(P(A_1)\)
 </span>
@@ -1162,33 +1445,52 @@ Chain Rule을 적용  <span>
   \( P(A_1|B) \)
 </span>
 는 사건 B를 관측한 후 원인이 되는 사건 A의 확률을 따졌다는 의미에서 사후확률(Posterior Probability)로 정의되며 다음과 같이 나타낼 수 있음.</p>
-<blockquote>
-<p><span>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Posterior Probability</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+<span>
   \(  P(A_1|B)) = \frac {P(A_1)P(B|A_1)}{P(B)} = \frac {P(A_1)P(B|A_1)}{P(A_1)P(B|A_1)&#43;P(A_2)P(B|A_2)&#43;P(A_3)P(B|A_3)} \)
 </span>
-<br><br></p>
-</blockquote>
-<blockquote>
-<p>전체 인구의 1%가 어떤 병에 걸렸다고 가정. 이 병의 진단 정확도가 97% 오진률은 6%라고 가정.</p>
-</blockquote>
-<blockquote>
-<p><U>Practice 1</U> <br><br>
+<br>
+</div>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Practice 1 : 진단문제</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+전체 인구의 1%가 어떤 병에 걸렸다고 가정. 이 병의 진단 정확도가 97% 오진률은 6%라고 가정.<br><br>
 <span>
   \( P(D) = 0.01 \)
 </span>
- : 사전확률 <br>
+ : 사전확률 <br><br>
 <span>
   \( P( \backsim D) = 0.99 \)
 </span>
- : 사전확률 <br>
+ : 사전확률 <br><br>
 <span>
   \( P(&#43;|D) = 0.97 \)
 </span>
- : 우도 <br>
+ : 우도 <br><br>
 <span>
   \( P(&#43;| \backsim D) = 0.06 \)
 </span>
- : 우도 <br>
+ : 우도 <br><br>
 <span>
   \( P(D|&#43;) \)
 </span>
@@ -1196,15 +1498,15 @@ Chain Rule을 적용  <span>
 <span>
   \( P(&#43;) = P(D \cap &#43;)&#43;P( \backsim D \cap &#43;) \)
 </span>
-<br>
+<br><br>
 <span>
   \( = P(D)P(&#43;|D)&#43;P( \backsim D)P(&#43;| \backsim D) \)
 </span>
-<br>
+<br><br>
 <span>
   \( = 0.01 \times 0.97 &#43; 0.99 \times 0.06 \)
 </span>
-<br>
+<br><br>
 <span>
   \( = 0.691 \)
 </span>
@@ -1212,46 +1514,57 @@ Chain Rule을 적용  <span>
 <span>
   \( P(D|&#43;) = \frac {P(D)P(&#43;|D)}{P(&#43;)} \)
 </span>
-<br>
+<br><br>
 <span>
   \( = \frac {0.01 \times 0.97}{0.691} \)
 </span>
-<br>
+<br><br>
 <span>
   \( = 0.014 \)
 </span>
-<br><br></p>
-</blockquote>
-<p>연습1 : 쿠키문제
-사탕주머니 1 : 딸기맛 30개, 포도맛 10
-사탕주머니 2 : 딸기맛 20개, 포도맛 20
-두 주머니에서 임의로 골랐을때 딸기였다면 주머니1에서 나왔을 확률은?</p>
-<blockquote>
-<p><span>
+<br>
+</div>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Practice 2 : 딸기맛 문제</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+사탕주머니 1 : 딸기맛 30개, 포도맛 10 <br><br>
+사탕주머니 2 : 딸기맛 20개, 포도맛 20 <br><br>
+두 주머니에서 임의로 골랐을때 딸기였다면 주머니1에서 나왔을 확률은? <br><br>
+<span>
   \( P(H) \)
 </span>
- : 사전확률 -&gt; 주머니1을 고를 확률 <br><br>
+ : 사전확률 -> 주머니1을 고를 확률 <br><br>
 <span>
   \( P(D|H) \)
 </span>
- : 우도 -&gt; 주머니1의 딸기 확률 <br><br>
+ : 우도 -> 주머니1의 딸기 확률 <br><br>
 <span>
   \( P(D) \)
 </span>
- : 한정상수 -&gt; 딸기를 고를 확률 <br><br>
+ : 한정상수 -> 딸기를 고를 확률 <br><br>
 <span>
   \( P(H|D)) \)
 </span>
- : 사후확률 -&gt; 주머니1에서 딸기를 골랐을 확률 <br><br>
+ : 사후확률 -> 주머니1에서 딸기를 골랐을 확률 <br><br>
 <span>
   \( P(H|D)) = \frac {P(H)P(D|H)}{P(D)} = \frac { \frac {1}{2} * \frac {3}{4} }{ \frac {5}{8} } = \frac {3}{5} \)
 </span>
-<br><br></p>
-</blockquote>
-<p>이때 한정상수 <span>
+<br><br>
+이때 한정상수 <span>
   \( P(D) \)
 </span>
-는 상호배제(Mutually Exclusive)와 전체포괄(Collectively Exhaustive)의 원칙에서 같은 값을 지니며 계산이 생략됨</p>
+는 상호배제(Mutually Exclusive)와 전체포괄(Collectively Exhaustive)의 원칙에서 같은 값을 지니며 계산이 생략됨<br><br>
 <table>
 <thead>
 <tr>
@@ -1262,20 +1575,14 @@ Chain Rule을 적용  <span>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">사전확률<span>
-  \(P(H)\)
-</span>
-</td>
+<td style="text-align:center">사전확률 P(H)</td>
 <td style="text-align:center">1/2</td>
 <td style="text-align:center">1/2</td>
 </tr>
 <tr>
-<td style="text-align:center">우도<span>
-  \(P(D|H)\)
-</span>
-</td>
+<td style="text-align:center">우도P(D</td>
+<td style="text-align:center">H)</td>
 <td style="text-align:center">3/4</td>
-<td style="text-align:center">1/2</td>
 </tr>
 <tr>
 <td style="text-align:center">사전확률*우도</td>
@@ -1283,66 +1590,106 @@ Chain Rule을 적용  <span>
 <td style="text-align:center">1/4</td>
 </tr>
 <tr>
-<td style="text-align:center">한정상수<span>
-  \(P(D)\)
-</span>
-</td>
+<td style="text-align:center">한정상수P(D)</td>
 <td style="text-align:center">5/8</td>
 <td style="text-align:center">5/8</td>
 </tr>
 <tr>
-<td style="text-align:center">사후확률<span>
-  \(P(H|D)\)
-</span>
-</td>
+<td style="text-align:center">사후확률P(H</td>
+<td style="text-align:center">D)</td>
 <td style="text-align:center">3/5</td>
-<td style="text-align:center">2/5</td>
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p><span>
+<span>
   \( P(H|D) = \frac {P(H)P(D|H)}{P(D)} = \frac { \frac {1}{2} * \frac {3}{4} }{ \frac {5}{8} } = \frac {3}{5} \)
 </span>
-<br><br></p>
-</blockquote>
-<p>연습2 : 카드문제<br>
-카드A : 앞뒤 모두 검은색<br>
-카드B : 앞은 검은색, 뒤는 하얀색<br>
-카드C : 앞뒤 모두 하얀색<br>
-세카드 중 하나를 뽑아서 본면이 검은색일 때 그 뒷면도 검은색이 나올 확률</p>
-<blockquote>
-<p><span>
-  \( P(A|Black) = \frac {P(A)P(Black|A)}{P(Black)} = \frac {P(A)P(Black|A)}{P(A)P(Black|A)&#43;P(B)P(Black|B)} = \frac { \frac {1}{3} * 1 }{ \frac {1}{3} * 1 &#43; \frac{1}{3} * \frac{1}{2} } = \frac {2}{3} \)
+<br>
+</div>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Practice 3 : 카드문제</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+카드A : 앞뒤 모두 검은색<br><br>
+카드B : 앞은 검은색, 뒤는 하얀색<br><br>
+카드C : 앞뒤 모두 하얀색<br><br>
+세카드 중 하나를 뽑아서 본면이 검은색일 때 그 뒷면도 검은색이 나올 확률<br><br>
+<span>
+  \( P(A|Black) = \frac {P(A)P(Black|A)}{P(Black)} \)
 </span>
-<br><br></p>
-</blockquote>
-<p>연습3 : 몬티홀의 문제   <br>
-문A1 : 상금<br>
-문A2 : 꽝<br>
-문A3 : 꽝<br>
-출연자가 문을 하나 선택한 후<br>
-사회자가 다른 문을 열어 문을 하나 보여준 후<br>
-출연자가 선택을 바꾸지 않고 문을 열때의 당첨 확률</p>
-<blockquote>
-<p><span>
+<br><br>
+<span>
+  \( = \frac {P(A)P(Black|A)}{P(A)P(Black|A)&#43;P(B)P(Black|B)} \)
+</span>
+<br><br>
+<span>
+  \( = \frac { \frac {1}{3} * 1 }{ \frac {1}{3} * 1 &#43; \frac{1}{3} * \frac{1}{2} } = \frac {2}{3} \)
+</span>
+<br>
+</div>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Practice 4 : 몬티홀문제</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+문A1 : 상금<br><br>
+문A2 : 꽝<br><br>
+문A3 : 꽝<br><br>
+출연자가 문을 하나 선택한 후<br><br>
+사회자가 다른 문을 열어 문을 하나 보여준 후<br><br>
+출연자가 선택을 바꾸지 않고 문을 열때의 당첨 확률<br><br>
+<span>
   \( P(A1|B) = \frac {P(A1 \cap B))}{P(B)} = \frac {P(A1 \cap B)}{P(A1 \cap B) &#43; P(A2 \cap B) &#43; P(A3 \cap B)} = \frac { P(A1)P(B|A1) }{ P(A1)P(B|A1) &#43; P(A2)P(A2|B) &#43; P(A3)P(A3|B) } = \frac {\frac {2}{3} * \frac {1}{2}}{\frac {1}{3}* \frac {1}{2} &#43; \frac {1}{3}*0 \frac {1}{3}*1} = \frac {1}{3} \)
 </span>
-<br><br></p>
-</blockquote>
+<br>
+</div>
+    </div>
+  </label>
+</div>
+
 <h3 id="logit--sigmoid--softmax">
   Logit / Sigmoid / Softmax
   <a class="anchor" href="#logit--sigmoid--softmax">#</a>
 </h3>
 <p>Logit /Sigmoid /Softmax의 관계를 정리</p>
-<p><a href="https://velog.io/@gwkoo/logit-sigmoid-softmax%EC%9D%98-%EA%B4%80%EA%B3%84" target="_blank" rel="noopener">참고1 gwkoo.log - Logit,Sigmoid,Softmax의 관계</a><br>
-<a href="https://opentutorials.org/module/3653/22995" target="_blank" rel="noopener">참고2 한 페이지 머신러닝 Logit,Sigmoid,Softmax의 관계</a><br>
-<a href="https://chacha95.github.io/2019-04-04-logit/" target="_blank" rel="noopener">참고3 ChaCha&rsquo;s blog - Sigmoid, Logit and Softmax</a><br>
-<a href="https://ratsgo.github.io/statistics/2017/07/01/bayes/" target="_blank" rel="noopener">참고4 ratsgo&rsquo;s blog - 베이즈 규칙과 다양한 문제들</a></p>
+<ul>
+<li><a href="https://velog.io/@gwkoo/logit-sigmoid-softmax%EC%9D%98-%EA%B4%80%EA%B3%84" target="_blank" rel="noopener">참고1 gwkoo.log - Logit,Sigmoid,Softmax의 관계</a></li>
+<li><a href="https://opentutorials.org/module/3653/22995" target="_blank" rel="noopener">참고2 한 페이지 머신러닝 Logit,Sigmoid,Softmax의 관계</a></li>
+<li><a href="https://chacha95.github.io/2019-04-04-logit/" target="_blank" rel="noopener">참고3 ChaCha&rsquo;s blog - Sigmoid, Logit and Softmax</a></li>
+<li><a href="https://ratsgo.github.io/statistics/2017/07/01/bayes/" target="_blank" rel="noopener">참고4 ratsgo&rsquo;s blog - 베이즈 규칙과 다양한 문제들</a></li>
+</ul>
 <p>Logit은 Log Odds를 의미.<br>
 Odds란 도박에서 얻을 확률과 잃을 확률의 비율을 의미</p>
-<blockquote>
-<p><span>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Odds / Logit</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+<span>
   \( Classes : C_1, C_2 \)
 </span>
  <br><br>
@@ -1361,11 +1708,23 @@ Odds = <span>
 Choose = <span>
   \( \begin{cases} C_1 \space if \space \frac {y}{1-y} &gt; 1 \\ C_2 \space if \space \frac {y}{1-y} &lt; 1 \end{cases} \)
 </span>
- <br><br></p>
-</blockquote>
+ <br>
+</div>
+    </div>
+  </label>
+</div>
+
 <p>이를 Log를 이용해 0~1의 범위로 한정된 Logit을 도출</p>
-<blockquote>
-<p>logits = log(odds)  <br><br>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Logits</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
 <span>
   \( = log \Big( \frac{y}{1-y} \Big) \)
 </span>
@@ -1418,19 +1777,64 @@ Choose = <span>
 <span>
   \( \therefore y = \frac {1}{ 1 &#43; e^{-z}} \)
 </span>
- <br><br></p>
-</blockquote>
-<p>여기서 Softfma는 Sigmoid를 K개 이상으로 일반화 하여 유도.</p>
-<blockquote>
-<p><span>
+ <br>
+</div>
+    </div>
+  </label>
+</div>
+
+<p>여기서 Softmax는 Sigmoid를 K개 이상으로 일반화 하여 유도.</p>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Softmax</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+<span>
   \( \frac {P(C_1|X)}{P(C_2|X)} = e^z \)
 </span>
  <br><br>
 <span>
   \( \frac {P(C_i|X)}{P(C_k|X)} = e^{z_i} \)
 </span>
- <br><br></p>
-</blockquote>
+ <br><br>
+<span>
+  \( \displaystyle\sum_{i=1}^{k-1} \frac { P(C_i|X)}{P(C_k|X)} = \displaystyle\sum_{i=1}^{k-1} e^{z_i} \)
+</span>
+ <br><br>
+<span>
+  \( \frac {P(C_1|X)&#43;P(C_2|X)&#43;...&#43;P(C_{k-1}|X)}{P(C_k|X)} = \displaystyle\sum_{i=1}^{k-1} e^{z_i} \)
+</span>
+ <br><br>
+<span>
+  \( \frac {1-P(C_k|X)}{P(C_k|X)} = \displaystyle\sum_{i=1}^{k-1} e^{z_i} \)
+</span>
+ <br><br>
+<span>
+  \( P(C_k|X) = \frac{1}{1&#43; \textstyle\sum_{i=1}^{k-1} e^{z_i} } \)
+</span>
+ <br><br>
+<span>
+  \( P(C_i|X) = e^{z_i} P(C_k|X) \)
+</span>
+ <br><br>
+<span>
+  \( P(C_i|X) = \frac {e^{z_i}}{1 &#43; \textstyle\sum_{i=1}^{k-1} e^{z_i}} \)
+</span>
+ <br><br>
+<span>
+  \( P(C_i|X) = \frac {e^{z_i}}{e^{z_i} &#43; \textstyle\sum_{i=1}^{k-1} e^{z_i}} = \frac {e^{z_i}}{ \textstyle\sum_{i=1}^{k} e^{z_i}} \)
+</span>
+ <br>
+</div>
+    </div>
+  </label>
+</div>
+
 <br>
 <section class="footnotes" role="doc-endnotes">
 <hr>
