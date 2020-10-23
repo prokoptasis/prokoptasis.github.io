@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.5e0c71439953e1ddc2296b7f7bf6b83cb9a439f4413eaa15f08bc5850d20e79c.js" integrity="sha256-XgxxQ5lT4d3CKWt/e/a4PLmkOfRBPqoV8IvFhQ0g55w="></script>
+<script defer src="/ko.search.min.9ac2e2d340ce7ba6847d6684992a673875b82e5876e3b39456eeae83cd4a0671.js" integrity="sha256-msLi00DOe6aEfWaEmSpnOHW4Llh247OUVu6ug81KBnE="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -1074,15 +1074,14 @@ Chain Rule을 적용  <span>
 </span>
 <br><br></p>
 </blockquote>
-<h3 id="logit--sigmoid--softmax">
-  Logit / Sigmoid / Softmax
-  <a class="anchor" href="#logit--sigmoid--softmax">#</a>
+<h3 id="bayes-theorem">
+  Bayes Theorem
+  <a class="anchor" href="#bayes-theorem">#</a>
 </h3>
-<p>Logit /Sigmoid /Softmax의 관계를 정리</p>
-<p><a href="https://velog.io/@gwkoo/logit-sigmoid-softmax%EC%9D%98-%EA%B4%80%EA%B3%84" target="_blank" rel="noopener">참고1 gwkoo.log - Logit,Sigmoid,Softmax의 관계</a><br>
-<a href="https://opentutorials.org/module/3653/22995" target="_blank" rel="noopener">참고2 한 페이지 머신러닝 Logit,Sigmoid,Softmax의 관계</a><br>
-<a href="https://chacha95.github.io/2019-04-04-logit/" target="_blank" rel="noopener">참고3 ChaCha&rsquo;s blog - Sigmoid, Logit and Softmax</a><br>
-<a href="https://ratsgo.github.io/statistics/2017/07/01/bayes/" target="_blank" rel="noopener">참고4 ratsgo&rsquo;s blog - 베이즈 규칙과 다양한 문제들</a></p>
+<p>Logit, Sigmoid, Softmax를 유도하기 위해 다음과 같은 확률의 개념이 선행되어야함.</p>
+<p><a href="https://www.synapsoft.co.kr/blog/6002" target="_blank" rel="noopener">베이지안 예제</a>
+<a href="https://namu.wiki/w/%EB%AA%AC%ED%8B%B0%20%ED%99%80%20%EB%AC%B8%EC%A0%9C" target="_blank" rel="noopener">몬티홀문제</a>
+<a href="https://j1w2k3.tistory.com/1009" target="_blank" rel="noopener">베이즈의 정리</a></p>
 <p>불확실성 하의 의사 결정의 문제를 수학적으로 다룰때 사용되는 베이즈의 정리(Bayes Theorem)와 전확률 법칙(law of total probability)는 다음과 같음.</p>
 <blockquote>
 <p><U>Bayes Theorem</U> <br><br>
@@ -1312,54 +1311,6 @@ Chain Rule을 적용  <span>
 카드B : 앞은 검은색, 뒤는 하얀색<br>
 카드C : 앞뒤 모두 하얀색<br>
 세카드 중 하나를 뽑아서 본면이 검은색일 때 그 뒷면도 검은색이 나올 확률</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Point</th>
-<th style="text-align:center">Theory1</th>
-<th style="text-align:center">Theory2</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">사전확률<span>
-  \(P(H)\)
-</span>
-</td>
-<td style="text-align:center">1/3</td>
-<td style="text-align:center">1/3</td>
-</tr>
-<tr>
-<td style="text-align:center">우도<span>
-  \(P(D|H)\)
-</span>
-</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1/2</td>
-</tr>
-<tr>
-<td style="text-align:center">사전확률*우도</td>
-<td style="text-align:center">1/3</td>
-<td style="text-align:center">1/6</td>
-</tr>
-<tr>
-<td style="text-align:center">한정상수<span>
-  \(P(D)\)
-</span>
-</td>
-<td style="text-align:center">1/2</td>
-<td style="text-align:center">1/2</td>
-</tr>
-<tr>
-<td style="text-align:center">사후확률<span>
-  \(P(H|D)\)
-</span>
-</td>
-<td style="text-align:center">2/3</td>
-<td style="text-align:center">1/3</td>
-</tr>
-</tbody>
-</table>
 <blockquote>
 <p><span>
   \( P(A|Black) = \frac {P(A)P(Black|A)}{P(Black)} = \frac {P(A)P(Black|A)}{P(A)P(Black|A)&#43;P(B)P(Black|B)} = \frac { \frac {1}{3} * 1 }{ \frac {1}{3} * 1 &#43; \frac{1}{3} * \frac{1}{2} } = \frac {2}{3} \)
@@ -1367,71 +1318,118 @@ Chain Rule을 적용  <span>
 <br><br></p>
 </blockquote>
 <p>연습3 : 몬티홀의 문제   <br>
-문A : 상금<br>
-문B : 꽝<br>
-문C : 꽝<br>
+문A1 : 상금<br>
+문A2 : 꽝<br>
+문A3 : 꽝<br>
 출연자가 문을 하나 선택한 후<br>
 사회자가 다른 문을 열어 문을 하나 보여준 후<br>
 출연자가 선택을 바꾸지 않고 문을 열때의 당첨 확률</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Point</th>
-<th style="text-align:center">Theory1</th>
-<th style="text-align:center">Theory2</th>
-<th style="text-align:center">Theory3</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">사전확률<span>
-  \(P(H)\)
-</span>
-</td>
-<td style="text-align:center">1/3</td>
-<td style="text-align:center">1/3</td>
-<td style="text-align:center">1/3</td>
-</tr>
-<tr>
-<td style="text-align:center">우도<span>
-  \(P(D|H)\)
-</span>
-</td>
-<td style="text-align:center">1/1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-</tr>
-<tr>
-<td style="text-align:center">사전확률*우도</td>
-<td style="text-align:center">1/3</td>
-<td style="text-align:center">1/6</td>
-<td></td>
-</tr>
-<tr>
-<td style="text-align:center">한정상수<span>
-  \(P(D)\)
-</span>
-</td>
-<td style="text-align:center">1/2</td>
-<td style="text-align:center">1/2</td>
-<td></td>
-</tr>
-<tr>
-<td style="text-align:center">사후확률<span>
-  \(P(H|D)\)
-</span>
-</td>
-<td style="text-align:center">2/3</td>
-<td style="text-align:center">1/3</td>
-<td></td>
-</tr>
-</tbody>
-</table>
 <blockquote>
 <p><span>
-  \( P(A|Black) = \frac {P(A)P(Black|A)}{P(Black)} = \frac {P(A)P(Black|A)}{P(A)P(Black|A)&#43;P(B)P(Black|B)} = \frac { \frac {1}{3} * 1 }{ \frac {1}{3} * 1 &#43; \frac{1}{3} * \frac{1}{2} } = \frac {2}{3} \)
+  \( P(A1|B) = \frac {P(A1 \cap B))}{P(B)} = \frac {P(A1 \cap B)}{P(A1 \cap B) &#43; P(A2 \cap B) &#43; P(A3 \cap B)} = \frac { P(A1)P(B|A1) }{ P(A1)P(B|A1) &#43; P(A2)P(A2|B) &#43; P(A3)P(A3|B) } = \frac {\frac {2}{3} * \frac {1}{2}}{\frac {1}{3}* \frac {1}{2} &#43; \frac {1}{3}*0 \frac {1}{3}*1} = \frac {1}{3} \)
 </span>
 <br><br></p>
+</blockquote>
+<h3 id="logit--sigmoid--softmax">
+  Logit / Sigmoid / Softmax
+  <a class="anchor" href="#logit--sigmoid--softmax">#</a>
+</h3>
+<p>Logit /Sigmoid /Softmax의 관계를 정리</p>
+<p><a href="https://velog.io/@gwkoo/logit-sigmoid-softmax%EC%9D%98-%EA%B4%80%EA%B3%84" target="_blank" rel="noopener">참고1 gwkoo.log - Logit,Sigmoid,Softmax의 관계</a><br>
+<a href="https://opentutorials.org/module/3653/22995" target="_blank" rel="noopener">참고2 한 페이지 머신러닝 Logit,Sigmoid,Softmax의 관계</a><br>
+<a href="https://chacha95.github.io/2019-04-04-logit/" target="_blank" rel="noopener">참고3 ChaCha&rsquo;s blog - Sigmoid, Logit and Softmax</a><br>
+<a href="https://ratsgo.github.io/statistics/2017/07/01/bayes/" target="_blank" rel="noopener">참고4 ratsgo&rsquo;s blog - 베이즈 규칙과 다양한 문제들</a></p>
+<p>Logit은 Log Odds를 의미.<br>
+Odds란 도박에서 얻을 확률과 잃을 확률의 비율을 의미</p>
+<blockquote>
+<p><span>
+  \( Classes : C_1, C_2 \)
+</span>
+ <br><br>
+<span>
+  \( Probability of C_1 given X : y = P(C_1|X) \)
+</span>
+ <br><br>
+<span>
+  \( Probability of C_2 given X : 1-y = P(C_2|X) \)
+</span>
+ <br><br>
+Odds = <span>
+  \( \frac {y}{1-y} = \frac {P(C_1|X)}{1-P(C_1|X)} \)
+</span>
+ <br><br>
+Choose = <span>
+  \( \begin{cases} C_1 \space if \space \frac {y}{1-y} &gt; 1 \\ C_2 \space if \space \frac {y}{1-y} &lt; 1 \end{cases} \)
+</span>
+ <br><br></p>
+</blockquote>
+<p>이를 Log를 이용해 0~1의 범위로 한정된 Logit을 도출</p>
+<blockquote>
+<p>logits = log(odds)  <br><br>
+<span>
+  \( = log \Big( \frac{y}{1-y} \Big) \)
+</span>
+ <br><br>
+<span>
+  \( = log \Big( \frac{P(C_1|X)}{1-P(C_1|X)} \Big) \)
+</span>
+ <br><br>
+<span>
+  \( z = log( \frac {y}{1-y} \)
+</span>
+ , <span>
+  \( e^z = ( \frac {y}{1-y} ) \)
+</span>
+  <br><br>
+<span>
+  \( e^z = ( \frac {y}{1-y} ) \)
+</span>
+ <br><br>
+<span>
+  \( \frac {1}{e^z} = \frac {1-y}{y} \)
+</span>
+ = <span>
+  \( \frac {1}{e^z} = \frac {1}{y} -1 \)
+</span>
+ <br><br>
+<span>
+  \( \frac {1}{e^z} &#43; 1 = \frac {1}{y} \)
+</span>
+ = <span>
+  \( \frac {1 &#43; e^z}{e^z} = \frac {1}{y} \)
+</span>
+ <br><br>
+<span>
+  \( \frac {e^z}{1 &#43; e^z} = y \)
+</span>
+ <br><br>
+<span>
+  \( \frac {e^z / e^z}{(1 &#43; e^z)/e^z} = y \)
+</span>
+ <br><br>
+<span>
+  \( \frac {1}{ \frac{1}{e^z} &#43; 1 } = y \)
+</span>
+ <br><br>
+<span>
+  \( \frac {1}{ e^{-z} &#43; 1 } = y \)
+</span>
+ <br><br>
+<span>
+  \( \therefore y = \frac {1}{ 1 &#43; e^{-z}} \)
+</span>
+ <br><br></p>
+</blockquote>
+<p>여기서 Softfma는 Sigmoid를 K개 이상으로 일반화 하여 유도.</p>
+<blockquote>
+<p><span>
+  \( \frac {P(C_1|X)}{P(C_2|X)} = e^z \)
+</span>
+ <br><br>
+<span>
+  \( \frac {P(C_i|X)}{P(C_k|X)} = e^{z_i} \)
+</span>
+ <br><br></p>
 </blockquote>
 <br>
 <section class="footnotes" role="doc-endnotes">

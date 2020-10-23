@@ -24,7 +24,7 @@ Live SQL #   Oracle 가입 Oracle Live SQL 접속 &amp;ldquo;Start Coding Now&am
       
       <guid>http://prokoptasis.github.io/docs/documents/backend/sql/sql02/</guid>
       <description>SQL Basic 2 #   Select, Where, 기본적인 함수, Union, Join
-Select / From #  -- 주석입니다. select * from my_table_1; -- 컬럼명을 지정합니다. select column_1,column_3 from my_table_1; Where / And #  -- where select * from my_table_1 where column_2 = 32; -- where / 부등호 1 select * from my_table_1 where column_2 &amp;lt;= 30; -- where / 부등호 2 select * from my_table_1 where column_2 &amp;gt;= 30; -- where / 부등호 3 select * from my_table_1 where column_2 &amp;gt; 30; -- where / 부등호 4 select * from my_table_1 where column_2 &amp;lt; 30; -- where / and select * from my_table_1 where column_2 &amp;gt; 10 and column_2 &amp;lt; 40; -- where / and / 문자열 1 select * from my_table_1 where column_1 = &amp;#39;홍길동&amp;#39; and column 2 = 23; -- where / and / 문자열 2 select * from my_table_1 where column_1 !</description>
+Select / From #   select / from ...  -- 주석입니다. select * from my_table_1; -- 컬럼명을 지정합니다. select column_1,column_3 from my_table_1;     Where / And #   where / and ...  -- where select * from my_table_1 where column_2 = 32; -- where / 부등호 1 select * from my_table_1 where column_2 &amp;lt;= 30; -- where / 부등호 2 select * from my_table_1 where column_2 &amp;gt;= 30; -- where / 부등호 3 select * from my_table_1 where column_2 &amp;gt; 30; -- where / 부등호 4 select * from my_table_1 where column_2 &amp;lt; 30; -- where / and select * from my_table_1 where column_2 &amp;gt; 10 and column_2 &amp;lt; 40; -- where / and / 문자열 1 select * from my_table_1 where column_1 = &amp;#39;홍길동&amp;#39; and column 2 = 23; -- where / and / 문자열 2 select * from my_table_1 where column_1 !</description>
     </item>
     
     <item>
@@ -46,7 +46,7 @@ Select / From #  -- 주석입니다. select * from my_table_1; -- 컬럼명을 �
       <description>GO Basic 1 #   Go 기본적인 문법 정리. 하기 사이트 참조.
 예제로 배우는 Go 프로그래밍
 Hello World #  package main func main() { println(&amp;#34;Hello World!&amp;#34;) } Declare #  선언 및 할당 방식
- Expand ↕  package main func main() { // 선언 및 할당 	var a int var b float32 = 11. println(a, b) // 선언 및 할당 	a = 10 b = 12.</description>
+ Declare ...  package main func main() { // 선언 및 할당 	var a int var b float32 = 11. println(a, b) // 선언 및 할당 	a = 10 b = 12.</description>
     </item>
     
     <item>

@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.5e0c71439953e1ddc2296b7f7bf6b83cb9a439f4413eaa15f08bc5850d20e79c.js" integrity="sha256-XgxxQ5lT4d3CKWt/e/a4PLmkOfRBPqoV8IvFhQ0g55w="></script>
+<script defer src="/ko.search.min.9ac2e2d340ce7ba6847d6684992a673875b82e5876e3b39456eeae83cd4a0671.js" integrity="sha256-msLi00DOe6aEfWaEmSpnOHW4Llh247OUVu6ug81KBnE="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -540,17 +540,40 @@ https://github.com/alex-shpak/hugo-book
   Select / From
   <a class="anchor" href="#select--from">#</a>
 </h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 주석입니다.
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>select / from</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 주석입니다.
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my_table_1;
 
 <span style="color:#75715e">-- 컬럼명을 지정합니다.
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> column_1,column_3 <span style="color:#66d9ef">from</span> my_table_1;
 
-</code></pre></div><h3 id="where--and">
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="where--and">
   Where / And
   <a class="anchor" href="#where--and">#</a>
 </h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- where
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>where / and</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- where
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">32</span>;
 
 <span style="color:#75715e">-- where / 부등호 1
@@ -610,11 +633,25 @@ https://github.com/alex-shpak/hugo-book
 <span style="color:#75715e">-- where / and / or / and 2
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> (column_1 <span style="color:#66d9ef">in</span> (<span style="color:#e6db74">&#39;이영희&#39;</span>,<span style="color:#e6db74">&#39;김철수&#39;</span>) <span style="color:#66d9ef">or</span> column_2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">22</span>) <span style="color:#66d9ef">and</span> column_1 <span style="color:#66d9ef">like</span> <span style="color:#e6db74">&#39;%수&#39;</span>;
 
-</code></pre></div><h3 id="dual------">
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="dual------">
   dual / + - * /
   <a class="anchor" href="#dual------">#</a>
 </h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- dual / + - * /
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>dual / operatios</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- dual / + - * /
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span><span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">8</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">from</span> dual;
 
 <span style="color:#75715e">-- mod, power, sign, cos, tan
@@ -635,11 +672,25 @@ https://github.com/alex-shpak/hugo-book
 <span style="color:#75715e">-- lower/upper
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#e6db74">&#39;Case&#39;</span>,<span style="color:#66d9ef">lower</span>(<span style="color:#e6db74">&#39;Case&#39;</span>),<span style="color:#66d9ef">upper</span>(<span style="color:#e6db74">&#39;Case&#39;</span>) <span style="color:#66d9ef">from</span> dual;
 
-</code></pre></div><h3 id="count--ditinct--alias--lower--upper">
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="count--ditinct--alias--lower--upper">
   count / ditinct / alias / lower / upper
   <a class="anchor" href="#count--ditinct--alias--lower--upper">#</a>
 </h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- count
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>count / ditinct / alias / lower / upper</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- count
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">count</span>(<span style="color:#f92672">*</span>) <span style="color:#66d9ef">from</span> my_table_1;
 
 <span style="color:#75715e">-- distinct
@@ -651,11 +702,25 @@ https://github.com/alex-shpak/hugo-book
 <span style="color:#75715e">-- distinct / count / alias
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">count</span>(<span style="color:#66d9ef">distinct</span> column_1) col1,<span style="color:#66d9ef">count</span>(column_1) col2,<span style="color:#66d9ef">count</span>(tab.column_1) col3 <span style="color:#66d9ef">from</span> my_table_1 tab;
 
-</code></pre></div><h3 id="from--nested-from--with-as-1--with-as-2--with-as-3">
-  from / nested from / with as 1 / with as 2 / with as 3
-  <a class="anchor" href="#from--nested-from--with-as-1--with-as-2--with-as-3">#</a>
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="from--nested-from--with-as">
+  from / nested from / with as
+  <a class="anchor" href="#from--nested-from--with-as">#</a>
 </h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- from 1
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>from / nested from / with as</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- from 1
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span>  column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3
 <span style="color:#66d9ef">from</span>    my_table_1
 <span style="color:#66d9ef">where</span>   column_1 <span style="color:#66d9ef">in</span> (<span style="color:#e6db74">&#39;홍길동&#39;</span>,<span style="color:#e6db74">&#39;김철수&#39;</span>,<span style="color:#e6db74">&#39;이영희&#39;</span>)
@@ -719,11 +784,25 @@ https://github.com/alex-shpak/hugo-book
         )
 ;
 
-</code></pre></div><h3 id="union-all--union--intersect--minus">
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="union-all--union--intersect--minus">
   union all / union / intersect / minus
   <a class="anchor" href="#union-all--union--intersect--minus">#</a>
 </h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>union all / union / intersect / minus</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">
 <span style="color:#75715e">-- union all
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">with</span>    tab_1 <span style="color:#66d9ef">as</span> (<span style="color:#66d9ef">select</span> column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3 <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_1 <span style="color:#66d9ef">in</span> (<span style="color:#e6db74">&#39;홍길동&#39;</span>,<span style="color:#e6db74">&#39;김철수&#39;</span>,<span style="color:#e6db74">&#39;이영희&#39;</span>))
 ,       tab_2 <span style="color:#66d9ef">as</span> (<span style="color:#66d9ef">select</span> column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3 <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_2 <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">30</span>)
@@ -763,11 +842,25 @@ https://github.com/alex-shpak/hugo-book
 <span style="color:#66d9ef">from</span>    tab_2
 ;
 
-</code></pre></div><h3 id="join-1--join-2--join-3--join-4--join-5">
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="join-1--join-2--join-3--join-4--join-5">
   join 1 / join 2 / join 3 / join 4 / join 5
   <a class="anchor" href="#join-1--join-2--join-3--join-4--join-5">#</a>
 </h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>join</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">
 <span style="color:#75715e">-- join 1 
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">with</span>    tab_1 <span style="color:#66d9ef">as</span> (<span style="color:#66d9ef">select</span> column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3 <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_1 <span style="color:#66d9ef">in</span> (<span style="color:#e6db74">&#39;홍길동&#39;</span>,<span style="color:#e6db74">&#39;김철수&#39;</span>,<span style="color:#e6db74">&#39;이영희&#39;</span>))
 ,       tab_2 <span style="color:#66d9ef">as</span> (<span style="color:#66d9ef">select</span> column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3 <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_2 <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">30</span>)
@@ -815,7 +908,12 @@ a.column_2 <span style="color:#f92672">=</span> b.column_2
 )
 ;
 
-</code></pre></div><br>
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<br>
 <span style="float:left"><a href="../sql01"><< 이전글</a></span>
 <span style="float:right"><a href="../sql03">다음글 >></a></span>
 </article>
