@@ -23,18 +23,7 @@ Live SQL #   Oracle 가입 Oracle Live SQL 접속 &amp;ldquo;Start Coding Now&am
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://prokoptasis.github.io/docs/documents/backend/sql/sql02/</guid>
-      <description>SQL Basic 2 #   Select, Where, 기본적인 함수, Union, Join
-Select / From #   select / from ...  -- 주석입니다. select * from my_table_1; -- 컬럼명을 지정합니다. select column_1,column_3 from my_table_1;     Where / And #   where / and ...  -- where select * from my_table_1 where column_2 = 32; -- where / 부등호 1 select * from my_table_1 where column_2 &amp;lt;= 30; -- where / 부등호 2 select * from my_table_1 where column_2 &amp;gt;= 30; -- where / 부등호 3 select * from my_table_1 where column_2 &amp;gt; 30; -- where / 부등호 4 select * from my_table_1 where column_2 &amp;lt; 30; -- where / and select * from my_table_1 where column_2 &amp;gt; 10 and column_2 &amp;lt; 40; -- where / and / 문자열 1 select * from my_table_1 where column_1 = &amp;#39;홍길동&amp;#39; and column 2 = 23; -- where / and / 문자열 2 select * from my_table_1 where column_1 !</description>
-    </item>
-    
-    <item>
-      <title>SQL Basic 3</title>
-      <link>http://prokoptasis.github.io/docs/documents/backend/sql/sql03/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://prokoptasis.github.io/docs/documents/backend/sql/sql03/</guid>
-      <description>SQL Basic 3 #   작성중
- 다음글  </description>
+      <description>SQL Basic 2 #    다음글  </description>
     </item>
     
     <item>
@@ -83,17 +72,6 @@ cargo init rust_hello --bin cd rust_hello cargo run fn main() { println!</descri
     </item>
     
     <item>
-      <title>Picked Up English</title>
-      <link>http://prokoptasis.github.io/docs/documents/english/pickedup/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://prokoptasis.github.io/docs/documents/english/pickedup/</guid>
-      <description>English Expression Diary #   A little bird told me #  동문서답으로 &amp;lsquo;그냥 주워들었어&amp;rsquo; 표현. &amp;lsquo;Tell me. Where did you hear that?&amp;rsquo; &amp;lsquo;A little bird told me.&amp;rsquo;
-Bigger fish to fry #  &amp;lsquo;좀 더 중요하고 큰 다른 것&amp;rsquo;이란 의미. &amp;lsquo;Why did you turn down their offer?&amp;rsquo; &amp;lsquo;Oh, I have bigger fish to fry.&amp;rsquo;
-Can of Worms #  &amp;lsquo;심각한 문제를 초래할 수 있는 위험&amp;rsquo;. &amp;lsquo;What do you think about the new tax law?</description>
-    </item>
-    
-    <item>
       <title>Seulsam</title>
       <link>http://prokoptasis.github.io/docs/documents/english/seulsam/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -105,6 +83,17 @@ I find it challenging #  힘들긴하지만 해볼만해.
 Did you eat at all? #  뭐 좀 먹었니?
 If you need anthing at all, please let me know. #  뭐라도 필요하시면 알려주세요.
 I&amp;rsquo;m in the middle of a metting. Can I call you back in just a minute?</description>
+    </item>
+    
+    <item>
+      <title>Picked Up English</title>
+      <link>http://prokoptasis.github.io/docs/documents/english/pickedup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://prokoptasis.github.io/docs/documents/english/pickedup/</guid>
+      <description>English Expression Diary #   A little bird told me #  동문서답으로 &amp;lsquo;그냥 주워들었어&amp;rsquo; 표현. &amp;lsquo;Tell me. Where did you hear that?&amp;rsquo; &amp;lsquo;A little bird told me.&amp;rsquo;
+Bigger fish to fry #  &amp;lsquo;좀 더 중요하고 큰 다른 것&amp;rsquo;이란 의미. &amp;lsquo;Why did you turn down their offer?&amp;rsquo; &amp;lsquo;Oh, I have bigger fish to fry.&amp;rsquo;
+Can of Worms #  &amp;lsquo;심각한 문제를 초래할 수 있는 위험&amp;rsquo;. &amp;lsquo;What do you think about the new tax law?</description>
     </item>
     
     <item>

@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.d9e792b05f9d8a3c384aaafafdb7a5a1980e8f53de80f5a679b486faab3838b5.js" integrity="sha256-2eeSsF&#43;dijw4Sqr6/beloZgOj1PegPWmebSG&#43;qs4OLU="></script>
+<script defer src="/ko.search.min.6ab3b83ac31521346f3680f6f9f4934091d60b76d8ded0e4a4b6fa4a373edca4.js" integrity="sha256-arO4OsMVITRvNoD2&#43;fSTQJHWC3bY3tDkpLb6Sjc&#43;3KQ="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -314,19 +314,6 @@ https://github.com/alex-shpak/hugo-book
         </li>
       
     
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="http://prokoptasis.github.io/docs/documents/backend/sql/sql03/" class="">SQL Basic 3</a>
-  
-
-        </li>
-      
-    
   </ul>
 
         </li>
@@ -419,7 +406,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://prokoptasis.github.io/docs/documents/english/pickedup/" class="">Picked Up English</a>
+    <a href="http://prokoptasis.github.io/docs/documents/english/seulsam/" class="">Seulsam</a>
   
 
         </li>
@@ -432,7 +419,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://prokoptasis.github.io/docs/documents/english/seulsam/" class="">Seulsam</a>
+    <a href="http://prokoptasis.github.io/docs/documents/english/pickedup/" class="">Picked Up English</a>
   
 
         </li>
@@ -556,42 +543,75 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#ddl--dml--dcl">#</a>
 </h3>
 <p>조회를 위한 예제 테이블이 작성을 위해 DDL, DML, DCL 개념 필요.</p>
-<h3 id="ddl-data-definition-language">
-  DDL (Data Definition Language)
-  <a class="anchor" href="#ddl-data-definition-language">#</a>
-</h3>
-<p>데이터 정의 언어로 데이터베이스에 오브젝트를 생성,삭제,변경 및 제거하는 명령문</p>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>ddl (data definition language)</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <p>데이터 정의 언어로 데이터베이스에 오브젝트를 생성,삭제,변경 및 제거하는 명령문</p>
 <p>create : 데이터베이스에 오브젝트를 생성
 drop : 데이터베이스에 오브젝트를 삭제
 alter : 데이터베이스에 오브젝트를 변경
 truncate : 테이블에서 데이터를 삭제</p>
-<h3 id="dml-data-manipulation-languge">
-  DML (Data Manipulation Languge)
-  <a class="anchor" href="#dml-data-manipulation-languge">#</a>
-</h3>
-<p>데디터 조작 언어로 데이터베이스 테이블에서 데이터를 질의,생성,수정 및 삭제하는 질의문</p>
+
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>dml (data manipulation languge)</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <p>데디터 조작 언어로 데이터베이스 테이블에서 데이터를 질의,생성,수정 및 삭제하는 질의문</p>
 <p>select : 테이블에서 데이터를 검색
 insert : 테이블에 데이터를 생성
 update : 테이블에서 데이터를 변경
 delete : 데이블에서 데이터를 삭제</p>
-<h3 id="dcl-data-control-language">
-  DCL (Data Control Language)
-  <a class="anchor" href="#dcl-data-control-language">#</a>
-</h3>
-<p>데이터 제어 언어로 데이터베이스의 권한을 관리하는데 사용하는 명령문</p>
+
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>dcl (data control language)</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <p>데이터 제어 언어로 데이터베이스의 권한을 관리하는데 사용하는 명령문</p>
 <p>grant : 데이터베이스 사용자에게 특정 권한을 부여
 revoke : 데이터베이스 사용자에게 특정 권한을 제거</p>
+
+    </div>
+  </label>
+</div>
+
 <h3 id="table-creation">
   Table Creation
   <a class="anchor" href="#table-creation">#</a>
 </h3>
 
-
-
-
-<div class="book-tabs"><input type="radio" class="toggle" name="tabs-create my_table_1" id="tabs-create my_table_1-0" checked="checked" />
-  <label for="tabs-create my_table_1-0">작성쿼리</label>
-  <div class="book-tabs-content markdown-inner"><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> my_table_1
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Table Creation</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> my_table_1
 (
     column_1 varchar2(<span style="color:#ae81ff">10</span>),
     column_2 number,
@@ -607,31 +627,23 @@ revoke : 데이터베이스 사용자에게 특정 권한을 제거</p>
 <span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> my_table_1 (column_1,column_2,column_3) <span style="color:#66d9ef">values</span> (<span style="color:#e6db74">&#39;김철수&#39;</span>,<span style="color:#ae81ff">36</span>,sysdate);
 <span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> my_table_1 (column_1,column_2,column_3) <span style="color:#66d9ef">values</span> (<span style="color:#e6db74">&#39;신영희&#39;</span>,<span style="color:#ae81ff">32</span>,sysdate);
 <span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> my_table_1 (column_1,column_2,column_3) <span style="color:#66d9ef">values</span> (<span style="color:#e6db74">&#39;최철호&#39;</span>,<span style="color:#ae81ff">11</span>,sysdate);
-</code></pre></div></div><input type="radio" class="toggle" name="tabs-create my_table_1" id="tabs-create my_table_1-1"  />
-  <label for="tabs-create my_table_1-1">실행결과</label>
-  <div class="book-tabs-content markdown-inner"><p>Table created.</p>
-<p>1 row(s) inserted.</p>
-<p>1 row(s) inserted.</p>
-<p>1 row(s) inserted.</p>
-<p>1 row(s) inserted.</p>
-<p>1 row(s) inserted.</p>
-<p>1 row(s) inserted.</p>
-<p>1 row(s) inserted.</p>
-<p>1 row(s) inserted.</p>
-</div></div>
+</code></pre></div>
+    </div>
+  </label>
+</div>
 
 <p>데이터 생성 결과를 조회</p>
 
 
 
 
-<div class="book-tabs"><input type="radio" class="toggle" name="tabs-create my_table_2" id="tabs-create my_table_2-0" checked="checked" />
-  <label for="tabs-create my_table_2-0">작성쿼리</label>
+<div class="book-tabs"><input type="radio" class="toggle" name="tabs-select table" id="tabs-select table-0" checked="checked" />
+  <label for="tabs-select table-0">query</label>
   <div class="book-tabs-content markdown-inner"><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span>  <span style="color:#f92672">*</span>
 <span style="color:#66d9ef">from</span>    my_table_1
 ;
-</code></pre></div></div><input type="radio" class="toggle" name="tabs-create my_table_2" id="tabs-create my_table_2-1"  />
-  <label for="tabs-create my_table_2-1">실행결과</label>
+</code></pre></div></div><input type="radio" class="toggle" name="tabs-select table" id="tabs-select table-1"  />
+  <label for="tabs-select table-1">result</label>
   <div class="book-tabs-content markdown-inner"><table>
 <thead>
 <tr>
@@ -685,6 +697,383 @@ revoke : 데이터베이스 사용자에게 특정 권한을 제거</p>
 </table>
 <p>Download CSV
 8 rows selected.</div></div>
+
+<h3 id="select--from">
+  Select / From
+  <a class="anchor" href="#select--from">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>select / from</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 주석입니다.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my_table_1;
+
+<span style="color:#75715e">-- 컬럼명을 지정합니다.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> column_1,column_3 <span style="color:#66d9ef">from</span> my_table_1;
+
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="where--and">
+  Where / And
+  <a class="anchor" href="#where--and">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>where / and</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- where
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">32</span>;
+
+<span style="color:#75715e">-- where / 부등호 1
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_2 <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">30</span>;
+
+<span style="color:#75715e">-- where / 부등호 2
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_2 <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">30</span>;
+
+<span style="color:#75715e">-- where / 부등호 3
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_2 <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">30</span>;
+
+<span style="color:#75715e">-- where / 부등호 4
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_2 <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">30</span>;
+
+<span style="color:#75715e">-- where / and
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_2 <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">10</span> <span style="color:#66d9ef">and</span> column_2 <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">40</span>;
+
+<span style="color:#75715e">-- where / and / 문자열 1
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;홍길동&#39;</span> <span style="color:#66d9ef">and</span> <span style="color:#66d9ef">column</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">23</span>;
+
+<span style="color:#75715e">-- where / and / 문자열 2
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_1 <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;홍길동&#39;</span>;
+
+<span style="color:#75715e">-- where / and / 문자열 3
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_1 <span style="color:#f92672">&lt;&gt;</span> <span style="color:#e6db74">&#39;홍길동&#39;</span>;
+
+<span style="color:#75715e">-- where / and / 문자열 / like 1
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_1 <span style="color:#66d9ef">like</span> <span style="color:#e6db74">&#39;김%&#39;</span>;
+
+<span style="color:#75715e">-- where / and / 문자열 / like 2
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_1 <span style="color:#66d9ef">like</span> <span style="color:#e6db74">&#39;%철%&#39;</span>;
+
+<span style="color:#75715e">-- where / and / 문자열 / like 3
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_1 <span style="color:#66d9ef">like</span> <span style="color:#e6db74">&#39;%철&#39;</span>;
+
+<span style="color:#75715e">-- where / and / 문자열 / like 4
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_1 <span style="color:#66d9ef">like</span> <span style="color:#e6db74">&#39;김%철&#39;</span>;
+
+<span style="color:#75715e">-- where / and / 문자열 / like 5
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_1 <span style="color:#66d9ef">not</span> <span style="color:#66d9ef">like</span> <span style="color:#e6db74">&#39;%철&#39;</span>;
+
+<span style="color:#75715e">-- where / and / between
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_2 <span style="color:#66d9ef">between</span> <span style="color:#ae81ff">22</span> <span style="color:#66d9ef">and</span> <span style="color:#ae81ff">32</span>;
+
+<span style="color:#75715e">-- where / and / in 
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_1 <span style="color:#66d9ef">in</span> (<span style="color:#e6db74">&#39;이영희&#39;</span>,<span style="color:#e6db74">&#39;김철수&#39;</span>);
+
+<span style="color:#75715e">-- where / and / not in 
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_1 <span style="color:#66d9ef">not</span> <span style="color:#66d9ef">in</span> (<span style="color:#e6db74">&#39;이영희&#39;</span>,<span style="color:#e6db74">&#39;김철수&#39;</span>);
+
+<span style="color:#75715e">-- where / and / in / or
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_1 <span style="color:#66d9ef">in</span> (<span style="color:#e6db74">&#39;이영희&#39;</span>,<span style="color:#e6db74">&#39;김철수&#39;</span>) <span style="color:#66d9ef">or</span> column_2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">22</span>;
+
+<span style="color:#75715e">-- where / and / or / and 1
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_1 <span style="color:#66d9ef">in</span> (<span style="color:#e6db74">&#39;이영희&#39;</span>,<span style="color:#e6db74">&#39;김철수&#39;</span>) <span style="color:#66d9ef">or</span> column_2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">22</span> <span style="color:#66d9ef">and</span> column_1 <span style="color:#66d9ef">like</span> <span style="color:#e6db74">&#39;%수&#39;</span>;
+
+<span style="color:#75715e">-- where / and / or / and 2
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> (column_1 <span style="color:#66d9ef">in</span> (<span style="color:#e6db74">&#39;이영희&#39;</span>,<span style="color:#e6db74">&#39;김철수&#39;</span>) <span style="color:#66d9ef">or</span> column_2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">22</span>) <span style="color:#66d9ef">and</span> column_1 <span style="color:#66d9ef">like</span> <span style="color:#e6db74">&#39;%수&#39;</span>;
+
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="dual------">
+  dual / + - * /
+  <a class="anchor" href="#dual------">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>dual / operatios</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- dual / + - * /
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span><span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">8</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">from</span> dual;
+
+<span style="color:#75715e">-- mod, power, sign, cos, tan
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">mod</span>(<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">3</span>),power(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>),sign(<span style="color:#ae81ff">1</span>),cos(<span style="color:#ae81ff">1</span>),tan(<span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">from</span> dual;
+
+<span style="color:#75715e">-- number, text, null, number+null, date
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;TEXT&#39;</span>, <span style="color:#66d9ef">null</span>, <span style="color:#ae81ff">10</span><span style="color:#f92672">+</span><span style="color:#ae81ff">2</span><span style="color:#f92672">+</span><span style="color:#66d9ef">null</span>, sysdate <span style="color:#66d9ef">from</span> dual;
+
+<span style="color:#75715e">-- number+null = null
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#ae81ff">10</span><span style="color:#f92672">+</span><span style="color:#ae81ff">2</span><span style="color:#f92672">+</span><span style="color:#66d9ef">null</span> <span style="color:#66d9ef">from</span> dual;
+
+<span style="color:#75715e">-- number+text(number) = number
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#ae81ff">10</span><span style="color:#f92672">+</span><span style="color:#ae81ff">2</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#39;3&#39;</span> <span style="color:#66d9ef">from</span> dual;
+
+<span style="color:#75715e">-- number+text : error
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#ae81ff">10</span><span style="color:#f92672">+</span><span style="color:#ae81ff">2</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#39;A&#39;</span> <span style="color:#66d9ef">from</span> dual;
+
+<span style="color:#75715e">-- lower/upper
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#e6db74">&#39;Case&#39;</span>,<span style="color:#66d9ef">lower</span>(<span style="color:#e6db74">&#39;Case&#39;</span>),<span style="color:#66d9ef">upper</span>(<span style="color:#e6db74">&#39;Case&#39;</span>) <span style="color:#66d9ef">from</span> dual;
+
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="count--ditinct--alias--lower--upper">
+  count / ditinct / alias / lower / upper
+  <a class="anchor" href="#count--ditinct--alias--lower--upper">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>count / ditinct / alias / lower / upper</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- count
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">count</span>(<span style="color:#f92672">*</span>) <span style="color:#66d9ef">from</span> my_table_1;
+
+<span style="color:#75715e">-- distinct
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">distinct</span> column_1 <span style="color:#66d9ef">from</span> my_table_1;
+
+<span style="color:#75715e">-- distinct / count 
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">count</span>(<span style="color:#66d9ef">distinct</span> column_1),<span style="color:#66d9ef">count</span>(column_1) <span style="color:#66d9ef">from</span> my_table_1;
+
+<span style="color:#75715e">-- distinct / count / alias
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">count</span>(<span style="color:#66d9ef">distinct</span> column_1) col1,<span style="color:#66d9ef">count</span>(column_1) col2,<span style="color:#66d9ef">count</span>(tab.column_1) col3 <span style="color:#66d9ef">from</span> my_table_1 tab;
+
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="from--nested-from--with-as">
+  from / nested from / with as
+  <a class="anchor" href="#from--nested-from--with-as">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>from / nested from / with as</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- from 1
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span>  column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3
+<span style="color:#66d9ef">from</span>    my_table_1
+<span style="color:#66d9ef">where</span>   column_1 <span style="color:#66d9ef">in</span> (<span style="color:#e6db74">&#39;홍길동&#39;</span>,<span style="color:#e6db74">&#39;김철수&#39;</span>,<span style="color:#e6db74">&#39;이영희&#39;</span>)
+;
+
+<span style="color:#75715e">-- nested from
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span>  <span style="color:#f92672">*</span>
+<span style="color:#66d9ef">from</span>    (
+        <span style="color:#66d9ef">select</span>  column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3
+        <span style="color:#66d9ef">from</span>    my_table_1
+        <span style="color:#66d9ef">where</span>   column_1 <span style="color:#66d9ef">in</span> (<span style="color:#e6db74">&#39;홍길동&#39;</span>,<span style="color:#e6db74">&#39;김철수&#39;</span>,<span style="color:#e6db74">&#39;이영희&#39;</span>)
+        )
+;
+
+<span style="color:#75715e">-- with 1
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">with</span>    tab_1 <span style="color:#66d9ef">as</span>
+(
+<span style="color:#66d9ef">select</span>  column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3
+<span style="color:#66d9ef">from</span>    my_table_1
+<span style="color:#66d9ef">where</span>   column_1 <span style="color:#66d9ef">in</span> (<span style="color:#e6db74">&#39;홍길동&#39;</span>,<span style="color:#e6db74">&#39;김철수&#39;</span>,<span style="color:#e6db74">&#39;이영희&#39;</span>)
+)
+<span style="color:#66d9ef">select</span>  <span style="color:#f92672">*</span>
+<span style="color:#66d9ef">from</span>    tab_1
+;
+
+<span style="color:#75715e">-- with 2
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">with</span>    tab_1 <span style="color:#66d9ef">as</span>
+(
+<span style="color:#66d9ef">select</span>  column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3
+<span style="color:#66d9ef">from</span>    my_table_1
+<span style="color:#66d9ef">where</span>   column_1 <span style="color:#66d9ef">in</span> (<span style="color:#e6db74">&#39;홍길동&#39;</span>,<span style="color:#e6db74">&#39;김철수&#39;</span>,<span style="color:#e6db74">&#39;이영희&#39;</span>)
+)
+,       tab_2 <span style="color:#66d9ef">as</span>
+(
+<span style="color:#66d9ef">select</span>  column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3
+<span style="color:#66d9ef">from</span>    my_table_1
+<span style="color:#66d9ef">where</span>   column_2 <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">30</span>
+)
+<span style="color:#66d9ef">select</span>  <span style="color:#f92672">*</span>
+<span style="color:#66d9ef">from</span>    tab_2
+;
+
+<span style="color:#75715e">-- with 3
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">with</span>    tab_1 <span style="color:#66d9ef">as</span>
+(
+<span style="color:#66d9ef">select</span>  column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3
+<span style="color:#66d9ef">from</span>    my_table_1
+<span style="color:#66d9ef">where</span>   column_1 <span style="color:#66d9ef">in</span> (<span style="color:#e6db74">&#39;홍길동&#39;</span>,<span style="color:#e6db74">&#39;김철수&#39;</span>,<span style="color:#e6db74">&#39;이영희&#39;</span>)
+)
+,       tab_2 <span style="color:#66d9ef">as</span>
+(
+<span style="color:#66d9ef">select</span>  column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3
+<span style="color:#66d9ef">from</span>    my_table_1
+<span style="color:#66d9ef">where</span>   column_2 <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">30</span>
+)
+<span style="color:#66d9ef">select</span>  <span style="color:#f92672">*</span>
+<span style="color:#66d9ef">from</span>    (
+        <span style="color:#66d9ef">select</span>  <span style="color:#f92672">*</span>
+        <span style="color:#66d9ef">from</span>    tab_2
+        <span style="color:#66d9ef">where</span>   column_1 <span style="color:#66d9ef">like</span> <span style="color:#e6db74">&#39;%철%&#39;</span>
+        )
+;
+
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="union-all--union--intersect--minus">
+  union all / union / intersect / minus
+  <a class="anchor" href="#union-all--union--intersect--minus">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>union all / union / intersect / minus</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">
+<span style="color:#75715e">-- union all
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">with</span>    tab_1 <span style="color:#66d9ef">as</span> (<span style="color:#66d9ef">select</span> column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3 <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_1 <span style="color:#66d9ef">in</span> (<span style="color:#e6db74">&#39;홍길동&#39;</span>,<span style="color:#e6db74">&#39;김철수&#39;</span>,<span style="color:#e6db74">&#39;이영희&#39;</span>))
+,       tab_2 <span style="color:#66d9ef">as</span> (<span style="color:#66d9ef">select</span> column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3 <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_2 <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">30</span>)
+<span style="color:#66d9ef">select</span>  <span style="color:#f92672">*</span>
+<span style="color:#66d9ef">from</span>    tab_1
+<span style="color:#66d9ef">union</span> <span style="color:#66d9ef">all</span>
+<span style="color:#66d9ef">select</span>  <span style="color:#f92672">*</span>
+<span style="color:#66d9ef">from</span>    tab_2
+;
+
+<span style="color:#75715e">-- union
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">with</span>    tab_1 <span style="color:#66d9ef">as</span> (<span style="color:#66d9ef">select</span> column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3 <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_1 <span style="color:#66d9ef">in</span> (<span style="color:#e6db74">&#39;홍길동&#39;</span>,<span style="color:#e6db74">&#39;김철수&#39;</span>,<span style="color:#e6db74">&#39;이영희&#39;</span>))
+,       tab_2 <span style="color:#66d9ef">as</span> (<span style="color:#66d9ef">select</span> column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3 <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_2 <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">30</span>)
+<span style="color:#66d9ef">select</span>  <span style="color:#f92672">*</span>
+<span style="color:#66d9ef">from</span>    tab_1
+<span style="color:#66d9ef">union</span> <span style="color:#66d9ef">all</span>
+<span style="color:#66d9ef">select</span>  <span style="color:#f92672">*</span>
+<span style="color:#66d9ef">from</span>    tab_2
+;
+
+<span style="color:#75715e">-- intersect
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">with</span>    tab_1 <span style="color:#66d9ef">as</span> (<span style="color:#66d9ef">select</span> column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3 <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_1 <span style="color:#66d9ef">in</span> (<span style="color:#e6db74">&#39;홍길동&#39;</span>,<span style="color:#e6db74">&#39;김철수&#39;</span>,<span style="color:#e6db74">&#39;이영희&#39;</span>))
+,       tab_2 <span style="color:#66d9ef">as</span> (<span style="color:#66d9ef">select</span> column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3 <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_2 <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">30</span>)
+<span style="color:#66d9ef">select</span>  <span style="color:#f92672">*</span>
+<span style="color:#66d9ef">from</span>    tab_1
+<span style="color:#66d9ef">intersect</span>
+<span style="color:#66d9ef">select</span>  <span style="color:#f92672">*</span>
+<span style="color:#66d9ef">from</span>    tab_2
+;
+<span style="color:#75715e">-- minus
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">with</span>    tab_1 <span style="color:#66d9ef">as</span> (<span style="color:#66d9ef">select</span> column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3 <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_1 <span style="color:#66d9ef">in</span> (<span style="color:#e6db74">&#39;홍길동&#39;</span>,<span style="color:#e6db74">&#39;김철수&#39;</span>,<span style="color:#e6db74">&#39;이영희&#39;</span>))
+,       tab_2 <span style="color:#66d9ef">as</span> (<span style="color:#66d9ef">select</span> column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3 <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_2 <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">30</span>)
+<span style="color:#66d9ef">select</span>  <span style="color:#f92672">*</span>
+<span style="color:#66d9ef">from</span>    tab_1
+<span style="color:#66d9ef">intersect</span>
+<span style="color:#66d9ef">select</span>  <span style="color:#f92672">*</span>
+<span style="color:#66d9ef">from</span>    tab_2
+;
+
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="join-1--join-2--join-3--join-4--join-5">
+  join 1 / join 2 / join 3 / join 4 / join 5
+  <a class="anchor" href="#join-1--join-2--join-3--join-4--join-5">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>join</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">
+<span style="color:#75715e">-- join 1 
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">with</span>    tab_1 <span style="color:#66d9ef">as</span> (<span style="color:#66d9ef">select</span> column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3 <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_1 <span style="color:#66d9ef">in</span> (<span style="color:#e6db74">&#39;홍길동&#39;</span>,<span style="color:#e6db74">&#39;김철수&#39;</span>,<span style="color:#e6db74">&#39;이영희&#39;</span>))
+,       tab_2 <span style="color:#66d9ef">as</span> (<span style="color:#66d9ef">select</span> column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3 <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_2 <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">30</span>)
+<span style="color:#66d9ef">select</span>  <span style="color:#f92672">*</span>
+<span style="color:#66d9ef">from</span>    tab_1 a, tab_2 b
+<span style="color:#66d9ef">where</span>   a.column_1 <span style="color:#f92672">=</span> b.column_1
+;
+
+<span style="color:#75715e">-- join 2 
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">with</span>    tab_1 <span style="color:#66d9ef">as</span> (<span style="color:#66d9ef">select</span> column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3 <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_1 <span style="color:#66d9ef">in</span> (<span style="color:#e6db74">&#39;홍길동&#39;</span>,<span style="color:#e6db74">&#39;김철수&#39;</span>,<span style="color:#e6db74">&#39;이영희&#39;</span>))
+,       tab_2 <span style="color:#66d9ef">as</span> (<span style="color:#66d9ef">select</span> column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3 <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_2 <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">30</span>)
+<span style="color:#66d9ef">select</span>  <span style="color:#f92672">*</span>
+<span style="color:#66d9ef">from</span>    tab_1 a, tab_2 b
+<span style="color:#66d9ef">where</span>   a.column_1 <span style="color:#f92672">=</span> b.column_1
+<span style="color:#66d9ef">and</span>     a.column_2 <span style="color:#f92672">=</span> b.column_2
+;
+
+<span style="color:#75715e">-- join 3
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">with</span>    tab_1 <span style="color:#66d9ef">as</span> (<span style="color:#66d9ef">select</span> column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3 <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_1 <span style="color:#66d9ef">in</span> (<span style="color:#e6db74">&#39;홍길동&#39;</span>,<span style="color:#e6db74">&#39;김철수&#39;</span>,<span style="color:#e6db74">&#39;이영희&#39;</span>))
+,       tab_2 <span style="color:#66d9ef">as</span> (<span style="color:#66d9ef">select</span> column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3 <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_2 <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">30</span>)
+<span style="color:#66d9ef">select</span>  <span style="color:#f92672">*</span>
+<span style="color:#66d9ef">from</span>    tab_1 a, tab_2 b
+<span style="color:#66d9ef">where</span>   a.column_1 <span style="color:#f92672">=</span> b.column_1 (<span style="color:#f92672">+</span>)
+<span style="color:#66d9ef">and</span>     a.column_2 <span style="color:#f92672">=</span> b.column_2 (<span style="color:#f92672">+</span>)
+;
+
+<span style="color:#75715e">-- join 4
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">with</span>    tab_1 <span style="color:#66d9ef">as</span> (<span style="color:#66d9ef">select</span> column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3 <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_1 <span style="color:#66d9ef">in</span> (<span style="color:#e6db74">&#39;홍길동&#39;</span>,<span style="color:#e6db74">&#39;김철수&#39;</span>,<span style="color:#e6db74">&#39;이영희&#39;</span>))
+,       tab_2 <span style="color:#66d9ef">as</span> (<span style="color:#66d9ef">select</span> column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3 <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_2 <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">30</span>)
+<span style="color:#66d9ef">select</span>  <span style="color:#f92672">*</span>
+<span style="color:#66d9ef">from</span>    tab_1 a, tab_2 b
+<span style="color:#66d9ef">where</span>   a.column_1 (<span style="color:#f92672">+</span>) <span style="color:#f92672">=</span> b.column_1
+<span style="color:#66d9ef">and</span>     a.column_2 (<span style="color:#f92672">+</span>) <span style="color:#f92672">=</span> b.column_2
+;
+
+<span style="color:#75715e">-- join 5
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">with</span>    tab_1 <span style="color:#66d9ef">as</span> (<span style="color:#66d9ef">select</span> column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3 <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_1 <span style="color:#66d9ef">in</span> (<span style="color:#e6db74">&#39;홍길동&#39;</span>,<span style="color:#e6db74">&#39;김철수&#39;</span>,<span style="color:#e6db74">&#39;이영희&#39;</span>))
+,       tab_2 <span style="color:#66d9ef">as</span> (<span style="color:#66d9ef">select</span> column_1,column_2,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_3 <span style="color:#66d9ef">from</span> my_table_1 <span style="color:#66d9ef">where</span> column_2 <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">30</span>)
+<span style="color:#66d9ef">select</span>  <span style="color:#f92672">*</span>
+<span style="color:#66d9ef">from</span>    tab_1 a <span style="color:#66d9ef">full</span> <span style="color:#66d9ef">outer</span> <span style="color:#66d9ef">join</span> tab_2 b
+<span style="color:#66d9ef">on</span>
+(
+a.column_1 <span style="color:#f92672">=</span> b.column_1 <span style="color:#66d9ef">and</span>
+a.column_2 <span style="color:#f92672">=</span> b.column_2 
+)
+;
+
+</code></pre></div>
+    </div>
+  </label>
+</div>
 
 <br>
 <span style="float:left"><a href="../"><< 이전글</a></span>

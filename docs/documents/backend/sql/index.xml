@@ -22,18 +22,7 @@ Live SQL #   Oracle 가입 Oracle Live SQL 접속 &amp;ldquo;Start Coding Now&am
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://prokoptasis.github.io/docs/documents/backend/sql/sql02/</guid>
-      <description>SQL Basic 2 #   Select, Where, 기본적인 함수, Union, Join
-Select / From #   select / from ...  -- 주석입니다. select * from my_table_1; -- 컬럼명을 지정합니다. select column_1,column_3 from my_table_1;     Where / And #   where / and ...  -- where select * from my_table_1 where column_2 = 32; -- where / 부등호 1 select * from my_table_1 where column_2 &amp;lt;= 30; -- where / 부등호 2 select * from my_table_1 where column_2 &amp;gt;= 30; -- where / 부등호 3 select * from my_table_1 where column_2 &amp;gt; 30; -- where / 부등호 4 select * from my_table_1 where column_2 &amp;lt; 30; -- where / and select * from my_table_1 where column_2 &amp;gt; 10 and column_2 &amp;lt; 40; -- where / and / 문자열 1 select * from my_table_1 where column_1 = &amp;#39;홍길동&amp;#39; and column 2 = 23; -- where / and / 문자열 2 select * from my_table_1 where column_1 !</description>
-    </item>
-    
-    <item>
-      <title>SQL Basic 3</title>
-      <link>http://prokoptasis.github.io/docs/documents/backend/sql/sql03/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://prokoptasis.github.io/docs/documents/backend/sql/sql03/</guid>
-      <description>SQL Basic 3 #   작성중
- 다음글  </description>
+      <description>SQL Basic 2 #    다음글  </description>
     </item>
     
   </channel>
