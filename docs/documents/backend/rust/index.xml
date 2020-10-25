@@ -14,8 +14,7 @@
       <guid>http://prokoptasis.github.io/docs/documents/backend/rust/rust01/</guid>
       <description>Rust Basic 1 #   Rust는 시스템 레벨의 프로그래밍 언어. C/C++의 대체 언어의 특성. 타입 안전성, 메모리 안전성, 동시성, 그리고 성능에도 초점을 맞추어 대규모, 고성능 소프트웨어의 개발을 작성하도록 설계됨. 무효한 메모리 접근을 예방하기 위해 빌림 검사와 같은 독특한 특성을 지님.
 하기 링크 참조.
-The Rust Programming Language The Rust Programming Language (KOR)
-Hello World #  Hello World
+ The Rust Programming Language The Rust Programming Language (KOR)  Hello World #  Hello World
 cargo init rust_hello --bin cd rust_hello cargo run fn main() { println!</description>
     </item>
     

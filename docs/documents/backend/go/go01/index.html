@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.6ab3b83ac31521346f3680f6f9f4934091d60b76d8ded0e4a4b6fa4a373edca4.js" integrity="sha256-arO4OsMVITRvNoD2&#43;fSTQJHWC3bY3tDkpLb6Sjc&#43;3KQ="></script>
+<script defer src="/ko.search.min.a71849bd7c632f9c81d845fc9b0937b32318f2e355a55751bd67b837eac58d0c.js" integrity="sha256-pxhJvXxjL5yB2EX8mwk3syMY8uNVpVdRvWe4N&#43;rFjQw="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -542,7 +542,7 @@ https://github.com/alex-shpak/hugo-book
 <div class="book-expand">
   <label>
     <div class="book-expand-head flex justify-between">
-      <span>Declare</span>
+      <span>declare</span>
       <span>...</span>
     </div>
     <input type="checkbox" class="hidden" />
@@ -607,7 +607,7 @@ https://github.com/alex-shpak/hugo-book
 <div class="book-expand">
   <label>
     <div class="book-expand-head flex justify-between">
-      <span>Declaration of Varialbe</span>
+      <span>declaration of varialbe</span>
       <span>...</span>
     </div>
     <input type="checkbox" class="hidden" />
@@ -647,7 +647,7 @@ https://github.com/alex-shpak/hugo-book
 <div class="book-expand">
   <label>
     <div class="book-expand-head flex justify-between">
-      <span>Operators</span>
+      <span>operators</span>
       <span>...</span>
     </div>
     <input type="checkbox" class="hidden" />
@@ -742,7 +742,7 @@ https://github.com/alex-shpak/hugo-book
 <div class="book-expand">
   <label>
     <div class="book-expand-head flex justify-between">
-      <span>Conditional Statement</span>
+      <span>conditional statement</span>
       <span>...</span>
     </div>
     <input type="checkbox" class="hidden" />
@@ -813,7 +813,7 @@ https://github.com/alex-shpak/hugo-book
 <div class="book-expand">
   <label>
     <div class="book-expand-head flex justify-between">
-      <span>Iteration</span>
+      <span>iteration</span>
       <span>...</span>
     </div>
     <input type="checkbox" class="hidden" />
@@ -890,7 +890,7 @@ https://github.com/alex-shpak/hugo-book
 <div class="book-expand">
   <label>
     <div class="book-expand-head flex justify-between">
-      <span>Method</span>
+      <span>method</span>
       <span>...</span>
     </div>
     <input type="checkbox" class="hidden" />
@@ -1042,7 +1042,7 @@ https://github.com/alex-shpak/hugo-book
 <div class="book-expand">
   <label>
     <div class="book-expand-head flex justify-between">
-      <span>Array and Slice</span>
+      <span>array and slice</span>
       <span>...</span>
     </div>
     <input type="checkbox" class="hidden" />
@@ -1142,7 +1142,7 @@ https://github.com/alex-shpak/hugo-book
 <div class="book-expand">
   <label>
     <div class="book-expand-head flex justify-between">
-      <span>Map</span>
+      <span>map</span>
       <span>...</span>
     </div>
     <input type="checkbox" class="hidden" />
@@ -1208,7 +1208,7 @@ https://github.com/alex-shpak/hugo-book
 <div class="book-expand">
   <label>
     <div class="book-expand-head flex justify-between">
-      <span>Package  </span>
+      <span>package  </span>
       <span>...</span>
     </div>
     <input type="checkbox" class="hidden" />
@@ -1245,6 +1245,72 @@ https://github.com/alex-shpak/hugo-book
 	<span style="color:#75715e">// package
 </span><span style="color:#75715e"></span>	<span style="color:#a6e22e">item</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">lib01</span>.<span style="color:#a6e22e">GetItems</span>(<span style="color:#e6db74">&#34;A&#34;</span>)
 	println(<span style="color:#a6e22e">item</span>)
+}
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="struct">
+  Struct
+  <a class="anchor" href="#struct">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>struct  </span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
+
+<span style="color:#75715e">// struct
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">person</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>
+	<span style="color:#a6e22e">age</span>  <span style="color:#66d9ef">int</span>
+}
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">dict</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">data</span> <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">int</span>]<span style="color:#66d9ef">string</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">newDict</span>() <span style="color:#f92672">*</span><span style="color:#a6e22e">dict</span> {
+	<span style="color:#a6e22e">dic</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">dict</span>{}
+	<span style="color:#a6e22e">dic</span>.<span style="color:#a6e22e">data</span> = <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">int</span>]<span style="color:#66d9ef">string</span>{}
+	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">dic</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#75715e">// person struct
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">per1</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">person</span>{}
+
+	<span style="color:#a6e22e">per1</span>.<span style="color:#a6e22e">name</span> = <span style="color:#e6db74">&#34;Lee&#34;</span>
+	<span style="color:#a6e22e">per1</span>.<span style="color:#a6e22e">age</span> = <span style="color:#ae81ff">18</span>
+
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">per1</span>)
+
+	<span style="color:#75715e">// person struct 2
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">per2</span> <span style="color:#a6e22e">person</span>
+	<span style="color:#a6e22e">per2</span> = <span style="color:#a6e22e">person</span>{<span style="color:#e6db74">&#34;Bob&#34;</span>, <span style="color:#ae81ff">20</span>}
+	<span style="color:#a6e22e">per3</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">person</span>{<span style="color:#a6e22e">name</span>: <span style="color:#e6db74">&#34;Sean&#34;</span>, <span style="color:#a6e22e">age</span>: <span style="color:#ae81ff">30</span>}
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">per2</span>)
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">per3</span>)
+
+	<span style="color:#75715e">// person struct 3
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">per4</span> <span style="color:#f92672">:=</span> new(<span style="color:#a6e22e">person</span>)
+	<span style="color:#a6e22e">per4</span>.<span style="color:#a6e22e">name</span> = <span style="color:#e6db74">&#34;Kim&#34;</span>
+
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">per4</span>)
+
+	<span style="color:#75715e">// constructor
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">dic1</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">newDict</span>()
+	<span style="color:#a6e22e">dic1</span>.<span style="color:#a6e22e">data</span>[<span style="color:#ae81ff">1</span>] = <span style="color:#e6db74">&#34;A&#34;</span>
+
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">dic1</span>)
 }
 </code></pre></div>
     </div>

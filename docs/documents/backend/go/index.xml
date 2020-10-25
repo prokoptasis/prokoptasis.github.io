@@ -15,7 +15,7 @@
       <description>GO Basic 1 #   Go 기본적인 문법 정리. 하기 사이트 참조.
 예제로 배우는 Go 프로그래밍
 Hello World #  package main func main() { println(&amp;#34;Hello World!&amp;#34;) } Declare #  선언 및 할당 방식
- Declare ...  package main func main() { // 선언 및 할당 	var a int var b float32 = 11. println(a, b) // 선언 및 할당 	a = 10 b = 12.</description>
+ declare ...  package main func main() { // 선언 및 할당 	var a int var b float32 = 11. println(a, b) // 선언 및 할당 	a = 10 b = 12.</description>
     </item>
     
     <item>
