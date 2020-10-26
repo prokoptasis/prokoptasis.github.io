@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.a71849bd7c632f9c81d845fc9b0937b32318f2e355a55751bd67b837eac58d0c.js" integrity="sha256-pxhJvXxjL5yB2EX8mwk3syMY8uNVpVdRvWe4N&#43;rFjQw="></script>
+<script defer src="/ko.search.min.ebf49a6cfef4ab4858d7e08d2d20b0cb5dbdde99176585a042e221e5a2662e82.js" integrity="sha256-6/SabP70q0hY1&#43;CNLSCwy1293pkXZYWgQuIh5aJmLoI="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -923,6 +923,156 @@ cargo run
   Understanding Ownership
   <a class="anchor" href="#understanding-ownership">#</a>
 </h3>
+<p><img src="../../../../../201026_01_rust_stack_and_heap.png" alt="stakc vs heap" /></p>
+<p>Stack vs Heap
+스택은 값을 받아들인 순서대로 저장하고 반대 방향으로 값을 지우는 방식. (Last In, First Out) 힙은 특정 공간을 할당하고 위치 검색을 통해 값을 불러 오는 방식.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">구분</th>
+<th style="text-align:center">Stack</th>
+<th style="text-align:center">Heap</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">관리</td>
+<td style="text-align:center">CPU</td>
+<td style="text-align:center">Programmer</td>
+</tr>
+<tr>
+<td style="text-align:center">속도</td>
+<td style="text-align:center">빠름</td>
+<td style="text-align:center">느림</td>
+</tr>
+<tr>
+<td style="text-align:center">범위</td>
+<td style="text-align:center">지역</td>
+<td style="text-align:center">전역</td>
+</tr>
+<tr>
+<td style="text-align:center">크기</td>
+<td style="text-align:center">제한</td>
+<td style="text-align:center">제한없음</td>
+</tr>
+</tbody>
+</table>
+<p>Shallow Copy vs Deep Copy
+Rust는 Shallow Copy를 Move라 표현. 명시적으로 표시하지 않는 이상 Deep Copy는 발생되지 않음.</p>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>ownership</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#75715e">// move
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> str1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;hello&#34;</span>);
+    <span style="color:#66d9ef">let</span> str2 <span style="color:#f92672">=</span> str1; <span style="color:#75715e">// shallow copy
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">//println!(&#34;{}&#34;, str1); // move occurs because `str1` has type `std::string::String`
+</span><span style="color:#75715e"></span>    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, str2);
+
+    <span style="color:#75715e">// function takes ownership
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> str3 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;world&#34;</span>);
+    take_owns(str3);
+
+    <span style="color:#75715e">//println!(&#34;{}&#34;, str3); //value borrowed here after move
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// integer copy to function
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> intg <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;
+    make_copy(<span style="color:#ae81ff">5</span>);
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, intg);
+
+    <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> str4 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;again&#34;</span>);
+    <span style="color:#66d9ef">let</span> str5 <span style="color:#f92672">=</span> take_back(str4);
+
+    <span style="color:#75715e">//println!(&#34;{}&#34;, str4); //move occurs because `str4` has type `std::string::String`
+</span><span style="color:#75715e"></span>    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, str5);
+
+    <span style="color:#75715e">// Reference
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> str6 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;This is a pen&#34;</span>);
+    <span style="color:#66d9ef">let</span> leng <span style="color:#f92672">=</span> calc_leng(<span style="color:#f92672">&amp;</span>str6);
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;The length of &#39;{}&#39; is {}&#34;</span>, str6, leng);
+
+    <span style="color:#75715e">// Reference
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> str7 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;This is a book&#34;</span>);
+    chng_strg(<span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> str7);
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, str7);
+
+    <span style="color:#75715e">// Reference mutable
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> str8 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;text1&#34;</span>);
+    <span style="color:#66d9ef">let</span> str9 <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> str8; <span style="color:#75715e">//first mutable borrow occurs here
+</span><span style="color:#75715e"></span>                          <span style="color:#75715e">// let str10 = &amp;mut str8; //second mutable borrow occurs here
+</span><span style="color:#75715e"></span>
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, str9);
+    <span style="color:#75715e">// println!(&#34;{}&#34;, str10)
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// Reference mutable 1
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> str11 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;text2&#34;</span>);
+    {
+        <span style="color:#66d9ef">let</span> str12 <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> str11;
+        println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, str12);
+    }
+
+    <span style="color:#66d9ef">let</span> str13 <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> str11;
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, str13);
+
+    <span style="color:#75715e">// Reference mutable 2
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> str14 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;text3&#34;</span>);
+
+    <span style="color:#66d9ef">let</span> str15 <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>str14;
+    <span style="color:#66d9ef">let</span> str16 <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>str14;
+    <span style="color:#75715e">// let str17 = &amp;mut str14; //mutable borrow occurs here
+</span><span style="color:#75715e"></span>
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, str15);
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, str16);
+    <span style="color:#75715e">// println!(&#34;{}&#34;, str17);
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// dangling references
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> noth <span style="color:#f92672">=</span> dang_refr();
+    println<span style="color:#f92672">!</span>()
+}
+
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">take_owns</span>(strg: String) {
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, strg);
+}
+
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">make_copy</span>(intg: <span style="color:#66d9ef">i32</span>) {
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, intg);
+}
+
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">take_back</span>(strg: String) -&gt; String {
+    strg
+}
+
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">calc_leng</span>(strg: <span style="color:#66d9ef">&amp;</span>String) -&gt; <span style="color:#66d9ef">usize</span> {
+    strg.len()
+}
+
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">chng_strg</span>(strg: <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">mut</span> String) {
+    strg.push_str(<span style="color:#e6db74">&#34;,Hello?&#34;</span>);
+}
+
+<span style="color:#75715e">// this function&#39;s return type contains a borrowed value
+</span><span style="color:#75715e">// fn dang_refr() -&gt; &amp;String {
+</span><span style="color:#75715e">//     let strg = String::from(&#34;Eh?&#34;);
+</span><span style="color:#75715e">//     &amp;strg
+</span><span style="color:#75715e">// }
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">dang_refr</span>() -&gt; String {
+    <span style="color:#66d9ef">let</span> strg <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Eh?&#34;</span>);
+    strg
+}
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
 <br>
 <span style="float:left"><a href="../"><< 이전글</a></span>
 <span style="float:right"><a href="../rust02">다음글 >></a></span>
