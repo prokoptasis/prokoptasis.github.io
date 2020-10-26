@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.ebf49a6cfef4ab4858d7e08d2d20b0cb5dbdde99176585a042e221e5a2662e82.js" integrity="sha256-6/SabP70q0hY1&#43;CNLSCwy1293pkXZYWgQuIh5aJmLoI="></script>
+<script defer src="/ko.search.min.7b55fd987eb141a4ce7887e442778f63b3caff8ac0797c931ad9653e84af242a.js" integrity="sha256-e1X9mH6xQaTOeIfkQnePY7PK/4rAeXyTGtllPoSvJCo="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -1035,7 +1035,44 @@ Rust는 Shallow Copy를 Move라 표현. 명시적으로 표시하지 않는 이�
 </span><span style="color:#75715e"></span>
     <span style="color:#75715e">// dangling references
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> noth <span style="color:#f92672">=</span> dang_refr();
-    println<span style="color:#f92672">!</span>()
+    println<span style="color:#f92672">!</span>();
+
+    <span style="color:#75715e">// slice
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> str17 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;fffirst words&#34;</span>);
+    <span style="color:#66d9ef">let</span> str18 <span style="color:#f92672">=</span> frst_word(<span style="color:#f92672">&amp;</span>str17);
+    str17.clear();
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, str18);
+
+    <span style="color:#75715e">// string slice
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> str19 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;hello world&#34;</span>);
+    <span style="color:#66d9ef">let</span> str20 <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>str19[<span style="color:#ae81ff">0</span>..<span style="color:#ae81ff">5</span>];
+    <span style="color:#66d9ef">let</span> str21 <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>str19[<span style="color:#ae81ff">6</span>..<span style="color:#ae81ff">11</span>];
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{},{},{}&#34;</span>, str19, str20, str21);
+
+    <span style="color:#66d9ef">let</span> str22 <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>str19[..<span style="color:#ae81ff">5</span>];
+    <span style="color:#66d9ef">let</span> leng <span style="color:#f92672">=</span> str19.len();
+    <span style="color:#66d9ef">let</span> str23 <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>str19[<span style="color:#ae81ff">6</span>..leng];
+
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{},{},{}&#34;</span>, str22, leng, str23);
+
+    <span style="color:#75715e">// literal slice
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> str24 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;hello world&#34;</span>);
+    <span style="color:#66d9ef">let</span> str25 <span style="color:#f92672">=</span> frst_word_s(<span style="color:#f92672">&amp;</span>str24);
+    <span style="color:#75715e">// str24.clear(); // mutable borrow occurs here
+</span><span style="color:#75715e"></span>    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;str25 {}&#34;</span>, str25);
+
+    <span style="color:#75715e">// literal slice
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> str26 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;hello world&#34;</span>);
+    <span style="color:#66d9ef">let</span> str27 <span style="color:#f92672">=</span> frst_word_s(<span style="color:#f92672">&amp;</span>str26[..]);
+    <span style="color:#66d9ef">let</span> str28 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;HELLO WORLD&#34;</span>;
+    <span style="color:#66d9ef">let</span> str27 <span style="color:#f92672">=</span> frst_word_s(<span style="color:#f92672">&amp;</span>str28[..]);
+    <span style="color:#66d9ef">let</span> str27 <span style="color:#f92672">=</span> frst_word_s(str28);
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;str27 {}&#34;</span>, str27);
+
+    <span style="color:#75715e">// etc slice
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> intg <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>];
+    <span style="color:#66d9ef">let</span> ints <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>intg[<span style="color:#ae81ff">1</span>..<span style="color:#ae81ff">3</span>];
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}{}&#34;</span>, ints[<span style="color:#ae81ff">0</span>], ints[<span style="color:#ae81ff">1</span>])
 }
 
 <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">take_owns</span>(strg: String) {
@@ -1067,6 +1104,39 @@ Rust는 Shallow Copy를 Move라 표현. 명시적으로 표시하지 않는 이�
 <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">dang_refr</span>() -&gt; String {
     <span style="color:#66d9ef">let</span> strg <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Eh?&#34;</span>);
     strg
+}
+
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">frst_word</span>(strg: <span style="color:#66d9ef">&amp;</span>String) -&gt; <span style="color:#66d9ef">usize</span> {
+    <span style="color:#66d9ef">let</span> bytes <span style="color:#f92672">=</span> strg.as_bytes();
+
+    <span style="color:#66d9ef">for</span> (i, <span style="color:#f92672">&amp;</span>item) <span style="color:#66d9ef">in</span> bytes.iter().enumerate() {
+        <span style="color:#66d9ef">if</span> item <span style="color:#f92672">==</span> <span style="color:#e6db74">b&#39; &#39;</span> {
+            <span style="color:#66d9ef">return</span> i;
+        }
+    }
+    strg.len()
+}
+
+<span style="color:#75715e">// fn frst_word_s(strg: &amp;String) -&gt; &amp;str {
+</span><span style="color:#75715e">//     let bytes = strg.as_bytes();
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">//     for (i, &amp;item) in bytes.iter().enumerate() {
+</span><span style="color:#75715e">//         if item == b&#39; &#39; {
+</span><span style="color:#75715e">//             return &amp;strg[0..i];
+</span><span style="color:#75715e">//         }
+</span><span style="color:#75715e">//     }
+</span><span style="color:#75715e">//     &amp;strg[..]
+</span><span style="color:#75715e">// }
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">frst_word_s</span>(strg: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span>) -&gt; <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span> {
+    <span style="color:#66d9ef">let</span> bytes <span style="color:#f92672">=</span> strg.as_bytes();
+
+    <span style="color:#66d9ef">for</span> (i, <span style="color:#f92672">&amp;</span>item) <span style="color:#66d9ef">in</span> bytes.iter().enumerate() {
+        <span style="color:#66d9ef">if</span> item <span style="color:#f92672">==</span> <span style="color:#e6db74">b&#39; &#39;</span> {
+            <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span>strg[<span style="color:#ae81ff">0</span>..i];
+        }
+    }
+    <span style="color:#f92672">&amp;</span>strg[..]
 }
 </code></pre></div>
     </div>

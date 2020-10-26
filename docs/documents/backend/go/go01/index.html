@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.ebf49a6cfef4ab4858d7e08d2d20b0cb5dbdde99176585a042e221e5a2662e82.js" integrity="sha256-6/SabP70q0hY1&#43;CNLSCwy1293pkXZYWgQuIh5aJmLoI="></script>
+<script defer src="/ko.search.min.7b55fd987eb141a4ce7887e442778f63b3caff8ac0797c931ad9653e84af242a.js" integrity="sha256-e1X9mH6xQaTOeIfkQnePY7PK/4rAeXyTGtllPoSvJCo="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -1311,6 +1311,104 @@ https://github.com/alex-shpak/hugo-book
 	<span style="color:#a6e22e">dic1</span>.<span style="color:#a6e22e">data</span>[<span style="color:#ae81ff">1</span>] = <span style="color:#e6db74">&#34;A&#34;</span>
 
 	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">dic1</span>)
+}
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="method--interface">
+  Method / Interface
+  <a class="anchor" href="#method--interface">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>method / interface</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+	<span style="color:#e6db74">&#34;math&#34;</span>
+)
+
+<span style="color:#75715e">// struct
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Rect</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">width</span>, <span style="color:#a6e22e">height</span> <span style="color:#66d9ef">int</span>
+}
+
+<span style="color:#75715e">// method
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">r</span> <span style="color:#a6e22e">Rect</span>) <span style="color:#a6e22e">area</span>() <span style="color:#66d9ef">int</span> {
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">width</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">height</span>
+}
+
+<span style="color:#75715e">// method
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Rect</span>) <span style="color:#a6e22e">area2</span>() <span style="color:#66d9ef">int</span> {
+	<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">width</span><span style="color:#f92672">++</span>
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">width</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">height</span>
+}
+
+<span style="color:#75715e">// interface
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Shpe</span> <span style="color:#66d9ef">interface</span> {
+	<span style="color:#a6e22e">area</span>() <span style="color:#66d9ef">float64</span>
+	<span style="color:#a6e22e">peri</span>() <span style="color:#66d9ef">float64</span>
+}
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">RectF</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">width</span>, <span style="color:#a6e22e">height</span> <span style="color:#66d9ef">float64</span>
+}
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CircF</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">radius</span> <span style="color:#66d9ef">float64</span>
+}
+
+<span style="color:#75715e">// interface
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">r</span> <span style="color:#a6e22e">RectF</span>) <span style="color:#a6e22e">area</span>() <span style="color:#66d9ef">float64</span> { <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">width</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">height</span> }
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">r</span> <span style="color:#a6e22e">RectF</span>) <span style="color:#a6e22e">peri</span>() <span style="color:#66d9ef">float64</span> { <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> (<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">width</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">height</span>) }
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">CircF</span>) <span style="color:#a6e22e">area</span>() <span style="color:#66d9ef">float64</span> { <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">Pi</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">radius</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">radius</span> }
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">CircF</span>) <span style="color:#a6e22e">peri</span>() <span style="color:#66d9ef">float64</span> { <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">Pi</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">radius</span> }
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">showArea</span>(<span style="color:#a6e22e">shpe</span> <span style="color:#f92672">...</span><span style="color:#a6e22e">Shpe</span>) {
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">s</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">shpe</span> {
+		<span style="color:#a6e22e">a</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">area</span>()
+		println(<span style="color:#a6e22e">a</span>)
+	}
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">rect</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Rect</span>{<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>}
+	<span style="color:#a6e22e">area</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">rect</span>.<span style="color:#a6e22e">area</span>()
+	println(<span style="color:#a6e22e">area</span>)
+	<span style="color:#a6e22e">area</span> = <span style="color:#a6e22e">rect</span>.<span style="color:#a6e22e">area2</span>()
+	println(<span style="color:#a6e22e">area</span>)
+
+	<span style="color:#a6e22e">rectf</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">RectF</span>{<span style="color:#ae81ff">10.</span>, <span style="color:#ae81ff">20.</span>}
+	<span style="color:#a6e22e">circf</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">CircF</span>{<span style="color:#ae81ff">10</span>}
+	<span style="color:#a6e22e">showArea</span>(<span style="color:#a6e22e">rectf</span>, <span style="color:#a6e22e">circf</span>)
+
+	<span style="color:#75715e">// empty interface
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">type_x</span> <span style="color:#66d9ef">interface</span>{}
+	<span style="color:#a6e22e">type_x</span> = <span style="color:#ae81ff">1</span>
+	<span style="color:#a6e22e">type_x</span> = <span style="color:#e6db74">&#34;Jake&#34;</span>
+
+	<span style="color:#a6e22e">printIt</span>(<span style="color:#a6e22e">type_x</span>)
+
+	<span style="color:#75715e">// Type Assertion
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">type_y</span> <span style="color:#66d9ef">interface</span>{} = <span style="color:#ae81ff">1</span>
+	<span style="color:#a6e22e">var_i</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">type_y</span>
+	<span style="color:#a6e22e">var_j</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">type_y</span>.(<span style="color:#66d9ef">int</span>)
+
+	println(<span style="color:#a6e22e">var_i</span>) <span style="color:#75715e">// pointer address
+</span><span style="color:#75715e"></span>	println(<span style="color:#a6e22e">var_j</span>) <span style="color:#75715e">// 1
+</span><span style="color:#75715e"></span>}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">printIt</span>(<span style="color:#a6e22e">type_v</span> <span style="color:#66d9ef">interface</span>{}) {
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">type_v</span>)
 }
 </code></pre></div>
     </div>
