@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.7b55fd987eb141a4ce7887e442778f63b3caff8ac0797c931ad9653e84af242a.js" integrity="sha256-e1X9mH6xQaTOeIfkQnePY7PK/4rAeXyTGtllPoSvJCo="></script>
+<script defer src="/ko.search.min.962fb64a0cca644665228734defefcd12ad9d679f371ad5e80d1a30c9afaed19.js" integrity="sha256-li&#43;2SgzKZEZlIoc03v780SrZ1nnzca1egNGjDJr67Rk="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -1409,6 +1409,71 @@ https://github.com/alex-shpak/hugo-book
 
 <span style="color:#66d9ef">func</span> <span style="color:#a6e22e">printIt</span>(<span style="color:#a6e22e">type_v</span> <span style="color:#66d9ef">interface</span>{}) {
 	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">type_v</span>)
+}
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="error--defer--panic--recover">
+  Error / Defer / Panic / Recover
+  <a class="anchor" href="#error--defer--panic--recover">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>error / defer / panic / recover</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+	<span style="color:#e6db74">&#34;os&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#75715e">// // Error 처리
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// f, err := os.Open(&#34;C:\\temp\\1.txt&#34;)
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// if err != nil {
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 	println(&#34;Error!!!&#34;)
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 	log.Fatal(err.Error())
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// }
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// println(f.Name())
+</span><span style="color:#75715e"></span>
+	<span style="color:#75715e">// // defer
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// f, err := os.Open(&#34;1.txt&#34;)
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// if err != nil {
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 	panic(err)
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// }
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// defer f.Close()
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// bytes := make([]byte, 1024)
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// f.Read(bytes)
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// println(len(bytes))
+</span><span style="color:#75715e"></span>
+	<span style="color:#75715e">// panic
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">openFile</span>(<span style="color:#e6db74">&#34;Invalid.txt&#34;</span>)
+	println(<span style="color:#e6db74">&#34;Done!!!&#34;</span>)
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">openFile</span>(<span style="color:#a6e22e">fn</span> <span style="color:#66d9ef">string</span>) {
+	<span style="color:#75715e">// defer에 의한 recover 처리
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">defer</span> <span style="color:#66d9ef">func</span>() {
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">r</span> <span style="color:#f92672">:=</span> recover(); <span style="color:#a6e22e">r</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+			<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Open Error&#34;</span>, <span style="color:#a6e22e">r</span>)
+		}
+	}()
+
+	<span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Open</span>(<span style="color:#a6e22e">fn</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		println(<span style="color:#e6db74">&#34;Panic Herer!!!&#34;</span>)
+		panic(<span style="color:#a6e22e">err</span>)
+	}
+
+	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">f</span>.<span style="color:#a6e22e">Close</span>()
 }
 </code></pre></div>
     </div>

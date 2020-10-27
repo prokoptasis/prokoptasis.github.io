@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.7b55fd987eb141a4ce7887e442778f63b3caff8ac0797c931ad9653e84af242a.js" integrity="sha256-e1X9mH6xQaTOeIfkQnePY7PK/4rAeXyTGtllPoSvJCo="></script>
+<script defer src="/ko.search.min.962fb64a0cca644665228734defefcd12ad9d679f371ad5e80d1a30c9afaed19.js" integrity="sha256-li&#43;2SgzKZEZlIoc03v780SrZ1nnzca1egNGjDJr67Rk="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -1255,8 +1255,8 @@ Chain Rule을 적용  <span>
   \( \infty \)
 </span>
 에 수렴하함. 이 두 식을 합하면 Logistic Regression의 Convex한 Cost Funtion이 되게 됨.</p>
-<div><img width="600px" src="../../../../../201020_11_log_y_1.jpg" alt="log y=1" ></div>
-<div><img width="600px" src="../../../../../201020_12_log_y_0.jpg" alt="log y=0" ></div>
+<div><img width="600px" src="../../../../../201020_11_ml_log_y_1.jpg" alt="log y=1" ></div>
+<div><img width="600px" src="../../../../../201020_12_ml_log_y_0.jpg" alt="log y=0" ></div>
 <p>Cross-Entropy 유도의 또다른 설명은 다음과 같음.</p>
 <p>하나의 입력 x에 대해 출력이 1일 확률을 y로 정의. y는 0 또는 1일임으로 y = sigmoid(Wx+b)로 나타낼 수 있음. 입력 x에 대해 출력이 0일 확률은 1이 나타날 확률의 나머지임으로 1-y 임. 확률 변수 C는 0 또는 1 이외에는 존재하지 않음으로 베르누이 시행을 전제로 하며 베르누이 분포의 확률질량함수(PMF)는 아래와 같이 정의됨. 이를 Log 변환을 통해 Convex의 형태와 극점의 위치를 유지하며 곱을 선형의 조합 꼴로 풀 수 있도록 변환함.</p>
 
@@ -1822,6 +1822,367 @@ Choose = <span>
   </label>
 </div>
 
+<h3 id="learning-rate">
+  Learning Rate
+  <a class="anchor" href="#learning-rate">#</a>
+</h3>
+<p>Learning Rate와 학습의 상관관계는 아래와 같음. Learning rate가 너무 높을 경우 Overshooting이 발생되며 너무 작을 경우 학습이 매우 더디게 진행됨.</p>
+<div><img width="600px" src="../../../../../201020_14_ml_learning_rate_step.png" alt="learning rate step" ></div>
+<p>학습시점에 따라 Learning rate를 조정하는 decay방식이 있음.</p>
+<ul>
+<li>Step deacy : N epoch or validation loss</li>
+<li>Exponential decay : <span>
+  \( \alpha = \apha 0 \epsilon - kt \)
+</span>
+</li>
+<li>1/t decay : <span>
+  \( \alpha = \apha 0 (1&#43;kt) \)
+</span>
+</li>
+<li>inverse time decay</li>
+<li>natural exponential decay</li>
+<li>piecewise constant</li>
+<li>polynomical decay</li>
+</ul>
+<h3 id="data-preprocessing">
+  Data Preprocessing
+  <a class="anchor" href="#data-preprocessing">#</a>
+</h3>
+<p>Data의 분포가 편중되어 있을 경우 표준화(Standardization)와 정규화(Normalization)을 통해서 전처리.</p>
+<p>Feature Scaling
+Standardization : <span>
+  \( x_{new} = \frac {x - \mu}{\sigma} \)
+</span>
+
+Normalization :  <span>
+  \( x_{new} = \frac {x - x_{min}}{x_{max} - - x_{min}} \)
+</span>
+</p>
+<p>Noisy Data
+학습에 필요한 Data로 정제하는 전처리 과정.</p>
+<h3 id="overfitting">
+  Overfitting
+  <a class="anchor" href="#overfitting">#</a>
+</h3>
+<p>Underfitting : High bias 상태. 학습이 덜된 상태.
+Overfitting : High variance. 학습이 너무되어 주어진 data에만 맞춰진 상태.</p>
+<div><img width="600px" src="../../../../../201020_15_ml_overfitting.png" alt="overfitting" ></div>
+<p>Solution</p>
+<ul>
+<li>Set features : Get more training data</li>
+<li>Set features : Smaller set of features (PCA)</li>
+<li>Set features : Add additional features (for underfitting)</li>
+<li>Regularization (Add term to loss)</li>
+</ul>
+<p>Linear regression with regularization <br><br>
+<span>
+  \( h_{\theta}(x) = \theta_0 &#43; \theta_1 x &#43; \theta_2 x^2 &#43; \theta_3 x^3 &#43; \theta_4 x^4 \)
+</span>
+ <br>
+<span>
+  \( J(\theta) = \frac{1}{2m}\displaystyle\sum_{i=1}^m (h_{\theta}(x^{(i)}) - y^{(i)})^2 &#43; \frac{ \lambda }{2m}\displaystyle\sum_{j=1}^m \theta_{j}^2 \)
+</span>
+ <br><br>
+<span>
+  \( \lambda-- \)
+</span>
+ : fixed high bias (under fitting) <br><br>
+<span>
+  \( \lambda&#43;&#43; \)
+</span>
+ : fixed high variance (over fitting) <br><br></p>
+<h3 id="xor-prolem">
+  XOR Prolem
+  <a class="anchor" href="#xor-prolem">#</a>
+</h3>
+<p>1958년 Frank Rosenblatt에 의에 제안된 신경망 시스템의 모델로 McGullock, Pitts, Hebb의 연구를 기초로 하고 있음.</p>
+<div><img width="600px" src="../../../../../201020_17_ml_perceptron.png" alt="perceptron" ></div>
+<p>하지만 XOR의 문제는 Linear Regression으로 해결할 수 없다는 수학적 결론을 내림. (Perceptrons by Marvin Minsky)</p>
+<div><img width="600px" src="../../../../../201020_18_ml_xor.png" alt="xor problem" ></div>
+
+
+
+
+<div class="book-tabs"><input type="radio" class="toggle" name="tabs-Logic Gate" id="tabs-Logic Gate-0" checked="checked" />
+  <label for="tabs-Logic Gate-0">AND</label>
+  <div class="book-tabs-content markdown-inner"><table>
+<thead>
+<tr>
+<th style="text-align:center">X1</th>
+<th style="text-align:center">X2</th>
+<th style="text-align:center">T</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+</div><input type="radio" class="toggle" name="tabs-Logic Gate" id="tabs-Logic Gate-1"  />
+  <label for="tabs-Logic Gate-1">OR</label>
+  <div class="book-tabs-content markdown-inner"><table>
+<thead>
+<tr>
+<th style="text-align:center">X1</th>
+<th style="text-align:center">X2</th>
+<th style="text-align:center">T</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+</div><input type="radio" class="toggle" name="tabs-Logic Gate" id="tabs-Logic Gate-2"  />
+  <label for="tabs-Logic Gate-2">NAND</label>
+  <div class="book-tabs-content markdown-inner"><table>
+<thead>
+<tr>
+<th style="text-align:center">X1</th>
+<th style="text-align:center">X2</th>
+<th style="text-align:center">T</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+</div><input type="radio" class="toggle" name="tabs-Logic Gate" id="tabs-Logic Gate-3"  />
+  <label for="tabs-Logic Gate-3">NOR</label>
+  <div class="book-tabs-content markdown-inner"><table>
+<thead>
+<tr>
+<th style="text-align:center">X1</th>
+<th style="text-align:center">X2</th>
+<th style="text-align:center">T</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+
+
+
+
+
+<div class="book-tabs"><input type="radio" class="toggle" name="tabs-XOR Solve" id="tabs-XOR Solve-0" checked="checked" />
+  <label for="tabs-XOR Solve-0">Flow</label>
+  <div class="book-tabs-content markdown-inner"><script src="/mermaid.min.js"></script>
+  <script>mermaid.initialize({
+  "flowchart": {
+    "useMaxWidth":true
+  },
+  "theme": "default"
+}
+)</script>
+<p class="mermaid text-center">
+graph LR
+A(NAND)-->C(AND)-->D(XOR)
+B(_OR_)-->C
+style A fill:#ffffff,stroke:#000000,stroke-width:1px
+style B fill:#ffffff,stroke:#000000,stroke-width:1px
+style C fill:#ffffff,stroke:#000000,stroke-width:1px
+style D fill:#ffffff,stroke:#000000,stroke-width:1px</div><input type="radio" class="toggle" name="tabs-XOR Solve" id="tabs-XOR Solve-1"  />
+  <label for="tabs-XOR Solve-1">XOR</label>
+  <div class="book-tabs-content markdown-inner"><p>NOR</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">X1</th>
+<th style="text-align:center">X2</th>
+<th style="text-align:center">NAND</th>
+<th style="text-align:center">OR</th>
+<th style="text-align:center">AND</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+
+
+
+
+
+<div class="book-tabs"><input type="radio" class="toggle" name="tabs-XOR Solve 2" id="tabs-XOR Solve 2-0" checked="checked" />
+  <label for="tabs-XOR Solve 2-0">Flow</label>
+  <div class="book-tabs-content markdown-inner"><p class="mermaid text-center">
+graph LR
+E(NOR)-->F(AND)-->G(XOR)
+H(AND)-->F
+style E fill:#ffffff,stroke:#000000,stroke-width:1px
+style F fill:#ffffff,stroke:#000000,stroke-width:1px
+style G fill:#ffffff,stroke:#000000,stroke-width:1px
+style H fill:#ffffff,stroke:#000000,stroke-width:1px</div><input type="radio" class="toggle" name="tabs-XOR Solve 2" id="tabs-XOR Solve 2-1"  />
+  <label for="tabs-XOR Solve 2-1">XOR</label>
+  <div class="book-tabs-content markdown-inner"><p>NOR</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">X1</th>
+<th style="text-align:center">X2</th>
+<th style="text-align:center">AND</th>
+<th style="text-align:center">NOR</th>
+<th style="text-align:center">AND</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+
+<h3 id="backpropagation">
+  Backpropagation
+  <a class="anchor" href="#backpropagation">#</a>
+</h3>
+<p>1974, 1982 Paul Werbos, 1986 Hinton에 의해 정립된 개념. 순전파에서 목표값과 모델의 계산값의 오차를 구한후 그 오차값을 역방향으로 전파하며 노드들의 변수들을 갱신하는 알고리즘. 다만 복잡한 Neural Networks 환경에서는 역전파되는 값들이 소실되는 Vanishing Gradient 현상이 발생됨. 2006년 2007년 Hinton과 Bengio에 의해 초기 Parameter에 의한 영향이 주목되며 Deep Learning이라는 용어가 등장함.</p>
+<p>Geoffrey Hinton&rsquo;s summary</p>
+<ul>
+<li>Our labeled datasets were thousands of times too small.</li>
+<li>Our computers were millions of times too slow.</li>
+<li>We initialized the wieghts in a stupid way.</li>
+<li>We used the wrong type of non-linearity.</li>
+</ul>
+<p>Node Noatation</p>
+<div><img width="600px" src="../../../../../201020_22_ml_node_notation.png" alt="node notation" ></div>
+<p>Backpropagation</p>
+<div><img width="600px" src="../../../../../201020_23_ml_backpropagation_1.png" alt="node notation" ></div>
+<p>Backpropagation2</p>
+<div><img width="600px" src="../../../../../201020_24_ml_backpropagation_2.png" alt="node notation" ></div>
+<p>Vanishing Gradient</p>
+<div><img width="600px" src="../../../../../201020_21_ml_vanishing_gradient.png" alt="vanishing gradient" ></div>
 <br>
 <section class="footnotes" role="doc-endnotes">
 <hr>
