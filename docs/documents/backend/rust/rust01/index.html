@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.962fb64a0cca644665228734defefcd12ad9d679f371ad5e80d1a30c9afaed19.js" integrity="sha256-li&#43;2SgzKZEZlIoc03v780SrZ1nnzca1egNGjDJr67Rk="></script>
+<script defer src="/ko.search.min.615aa299a05f866975ef08ff4e1ed3064dde553a58acdc949b088340ffed5db7.js" integrity="sha256-YVqimaBfhml17wj/Th7TBk3eVTpYrNyUmwiDQP/tXbc="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -247,7 +247,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://prokoptasis.github.io/docs/documents/backend/go/go01/" class="">GO Basic 1</a>
+    <a href="http://prokoptasis.github.io/docs/documents/backend/go/go01/" class="">GO Basic</a>
   
 
         </li>
@@ -1143,7 +1143,10 @@ Rust는 Shallow Copy를 Move라 표현. 명시적으로 표시하지 않는 이�
   </label>
 </div>
 
-<p>Struct / Function</p>
+<h3 id="using-structs">
+  Using Structs
+  <a class="anchor" href="#using-structs">#</a>
+</h3>
 
 <div class="book-expand">
   <label>
@@ -1301,6 +1304,155 @@ Rust는 Shallow Copy를 Move라 표현. 명시적으로 표시하지 않는 이�
     <span style="color:#75715e">// associated functions
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> sqre <span style="color:#f92672">=</span> Rectangle::sqre(<span style="color:#ae81ff">3</span>);
     println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;sqre : {:?}&#34;</span>, sqre)
+}
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="enums-and-pattern-matching">
+  Enums and Pattern Matching
+  <a class="anchor" href="#enums-and-pattern-matching">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>enums</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#75715e">#[derive(Debug)]</span>
+<span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">IpAddrKind</span> {
+    V4,
+    V6,
+}
+
+<span style="color:#75715e">#[derive(Debug)]</span>
+<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">IpAddr</span> {
+    kind: <span style="color:#a6e22e">IpAddrKind</span>,
+    addr: String,
+}
+
+<span style="color:#75715e">#[derive(Debug)]</span>
+<span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">IpAddrStr</span> {
+    V4(String),
+    V6(String),
+}
+
+<span style="color:#75715e">#[derive(Debug)]</span>
+<span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">IpAddrU8</span> {
+    V4(<span style="color:#66d9ef">u8</span>, <span style="color:#66d9ef">u8</span>, <span style="color:#66d9ef">u8</span>, <span style="color:#66d9ef">u8</span>),
+    V6(String),
+}
+
+<span style="color:#75715e">#[derive(Debug)]</span>
+<span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">IpAddrStrc</span> {
+    V4(Ipv4Addr),
+    V6(Ipv6Addr),
+}
+
+<span style="color:#75715e">#[derive(Debug)]</span>
+<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Ipv4Addr</span> {
+    addr: String,
+}
+
+<span style="color:#75715e">#[derive(Debug)]</span>
+<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Ipv6Addr</span> {
+    addr: String,
+}
+
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">route</span>(ip_type: <span style="color:#a6e22e">IpAddrKind</span>) {
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, ip_type)
+}
+
+<span style="color:#75715e">#[derive(Debug)]</span>
+<span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">Mssg</span> {
+    Quit,
+    Move { x: <span style="color:#66d9ef">i32</span>, y: <span style="color:#66d9ef">i32</span> },
+    Write(String),
+    ChangeColor(<span style="color:#66d9ef">i32</span>, <span style="color:#66d9ef">i32</span>, <span style="color:#66d9ef">i32</span>),
+}
+
+<span style="color:#66d9ef">impl</span> Mssg {
+    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">call</span>(<span style="color:#f92672">&amp;</span>self) {
+        println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Mssg::call&#34;</span>)
+    }
+}
+
+<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">QuitMessage</span>;
+<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">MoveMessage</span> {
+    x: <span style="color:#66d9ef">i32</span>,
+    y: <span style="color:#66d9ef">i32</span>,
+}
+<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">WriteMessage</span>(String);
+<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">ChangeColorMessage</span>(<span style="color:#66d9ef">i32</span>, <span style="color:#66d9ef">i32</span>, <span style="color:#66d9ef">i32</span>);
+
+<span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">Optn</span><span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> {
+    Some(T),
+    None,
+}
+
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#75715e">// enum 1
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> ip4 <span style="color:#f92672">=</span> IpAddrKind::V4;
+    <span style="color:#66d9ef">let</span> ip6 <span style="color:#f92672">=</span> IpAddrKind::V6;
+
+    route(IpAddrKind::V4);
+    route(IpAddrKind::V6);
+    route(ip4);
+    route(ip6);
+
+    <span style="color:#75715e">// enum 2
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> home <span style="color:#f92672">=</span> IpAddr {
+        kind: <span style="color:#a6e22e">IpAddrKind</span>::V4,
+        addr: String::from(<span style="color:#e6db74">&#34;127.0.0.1&#34;</span>),
+    };
+
+    <span style="color:#66d9ef">let</span> lbck <span style="color:#f92672">=</span> IpAddr {
+        kind: <span style="color:#a6e22e">IpAddrKind</span>::V6,
+        addr: String::from(<span style="color:#e6db74">&#34;::1&#34;</span>),
+    };
+
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, home);
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, lbck);
+
+    <span style="color:#75715e">// enum 3
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> home <span style="color:#f92672">=</span> IpAddrStr::V4(String::from(<span style="color:#e6db74">&#34;127.0.0.1&#34;</span>));
+    <span style="color:#66d9ef">let</span> lbck <span style="color:#f92672">=</span> IpAddrStr::V6(String::from(<span style="color:#e6db74">&#34;::1&#34;</span>));
+
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, home);
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, lbck);
+
+    <span style="color:#75715e">// enum 4
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> home <span style="color:#f92672">=</span> IpAddrU8::V4(<span style="color:#ae81ff">127</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>);
+    <span style="color:#66d9ef">let</span> lbck <span style="color:#f92672">=</span> IpAddrU8::V6(String::from(<span style="color:#e6db74">&#34;::1&#34;</span>));
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, home);
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, lbck);
+
+    <span style="color:#75715e">// enum 5
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> home <span style="color:#f92672">=</span> IpAddrStrc::V4(Ipv4Addr {
+        addr: String::from(<span style="color:#e6db74">&#34;127.0.0.1&#34;</span>),
+    });
+    <span style="color:#66d9ef">let</span> lbck <span style="color:#f92672">=</span> IpAddrStrc::V6(Ipv6Addr {
+        addr: String::from(<span style="color:#e6db74">&#34;::1&#34;</span>),
+    });
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, home);
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, lbck);
+
+    <span style="color:#75715e">// enum 6
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> mssg <span style="color:#f92672">=</span> Mssg::Write(String::from(<span style="color:#e6db74">&#34;Hello&#34;</span>));
+    mssg.call();
+
+    <span style="color:#75715e">// enum 7
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> numb <span style="color:#f92672">=</span> Some(<span style="color:#ae81ff">5</span>);
+    <span style="color:#66d9ef">let</span> strg <span style="color:#f92672">=</span> Some(<span style="color:#e6db74">&#34;A string&#34;</span>);
+    <span style="color:#66d9ef">let</span> abst: Option<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">i32</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> None;
+
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, numb);
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, strg);
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, abst);
 }
 </code></pre></div>
     </div>

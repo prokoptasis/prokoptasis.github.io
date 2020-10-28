@@ -27,15 +27,15 @@ Live SQL #   Oracle 가입 Oracle Live SQL 접속 &amp;ldquo;Start Coding Now&am
     </item>
     
     <item>
-      <title>GO Basic 1</title>
+      <title>GO Basic</title>
       <link>http://prokoptasis.github.io/docs/documents/backend/go/go01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://prokoptasis.github.io/docs/documents/backend/go/go01/</guid>
-      <description>GO Basic 1 #   Go 기본적인 문법 정리. 하기 사이트 참조.
+      <description>GO Basic #   Go 기본적인 문법 정리. 하기 사이트 참조.
 예제로 배우는 Go 프로그래밍
 Hello World #  package main func main() { println(&amp;#34;Hello World!&amp;#34;) } Declare #  선언 및 할당 방식
- declare ...  package main func main() { // 선언 및 할당 	var a int var b float32 = 11. println(a, b) // 선언 및 할당 	a = 10 b = 12.</description>
+ declare ...  package main func main() { // 선언 및 할당 	var a int var b float32 = 11. println(a, b) // 선언 및 할당 	a = 10 b = 12.0 println(a, b) // 상수 	const c int = 10 const d string = &amp;#34;Hello&amp;#34; println(c, d) // 상수 나열 	const ( Visa = &amp;#34;Visa&amp;#34; Master = &amp;#34;MasterCard&amp;#34; Amex = &amp;#34;American Express&amp;#34; ) println(Visa, Master, Amex) // 상수 나열 	const ( Apple = iota Grape Orage ) println(Apple, Grape, Orage) }     Reserved Keywords #  GO 25개 예약어</description>
     </item>
     
     <item>
