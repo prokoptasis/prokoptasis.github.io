@@ -8,12 +8,12 @@
     <language>kr-ko</language>
     <lastBuildDate>Wed, 07 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://prokoptasis.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>SQL Basic 1</title>
+      <title>SQL Basic</title>
       <link>http://prokoptasis.github.io/docs/documents/backend/sql/sql01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://prokoptasis.github.io/docs/documents/backend/sql/sql01/</guid>
-      <description>SQL Basic 1 #   SQL은 Sturctured Query Langugage의 약자로 데이터베이스의 데이터를 관리하기 위해 사용하는 언어. 자료의 검색과 관리, 스키마의 생성과 수정, 객체의 접근 조정 및 관리의 기능 제공. ANSI SQL 기본 문법은 원래 어떤 데이터베이스와도 호환이 가능해야 하나 통상 Vendor들이 표준을 잘지키지않는 편이라 기본적인 수준에서만 호환이 가능. NoSQL 계열의 데이터베이스에서는 사용되지 않음. (다음은 오라클 기준임)
+      <description>SQL BASIC 기본 교육 자료 #   SQL은 Sturctured Query Langugage의 약자로 데이터베이스의 데이터를 관리하기 위해 사용하는 언어. 자료의 검색과 관리, 스키마의 생성과 수정, 객체의 접근 조정 및 관리의 기능 제공. ANSI SQL 기본 문법은 원래 어떤 데이터베이스와도 호환이 가능해야 하나 통상 Vendor들이 표준을 잘지키지않는 편이라 기본적인 수준에서만 호환이 가능. NoSQL 계열의 데이터베이스에서는 사용되지 않음. (다음은 오라클 기준임)
 Live SQL #   Oracle 가입 Oracle Live SQL 접속 &amp;ldquo;Start Coding Now&amp;rdquo; Live SQL 실행  Hello World!</description>
     </item>
     
@@ -49,7 +49,7 @@ Hello World #  package main func main() { println(&amp;#34;Hello World!&amp;#34;
     </item>
     
     <item>
-      <title>Rust Basic 01</title>
+      <title>Rust Basic</title>
       <link>http://prokoptasis.github.io/docs/documents/backend/rust/rust01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       

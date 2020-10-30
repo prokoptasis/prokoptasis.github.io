@@ -4,17 +4,17 @@
 <head>
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Rust Basic 01">
-<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="Rust Basic 01" />
-<meta property="og:description" content="Rust Basic 01" />
+<meta name="description" content="The Rust Programming Language">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="Rust Basic" />
+<meta property="og:description" content="The Rust Programming Language" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://prokoptasis.github.io/docs/documents/backend/rust/rust01/" />
 
-<title>Rust Basic 01 | Prokoptasis</title>
+<title>Rust Basic | Prokoptasis</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.f93877ae0c7efad4aa920cc507f0488e74ba1b0d38fa850791e7f25a6b9f460e.js" integrity="sha256-&#43;Th3rgx&#43;&#43;tSqkgzFB/BIjnS6Gw04&#43;oUHkefyWmufRg4="></script>
+<script defer src="/ko.search.min.720b73658a47637d47f01026ee4329b7dd69af1a9b8975f58ed0f145db64943d.js" integrity="sha256-cgtzZYpHY31H8BAm7kMpt91prxqbiXX1jtDxRdtklD0="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -199,7 +199,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://prokoptasis.github.io/docs/documents/backend/rust/rust01/" class=" active">Rust Basic 01</a>
+    <a href="http://prokoptasis.github.io/docs/documents/backend/rust/rust01/" class=" active">Rust Basic</a>
   
 
         </li>
@@ -295,7 +295,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://prokoptasis.github.io/docs/documents/backend/sql/sql01/" class="">SQL Basic 1</a>
+    <a href="http://prokoptasis.github.io/docs/documents/backend/sql/sql01/" class="">SQL Basic</a>
   
 
         </li>
@@ -506,7 +506,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>Rust Basic 01</strong>
+  <strong>Rust Basic</strong>
 
   <label for="toc-control">
     
@@ -1453,6 +1453,112 @@ Rust는 Shallow Copy를 Move라 표현. 명시적으로 표시하지 않는 이�
     println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, numb);
     println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, strg);
     println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, abst);
+}
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>match</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#75715e">#[derive(Debug)]</span>
+<span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">UsState</span> {
+    Alabama,
+    Alaska,
+}
+
+<span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">Coin</span> {
+    Penny,
+    Nickel,
+    Dime,
+    Quater(UsState),
+}
+
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">value_in_cents</span>(coin: <span style="color:#a6e22e">Coin</span>) -&gt; <span style="color:#66d9ef">u32</span> {
+    <span style="color:#75715e">// enum &amp; match
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">match</span> coin {
+        Coin::Penny <span style="color:#f92672">=&gt;</span> {
+            println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Lucky penny!&#34;</span>);
+            <span style="color:#ae81ff">1</span>
+        }
+        Coin::Nickel <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">5</span>,
+        Coin::Dime <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">10</span>,
+        Coin::Quater(state) <span style="color:#f92672">=&gt;</span> {
+            println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;State quater from {:?}!&#34;</span>, state);
+            <span style="color:#ae81ff">25</span>
+        }
+    }
+}
+
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">plus_one</span>(x: Option<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">i32</span><span style="color:#f92672">&gt;</span>) -&gt; Option<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">i32</span><span style="color:#f92672">&gt;</span> {
+    <span style="color:#66d9ef">match</span> x {
+        None <span style="color:#f92672">=&gt;</span> None,
+        Some(i) <span style="color:#f92672">=&gt;</span> Some(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>),
+    }
+}
+
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#75715e">// enum 1
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> coin1 <span style="color:#f92672">=</span> Coin::Penny;
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, value_in_cents(coin1));
+
+    <span style="color:#75715e">// enum2
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> coin2 <span style="color:#f92672">=</span> Coin::Quater(UsState::Alaska);
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, value_in_cents(coin2));
+
+    <span style="color:#75715e">// Option&lt;T&gt; Matching
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> five <span style="color:#f92672">=</span> Some(<span style="color:#ae81ff">5</span>);
+    <span style="color:#66d9ef">let</span> six <span style="color:#f92672">=</span> plus_one(five);
+    <span style="color:#66d9ef">let</span> none <span style="color:#f92672">=</span> plus_one(None);
+
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, five);
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, six);
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, none);
+
+    <span style="color:#75715e">// Placeholder
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> some_u8_value <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#66d9ef">u8</span>;
+    <span style="color:#66d9ef">match</span> some_u8_value {
+        <span style="color:#ae81ff">1</span> <span style="color:#f92672">=&gt;</span> println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;one&#34;</span>),
+        <span style="color:#ae81ff">3</span> <span style="color:#f92672">=&gt;</span> println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;three&#34;</span>),
+        <span style="color:#ae81ff">5</span> <span style="color:#f92672">=&gt;</span> println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;five&#34;</span>),
+        <span style="color:#ae81ff">6</span> <span style="color:#f92672">=&gt;</span> println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;seven&#34;</span>),
+        <span style="color:#ae81ff">7</span> <span style="color:#f92672">=&gt;</span> (),
+        _ <span style="color:#f92672">=&gt;</span> println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;???&#34;</span>),
+    }
+
+    <span style="color:#66d9ef">let</span> some_u8_value <span style="color:#f92672">=</span> Some(<span style="color:#ae81ff">3</span>);
+
+    <span style="color:#75715e">// before if let
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">match</span> some_u8_value {
+        Some(<span style="color:#ae81ff">3</span>) <span style="color:#f92672">=&gt;</span> println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;three&#34;</span>),
+        _ <span style="color:#f92672">=&gt;</span> (),
+    }
+
+    <span style="color:#75715e">// after if let (syntax sugar)
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> <span style="color:#66d9ef">let</span> Some(<span style="color:#ae81ff">3</span>) <span style="color:#f92672">=</span> some_u8_value {
+        println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Three&#34;</span>);
+    }
+
+    <span style="color:#75715e">// let mut / if let else
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> coin2 <span style="color:#f92672">=</span> Coin::Quater(UsState::Alaska);
+    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">match</span> coin2 {
+        Coin::Quater(state) <span style="color:#f92672">=&gt;</span> println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;State {:?}&#34;</span>, state),
+        _ <span style="color:#f92672">=&gt;</span> count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>,
+    }
+    <span style="color:#66d9ef">let</span> coin2 <span style="color:#f92672">=</span> Coin::Quater(UsState::Alabama);
+    <span style="color:#66d9ef">if</span> <span style="color:#66d9ef">let</span> Coin::Quater(state) <span style="color:#f92672">=</span> coin2 {
+        println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;State {:?}&#34;</span>, state);
+    } <span style="color:#66d9ef">else</span> {
+        count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+    }
 }
 </code></pre></div>
     </div>
