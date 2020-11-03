@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.720b73658a47637d47f01026ee4329b7dd69af1a9b8975f58ed0f145db64943d.js" integrity="sha256-cgtzZYpHY31H8BAm7kMpt91prxqbiXX1jtDxRdtklD0="></script>
+<script defer src="/ko.search.min.4283813b7c4cdba71231a2aab7de204c8ebc3e2e52b66580f28d938ea0ac1474.js" integrity="sha256-QoOBO3xM26cSMaKqt94gTI68Pi5StmWA8o2TjqCsFHQ="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -1559,6 +1559,242 @@ Rust는 Shallow Copy를 Move라 표현. 명시적으로 표시하지 않는 이�
     } <span style="color:#66d9ef">else</span> {
         count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
     }
+}
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="mods">
+  Mods
+  <a class="anchor" href="#mods">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>mods</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <p>main.rs</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">crate</span> rust_comm;
+
+<span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">mod</span> a {
+	<span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">mod</span> sers {
+		<span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">mod</span> of {
+			<span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">nest_mods</span>() {}
+		}
+	}
+}
+
+<span style="color:#66d9ef">use</span> a::sers::of;
+<span style="color:#66d9ef">use</span> a::sers::of::nest_mods;
+
+<span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">TrffLight</span> {
+	Red,
+	Yellow,
+	Green,
+}
+
+<span style="color:#75715e">// use green은 제외
+</span><span style="color:#75715e">// use TrffLight::{Red, Yellow};
+</span><span style="color:#75715e">// use에서 전체 포함
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">use</span> TrffLight::<span style="color:#f92672">*</span>;
+
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
+	rust_comm::client::connect();
+	<span style="color:#75715e">// importing names
+</span><span style="color:#75715e"></span>	a::sers::of::nest_mods();
+	<span style="color:#75715e">// use short type
+</span><span style="color:#75715e"></span>	of::nest_mods();
+	<span style="color:#75715e">// use short type
+</span><span style="color:#75715e"></span>	nest_mods();
+
+	<span style="color:#66d9ef">let</span> red <span style="color:#f92672">=</span> Red;
+	<span style="color:#66d9ef">let</span> yellow <span style="color:#f92672">=</span> Yellow;
+	<span style="color:#75715e">//let green1 = TrffLight::Green;
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">let</span> green2 <span style="color:#f92672">=</span> Green;
+}
+</code></pre></div><p>lib.rs</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#75715e">// rust_comm
+</span><span style="color:#75715e">// ⨽ network
+</span><span style="color:#75715e">// ⨽ client
+</span><span style="color:#75715e">// // network::connect()
+</span><span style="color:#75715e">// mod network {
+</span><span style="color:#75715e">//     fn connect() {
+</span><span style="color:#75715e">//     }
+</span><span style="color:#75715e">// }
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// // client::connect()
+</span><span style="color:#75715e">// mod client {
+</span><span style="color:#75715e">//     fn connect() {
+</span><span style="color:#75715e">//     }
+</span><span style="color:#75715e">// }
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// rust_comm
+</span><span style="color:#75715e">// ⨽ network
+</span><span style="color:#75715e">//   ⨽ client
+</span><span style="color:#75715e">// network::connect
+</span><span style="color:#75715e">// network::client::connect
+</span><span style="color:#75715e">// mod network {
+</span><span style="color:#75715e">//     fn connect() {}
+</span><span style="color:#75715e">//     mod client {
+</span><span style="color:#75715e">//         fn connect() {}
+</span><span style="color:#75715e">//     }
+</span><span style="color:#75715e">// }
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// rust_comm
+</span><span style="color:#75715e">// ⨽ client
+</span><span style="color:#75715e">// ⨽ network
+</span><span style="color:#75715e">//   ⨽ server
+</span><span style="color:#75715e">// client
+</span><span style="color:#75715e">// mod client {
+</span><span style="color:#75715e">//     fn connect() {
+</span><span style="color:#75715e">//     }
+</span><span style="color:#75715e">// }
+</span><span style="color:#75715e">// // network
+</span><span style="color:#75715e">// // network::server
+</span><span style="color:#75715e">// mod network {
+</span><span style="color:#75715e">//     fn connect() {
+</span><span style="color:#75715e">//     }
+</span><span style="color:#75715e">//     mod server {
+</span><span style="color:#75715e">//         fn connect() {
+</span><span style="color:#75715e">//         }
+</span><span style="color:#75715e">//     }
+</span><span style="color:#75715e">// }
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// src/client.rs
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">mod</span> client;
+
+<span style="color:#75715e">// src/networ.rs
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">mod</span> network;
+
+<span style="color:#75715e">// src/network/client2.rs
+</span><span style="color:#75715e">// pub mod client2;
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">mod</span> outm {
+    <span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">midd_func</span>() {}
+    <span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">midd_scrt_func</span>() {}
+
+    <span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">mod</span> insd {
+        <span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">innr_func</span>() {}
+        <span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">scrt_func</span>() {}
+    }
+}
+
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">try_me</span>() {
+    outm::midd_func();
+    outm::midd_scrt_func();
+    outm::insd::innr_func();
+    outm::insd::scrt_func();
+}
+
+<span style="color:#75715e">#[cfg(test)]</span>
+<span style="color:#66d9ef">mod</span> tests {
+    <span style="color:#66d9ef">use</span> <span style="color:#66d9ef">super</span>::client2;
+
+    <span style="color:#75715e">#[test]</span>
+    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">it_works</span>() {
+        assert_eq<span style="color:#f92672">!</span>(<span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">4</span>);
+        <span style="color:#75715e">// client2::connect();
+</span><span style="color:#75715e"></span>        client2::connect();
+    }
+}
+</code></pre></div><p>client.rs</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">connect</span>() {}
+</code></pre></div><p>\network\mod.rs</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">connect</span>() {}
+
+<span style="color:#66d9ef">mod</span> server;
+</code></pre></div><p>\network\server.rs</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">connect</span>() {}
+</code></pre></div><p>\network\client2.rs</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">connect2</span>() {}
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="collections">
+  Collections
+  <a class="anchor" href="#collections">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>vectors</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#75715e">#[derive(Debug)]</span>
+<span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">SpreadsheetCell</span> {
+    Int(<span style="color:#66d9ef">i32</span>),
+    Float(<span style="color:#66d9ef">f64</span>),
+    Text(String),
+}
+
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#75715e">// generic
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> v1: Vec<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">i32</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> Vec::new();
+    <span style="color:#66d9ef">let</span> v1 <span style="color:#f92672">=</span> vec<span style="color:#f92672">!</span>[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>];
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, v1);
+
+    <span style="color:#75715e">// push
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> v1 <span style="color:#f92672">=</span> Vec::new();
+    v1.push(<span style="color:#ae81ff">5</span>);
+    v1.push(<span style="color:#ae81ff">6</span>);
+    v1.push(<span style="color:#ae81ff">7</span>);
+    v1.push(<span style="color:#ae81ff">8</span>);
+
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, v1);
+
+    <span style="color:#75715e">// vector scope
+</span><span style="color:#75715e"></span>    {
+        <span style="color:#66d9ef">let</span> v2 <span style="color:#f92672">=</span> vec<span style="color:#f92672">!</span>[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>];
+        println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, v2);
+    }
+    <span style="color:#75715e">// println!(&#34;{:?}&#34;, v2);
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// get
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> v3 <span style="color:#f92672">=</span> vec<span style="color:#f92672">!</span>[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>];
+    <span style="color:#66d9ef">let</span> third: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">i32</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>v3[<span style="color:#ae81ff">2</span>];
+    <span style="color:#66d9ef">let</span> fourth: Option<span style="color:#f92672">&lt;&amp;</span><span style="color:#66d9ef">i32</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> v3.get(<span style="color:#ae81ff">3</span>);
+    <span style="color:#66d9ef">let</span> sixth: Option<span style="color:#f92672">&lt;&amp;</span><span style="color:#66d9ef">i32</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> v3.get(<span style="color:#ae81ff">5</span>);
+
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?},{:?},{:?}&#34;</span>, third, fourth, sixth);
+
+    <span style="color:#75715e">// Vecto Push (???)
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> v4 <span style="color:#f92672">=</span> vec<span style="color:#f92672">!</span>[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>];
+    <span style="color:#66d9ef">let</span> second <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>v4[<span style="color:#ae81ff">1</span>];
+    v4.push(<span style="color:#ae81ff">6</span>);
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, v4);
+
+    <span style="color:#75715e">// Vector + for
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> v5 <span style="color:#f92672">=</span> vec<span style="color:#f92672">!</span>[<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">7</span>];
+    <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#f92672">&amp;</span>v5 {
+        println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, i);
+    }
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, v5);
+
+    <span style="color:#75715e">// Vector + for
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> v5 <span style="color:#f92672">=</span> vec<span style="color:#f92672">!</span>[<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">7</span>];
+    <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> v5 {
+        <span style="color:#f92672">*</span>i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">50</span>;
+        println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, i);
+    }
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, v5);
+
+    <span style="color:#75715e">// enum
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> row <span style="color:#f92672">=</span> vec<span style="color:#f92672">!</span>[
+        SpreadsheetCell::Int(<span style="color:#ae81ff">3</span>),
+        SpreadsheetCell::Text(String::from(<span style="color:#e6db74">&#34;Blue&#34;</span>)),
+        SpreadsheetCell::Float(<span style="color:#ae81ff">10.12</span>),
+    ];
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, row);
 }
 </code></pre></div>
     </div>
