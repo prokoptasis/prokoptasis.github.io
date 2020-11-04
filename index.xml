@@ -39,16 +39,6 @@ Hello World #  package main func main() { println(&amp;#34;Hello World!&amp;#34;
     </item>
     
     <item>
-      <title>GO Basic 2</title>
-      <link>http://prokoptasis.github.io/docs/documents/backend/go/go02/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://prokoptasis.github.io/docs/documents/backend/go/go02/</guid>
-      <description>GO Basic 2 #   정리중
- 다음글  </description>
-    </item>
-    
-    <item>
       <title>Rust Basic</title>
       <link>http://prokoptasis.github.io/docs/documents/backend/rust/rust01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -68,6 +58,18 @@ cargo init rust_hello --bin cd rust_hello cargo run fn main() { println!</descri
       <guid>http://prokoptasis.github.io/docs/documents/backend/rust/rust02/</guid>
       <description>Rust Basic2 #   직성중.
  다음글  </description>
+    </item>
+    
+    <item>
+      <title>GO Advanced</title>
+      <link>http://prokoptasis.github.io/docs/documents/backend/go/go02/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://prokoptasis.github.io/docs/documents/backend/go/go02/</guid>
+      <description>Go Advanced #   Go 활용 정리. 하기 사이트 참조.
+노마드 코더 - 쉽고 빠른 Go 시작하기
+Account #   account ...  main.go
+package main import ( &amp;#34;fmt&amp;#34; accounts &amp;#34;./accounts&amp;#34; ) func main() { // newAccount 	acct := accounts.NewAccount(&amp;#34;jhook&amp;#34;) fmt.Println(&amp;#34;01 : &amp;#34;, acct) // Deposit 	acct.Deposit(1000) fmt.Println(&amp;#34;02 : &amp;#34;, acct) // Withdraw O 	err := acct.Withdraw(300) fmt.Println(&amp;#34;03 : &amp;#34;, acct) if err != nil { fmt.</description>
     </item>
     
     <item>

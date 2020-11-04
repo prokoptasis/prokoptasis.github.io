@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.4283813b7c4cdba71231a2aab7de204c8ebc3e2e52b66580f28d938ea0ac1474.js" integrity="sha256-QoOBO3xM26cSMaKqt94gTI68Pi5StmWA8o2TjqCsFHQ="></script>
+<script defer src="/ko.search.min.55920159ef17b62d73040d109f56efd2cbad72faee3d9b4b2412376df4ab99c1.js" integrity="sha256-VZIBWe8Xti1zBA0Qn1bv0sutcvruPZtLJBI3bfSrmcE="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -260,7 +260,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://prokoptasis.github.io/docs/documents/backend/go/go02/" class="">GO Basic 2</a>
+    <a href="http://prokoptasis.github.io/docs/documents/backend/go/go02/" class="">GO Advanced</a>
   
 
         </li>
@@ -1795,6 +1795,113 @@ Rust는 Shallow Copy를 Move라 표현. 명시적으로 표시하지 않는 이�
         SpreadsheetCell::Float(<span style="color:#ae81ff">10.12</span>),
     ];
     println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, row);
+}
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>string</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#75715e">// str1
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> str1 <span style="color:#f92672">=</span> String::new();
+    <span style="color:#66d9ef">let</span> str1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hello there?&#34;</span>;
+    <span style="color:#75715e">// str2
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> dat1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;initial contents&#34;</span>;
+    <span style="color:#66d9ef">let</span> str2 <span style="color:#f92672">=</span> dat1.to_string();
+    <span style="color:#66d9ef">let</span> str2 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;initial contents&#34;</span>.to_string();
+
+    <span style="color:#75715e">// str3
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> str3 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;This is Pen&#34;</span>);
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{} , {} , {}&#34;</span>, str1, str2, str3);
+
+    <span style="color:#75715e">// str utf8
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> hello <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;السلام عليكم&#34;</span>);
+    <span style="color:#66d9ef">let</span> hello <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Dobrý den&#34;</span>);
+    <span style="color:#66d9ef">let</span> hello <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Hello&#34;</span>);
+    <span style="color:#66d9ef">let</span> hello <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;שָׁלוֹם&#34;</span>);
+    <span style="color:#66d9ef">let</span> hello <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;नमस्ते&#34;</span>);
+    <span style="color:#66d9ef">let</span> hello <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;こんにちは&#34;</span>);
+    <span style="color:#66d9ef">let</span> hello <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;안녕하세요&#34;</span>);
+    <span style="color:#66d9ef">let</span> hello <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;你好&#34;</span>);
+    <span style="color:#66d9ef">let</span> hello <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Olá&#34;</span>);
+    <span style="color:#66d9ef">let</span> hello <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Здравствуйте&#34;</span>);
+    <span style="color:#66d9ef">let</span> hello <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Hola&#34;</span>);
+
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, hello);
+
+    <span style="color:#75715e">// push
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> str4 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;foo&#34;</span>);
+    str4.push_str(<span style="color:#e6db74">&#34;bar&#34;</span>);
+    str4.push_str(<span style="color:#e6db74">&#34;quz&#34;</span>);
+
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, str4);
+
+    <span style="color:#75715e">// push_str : ownership
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> str5 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;foo&#34;</span>);
+    <span style="color:#66d9ef">let</span> str6 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;bar&#34;</span>;
+    str5.push_str(<span style="color:#f92672">&amp;</span>str6);
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{} , {}&#34;</span>, str5, str6);
+
+    <span style="color:#75715e">// push (lol)
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> str7 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;lo&#34;</span>);
+    str7.push(<span style="color:#e6db74">&#39;l&#39;</span>);
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, str7);
+
+    <span style="color:#75715e">// combine
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> str8 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Hello,&#34;</span>);
+    <span style="color:#66d9ef">let</span> str9 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;World!&#34;</span>);
+    <span style="color:#75715e">// let str10 = str8 + str9; //expected `&amp;str`, found struct `std::string::String`
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// add moethod -&gt; fn add(self, s: &amp;str) -&gt; String {}
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// &amp;String -&gt; &amp;str : deref coercion
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> str10 <span style="color:#f92672">=</span> str8 <span style="color:#f92672">+</span> <span style="color:#f92672">&amp;</span>str9;
+    <span style="color:#75715e">//println!(&#34;{}&#34;, str8); //value borrowed here after move
+</span><span style="color:#75715e"></span>    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, str9);
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, str10);
+
+    <span style="color:#75715e">// +
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> str11 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;tic&#34;</span>);
+    <span style="color:#66d9ef">let</span> str12 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;tac&#34;</span>);
+    <span style="color:#66d9ef">let</span> str13 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;toe&#34;</span>);
+
+    <span style="color:#66d9ef">let</span> str14 <span style="color:#f92672">=</span> str11 <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;-&#34;</span> <span style="color:#f92672">+</span> <span style="color:#f92672">&amp;</span>str12 <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;-&#34;</span> <span style="color:#f92672">+</span> <span style="color:#f92672">&amp;</span>str13;
+    <span style="color:#75715e">// println!(&#34;{}&#34;, str11);
+</span><span style="color:#75715e"></span>    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, str12);
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, str13);
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, str14);
+
+    <span style="color:#75715e">// format!
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> str11 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;tic&#34;</span>);
+    <span style="color:#66d9ef">let</span> str15 <span style="color:#f92672">=</span> format<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}-{}-{}&#34;</span>, str11, str12, str13);
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, str15);
+
+    <span style="color:#66d9ef">let</span> str16 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;hello wrold&#34;</span>);
+    <span style="color:#75715e">//let str17 = str16[3]; //std::string::String` cannot be indexed by
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// &#34;Hello&#34; &#34;Здравствуйте&#34; &#34;안녕하십니까&#34; &amp;str16[0] = ???
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> str17 <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>str16[<span style="color:#ae81ff">0</span>..<span style="color:#ae81ff">4</span>];
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, str17);
+
+    <span style="color:#75715e">// Panic
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// let str16 = String::from(&#34;안녕하십니까&#34;);
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// let str17 = &amp;str16[0..1];
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// println!(&#34;{}&#34;, str17);
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// string for
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> chr <span style="color:#66d9ef">in</span> <span style="color:#e6db74">&#34;안녕하십니까?&#34;</span>.chars() {
+        println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, chr);
+    }
+    <span style="color:#75715e">// string for
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> byt <span style="color:#66d9ef">in</span> <span style="color:#e6db74">&#34;안녕하십니까?&#34;</span>.bytes() {
+        println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, byt);
+    }
 }
 </code></pre></div>
     </div>

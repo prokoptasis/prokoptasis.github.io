@@ -4,17 +4,17 @@
 <head>
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="GO Basic 2">
-<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="GO Basic 2" />
-<meta property="og:description" content="GO Basic 2" />
+<meta name="description" content="Nomadcoders - 쉽고 빠른 Go 시작하기">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="GO Advanced" />
+<meta property="og:description" content="Nomadcoders - 쉽고 빠른 Go 시작하기" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://prokoptasis.github.io/docs/documents/backend/go/go02/" />
 
-<title>GO Basic 2 | Prokoptasis</title>
+<title>GO Advanced | Prokoptasis</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.4283813b7c4cdba71231a2aab7de204c8ebc3e2e52b66580f28d938ea0ac1474.js" integrity="sha256-QoOBO3xM26cSMaKqt94gTI68Pi5StmWA8o2TjqCsFHQ="></script>
+<script defer src="/ko.search.min.55920159ef17b62d73040d109f56efd2cbad72faee3d9b4b2412376df4ab99c1.js" integrity="sha256-VZIBWe8Xti1zBA0Qn1bv0sutcvruPZtLJBI3bfSrmcE="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -260,7 +260,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://prokoptasis.github.io/docs/documents/backend/go/go02/" class=" active">GO Basic 2</a>
+    <a href="http://prokoptasis.github.io/docs/documents/backend/go/go02/" class=" active">GO Advanced</a>
   
 
         </li>
@@ -506,7 +506,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>GO Basic 2</strong>
+  <strong>GO Advanced</strong>
 
   <label for="toc-control">
     
@@ -517,12 +517,112 @@ https://github.com/alex-shpak/hugo-book
             </header>
 
             
-<article class="markdown"><h2 id="go-basic-2">
-  GO Basic 2
-  <a class="anchor" href="#go-basic-2">#</a>
+<article class="markdown"><h2 id="go-advanced">
+  Go Advanced
+  <a class="anchor" href="#go-advanced">#</a>
 </h2>
 <hr>
-<p>정리중</p>
+<p>Go 활용 정리. 하기 사이트 참조.</p>
+<p><a href="https://nomadcoders.co/go-for-beginners/lobby" target="_blank" rel="noopener">노마드 코더 - 쉽고 빠른 Go 시작하기</a></p>
+<h3 id="account">
+  Account
+  <a class="anchor" href="#account">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>account</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <p>main.go</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+
+	<span style="color:#a6e22e">accounts</span> <span style="color:#e6db74">&#34;./accounts&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#75715e">// newAccount
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">acct</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">accounts</span>.<span style="color:#a6e22e">NewAccount</span>(<span style="color:#e6db74">&#34;jhook&#34;</span>)
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;01 : &#34;</span>, <span style="color:#a6e22e">acct</span>)
+
+	<span style="color:#75715e">// Deposit
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">acct</span>.<span style="color:#a6e22e">Deposit</span>(<span style="color:#ae81ff">1000</span>)
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;02 : &#34;</span>, <span style="color:#a6e22e">acct</span>)
+
+	<span style="color:#75715e">// Withdraw O
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">acct</span>.<span style="color:#a6e22e">Withdraw</span>(<span style="color:#ae81ff">300</span>)
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;03 : &#34;</span>, <span style="color:#a6e22e">acct</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>)
+	}
+
+	<span style="color:#75715e">// Withdraw X
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">acct</span>.<span style="color:#a6e22e">Withdraw</span>(<span style="color:#ae81ff">1100</span>)
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;04 : &#34;</span>, <span style="color:#a6e22e">acct</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>)
+	}
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;05 : &#34;</span>, <span style="color:#a6e22e">acct</span>)
+}
+</code></pre></div><p>accounts/account.go</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">accounts</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;errors&#34;</span>
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+)
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Account</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">owner</span>   <span style="color:#66d9ef">string</span>
+	<span style="color:#a6e22e">balance</span> <span style="color:#66d9ef">int</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewAccount</span>(<span style="color:#a6e22e">owner</span> <span style="color:#66d9ef">string</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">Account</span> {
+	<span style="color:#a6e22e">account</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Account</span>{<span style="color:#a6e22e">owner</span>: <span style="color:#a6e22e">owner</span>, <span style="color:#a6e22e">balance</span>: <span style="color:#ae81ff">0</span>}
+	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">account</span>
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">acct</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Account</span>) <span style="color:#a6e22e">Deposit</span>(<span style="color:#a6e22e">amnt</span> <span style="color:#66d9ef">int</span>) {
+	<span style="color:#a6e22e">acct</span>.<span style="color:#a6e22e">balance</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">amnt</span>
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">acct</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Account</span>) <span style="color:#a6e22e">Balance</span>() <span style="color:#66d9ef">int</span> {
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">acct</span>.<span style="color:#a6e22e">balance</span>
+}
+
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">errNoMoney</span> = <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">New</span>(<span style="color:#e6db74">&#34;Can&#39;t Withdraw&#34;</span>)
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">acct</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Account</span>) <span style="color:#a6e22e">Withdraw</span>(<span style="color:#a6e22e">amnt</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">error</span> {
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">acct</span>.<span style="color:#a6e22e">balance</span> &lt; <span style="color:#a6e22e">amnt</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">errNoMoney</span>
+	}
+
+	<span style="color:#a6e22e">acct</span>.<span style="color:#a6e22e">balance</span> <span style="color:#f92672">-=</span> <span style="color:#a6e22e">amnt</span>
+	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">acct</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Account</span>) <span style="color:#a6e22e">ChangeOwner</span>(<span style="color:#a6e22e">nOwnr</span> <span style="color:#66d9ef">string</span>) {
+	<span style="color:#a6e22e">acct</span>.<span style="color:#a6e22e">owner</span> = <span style="color:#a6e22e">nOwnr</span>
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">acct</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Account</span>) <span style="color:#a6e22e">Owner</span>() <span style="color:#66d9ef">string</span> {
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">acct</span>.<span style="color:#a6e22e">owner</span>
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">acct</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Account</span>) <span style="color:#a6e22e">String</span>() <span style="color:#66d9ef">string</span> {
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprint</span>(<span style="color:#a6e22e">acct</span>.<span style="color:#a6e22e">Owner</span>(), <span style="color:#e6db74">&#34;&#39;s account. Has:&#34;</span>, <span style="color:#a6e22e">acct</span>.<span style="color:#a6e22e">Balance</span>())
+}
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
 <br>
 <span style="float:left"><a href="../go01"><< 이전글</a></span>
 <span style="float:right"><a href="../go03">다음글 >></a></span>

@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.4283813b7c4cdba71231a2aab7de204c8ebc3e2e52b66580f28d938ea0ac1474.js" integrity="sha256-QoOBO3xM26cSMaKqt94gTI68Pi5StmWA8o2TjqCsFHQ="></script>
+<script defer src="/ko.search.min.55920159ef17b62d73040d109f56efd2cbad72faee3d9b4b2412376df4ab99c1.js" integrity="sha256-VZIBWe8Xti1zBA0Qn1bv0sutcvruPZtLJBI3bfSrmcE="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -261,7 +261,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://prokoptasis.github.io/docs/documents/backend/go/go02/" class="">GO Basic 2</a>
+    <a href="http://prokoptasis.github.io/docs/documents/backend/go/go02/" class="">GO Advanced</a>
   
 
         </li>
@@ -1874,7 +1874,17 @@ Overfitting : High variance. 학습이 너무되어 주어진 data에만 맞춰�
 <li>Set features : Add additional features (for underfitting)</li>
 <li>Regularization (Add term to loss)</li>
 </ul>
-<p>Linear regression with regularization <br><br>
+<p>Linear regression with regularization <br><br></p>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>softmax</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
 <span>
   \( h_{\theta}(x) = \theta_0 &#43; \theta_1 x &#43; \theta_2 x^2 &#43; \theta_3 x^3 &#43; \theta_4 x^4 \)
 </span>
@@ -1890,7 +1900,12 @@ Overfitting : High variance. 학습이 너무되어 주어진 data에만 맞춰�
 <span>
   \( \lambda&#43;&#43; \)
 </span>
- : fixed high variance (over fitting) <br><br></p>
+ : fixed high variance (over fitting) <br><br>
+</div>
+    </div>
+  </label>
+</div>
+
 <h3 id="xor-prolem">
   XOR Prolem
   <a class="anchor" href="#xor-prolem">#</a>
@@ -2175,10 +2190,379 @@ style H fill:#ffffff,stroke:#000000,stroke-width:1px</div><input type="radio" cl
 <li>We initialized the wieghts in a stupid way.</li>
 <li>We used the wrong type of non-linearity.</li>
 </ul>
-<p>Node Noatation</p>
+<p>Node Notation</p>
 <div><img width="600px" src="../../../../../201020_22_ml_node_notation.png" alt="node notation" ></div>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>node notation</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+<span>
+  \( W_{2,1}^{(2)} \)
+</span>
+ : 계층2에 적용되는 가중치로 1계층 노드 1에서 2계층 노드 2로 전달됨을 의미 <br><br>
+<span>
+  \( B_{1}^{(2)} \)
+</span>
+ : 계층2의 노드1에 적용 Bias를 의미 <br><br>
+<span>
+  \( Z_{2}^{(2)} \)
+</span>
+ : 계층2의 노드2의 계산값을 의미 ( <span>
+  \( Z_{2}^{(2)} = X_1 W_{2,1}^{(2)} &#43; X_2 W_{2,2}^{(2)} &#43; b_2^{(2)} \)
+</span>
+ ) <br><br>
+<span>
+  \( a_{2}^{(2)} \)
+</span>
+ : 계층2의 노드2의 출력값을 의미 ( <span>
+  \( sigmoid(Z_2^{(2)}) \)
+</span>
+ ) <br><br>
+</div>
+    </div>
+  </label>
+</div>
+
 <p>Backpropagation</p>
 <div><img width="600px" src="../../../../../201020_23_ml_backpropagation_1.png" alt="node notation" ></div>
+<p>Chain Rule을 이용한 국소 미분된 오차 역전파<br>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>derivative of backpropagation</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+<span>
+  \( W^{(2)} = W^{(2)} - \alpha \frac {\partial E}{\partial W^{(2)}} = W^{(2)} - \alpha ( \frac {\partial E}{\partial A^{(3)}} \cdotp \frac {\partial A^{(3)}}{\partial A^{(2)}} \cdotp \frac {\partial A^{(2)}}{\partial W^{(2)}} ) \)
+</span>
+ <br><br>
+</div>
+    </div>
+  </label>
+</div>
+</p>
+<p>Sigmoid 미분</p>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>derivative of sigmoid</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+<span>
+  \( \frac {\partial sigmoid(z)}{\partial z} = \frac {\partial }{\partial z} (\frac {1}{1&#43; e^{-z}} )  \)
+</span>
+ <br><br>
+Chian rule 적용 : <span>
+  \( \frac {\partial f}{\partial u} \cdotp \frac {\partial u}{\partial x} \)
+</span>
+ 이때 <span>
+  \( u = e^{-x}&#43;1 \)
+</span>
+ 이면 <span>
+  \( f = \frac {1}{u} \)
+</span>
+ 이고 <span>
+  \( \therefore \frac {\partial}{\partial u} (\frac {1}{u}) \cdotp \frac {\partial u}{\partial x} \)
+</span>
+<br><br>
+<span>
+  \( = - \frac {1}{(1&#43;e^{-x})^2} \cdotp \frac {\partial (1&#43;e^{-x})}{\partial x} \)
+</span>
+<br><br>
+<span>
+  \( = - \frac {1}{(1&#43;e^{-x})^2} \cdotp (\frac {\partial}{\partial x} (1) &#43; \frac {\partial}{\partial x} (e^{-x})) \)
+</span>
+<br><br>
+Chian rule 적용 : <span>
+  \( u = -x \)
+</span>
+ 이면 <span>
+  \( \frac {\partial}{\partial x}(e^{-x}) = \frac {\partial e^u}{\partial u} \cdotp \frac {\partial u}{\partial x} \)
+</span>
+ <br><br>
+<span>
+  \( \frac {\partial}{\partial u}(e^u) = e^u \)
+</span>
+ <br><br>
+<span>
+  \( \therefore \frac {\partial}{\partial x}(e^{-x}) = e^{-x} \)
+</span>
+ <br><br>
+<span>
+  \( \frac {\partial}{\partial x}(-x) = -1 \)
+</span>
+ <br><br>
+<span>
+  \( = - \frac {1}{(1&#43;e^{-x})^2} \cdotp (\frac {\partial}{\partial x} (1) &#43; \frac {\partial}{\partial x} (e^{-x})) = - \frac {1}{(1&#43;e^{-x})^2} \cdotp (0 &#43; -1 e^{-x}) \)
+</span>
+<br><br>
+<span>
+  \( = \frac {e^{-x}}{(1&#43;e^{-x})^2} \)
+</span>
+<br><br>
+<span>
+  \( = \frac {1&#43;e^{-x}-1}{(1&#43;e^{-x})^2} \)
+</span>
+<br><br>
+<span>
+  \( = \frac {1&#43;e^{-x}}{(1&#43;e^{-x})^2} - \frac {1}{(1&#43;e^{-x})^2} \)
+</span>
+<br><br>
+<span>
+  \( = \frac {1}{(1&#43;e^{-x})} - \frac {1}{(1&#43;e^{-x})^2} \)
+</span>
+<br><br>
+<span>
+  \( = \frac {1}{(1&#43;e^{-x})} (1 - \frac {1}{(1&#43;e^{-x})}) \)
+</span>
+<br><br>
+<span>
+  \( = sigmoid(x)(1-sigmoid(x)) \)
+</span>
+<br><br>
+</div>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>using derivative of sigmoid</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+<span>
+  \( \frac {\partial E_{(1)}}{\partial w_{(1,1)}^{(3)}} = \frac {\partial E_{(1)}}{\partial a_{(1)}^{(3)}} * \frac {\partial a_{(1)}^{(3)}}{\partial z_{(1)}^{(3)}} * \frac {\partial z_{(1)}^{(3)}}{\partial w_{(1,1)}^{(3)}}  \)
+</span>
+<br><br>
+ <span>
+  \( = \frac {\partial E_{(1)}}{\partial a_{(1)}^{(3)}} * \frac {\partial sigmoid(z_{(1)}^{(3)}}{\partial z_{(1)}^{(3)}} * \frac {\partial z_{(1)}^{(3)}}{\partial w_{(1,1)}^{(3)}}  \)
+</span>
+<br><br>
+ <span>
+  \( = \frac {\partial E_{(1)}}{\partial a_{(1)}^{(3)}} * sigmoid(z_{(1)}^{(3)}) * (1-sigmoid(z_{(1)}^{(3)})) * \frac {\partial z_{(1)}^{(3)}}{\partial w_{(1,1)}^{(3)}}  \)
+</span>
+<br><br>
+<span>
+  \( = \frac {\partial E_{(1)}}{\partial a_{(1)}^{(3)}} * a_{(1)}^{(3)} * (1-a_{(1)}^{(3)}) * \frac {\partial z_{(1)}^{(3)}}{\partial w_{(1,1)}^{(3)}}  \)
+</span>
+<br><br>
+</div>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>preparation of backpropagation</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+입력층 선형회귀값 (z)
+* 없음   
+<p>입력층 출력값 (a)</p>
+<ul>
+<li>
+<span>
+\( a_{1}^{(1)} = x_{1} \)
+</li>
+</ul>
+</span>
+<ul>
+<li>
+<span>
+\( a_{2}^{(1)} = x_{2} \)
+</li>
+</ul>
+</span>
+<p>은닉층 선형회귀값 (z)</p>
+<ul>
+<li>
+<span>
+\( z_{1}^{(2)} = a_{1}^{(1)} w_{1,1}^{(2)} &#43; a_{2}^{(1)} w_{1,2}^{(2)} &#43; b_{1}^{(2)} \)
+</li>
+</ul>
+</span>
+<ul>
+<li>
+<span>
+\( z_{2}^{(2)} = a_{1}^{(1)} w_{2,1}^{(2)} &#43; a_{2}^{(1)} w_{2,2}^{(2)} &#43; b_{2}^{(2)} \)
+</li>
+</ul>
+</span>
+<p>은닉층 출력값 (a)</p>
+<ul>
+<li>
+<span>
+\( a_{1}^{(2)} = sigmoidz(z_{1}{(2)} \)
+</li>
+</ul>
+</span>
+<ul>
+<li>
+<span>
+\( a_{2}^{(2)} = sigmoidz(z_{2}{(2)} \)
+</li>
+</ul>
+</span>
+<p>출력층 선형회귀값 (z)</p>
+<ul>
+<li>
+<span>
+\( z_{1}^{(3)} = a_{1}^{(2)} w_{1,1}^{(3)} &#43; a_{2}^{(2)} w_{1,2}^{(3)} &#43; b_{1}^{(3)} \)
+</li>
+</ul>
+</span>
+<ul>
+<li>
+<span>
+\( z_{2}^{(3)} = a_{1}^{(2)} w_{2,1}^{(3)} &#43; a_{2}^{(2)} w_{2,2}^{(3)} &#43; b_{2}^{(3)} \)
+</li>
+</ul>
+</span>
+<p>출력층 출력값 (a)</p>
+<ul>
+<li>
+<span>
+\( a_{1}^{(3)} = sigmoidz(z_{1}{(3)} \)
+</li>
+</ul>
+</span>
+<ul>
+<li>
+<span>
+\( a_{2}^{(3)} = sigmoidz(z_{2}{(3)} \)
+</li>
+</ul>
+</span>
+<ul>
+<li>
+<span>
+\( E = \frac {1}{n} \displaystyle\sum_{i=1}^{n}(t_{i}^{(3)} - a_{i}^{(3)})^2 = \frac {1}{2} ( (t_{1}^{(3)} - a_{1}^{(3)})^2 &#43; (t_{2}^{(3)} - a_{2}^{(3)})^2 ) \)
+</li>
+</ul>
+</span>
+<ul>
+<li>
+<span>
+\( E_1 &#43; E_2 = \frac {1}{2} (t_{1}^{(3)}-a_{1}^{(3)})^2 &#43; \frac {1}{2} (t_{2}^{(3)}-a_{2}^{(3)})^2 \)
+</li>
+</ul>
+</span>
+<ul>
+<li>
+<span>
+\( W^{(2)} = \begin{pmatrix} w_{(1,1)}^{(2)} &amp; w_{(2,1)}^{(2)} \\ w_{(1,2)}^{(2)} &amp; w_{(2,2)}^{(2)} \end{pmatrix} , W^{(3)} = \begin{pmatrix} w_{(1,1)}^{(3)} &amp; w_{(2,1)}^{(3)} \\ w_{(1,2)}^{(3)} &amp; w_{(2,2)}^{(3)} \end{pmatrix} \)
+</li>
+</ul>
+</span>
+<ul>
+<li>
+<span>
+\( W^{(2)} = W^{(2)} - \alpha \frac {\partial E}{\partial W^{(2)}} \to \frac {\partial E}{\partial W^{(2)}} = \frac {\partial E}{\partial W_{(1,1)}^{(2)}} , \frac {\partial E}{\partial W_{(2,1)}^{(2)}} , \frac {\partial E}{\partial W_{(1,2)}^{(2)}} , \frac {\partial E}{\partial W_{(2,2)}^{(2)}} \)
+</li>
+</ul>
+</span>
+<ul>
+<li>
+<span>
+\( W^{(3)} = W^{(3)} - \alpha \frac {\partial E}{\partial W^{(3)}} \to \frac {\partial E}{\partial W^{(3)}} = \frac {\partial E}{\partial W_{(1,1)}^{(3)}} , \frac {\partial E}{\partial W_{(2,1)}^{(2)}} , \frac {\partial E}{\partial W_{(1,2)}^{(3)}} , \frac {\partial E}{\partial W_{(2,2)}^{(3)}} \)
+</li>
+</ul>
+</span>
+<ul>
+<li>
+<span>
+\( b^{(2)} = \begin{pmatrix} b_{(1)}^{(2)} &amp; b_{(2)}^{(2)} \end{pmatrix} , b^{(3)} = \begin{pmatrix} b_{(1)}^{(3)} &amp; b_{(2)}^{(3)} \end{pmatrix} \)
+</li>
+</ul>
+</span>
+<ul>
+<li>
+<span>
+\( b^{(2)} = b^{(2)} - \alpha \frac {\partial E}{\partial b^{(2)}} \to \frac {\partial E}{\partial b^{(2)}} = \frac {\partial E}{\partial b_{(1)}^{(2)}} , \frac {\partial E}{\partial b_{(2)}^{(2)}} \)
+</li>
+</ul>
+</span>
+<ul>
+<li>
+<span>
+\( b^{(3)} = b^{(3)} - \alpha \frac {\partial E}{\partial b^{(3)}} \to \frac {\partial E}{\partial b^{(3)}} = \frac {\partial E}{\partial b_{(1)}^{(3)}} , \frac {\partial E}{\partial b_{(2)}^{(3)}} \)
+</li>
+</ul>
+</span>
+</div>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>formula induction</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+<span>
+  \( 
+\frac {\partial E} {\partial W_{(1,1)}^{(3)}}\)
+</span>
+<br><br>
+<span>
+  \( 
+= \frac {\partial E_{(1)}} {\partial W_{(1,1)}^{(3)}} &#43; \frac {\partial E_{(2)}} {\partial W_{(1,1)}^{(3)}} \)
+</span>
+<br><br>
+<span>
+  \( 
+= \frac {\partial E_{(1)}} {\partial a_{(1)}^{(3)}} * \frac {\partial a_{(1)}^{(3)}}{\partial z_{(1)}^{(3)}} * \frac {\partial z_{(1)}^{(3)}}{\partial w_{(1,1)}^{(3)}} \)
+</span>
+<br><br>
+<span>
+  \( 
+= \frac {\partial \begin{Bmatrix} \frac{1}{2} (t_{(1)}^{(3)} - a_{(1)}^{(3)})^2 ) \end{Bmatrix} } {\partial a_{(1)}^{(3)}} * \frac { \partial sigmoid (z_{(1)}^{(3)}) } { \partial z_{(1)}^{(3)} } * \frac { \partial ( a_{(1)}^{(2)} w_{(1,1)}^{(3)} &#43; a_{(2)}^{(2)} w_{(1,2)}^{(3)} &#43; b_{(1)}^{(3)} ) } { \partial w_{(1,1)}^{(3)} } \)
+</span>
+<br><br>
+<span>
+  \( 
+= (a_{(1)}^{(3)} - t_{(1)}^{(3)}) * sigmoid(z_{(1)}^{(3)}) * (1-sigmoid(z_{(1)}^{(3)})) * a_{(1)}^{(2)}\)
+</span>
+<br><br>
+<span>
+  \( 
+= (a_{(1)}^{(3)} - t_{(1)}^{(3)}) * a_{(1)}^{(3)} * ( 1 - a_{(1)}^{(3)} ) * a_{(1)}^{(2)}\)
+</span>
+<br><br>
+</div>
+    </div>
+  </label>
+</div>
+
 <p>Backpropagation2</p>
 <div><img width="600px" src="../../../../../201020_24_ml_backpropagation_2.png" alt="node notation" ></div>
 <p>Vanishing Gradient</p>
