@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.c114fec166e1992173d0e9c8f0d9d91620445a91e731432034ef4bf044661a74.js" integrity="sha256-wRT&#43;wWbhmSFz0OnI8NnZFiBEWpHnMUMgNO9L8ERmGnQ="></script>
+<script defer src="/ko.search.min.8d96e4c6f6aa10e7f82d4596635628ae446cf543b73688134ba81a1d360241c9.js" integrity="sha256-jZbkxvaqEOf4LUWWY1YorkRs9UO3NogTS6gaHTYCQck="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -1902,6 +1902,81 @@ Rust는 Shallow Copy를 Move라 표현. 명시적으로 표시하지 않는 이�
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> byt <span style="color:#66d9ef">in</span> <span style="color:#e6db74">&#34;안녕하십니까?&#34;</span>.bytes() {
         println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, byt);
     }
+}
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>hashmap</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">use</span> std::collections::HashMap;
+
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#75715e">// Hash map 1
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> scores <span style="color:#f92672">=</span> HashMap::new();
+    scores.insert(String::from(<span style="color:#e6db74">&#34;Blue&#34;</span>), <span style="color:#ae81ff">10</span>);
+    scores.insert(String::from(<span style="color:#e6db74">&#34;Yellow&#34;</span>), <span style="color:#ae81ff">50</span>);
+
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, scores);
+
+    <span style="color:#75715e">// hash map 2
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> teams <span style="color:#f92672">=</span> vec<span style="color:#f92672">!</span>[String::from(<span style="color:#e6db74">&#34;Blue&#34;</span>), String::from(<span style="color:#e6db74">&#34;Yellow&#34;</span>)];
+    <span style="color:#66d9ef">let</span> init_scores <span style="color:#f92672">=</span> vec<span style="color:#f92672">!</span>[<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">50</span>];
+    <span style="color:#66d9ef">let</span> score2: <span style="color:#a6e22e">HashMap</span><span style="color:#f92672">&lt;</span>_, _<span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> teams.iter().zip(init_scores.iter()).collect();
+
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, score2);
+
+    <span style="color:#66d9ef">let</span> field_nm <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;favorite color&#34;</span>);
+    <span style="color:#66d9ef">let</span> field_val <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Blue&#34;</span>);
+
+    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> map <span style="color:#f92672">=</span> HashMap::new();
+    map.insert(field_nm, field_val);
+    <span style="color:#75715e">//println!(&#34;{:?}&#34;, field_nm); // value borrowed here after move
+</span><span style="color:#75715e"></span>    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, map);
+
+    <span style="color:#75715e">// hash map 3
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> team_nm <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Blue&#34;</span>);
+    <span style="color:#66d9ef">let</span> score <span style="color:#f92672">=</span> scores.get(<span style="color:#f92672">&amp;</span>team_nm);
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, score);
+
+    <span style="color:#75715e">// hash map for
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (key, value) <span style="color:#66d9ef">in</span> <span style="color:#f92672">&amp;</span>scores {
+        println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}:{}&#34;</span>, key, value);
+    }
+
+    <span style="color:#75715e">// hashmap insert
+</span><span style="color:#75715e"></span>    scores.insert(String::from(<span style="color:#e6db74">&#34;Blue&#34;</span>), <span style="color:#ae81ff">25</span>);
+
+    <span style="color:#75715e">// hash map for
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (key, value) <span style="color:#66d9ef">in</span> <span style="color:#f92672">&amp;</span>scores {
+        println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}:{}&#34;</span>, key, value);
+    }
+
+    <span style="color:#75715e">// hashmap or insert
+</span><span style="color:#75715e"></span>    scores.entry(String::from(<span style="color:#e6db74">&#34;Red&#34;</span>)).or_insert(<span style="color:#ae81ff">15</span>);
+
+    <span style="color:#75715e">// hash map for
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (key, value) <span style="color:#66d9ef">in</span> <span style="color:#f92672">&amp;</span>scores {
+        println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}:{}&#34;</span>, key, value);
+    }
+
+    <span style="color:#66d9ef">let</span> text <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hello World Wonderful World Very Wonderful World And Hello Agin&#34;</span>;
+    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> map <span style="color:#f92672">=</span> HashMap::new();
+
+    <span style="color:#66d9ef">for</span> word <span style="color:#66d9ef">in</span> text.split_whitespace() {
+        <span style="color:#66d9ef">let</span> count <span style="color:#f92672">=</span> map.entry(word).or_insert(<span style="color:#ae81ff">0</span>); <span style="color:#75715e">// return &amp;mut V
+</span><span style="color:#75715e"></span>        <span style="color:#f92672">*</span>count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+    }
+
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, map);
 }
 </code></pre></div>
     </div>

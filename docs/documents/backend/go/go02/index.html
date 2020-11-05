@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.c114fec166e1992173d0e9c8f0d9d91620445a91e731432034ef4bf044661a74.js" integrity="sha256-wRT&#43;wWbhmSFz0OnI8NnZFiBEWpHnMUMgNO9L8ERmGnQ="></script>
+<script defer src="/ko.search.min.8d96e4c6f6aa10e7f82d4596635628ae446cf543b73688134ba81a1d360241c9.js" integrity="sha256-jZbkxvaqEOf4LUWWY1YorkRs9UO3NogTS6gaHTYCQck="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -617,6 +617,102 @@ https://github.com/alex-shpak/hugo-book
 
 <span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">acct</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Account</span>) <span style="color:#a6e22e">String</span>() <span style="color:#66d9ef">string</span> {
 	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprint</span>(<span style="color:#a6e22e">acct</span>.<span style="color:#a6e22e">Owner</span>(), <span style="color:#e6db74">&#34;&#39;s account. Has:&#34;</span>, <span style="color:#a6e22e">acct</span>.<span style="color:#a6e22e">Balance</span>())
+}
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="my-dict">
+  My Dict
+  <a class="anchor" href="#my-dict">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>mydict</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <p>main.go</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+
+	<span style="color:#e6db74">&#34;./mydict&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">dictionary</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">mydict</span>.<span style="color:#a6e22e">Dictionary</span>{<span style="color:#e6db74">&#34;first&#34;</span>: <span style="color:#e6db74">&#34;First word&#34;</span>}
+	<span style="color:#a6e22e">definition1</span>, <span style="color:#a6e22e">err1</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">dictionary</span>.<span style="color:#a6e22e">Search</span>(<span style="color:#e6db74">&#34;second&#34;</span>)
+
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err1</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err1</span>)
+	} <span style="color:#66d9ef">else</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">definition1</span>)
+	}
+
+	<span style="color:#a6e22e">definition2</span>, <span style="color:#a6e22e">err2</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">dictionary</span>.<span style="color:#a6e22e">Search</span>(<span style="color:#e6db74">&#34;first&#34;</span>)
+
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err2</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err2</span>)
+	} <span style="color:#66d9ef">else</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">definition2</span>)
+	}
+
+	<span style="color:#a6e22e">dictionary</span>.<span style="color:#a6e22e">Add</span>(<span style="color:#e6db74">&#34;second&#34;</span>, <span style="color:#e6db74">&#34;Second word&#34;</span>)
+	<span style="color:#a6e22e">definition1</span>, <span style="color:#a6e22e">err1</span> = <span style="color:#a6e22e">dictionary</span>.<span style="color:#a6e22e">Search</span>(<span style="color:#e6db74">&#34;second&#34;</span>)
+
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err1</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err1</span>)
+	} <span style="color:#66d9ef">else</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">definition1</span>)
+	}
+
+	<span style="color:#a6e22e">dictionary</span>.<span style="color:#a6e22e">Add</span>(<span style="color:#e6db74">&#34;third&#34;</span>, <span style="color:#e6db74">&#34;Third word&#34;</span>)
+	<span style="color:#a6e22e">definition1</span>, <span style="color:#a6e22e">err1</span> = <span style="color:#a6e22e">dictionary</span>.<span style="color:#a6e22e">Search</span>(<span style="color:#e6db74">&#34;third&#34;</span>)
+
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err1</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err1</span>)
+	} <span style="color:#66d9ef">else</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">definition1</span>)
+	}
+}
+
+</code></pre></div><p>mydict/mydict.go</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">mydict</span>
+
+<span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;errors&#34;</span>
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Dictionary</span> <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">string</span>
+
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">errNotFound</span> = <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">New</span>(<span style="color:#e6db74">&#34;Not Found&#34;</span>)
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">errWordExists</span> = <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">New</span>(<span style="color:#e6db74">&#34;Word Exists&#34;</span>)
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">d</span> <span style="color:#a6e22e">Dictionary</span>) <span style="color:#a6e22e">Search</span>(<span style="color:#a6e22e">word</span> <span style="color:#66d9ef">string</span>) (<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">error</span>) {
+	<span style="color:#a6e22e">value</span>, <span style="color:#a6e22e">exists</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">d</span>[<span style="color:#a6e22e">word</span>]
+
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">exists</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">value</span>, <span style="color:#66d9ef">nil</span>
+	}
+
+	<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#a6e22e">errNotFound</span>
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">d</span> <span style="color:#a6e22e">Dictionary</span>) <span style="color:#a6e22e">Add</span>(<span style="color:#a6e22e">word</span>, <span style="color:#a6e22e">def</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">error</span> {
+	<span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">Search</span>(<span style="color:#a6e22e">word</span>)
+
+	<span style="color:#66d9ef">switch</span> <span style="color:#a6e22e">err</span> {
+	<span style="color:#66d9ef">case</span> <span style="color:#a6e22e">errNotFound</span>:
+		<span style="color:#a6e22e">d</span>[<span style="color:#a6e22e">word</span>] = <span style="color:#a6e22e">def</span>
+	<span style="color:#66d9ef">case</span> <span style="color:#66d9ef">nil</span>:
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">errWordExists</span>
+	}
+
+	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
 }
 </code></pre></div>
     </div>
