@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.8d96e4c6f6aa10e7f82d4596635628ae446cf543b73688134ba81a1d360241c9.js" integrity="sha256-jZbkxvaqEOf4LUWWY1YorkRs9UO3NogTS6gaHTYCQck="></script>
+<script defer src="/ko.search.min.38d5f68305cd157de83354b7431d8f4b15d5d43e171ba2c62fbcee9cc62064e7.js" integrity="sha256-ONX2gwXNFX3oM1S3Qx2PSxXV1D4XG6LGL7zunMYgZOc="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -1978,6 +1978,108 @@ Rust는 Shallow Copy를 Move라 표현. 명시적으로 표시하지 않는 이�
 
     println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, map);
 }
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="error-handling">
+  Error Handling
+  <a class="anchor" href="#error-handling">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>error handling</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">use</span> std::fs::File;
+<span style="color:#66d9ef">use</span> std::io;
+<span style="color:#75715e">// use std::io::ErrorKind;
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">use</span> std::io::Read;
+
+<span style="color:#75715e">// enum Result&lt;T, E&gt; {
+</span><span style="color:#75715e">//     Ok(T),
+</span><span style="color:#75715e">//     Err(E),
+</span><span style="color:#75715e">// }
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">read_from_file1</span>() -&gt; Result<span style="color:#f92672">&lt;</span>String, io::Error<span style="color:#f92672">&gt;</span> {
+    <span style="color:#66d9ef">let</span> f <span style="color:#f92672">=</span> File::open(<span style="color:#e6db74">&#34;not_exist_file.txt&#34;</span>);
+
+    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> f <span style="color:#f92672">=</span> <span style="color:#66d9ef">match</span> f {
+        Ok(file) <span style="color:#f92672">=&gt;</span> file,
+        Err(e) <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">return</span> Err(e),
+    };
+
+    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> s <span style="color:#f92672">=</span> String::new();
+
+    <span style="color:#66d9ef">match</span> f.read_to_string(<span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> s) {
+        Ok(_) <span style="color:#f92672">=&gt;</span> Ok(s),
+        Err(e) <span style="color:#f92672">=&gt;</span> Err(e),
+    }
+}
+
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">read_from_file2</span>() -&gt; Result<span style="color:#f92672">&lt;</span>String, io::Error<span style="color:#f92672">&gt;</span> {
+    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> f <span style="color:#f92672">=</span> File::open(<span style="color:#e6db74">&#34;not_exist_file.txt&#34;</span>)<span style="color:#f92672">?</span>;
+    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> s <span style="color:#f92672">=</span> String::new();
+    f.read_to_string(<span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> s)<span style="color:#f92672">?</span>;
+    Ok(s)
+}
+
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">read_from_file3</span>() -&gt; Result<span style="color:#f92672">&lt;</span>String, io::Error<span style="color:#f92672">&gt;</span> {
+    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> s <span style="color:#f92672">=</span> String::new();
+    File::open(<span style="color:#e6db74">&#34;not_exist_file.txt&#34;</span>)<span style="color:#f92672">?</span>.read_to_string(<span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> s)<span style="color:#f92672">?</span>;
+    Ok(s)
+}
+
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#75715e">// panic direct call
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// panic!(&#34;crash and burn&#34;);
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// println!(&#34;Hello, world!&#34;);
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// panic library call (buffer overread)
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// let v = vec![1, 2, 3];
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// v[99];
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// RUST_BACKTRACE=full cargo run
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// Error
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// let f: u32 = File::open(&#34;not_exists_file.txt&#34;);
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// Error Match
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// let f = File::open(&#34;not_exists_file.txt&#34;);
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// let f = match f {
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//     Ok(file) =&gt; file,
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//     Err(ref error) if error.kind() == ErrorKind::NotFound =&gt; {
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//         match File::create(&#34;not_exists_file.txt&#34;) {
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//             Ok(fc) =&gt; fc,
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//             Err(e) =&gt; panic!(&#34;Tried Create {:?}&#34;, e),
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//         }
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//     }
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//     Err(error) =&gt; panic!(&#34;Error {:?}&#34;, error),
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// };
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// Error with unwrap
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// let f = File::open(&#34;not_exists_file.txt&#34;).unwrap();
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// Error with expect
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// let f = File::open(&#34;not_exists_file.txt&#34;).expect(&#34;Failed&#34;);
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// Error propagating
+</span><span style="color:#75715e"></span>    read_from_file1();
+
+    <span style="color:#75715e">// Error propagating 2
+</span><span style="color:#75715e"></span>    read_from_file2();
+
+    <span style="color:#75715e">// Error propagating 3
+</span><span style="color:#75715e"></span>    read_from_file3();
+
+    <span style="color:#75715e">// ? without return Error
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// let x = File::open(&#34;not_exists_file.txt&#34;)?;
+</span><span style="color:#75715e"></span>}
 </code></pre></div>
     </div>
   </label>

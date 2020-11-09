@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.8d96e4c6f6aa10e7f82d4596635628ae446cf543b73688134ba81a1d360241c9.js" integrity="sha256-jZbkxvaqEOf4LUWWY1YorkRs9UO3NogTS6gaHTYCQck="></script>
+<script defer src="/ko.search.min.38d5f68305cd157de83354b7431d8f4b15d5d43e171ba2c62fbcee9cc62064e7.js" integrity="sha256-ONX2gwXNFX3oM1S3Qx2PSxXV1D4XG6LGL7zunMYgZOc="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -2528,6 +2528,57 @@ Chian rule 적용 : <span>
     <input type="checkbox" class="hidden" />
     <div class="book-expand-content markdown-inner">
        <div>
+<span>
+  \( 
+\frac {\partial E} {\partial W_{(1,1)}^{(3)}}
+= \frac {\partial E_{(1)}} {\partial W_{(1,1)}^{(3)}} &#43; \frac {\partial E_{(2)}} {\partial W_{(1,1)}^{(3)}} 
+= \frac {\partial E_{(1)}} {\partial a_{(1)}^{(3)}} * \frac {\partial a_{(1)}^{(3)}}{\partial z_{(1)}^{(3)}} * \frac {\partial z_{(1)}^{(3)}}{\partial w_{(1,1)}^{(3)}} \)
+</span>
+<br><br>
+<span>
+  \( 
+= \frac {\partial \begin{Bmatrix} \frac{1}{2} (t_{(1)}^{(3)} - a_{(1)}^{(3)})^2 ) \end{Bmatrix} } {\partial a_{(1)}^{(3)}} * \frac { \partial sigmoid (z_{(1)}^{(3)}) } { \partial z_{(1)}^{(3)} } * \frac { \partial ( a_{(1)}^{(2)} w_{(1,1)}^{(3)} &#43; a_{(2)}^{(2)} w_{(1,2)}^{(3)} &#43; b_{(1)}^{(3)} ) } { \partial w_{(1,1)}^{(3)} } \)
+</span>
+<br><br>
+1) <span>
+  \( 
+\frac {\partial \begin{Bmatrix} \frac{1}{2} (t_{(1)}^{(3)} - a_{(1)}^{(3)})^2 ) \end{Bmatrix} } {\partial a_{(1)}^{(3)}}
+= \frac{1}{2} \cdotp \frac {\partial (t_{(1)}^{(3)})^2 &#43; (a_{(1)}^{(3)})^2 -2 t_{(1)}^{(3)} a_{(1)}^{(3)} } { \partial a_{(1)}^{(3)} }\)
+</span>
+<br><br>
+<span>
+  \( 
+\space \space \space \space = \frac{1}{2} \cdotp (0 &#43; 2*(a_{(1)}^{(3)})^{(2-1)} &#43; -2 t_{(1)}^{(3)}) = a_{(1)}^{(3)} - t_{(1)}^{(3)}\)
+</span>
+<br><br>
+2) <span>
+  \( 
+\frac { \partial sigmoid (z_{(1)}^{(3)}) } { \partial z_{(1)}^{(3)} } =
+sigmoid(z_{(1)}^{(3)}) * (1-sigmoid(z_{(1)}^{(3)}))\)
+</span>
+<br><br>
+3) <span>
+  \( 
+\frac { \partial ( a_{(1)}^{(2)} w_{(1,1)}^{(3)} &#43; a_{(2)}^{(2)} w_{(1,2)}^{(3)} &#43; b_{(1)}^{(3)} ) } { \partial w_{(1,1)}^{(3)} } 
+= a_{(1)}^{(2)} &#43; 0 &#43; 0\)
+</span>
+<br><br>
+<span>
+  \( 
+= (a_{(1)}^{(3)} - t_{(1)}^{(3)}) * sigmoid(z_{(1)}^{(3)}) * (1-sigmoid(z_{(1)}^{(3)})) * a_{(1)}^{(2)}\)
+</span>
+<br><br>
+여기서 <span>
+  \( 
+sigmoid(z_{(1)}^{(3)}) = a_{(1)}^{(3)}\)
+</span>
+<br><br>
+<span>
+  \( 
+= (a_{(1)}^{(3)} - t_{(1)}^{(3)}) * a_{(1)}^{(3)} * ( 1 - a_{(1)}^{(3)} ) * a_{(1)}^{(2)}\)
+</span>
+<br><br>
+<hr>
 <span>
   \( 
 \frac {\partial E} {\partial W_{(1,1)}^{(3)}}
