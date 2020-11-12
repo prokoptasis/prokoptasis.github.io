@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.bb130633c74423b5e93ec7743ebf2aa4763f23ef01381534717ce94a087a828b.js" integrity="sha256-uxMGM8dEI7XpPsd0Pr8qpHY/I&#43;8BOBU0cXzpSgh6gos="></script>
+<script defer src="/ko.search.min.522309f0580feac867b61ce9675047453caa889e7f114efb9b922372a2b9dfef.js" integrity="sha256-UiMJ8FgP6shnthzpZ1BHRTyqiJ5/EU77m5IjcqK53&#43;8="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -2522,7 +2522,7 @@ Chian rule 적용 : <span>
 <div class="book-expand">
   <label>
     <div class="book-expand-head flex justify-between">
-      <span>formula induction 1</span>
+      <span>output layer 1</span>
       <span>...</span>
     </div>
     <input type="checkbox" class="hidden" />
@@ -2842,7 +2842,7 @@ sigmoid(z_{(2)}^{(3)}) = a_{(2)}^{(3)}\)
 <div class="book-expand">
   <label>
     <div class="book-expand-head flex justify-between">
-      <span>formula induction 2</span>
+      <span>output layer 2</span>
       <span>...</span>
     </div>
     <input type="checkbox" class="hidden" />
@@ -2946,7 +2946,7 @@ loss\_3 =
 <div class="book-expand">
   <label>
     <div class="book-expand-head flex justify-between">
-      <span>formula induction 3</span>
+      <span>output layer 3</span>
       <span>...</span>
     </div>
     <input type="checkbox" class="hidden" />
@@ -2960,6 +2960,136 @@ W^{(3)} = W^{(3)} - \alpha \frac {\partial E}{\partial W^{(3)}} = W^{(3)} - \alp
 <span>
   \( 
 b^{(3)} = b^{(3)} - \alpha \frac {\partial E}{\partial b^{(3)}} = b^{(3)} - \alpha \times loss\_3\)
+</span>
+<br><br>
+</div>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>hidden layer 1</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+<span>
+  \( 
+W^{(2)} = W^{(2)} - \alpha \frac {\partial E}{\partial W^{(2)}} = \frac {\partial E}{\partial W_{(1,1)}^{(2)}} ,
+\frac {\partial E}{\partial W_{(2,1)}^{(2)}} ,
+\frac {\partial E}{\partial W_{(1,2)}^{(2)}} ,
+\frac {\partial E}{\partial W_{(2,2)}^{(2)}} \)
+</span>
+<br><br>
+<span>
+  \( 
+b^{(2)} = b^{(2)} - \alpha \frac {\partial E}{\partial b^{(2)}} = 
+\frac {\partial E}{\partial b_{(1)}^{(2)}} ,
+\frac {\partial E}{\partial b_{(2)}^{(2)}} \)
+</span>
+<br><br>
+<hr>
+<span>
+  \( 
+\frac {\partial E}{\partial W_{(1,1)}^{(2)}} = 
+\frac {\partial E_{(1)}}{\partial W_{(1,1)}^{(2)}} &#43;
+\frac {\partial E_{(2)}}{\partial W_{(1,1)}^{(2)}}\)
+</span>
+<br><br>
+<span>
+  \( 
+= 
+\frac {\partial E_{(1)}}{\partial a_{(1)}^{(3)}} \times
+\frac {\partial a_{(1)}^{(3)}}{\partial z_{(1)}^{(3)}} \times
+\frac {\partial z_{(1)}^{(3)}}{\partial a_{(1)}^{(2)}} \times
+\frac {\partial a_{(1)}^{(2)}}{\partial z_{(1)}^{(2)}} \times
+\frac {\partial z_{(1)}^{(2)}}{\partial w_{(1,1)}^{(2)}}\)
+</span>
+<br><br>
+<span>
+  \( 
+&#43;
+\frac {\partial E_{(2)}}{\partial a_{(2)}^{(3)}} \times
+\frac {\partial a_{(2)}^{(3)}}{\partial z_{(2)}^{(3)}} \times
+\frac {\partial z_{(2)}^{(3)}}{\partial a_{(1)}^{(2)}} \times
+\frac {\partial a_{(1)}^{(2)}}{\partial z_{(1)}^{(3)}} \times
+\frac {\partial z_{(1)}^{(2)}}{\partial w_{(1,1)}^{(2)}} \)
+</span>
+<br><br>
+<span>
+  \( 
+= 
+(
+a_{(1)}^{(3)}-
+t_{(1)}^{(3)}
+\times
+sigmoid(z_{(1)}^{(3)})
+(1-sigmoid(z_{(1)}^{(3)}))
+\times
+w_{(1,1)}^{(3)}
+\times
+sigmoid(z_{(1)}^{(2)})
+(1-sigmoid(z_{(1)}^{(2)}))
+\times
+a_{(1)}^{(1)}
+)\)
+</span>
+<br><br>
+<span>
+  \( 
+\space \space \space &#43; 
+(
+a_{(2)}^{(3)}-
+t_{(2)}^{(3)}
+\times
+sigmoid(z_{(2)}^{(3)})
+(1-sigmoid(z_{(2)}^{(3)}))
+\times
+w_{(2,1)}^{(3)}
+\times
+sigmoid(z_{(1)}^{(2)})
+(1-sigmoid(z_{(1)}^{(2)}))
+\times
+a_{(1)}^{(1)}
+)\)
+</span>
+<br><br>
+<span>
+  \( 
+=
+(
+a_{(1)}^{(3)}-
+t_{(1)}^{(3)}
+\times
+a_{(1)}^{(3)}(1-a_{(1)}^{(3)})
+\times
+w_{(1,1)}^{(3)}
+\times
+a_{(1)}^{(2)}(1-a_{(1)}^{(2)})
+\times
+a_{(1)}^{(1)}
+)\)
+</span>
+<br><br>
+<span>
+  \( 
+\space \space \space &#43;
+(
+a_{(2)}^{(3)}-
+t_{(2)}^{(3)}
+\times
+a_{(2)}^{(3)}(1-a_{(2)}^{(3)})
+\times
+w_{(1,1)}^{(3)}
+\times
+a_{(1)}^{(2)}(1-a_{(1)}^{(2)})
+\times
+a_{(1)}^{(1)}
+)\)
 </span>
 <br><br>
 </div>

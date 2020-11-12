@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.bb130633c74423b5e93ec7743ebf2aa4763f23ef01381534717ce94a087a828b.js" integrity="sha256-uxMGM8dEI7XpPsd0Pr8qpHY/I&#43;8BOBU0cXzpSgh6gos="></script>
+<script defer src="/ko.search.min.522309f0580feac867b61ce9675047453caa889e7f114efb9b922372a2b9dfef.js" integrity="sha256-UiMJ8FgP6shnthzpZ1BHRTyqiJ5/EU77m5IjcqK53&#43;8="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -2080,6 +2080,174 @@ Rust는 Shallow Copy를 Move라 표현. 명시적으로 표시하지 않는 이�
     <span style="color:#75715e">// ? without return Error
 </span><span style="color:#75715e"></span>    <span style="color:#75715e">// let x = File::open(&#34;not_exists_file.txt&#34;)?;
 </span><span style="color:#75715e"></span>}
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="generic-trait-lifetime">
+  Generic, Trait, Lifetime
+  <a class="anchor" href="#generic-trait-lifetime">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>generic</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">find_max_num</span>(nums: <span style="color:#66d9ef">&amp;</span>[<span style="color:#66d9ef">i32</span>]) -&gt; <span style="color:#66d9ef">i32</span> {
+    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> num_max <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>];
+
+    <span style="color:#66d9ef">for</span> <span style="color:#f92672">&amp;</span>num <span style="color:#66d9ef">in</span> nums.iter() {
+        <span style="color:#66d9ef">if</span> num <span style="color:#f92672">&gt;</span> num_max {
+            num_max <span style="color:#f92672">=</span> num;
+        }
+    }
+
+    num_max
+}
+
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">find_max_chr</span>(chrs: <span style="color:#66d9ef">&amp;</span>[char]) -&gt; <span style="color:#a6e22e">char</span> {
+    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> chr_max <span style="color:#f92672">=</span> chrs[<span style="color:#ae81ff">0</span>];
+
+    <span style="color:#66d9ef">for</span> <span style="color:#f92672">&amp;</span>chr <span style="color:#66d9ef">in</span> chrs.iter() {
+        <span style="color:#66d9ef">if</span> chr <span style="color:#f92672">&gt;</span> chr_max {
+            chr_max <span style="color:#f92672">=</span> chr;
+        }
+    }
+
+    chr_max
+}
+
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">find_max</span><span style="color:#f92672">&lt;</span>T: PartialOrd <span style="color:#f92672">+</span> Copy<span style="color:#f92672">&gt;</span>(list: <span style="color:#66d9ef">&amp;</span>[T]) -&gt; <span style="color:#a6e22e">T</span> {
+    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> item_max <span style="color:#f92672">=</span> list[<span style="color:#ae81ff">0</span>];
+
+    <span style="color:#66d9ef">for</span> <span style="color:#f92672">&amp;</span>item <span style="color:#66d9ef">in</span> list.iter() {
+        <span style="color:#66d9ef">if</span> item <span style="color:#f92672">&gt;</span> item_max {
+            item_max <span style="color:#f92672">=</span> item;
+        }
+    }
+
+    item_max
+}
+
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#75715e">// Find Max Number 1
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> nums <span style="color:#f92672">=</span> vec<span style="color:#f92672">!</span>[<span style="color:#ae81ff">34</span>, <span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">65</span>];
+    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> num_max <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>];
+
+    <span style="color:#66d9ef">for</span> num <span style="color:#66d9ef">in</span> nums {
+        <span style="color:#66d9ef">if</span> num <span style="color:#f92672">&gt;</span> num_max {
+            num_max <span style="color:#f92672">=</span> num;
+        }
+    }
+
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Number Max : {:?}&#34;</span>, num_max);
+
+    <span style="color:#75715e">// Find Max Number 2
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> nums <span style="color:#f92672">=</span> vec<span style="color:#f92672">!</span>[<span style="color:#ae81ff">102</span>, <span style="color:#ae81ff">34</span>, <span style="color:#ae81ff">6000</span>, <span style="color:#ae81ff">89</span>, <span style="color:#ae81ff">54</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">43</span>, <span style="color:#ae81ff">8</span>];
+
+    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> num_max <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>];
+
+    <span style="color:#66d9ef">for</span> num <span style="color:#66d9ef">in</span> nums {
+        <span style="color:#66d9ef">if</span> num <span style="color:#f92672">&gt;</span> num_max {
+            num_max <span style="color:#f92672">=</span> num;
+        }
+    }
+
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Number Max : {:?}&#34;</span>, num_max);
+
+    <span style="color:#75715e">// Find Max Number 3
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> nums <span style="color:#f92672">=</span> vec<span style="color:#f92672">!</span>[<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">60</span>, <span style="color:#ae81ff">150</span>, <span style="color:#ae81ff">59</span>, <span style="color:#ae81ff">34</span>, <span style="color:#ae81ff">22</span>, <span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">80</span>];
+    <span style="color:#66d9ef">let</span> num_max <span style="color:#f92672">=</span> find_max_num(<span style="color:#f92672">&amp;</span>nums);
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Number Max : {:?}&#34;</span>, num_max);
+
+    <span style="color:#75715e">// Find Max Chars 4
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> chrs <span style="color:#f92672">=</span> vec<span style="color:#f92672">!</span>[<span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;c&#39;</span>, <span style="color:#e6db74">&#39;d&#39;</span>, <span style="color:#e6db74">&#39;e&#39;</span>, <span style="color:#e6db74">&#39;g&#39;</span>, <span style="color:#e6db74">&#39;z&#39;</span>];
+    <span style="color:#66d9ef">let</span> chr_max <span style="color:#f92672">=</span> find_max_chr(<span style="color:#f92672">&amp;</span>chrs);
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Chars Max : {:?}&#34;</span>, chr_max);
+
+    <span style="color:#75715e">// Find Max 5
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> nums <span style="color:#f92672">=</span> vec<span style="color:#f92672">!</span>[<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">60</span>, <span style="color:#ae81ff">150</span>, <span style="color:#ae81ff">59</span>, <span style="color:#ae81ff">34</span>, <span style="color:#ae81ff">22</span>, <span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">80</span>];
+    <span style="color:#66d9ef">let</span> chrs <span style="color:#f92672">=</span> vec<span style="color:#f92672">!</span>[<span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;c&#39;</span>, <span style="color:#e6db74">&#39;d&#39;</span>, <span style="color:#e6db74">&#39;e&#39;</span>, <span style="color:#e6db74">&#39;g&#39;</span>, <span style="color:#e6db74">&#39;z&#39;</span>];
+    <span style="color:#66d9ef">let</span> num_max <span style="color:#f92672">=</span> find_max(<span style="color:#f92672">&amp;</span>nums);
+    <span style="color:#66d9ef">let</span> chr_max <span style="color:#f92672">=</span> find_max(<span style="color:#f92672">&amp;</span>chrs);
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Number Max : {:?} , Chars Max : {:?}&#34;</span>, num_max, chr_max);
+
+    <span style="color:#75715e">// generic data type 1
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> int1 <span style="color:#f92672">=</span> Point1 { x: <span style="color:#ae81ff">5</span>, y: <span style="color:#ae81ff">10</span> };
+    <span style="color:#66d9ef">let</span> flt1 <span style="color:#f92672">=</span> Point1 { x: <span style="color:#ae81ff">1.0</span>, y: <span style="color:#ae81ff">3.0</span> };
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?},{:?}&#34;</span>, int1, flt1);
+
+    <span style="color:#75715e">// let not_work = Point { x: 5, y: 3.0 };
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// generic data type 2
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> int1 <span style="color:#f92672">=</span> Point2 { x: <span style="color:#ae81ff">5</span>, y: <span style="color:#ae81ff">10</span> };
+    <span style="color:#66d9ef">let</span> flt1 <span style="color:#f92672">=</span> Point2 { x: <span style="color:#ae81ff">1.0</span>, y: <span style="color:#ae81ff">3.0</span> };
+    <span style="color:#66d9ef">let</span> mix1 <span style="color:#f92672">=</span> Point2 { x: <span style="color:#ae81ff">5</span>, y: <span style="color:#ae81ff">3.0</span> };
+
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?},{:?},{:?}&#34;</span>, int1, flt1, mix1);
+
+    <span style="color:#75715e">// generic type with method
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> int1 <span style="color:#f92672">=</span> Point1 { x: <span style="color:#ae81ff">3</span>, y: <span style="color:#ae81ff">8</span> };
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;int1.x = {}, int1.y = {}&#34;</span>, int1.x(), int1.y());
+
+    <span style="color:#75715e">// generic type with method 2
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> pnt1 <span style="color:#f92672">=</span> Point2 { x: <span style="color:#ae81ff">3</span>, y: <span style="color:#ae81ff">10.5</span> };
+    <span style="color:#66d9ef">let</span> pnt2 <span style="color:#f92672">=</span> Point2 { x: <span style="color:#e6db74">&#34;Text&#34;</span>, y: <span style="color:#e6db74">&#39;H&#39;</span> };
+    <span style="color:#66d9ef">let</span> pnt3 <span style="color:#f92672">=</span> pnt1.mixup(pnt2);
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, pnt3);
+
+    <span style="color:#75715e">// zero cost generic &lt;-- monomorphization
+</span><span style="color:#75715e"></span>}
+
+<span style="color:#75715e">#[derive(Debug)]</span>
+<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Point1</span><span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> {
+    x: <span style="color:#a6e22e">T</span>,
+    y: <span style="color:#a6e22e">T</span>,
+}
+
+<span style="color:#66d9ef">impl</span><span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> Point1<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> {
+    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">x</span>(<span style="color:#f92672">&amp;</span>self) -&gt; <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">T</span> {
+        <span style="color:#f92672">&amp;</span>self.x
+    }
+    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">y</span>(<span style="color:#f92672">&amp;</span>self) -&gt; <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">T</span> {
+        <span style="color:#f92672">&amp;</span>self.y
+    }
+}
+
+<span style="color:#75715e">#[derive(Debug)]</span>
+<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Point2</span><span style="color:#f92672">&lt;</span>A, B<span style="color:#f92672">&gt;</span> {
+    x: <span style="color:#a6e22e">A</span>,
+    y: <span style="color:#a6e22e">B</span>,
+}
+
+<span style="color:#66d9ef">impl</span><span style="color:#f92672">&lt;</span>A, B<span style="color:#f92672">&gt;</span> Point2<span style="color:#f92672">&lt;</span>A, B<span style="color:#f92672">&gt;</span> {
+    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">mixup</span><span style="color:#f92672">&lt;</span>C, D<span style="color:#f92672">&gt;</span>(self, other: <span style="color:#a6e22e">Point2</span><span style="color:#f92672">&lt;</span>C, D<span style="color:#f92672">&gt;</span>) -&gt; <span style="color:#a6e22e">Point2</span><span style="color:#f92672">&lt;</span>A, D<span style="color:#f92672">&gt;</span> {
+        Point2 {
+            x: <span style="color:#a6e22e">self</span>.x,
+            y: <span style="color:#a6e22e">other</span>.y,
+        }
+    }
+}
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>trait</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust">
 </code></pre></div>
     </div>
   </label>
