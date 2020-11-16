@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="머신러닝/딥러닝 학습 자료">
+<meta name="description" content="머신러닝 학습 자료">
 <meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="Machine Learning" />
-<meta property="og:description" content="머신러닝/딥러닝 학습 자료" />
+<meta property="og:description" content="머신러닝 학습 자료" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://prokoptasis.github.io/docs/documents/deeplearning/machinelearning/" />
 
@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.c24b0f71f0cf5c500eb996abcae716b6698a3bc23bbf7efce1f8b8ec206a11d1.js" integrity="sha256-wksPcfDPXFAOuZaryucWtmmKO8I7v3784fi47CBqEdE="></script>
+<script defer src="/ko.search.min.65a9fe56a6fe4bd470689cd2425155c3db7cdca998c709eb4c1aa46c4480a93d.js" integrity="sha256-Zan&#43;Vqb&#43;S9RwaJzSQlFVw9t83KmYxwnrTBqkbESAqT0="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -523,7 +523,10 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#machine-learning">#</a>
 </h2>
 <hr>
-<p>머신 러닝 관련 자료 정리</p>
+<p>다음 사이트등을 참조하여 머신 러닝 관련 자료 정리.
+<a href="https://www.youtube.com/playlist?list=PLS8gIc2q83OjStGjdTF2LZtc0vefCAbnX" target="_blank" rel="noopener">머신러닝/딥러닝 강의</a>
+<a href="https://www.youtube.com/playlist?list=PLQ28Nx3M4Jrguyuwg4xe9d9t2XE639e5C" target="_blank" rel="noopener">모두를 위한 딥러닝 시즌2</a>
+<a href="https://opentutorials.org/course/4548" target="_blank" rel="noopener">오픈튜토리얼-생활토당-머신러닝1</a></p>
 <h3 id="machine-learning-분류">
   Machine Learning 분류
   <a class="anchor" href="#machine-learning-%eb%b6%84%eb%a5%98">#</a>
@@ -3092,15 +3095,837 @@ a_{(1)}^{(1)}
 )\)
 </span>
 <br><br>
+<hr>
+<span>
+  \( 
+\frac {\partial E}{\partial W_{(2,1)}^{(2)}} = 
+\frac {\partial E_{(1)}}{\partial W_{(2,1)}^{(2)}} &#43;
+\frac {\partial E_{(2)}}{\partial W_{(2,1)}^{(2)}}\)
+</span>
+<br><br>
+<span>
+  \( 
+= 
+\frac {\partial E_{(1)}}{\partial a_{(1)}^{(3)}} \times
+\frac {\partial a_{(1)}^{(3)}}{\partial z_{(1)}^{(3)}} \times
+\frac {\partial z_{(1)}^{(3)}}{\partial a_{(2)}^{(2)}} \times
+\frac {\partial a_{(2)}^{(2)}}{\partial z_{(2)}^{(2)}} \times
+\frac {\partial z_{(2)}^{(2)}}{\partial w_{(2,1)}^{(2)}}\)
+</span>
+<br><br>
+<span>
+  \( 
+&#43;
+\frac {\partial E_{(2)}}{\partial a_{(2)}^{(3)}} \times
+\frac {\partial a_{(2)}^{(3)}}{\partial z_{(2)}^{(3)}} \times
+\frac {\partial z_{(2)}^{(3)}}{\partial a_{(2)}^{(2)}} \times
+\frac {\partial a_{(2)}^{(2)}}{\partial z_{(2)}^{(3)}} \times
+\frac {\partial z_{(2)}^{(2))}}{\partial w_{(2,1)}^{(2)}} \)
+</span>
+<br><br>
+<span>
+  \( 
+= 
+(
+a_{(1)}^{(3)}-
+t_{(1)}^{(3)}
+\times
+sigmoid(z_{(1)}^{(3)})
+(1-sigmoid(z_{(1)}^{(3)}))
+\times
+w_{(1,2)}^{(3)}
+\times
+sigmoid(z_{(2)}^{(2)})
+(1-sigmoid(z_{(2)}^{(2)}))
+\times
+a_{(1)}^{(1)}
+)\)
+</span>
+<br><br>
+<span>
+  \( 
+\space \space \space &#43; 
+(
+a_{(2)}^{(3)}-
+t_{(2)}^{(3)}
+\times
+sigmoid(z_{(2)}^{(3)})
+(1-sigmoid(z_{(2)}^{(3)}))
+\times
+w_{(2,2)}^{(3)}
+\times
+sigmoid(z_{(2)}^{(2)})
+(1-sigmoid(z_{(2)}^{(2)}))
+\times
+a_{(1)}^{(1)}
+)\)
+</span>
+<br><br>
+<span>
+  \( 
+=
+(
+a_{(1)}^{(3)}-
+t_{(1)}^{(3)}
+\times
+a_{(1)}^{(3)}(1-a_{(1)}^{(3)})
+\times
+w_{(1,2)}^{(3)}
+\times
+a_{(2)}^{(2)}(1-a_{(2)}^{(2)})
+\times
+a_{(1)}^{(1)}
+)\)
+</span>
+<br><br>
+<span>
+  \( 
+\space \space \space &#43;
+(
+a_{(2)}^{(3)}-
+t_{(2)}^{(3)}
+\times
+a_{(2)}^{(3)}(1-a_{(2)}^{(3)})
+\times
+w_{(2,2)}^{(3)}
+\times
+a_{(2)}^{(2)}(1-a_{(2)}^{(2)})
+\times
+a_{(1)}^{(1)}
+)\)
+</span>
+<br><br>
+<hr>
+<span>
+  \( 
+\frac {\partial E}{\partial W_{(1,1)}^{(2)}} = 
+\frac {\partial E_{(1)}}{\partial W_{(1,2)}^{(2)}} &#43;
+\frac {\partial E_{(2)}}{\partial W_{(1,2)}^{(2)}}\)
+</span>
+<br><br>
+<span>
+  \( 
+= 
+\frac {\partial E_{(1)}}{\partial a_{(1)}^{(3)}} \times
+\frac {\partial a_{(1)}^{(3)}}{\partial z_{(1)}^{(3)}} \times
+\frac {\partial z_{(1)}^{(3)}}{\partial a_{(1)}^{(2)}} \times
+\frac {\partial a_{(1)}^{(2)}}{\partial z_{(1)}^{(2)}} \times
+\frac {\partial z_{(1)}^{(2)}}{\partial w_{(1,2)}^{(2)}}\)
+</span>
+<br><br>
+<span>
+  \( 
+&#43;
+\frac {\partial E_{(2)}}{\partial a_{(2)}^{(3)}} \times
+\frac {\partial a_{(2)}^{(3)}}{\partial z_{(2)}^{(3)}} \times
+\frac {\partial z_{(2)}^{(3)}}{\partial a_{(1)}^{(2)}} \times
+\frac {\partial a_{(1)}^{(2)}}{\partial z_{(1)}^{(3)}} \times
+\frac {\partial z_{(1)}^{(2))}}{\partial w_{(1,2)}^{(2)}} \)
+</span>
+<br><br>
+<span>
+  \( 
+= 
+(
+a_{(1)}^{(3)}-
+t_{(1)}^{(3)}
+\times
+sigmoid(z_{(1)}^{(3)})
+(1-sigmoid(z_{(1)}^{(3)}))
+\times
+w_{(1,1)}^{(3)}
+\times
+sigmoid(z_{(1)}^{(2)})
+(1-sigmoid(z_{(1)}^{(2)}))
+\times
+a_{(2)}^{(1)}
+)\)
+</span>
+<br><br>
+<span>
+  \( 
+\space \space \space &#43; 
+(
+a_{(2)}^{(3)}-
+t_{(2)}^{(3)}
+\times
+sigmoid(z_{(2)}^{(3)})
+(1-sigmoid(z_{(2)}^{(3)}))
+\times
+w_{(2,1)}^{(3)}
+\times
+sigmoid(z_{(1)}^{(2)})
+(1-sigmoid(z_{(1)}^{(2)}))
+\times
+a_{(2)}^{(1)}
+)\)
+</span>
+<br><br>
+<span>
+  \( 
+=
+(
+a_{(1)}^{(3)}-
+t_{(1)}^{(3)}
+\times
+a_{(1)}^{(3)}(1-a_{(1)}^{(3)})
+\times
+w_{(1,1)}^{(3)}
+\times
+a_{(1)}^{(2)}(1-a_{(1)}^{(2)})
+\times
+a_{(2)}^{(1)}
+)\)
+</span>
+<br><br>
+<span>
+  \( 
+\space \space \space &#43;
+(
+a_{(2)}^{(3)}-
+t_{(2)}^{(3)}
+\times
+a_{(2)}^{(3)}(1-a_{(2)}^{(3)})
+\times
+w_{(2,1)}^{(3)}
+\times
+a_{(1)}^{(2)}(1-a_{(1)}^{(2)})
+\times
+a_{(2)}^{(1)}
+)\)
+</span>
+<br><br>
+<hr>
+<span>
+  \( 
+\frac {\partial E}{\partial W_{(2,2)}^{(2)}} = 
+\frac {\partial E_{(1)}}{\partial W_{(2,2)}^{(2)}} &#43;
+\frac {\partial E_{(2)}}{\partial W_{(2,2)}^{(2)}}\)
+</span>
+<br><br>
+<span>
+  \( 
+= 
+\frac {\partial E_{(1)}}{\partial a_{(1)}^{(3)}} \times
+\frac {\partial a_{(1)}^{(3)}}{\partial z_{(1)}^{(3)}} \times
+\frac {\partial z_{(1)}^{(3)}}{\partial a_{(2)}^{(2)}} \times
+\frac {\partial a_{(2)}^{(2)}}{\partial z_{(2)}^{(2)}} \times
+\frac {\partial z_{(2)}^{(2)}}{\partial w_{(2,2)}^{(2)}}\)
+</span>
+<br><br>
+<span>
+  \( 
+&#43;
+\frac {\partial E_{(2)}}{\partial a_{(2)}^{(3)}} \times
+\frac {\partial a_{(2)}^{(3)}}{\partial z_{(2)}^{(3)}} \times
+\frac {\partial z_{(2)}^{(3)}}{\partial a_{(2)}^{(2)}} \times
+\frac {\partial a_{(2)}^{(2)}}{\partial z_{(2)}^{(3)}} \times
+\frac {\partial z_{(2)}^{(2))}}{\partial w_{(2,2)}^{(2)}} \)
+</span>
+<br><br>
+<span>
+  \( 
+= 
+(
+a_{(1)}^{(3)}-
+t_{(1)}^{(3)}
+\times
+sigmoid(z_{(1)}^{(3)})
+(1-sigmoid(z_{(1)}^{(3)}))
+\times
+w_{(1,2)}^{(3)}
+\times
+sigmoid(z_{(2)}^{(2)})
+(1-sigmoid(z_{(2)}^{(2)}))
+\times
+a_{(2)}^{(1)}
+)\)
+</span>
+<br><br>
+<span>
+  \( 
+\space \space \space &#43; 
+(
+a_{(2)}^{(3)}-
+t_{(2)}^{(3)}
+\times
+sigmoid(z_{(2)}^{(3)})
+(1-sigmoid(z_{(2)}^{(3)}))
+\times
+w_{(2,2)}^{(3)}
+\times
+sigmoid(z_{(2)}^{(2)})
+(1-sigmoid(z_{(2)}^{(2)}))
+\times
+a_{(2)}^{(1)}
+)\)
+</span>
+<br><br>
+<span>
+  \( 
+=
+(
+a_{(1)}^{(3)}-
+t_{(1)}^{(3)}
+\times
+a_{(1)}^{(3)}(1-a_{(1)}^{(3)})
+\times
+w_{(1,2)}^{(3)}
+\times
+a_{(2)}^{(2)}(1-a_{(2)}^{(2)})
+\times
+a_{(2)}^{(1)}
+)\)
+</span>
+<br><br>
+<span>
+  \( 
+\space \space \space &#43;
+(
+a_{(2)}^{(3)}-
+t_{(2)}^{(3)}
+\times
+a_{(2)}^{(3)}(1-a_{(2)}^{(3)})
+\times
+w_{(2,2)}^{(3)}
+\times
+a_{(2)}^{(2)}(1-a_{(2)}^{(2)})
+\times
+a_{(2)}^{(1)}
+)\)
+</span>
+<br><br>
+<hr>
+<span>
+  \( 
+\frac {\partial E}{\partial b_{(1)}^{(2)}} = 
+\frac {\partial E_{(1)}}{\partial b_{(1)}^{(2)}} &#43;
+\frac {\partial E_{(2)}}{\partial b_{(1)}^{(2)}}\)
+</span>
+<br><br>
+<span>
+  \( 
+= 
+\frac {\partial E_{(1)}}{\partial a_{(1)}^{(3)}} \times
+\frac {\partial a_{(1)}^{(3)}}{\partial z_{(1)}^{(3)}} \times
+\frac {\partial z_{(1)}^{(3)}}{\partial a_{(1)}^{(2)}} \times
+\frac {\partial a_{(1)}^{(3)}}{\partial z_{(1)}^{(2)}} \times
+\frac {\partial z_{(1)}^{(2)}}{\partial b_{(1)}^{(2)}}\)
+</span>
+<br><br>
+<span>
+  \( 
+&#43;
+\frac {\partial E_{(2)}}{\partial a_{(2)}^{(3)}} \times
+\frac {\partial a_{(2)}^{(3)}}{\partial z_{(2)}^{(3)}} \times
+\frac {\partial z_{(2)}^{(3)}}{\partial a_{(1)}^{(2)}} \times
+\frac {\partial a_{(1)}^{(2)}}{\partial z_{(1)}^{(3)}} \times
+\frac {\partial z_{(1)}^{(2))}}{\partial w_{(1)}^{(2)}} \)
+</span>
+<br><br>
+<span>
+  \( 
+= 
+(
+a_{(1)}^{(3)}-
+t_{(1)}^{(3)}
+\times
+sigmoid(z_{(1)}^{(3)})
+(1-sigmoid(z_{(1)}^{(3)}))
+\times
+w_{(1,1)}^{(3)}
+\times
+sigmoid(z_{(1)}^{(2)})
+(1-sigmoid(z_{(1)}^{(2)}))
+\times
+1
+)\)
+</span>
+<br><br>
+<span>
+  \( 
+\space \space \space &#43; 
+(
+a_{(2)}^{(3)}-
+t_{(2)}^{(3)}
+\times
+sigmoid(z_{(2)}^{(3)})
+(1-sigmoid(z_{(2)}^{(3)}))
+\times
+w_{(2,1)}^{(3)}
+\times
+sigmoid(z_{(1)}^{(2)})
+(1-sigmoid(z_{(1)}^{(2)}))
+\times
+1
+)\)
+</span>
+<br><br>
+<span>
+  \( 
+=
+(
+a_{(1)}^{(3)}-
+t_{(1)}^{(3)}
+\times
+a_{(1)}^{(3)}(1-a_{(1)}^{(3)})
+\times
+w_{(1,1)}^{(3)}
+\times
+a_{(1)}^{(2)}(1-a_{(1)}^{(2)})
+\times
+1
+)\)
+</span>
+<br><br>
+<span>
+  \( 
+\space \space \space &#43;
+(
+a_{(2)}^{(3)}-
+t_{(2)}^{(3)}
+\times
+a_{(2)}^{(3)}(1-a_{(2)}^{(3)})
+\times
+w_{(2,1)}^{(3)}
+\times
+a_{(1)}^{(2)}(1-a_{(1)}^{(2)})
+\times
+1
+)\)
+</span>
+<br><br>
+<hr>
+<span>
+  \( 
+\frac {\partial E}{\partial b_{(2)}^{(2)}} = 
+\frac {\partial E_{(1)}}{\partial b_{(2)}^{(2)}} &#43;
+\frac {\partial E_{(2)}}{\partial b_{(2)}^{(2)}}\)
+</span>
+<br><br>
+<span>
+  \( 
+= 
+\frac {\partial E_{(1)}}{\partial a_{(1)}^{(3)}} \times
+\frac {\partial a_{(1)}^{(3)}}{\partial z_{(1)}^{(3)}} \times
+\frac {\partial z_{(1)}^{(3)}}{\partial a_{(2)}^{(2)}} \times
+\frac {\partial a_{(2)}^{(3)}}{\partial z_{(2)}^{(2)}} \times
+\frac {\partial z_{(2)}^{(2)}}{\partial b_{(2)}^{(2)}}\)
+</span>
+<br><br>
+<span>
+  \( 
+&#43;
+\frac {\partial E_{(2)}}{\partial a_{(2)}^{(3)}} \times
+\frac {\partial a_{(2)}^{(3)}}{\partial z_{(2)}^{(3)}} \times
+\frac {\partial z_{(2)}^{(3)}}{\partial a_{(2)}^{(2)}} \times
+\frac {\partial a_{(2)}^{(2)}}{\partial z_{(2)}^{(3)}} \times
+\frac {\partial z_{(2)}^{(2))}}{\partial w_{(2)}^{(2)}} \)
+</span>
+<br><br>
+<span>
+  \( 
+= 
+(
+a_{(1)}^{(3)}-
+t_{(1)}^{(3)}
+\times
+sigmoid(z_{(1)}^{(3)})
+(1-sigmoid(z_{(1)}^{(3)}))
+\times
+w_{(1,3)}^{(3)}
+\times
+sigmoid(z_{(2)}^{(2)})
+(1-sigmoid(z_{(2)}^{(2)}))
+\times
+1
+)\)
+</span>
+<br><br>
+<span>
+  \( 
+\space \space \space &#43; 
+(
+a_{(2)}^{(3)}-
+t_{(2)}^{(3)}
+\times
+sigmoid(z_{(2)}^{(3)})
+(1-sigmoid(z_{(2)}^{(3)}))
+\times
+w_{(2,2)}^{(3)}
+\times
+sigmoid(z_{(2)}^{(2)})
+(1-sigmoid(z_{(2)}^{(2)}))
+\times
+1
+)\)
+</span>
+<br><br>
+<span>
+  \( 
+=
+(
+a_{(1)}^{(3)}-
+t_{(1)}^{(3)}
+\times
+a_{(1)}^{(3)}(1-a_{(1)}^{(3)})
+\times
+w_{(1,2)}^{(3)}
+\times
+a_{(2)}^{(2)}(1-a_{(2)}^{(2)})
+\times
+1
+)\)
+</span>
+<br><br>
+<span>
+  \( 
+\space \space \space &#43;
+(
+a_{(2)}^{(3)}-
+t_{(2)}^{(3)}
+\times
+a_{(2)}^{(3)}(1-a_{(2)}^{(3)})
+\times
+w_{(2,2)}^{(3)}
+\times
+a_{(2)}^{(2)}(1-a_{(2)}^{(2)})
+\times
+1
+)\)
+</span>
+<br><br>
 </div>
     </div>
   </label>
 </div>
 
-<p>Backpropagation2</p>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>hidden layer 2</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+<span>
+  \( 
+\frac {\partial E} {\partial W^{(2)}} 
+= \begin{bmatrix} 
+\frac {\partial E}{\partial W_{(1,1)}^{(2)}} &amp; 
+\frac {\partial E}{\partial W_{(2,1)}^{(2)}} \\ 
+\frac {\partial E}{\partial W_{(1,2)}^{(2)}} &amp; 
+\frac {\partial E}{\partial W_{(2,2)}^{(2)}} \end{bmatrix}\)
+</span>
+<br><br>
+1) <span>
+  \( 
+\frac {\partial E}{\partial W_{(1,1)}^{(2)}}\)
+</span>
+<br><br>
+<span>
+  \( 
+= a_{(1)}^{(1)}(a_{(1)}^{(3)}-t_{(1)}^{(3)})a_{(1)}^{(3)}(1-a_{(1)}^{(3)})w_{(1,1)}^{(3)}a_{(1)}^{(2)}(1-a_{(1)}^{(2)})\)
+</span>
+<br><br>
+<span>
+  \( 
+&#43; a_{(1)}^{(1)}(a_{(2)}^{(3)}-t_{(2)}^{(3)})a_{(2)}^{(3)}(1-a_{(2)}^{(3)})w_{(2,1)}^{(3)}a_{(1)}^{(2)}(1-a_{(1)}^{(2)})\)
+</span>
+<br><br>
+2) <span>
+  \( 
+\frac {\partial E}{\partial W_{(2,1)}^{(2)}}\)
+</span>
+<br><br>
+<span>
+  \( 
+= a_{(1)}^{(1)}(a_{(1)}^{(3)}-t_{(1)}^{(3)})a_{(1)}^{(3)}(1-a_{(1)}^{(3)})w_{(1,2)}^{(3)}a_{(2)}^{(2)}(1-a_{(2)}^{(2)})\)
+</span>
+<br><br>
+<span>
+  \( 
+&#43; a_{(1)}^{(1)}(a_{(2)}^{(3)}-t_{(2)}^{(3)})a_{(2)}^{(3)}(1-a_{(2)}^{(3)})w_{(2,2)}^{(3)}a_{(2)}^{(2)}(1-a_{(2)}^{(2)})\)
+</span>
+<br><br>
+3) <span>
+  \( 
+\frac {\partial E}{\partial W_{(1,2)}^{(2)}}\)
+</span>
+<br><br>
+<span>
+  \( 
+= a_{(2)}^{(1)}(a_{(1)}^{(3)}-t_{(1)}^{(3)})a_{(1)}^{(3)}(1-a_{(1)}^{(3)})w_{(1,1)}^{(3)}a_{(1)}^{(2)}(1-a_{(1)}^{(2)})\)
+</span>
+<br><br>
+<span>
+  \( 
+&#43; a_{(2)}^{(1)}(a_{(2)}^{(3)}-t_{(2)}^{(3)})a_{(2)}^{(3)}(1-a_{(2)}^{(3)})w_{(2,1)}^{(3)}a_{(1)}^{(2)}(1-a_{(1)}^{(2)})\)
+</span>
+<br><br>
+4) <span>
+  \( 
+\frac {\partial E}{\partial W_{(2,2)}^{(2)}}\)
+</span>
+<br><br>
+<span>
+  \( 
+= a_{(2)}^{(1)}(a_{(1)}^{(3)}-t_{(1)}^{(3)})a_{(1)}^{(3)}(1-a_{(1)}^{(3)})w_{(1,2)}^{(3)}a_{(2)}^{(2)}(1-a_{(2)}^{(2)})\)
+</span>
+<br><br>
+<span>
+  \( 
+&#43; a_{(2)}^{(1)}(a_{(2)}^{(3)}-t_{(2)}^{(3)})a_{(2)}^{(3)}(1-a_{(2)}^{(3)})w_{(2,2)}^{(3)}a_{(2)}^{(2)}(1-a_{(2)}^{(2)})\)
+</span>
+<br><br>
+<span>
+  \( 
+= \begin{bmatrix} 
+a_{(1)}^{(1)} \\ 
+a_{(2)}^{(1)}
+\end{bmatrix}\)
+</span>
+<br><br>
+<span>
+  \( 
+\cdotp
+\Big(
+\begin{bmatrix} 
+(a_{(1)}^{(3)}-t_{(1)}^{(3)})a_{(1)}^{(3)}(1-a_{(1)}^{(3)}) &amp;
+(a_{(2)}^{(3)}-t_{(2)}^{(3)})a_{(2)}^{(3)}(1-a_{(2)}^{(3)})
+\end{bmatrix}\)
+</span>
+<br><br>
+<span>
+  \( 
+\cdotp
+\begin{bmatrix} 
+w_{(1,1)}^{(3)} 
+&amp;
+w_{(1,2)}^{(3)}
+\\
+w_{(2,1)}^{(3)} 
+&amp;
+w_{(2,2)}^{(3)} 
+\end{bmatrix}\)
+</span>
+<br><br>
+<span>
+  \( 
+\times
+\begin{bmatrix} 
+a_{(1)}^{(2)}(1-a_{(1)}^{(2)})
+&amp;
+a_{(2)}^{(2)}(1-a_{(2)}^{(2)})
+\end{bmatrix}
+\Big)\)
+</span>
+<br><br>
+<span>
+  \( 
+= A1^{T} \cdotp ( (loss\_3 \cdotp W3^{T}) \times (A2 \times (1-A2)) )\)
+</span>
+<br><br>
+<span>
+  \( = A1^{T} \cdotp loss\_2 \)
+</span>
+ <br><br>
+<hr>
+<span>
+  \( 
+\frac {\partial E} {\partial b^{(2)}} 
+= \begin{bmatrix} 
+\frac {\partial E}{\partial b_{(1)}^{(2)}} \\ 
+\frac {\partial E}{\partial b_{(2)}^{(2)}} 
+\end{bmatrix}\)
+</span>
+<br><br>
+1) <span>
+  \( 
+= (a_{(1)}^{(3)}-t_{(1)}^{(3)})a_{(1)}^{(3)}(1-a_{(1)}^{(3)}w_{(1,1)}^{(3)}a_{(1)}^{(2)}(1-a_{(1)}^{(2)}\)
+</span>
+<br><br>
+<span>
+  \( 
+&#43; (a_{(2)}^{(3)}-t_{(2)}^{(3)})a_{(2)}^{(3)}(1-a_{(2)}^{(3)}w_{(2,1)}^{(3)}a_{(1)}^{(2)}(1-a_{(1)}^{(2)}\)
+</span>
+<br><br>
+2) <span>
+  \( 
+= (a_{(1)}^{(3)}-t_{(1)}^{(3)})a_{(1)}^{(3)}(1-a_{(1)}^{(3)}w_{(1,2)}^{(3)}a_{(2)}^{(2)}(1-a_{(2)}^{(2)}\)
+</span>
+<br><br>
+<span>
+  \( 
+&#43; (a_{(2)}^{(3)}-t_{(2)}^{(3)})a_{(2)}^{(3)}(1-a_{(2)}^{(3)}w_{(2,2)}^{(3)}a_{(2)}^{(2)}(1-a_{(2)}^{(2)}\)
+</span>
+<br><br>
+3) <span>
+  \( 
+= (a_{(1)}^{(3)}-t_{(1)}^{(3)})a_{(1)}^{(3)}(1-a_{(1)}^{(3)}w_{(1,1)}^{(3)}a_{(1)}^{(2)}(1-a_{(1)}^{(2)}\)
+</span>
+<br><br>
+<span>
+  \( 
+&#43; (a_{(2)}^{(3)}-t_{(2)}^{(3)})a_{(2)}^{(3)}(1-a_{(2)}^{(3)}w_{(2,1)}^{(3)}a_{(1)}^{(2)}(1-a_{(1)}^{(2)}\)
+</span>
+<br><br>
+4) <span>
+  \( 
+= (a_{(1)}^{(3)}-t_{(1)}^{(3)})a_{(1)}^{(3)}(1-a_{(1)}^{(3)}w_{(1,2)}^{(3)}a_{(2)}^{(2)}(1-a_{(2)}^{(2)}\)
+</span>
+<br><br>
+<span>
+  \( 
+&#43; (a_{(2)}^{(3)}-t_{(2)}^{(3)})a_{(2)}^{(3)}(1-a_{(2)}^{(3)}w_{(2,2)}^{(3)}a_{(2)}^{(2)}(1-a_{(2)}^{(2)}\)
+</span>
+<br><br>
+<span>
+  \( 
+= (a_{(1)}^{(3)}-t_{(1)}^{(3)})a_{(1)}^{(3)}(1-a_{(1)}^{(3)}\)
+</span>
+<br><br>
+<span>
+  \( 
+\space \space \space
+(a_{(2)}^{(3)}-t_{(2)}^{(3)})a_{(2)}^{(3)}(1-a_{(2)}^{(3)})\)
+</span>
+<br><br>
+<span>
+  \( 
+\cdotp
+\begin{bmatrix}
+W_{(1,1)}^{(3)} &amp;
+W_{(1,2)}^{(3)} \\
+W_{(2,1)}^{(3)} &amp;
+W_{(2,2)}^{(3)} 
+\end{bmatrix}\)
+</span>
+<br><br>
+<span>
+  \( 
+\times
+\begin{bmatrix}
+a_{(1)}^{(2)}(1-a_{(1)}{(2)}) \\
+a_{(2)}^{(2)}(1-a_{(2)}{(2)})
+\end{bmatrix}\)
+</span>
+<br><br>
+<span>
+  \( 
+= ((loss\_3 \cdotp W3^{T}) \times (A2 \times (1-A2)) )\)
+</span>
+<br><br>
+<span>
+  \( 
+= loss\_2\)
+</span>
+<br><br>
+</div>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>hidden layer 3</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+<span>
+  \( 
+W^{(2)} = W^{(2)} - \alpha \frac {\partial E}{\partial W^{(2)}} = W^{(2)} - \alpha \times (A1^{T} \cdotp loss\_2 )\)
+</span>
+<br><br>
+<span>
+  \( 
+b^{(2)} = b^{(2)} - \alpha \frac {\partial E}{\partial b^{(2)}} = b^{(2)} - \alpha \times loss\_2\)
+</span>
+<br><br>
+</div>
+    </div>
+  </label>
+</div>
+
 <div><img width="600px" src="../../../../../201020_24_ml_backpropagation_2.png" alt="node notation" ></div>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>loss, weight and bias update</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+<span>
+  \( 
+loss\_4 = (A4 - Target) \times A4(1-A4)\)
+</span>
+<br><br>
+<span>
+  \( 
+W4 = W4 - \alpha \frac {\partial E}{\partial W4} = W4 - \alpha \times (A3^{T} \cdotp loss\_4)\)
+</span>
+<br><br>
+<span>
+  \( 
+b4 = b4 - \alpha \frac {\partial E}{\partial b4} = b4 - \alpha \times loss\_4\)
+</span>
+<br><br>
+<hr>
+<span>
+  \( 
+loss\_3 = ( loss\_4 \cdotp W4^{T} ) \times A3(1-A3)\)
+</span>
+<br><br>
+<span>
+  \( 
+W3 = W3 - \alpha \frac {\partial E}{\partial W3} = W3 - \alpha \times (A2^{T} \cdotp loss\_3)\)
+</span>
+<br><br>
+<span>
+  \( 
+b3 = b3 - \alpha \frac {\partial E}{\partial b3} = b3 - \alpha \times loss\_3\)
+</span>
+<br><br>
+<hr>
+<span>
+  \( 
+loss\_2 = ( loss\_3 \cdotp W3^{T} ) \times A2(1-A2)\)
+</span>
+<br><br>
+<span>
+  \( 
+W2 = W2 - \alpha \frac {\partial E}{\partial W2} = W2 - \alpha \times (A1^{T} \cdotp loss\_2)\)
+</span>
+<br><br>
+<span>
+  \( 
+b2 = b2 - \alpha \frac {\partial E}{\partial b2} = b2 - \alpha \times loss\_2\)
+</span>
+<br><br>
+</div>
+    </div>
+  </label>
+</div>
+
 <p>Vanishing Gradient</p>
 <div><img width="600px" src="../../../../../201020_21_ml_vanishing_gradient.png" alt="vanishing gradient" ></div>
+<p>Sigmoid나 Tanh등 Activation Function의 제한적 실수 범위의 선택으로 Depth가 깊은 Layer에서는 차이가 Squashing되어 소실 되는 특성을 지님</p>
+<p>Solution 1 : Relu, Leaky Relu <span>
+  \( f(x) = max(0,x)\)
+</span>
+<br>
+Solution 2 : Weight Initialization (Xavier)<br>
+Solution 3 : Dropout<br>
+Solution 4 : Batch Normalization</p>
 <br>
 <section class="footnotes" role="doc-endnotes">
 <hr>
