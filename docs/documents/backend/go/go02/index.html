@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.7a8c4339199fc991d7819194c1a3e8342994a54a54502cb3d0abf779b9c2442a.js" integrity="sha256-eoxDORmfyZHXgZGUwaPoNCmUpUpUUCyz0Kv3ebnCRCo="></script>
+<script defer src="/ko.search.min.0a782395553375a7fb2c94aa3d2a63eb45258d2d2ab19f7ae8bcff9b4b0b2be4.js" integrity="sha256-CngjlVUzdaf7LJSqPSpj60UljS0qsZ966Lz/m0sLK&#43;Q="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -261,6 +261,19 @@ https://github.com/alex-shpak/hugo-book
 
   
     <a href="http://prokoptasis.github.io/docs/documents/backend/go/go02/" class=" active">GO Advanced</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/documents/backend/go/go03/" class="">GO DB 연결</a>
   
 
         </li>
@@ -736,11 +749,10 @@ https://github.com/alex-shpak/hugo-book
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;net/http&#34;</span>
+
 	<span style="color:#e6db74">&#34;./scrp&#34;</span>
 	<span style="color:#e6db74">&#34;github.com/labstack/echo&#34;</span>
-
-	<span style="color:#75715e">//&#34;github.com/labstack/echo/v4&#34;
-</span><span style="color:#75715e"></span>	<span style="color:#e6db74">&#34;net/http&#34;</span>
 )
 
 <span style="color:#66d9ef">func</span> <span style="color:#a6e22e">handleHome</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
@@ -748,12 +760,9 @@ https://github.com/alex-shpak/hugo-book
 }
 
 <span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-	<span style="color:#a6e22e">scrp</span>.<span style="color:#a6e22e">Scrp</span>(<span style="color:#e6db74">&#34;python&#34;</span>)
-
-	<span style="color:#75715e">// e := echo.New()
-</span><span style="color:#75715e"></span>	<span style="color:#75715e">// e.GET(&#34;/&#34;, handleHome)
-</span><span style="color:#75715e"></span>	<span style="color:#75715e">// e.Logger.Fatal(e.Start(&#34;:1323&#34;))
-</span><span style="color:#75715e"></span>}
+	<span style="color:#75715e">// scrp.Scrp
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">scrp</span>.<span style="color:#a6e22e">Scrp</span>(<span style="color:#e6db74">&#34;scm&#34;</span>)
+}
 </code></pre></div><p>scrp/scrp.go</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">scrp</span>
 
@@ -769,7 +778,8 @@ https://github.com/alex-shpak/hugo-book
 	<span style="color:#e6db74">&#34;github.com/PuerkitoBio/goquery&#34;</span>
 )
 
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">extractedJob</span> <span style="color:#66d9ef">struct</span> {
+<span style="color:#75715e">// extractedJob 구조체 정의
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">extractedJob</span> <span style="color:#66d9ef">struct</span> {
 	<span style="color:#a6e22e">id</span>       <span style="color:#66d9ef">string</span>
 	<span style="color:#a6e22e">title</span>    <span style="color:#66d9ef">string</span>
 	<span style="color:#a6e22e">location</span> <span style="color:#66d9ef">string</span>
@@ -777,131 +787,249 @@ https://github.com/alex-shpak/hugo-book
 	<span style="color:#a6e22e">summary</span>  <span style="color:#66d9ef">string</span>
 }
 
-<span style="color:#75715e">// Scrp
+<span style="color:#75715e">// Scrp Function
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Scrp</span>(<span style="color:#a6e22e">term</span> <span style="color:#66d9ef">string</span>) {
-	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">baseURL</span> <span style="color:#66d9ef">string</span> = <span style="color:#e6db74">&#34;https://kr.indeed.com/jobs?q=&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">term</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;&amp;limit=50&#34;</span>
-	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">jobs</span> []<span style="color:#a6e22e">extractedJob</span>
-	<span style="color:#a6e22e">c</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> []<span style="color:#a6e22e">extractedJob</span>)
+	<span style="color:#75715e">// base URL 변수 선언
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">baseURL</span> <span style="color:#66d9ef">string</span> = <span style="color:#e6db74">&#34;https://kr.indeed.com/jobs?q=&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">term</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;&amp;limit=50&#34;</span>
 
-	<span style="color:#a6e22e">totalPages</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">getPages</span>(<span style="color:#a6e22e">baseURL</span>)
+	<span style="color:#75715e">// extractedJob 구조체 배열 선언
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">jobs</span> []<span style="color:#a6e22e">extractedJob</span>
 
-	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">totalPages</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
-		<span style="color:#66d9ef">go</span> <span style="color:#a6e22e">getPage</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">baseURL</span>, <span style="color:#a6e22e">c</span>)
-		<span style="color:#75715e">//extractedJobs := getPage(i)
-</span><span style="color:#75715e"></span>		<span style="color:#75715e">//jobs = append(jobs, extractedJobs...)
+	<span style="color:#75715e">// extractedJOb 배열형 채널 선언
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">c</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> []<span style="color:#a6e22e">extractedJob</span>)
+
+	<span style="color:#75715e">// 1) getPages Function을 통해 baseURL을 전달
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 2) getPages Function을 통해 totalPages를 받음
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">totalPages</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">getPages</span>(<span style="color:#a6e22e">baseURL</span>)
+
+	<span style="color:#75715e">// totalpages 수만큼 go routine 으로 getPage를 수행
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">totalPages</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+		<span style="color:#75715e">// 고루틴으로 getPage를 수행
+</span><span style="color:#75715e"></span>		<span style="color:#75715e">// 페이지 번호, 기본URL, 채널
+</span><span style="color:#75715e"></span>		<span style="color:#66d9ef">go</span> <span style="color:#a6e22e">getPage</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">baseURL</span>, <span style="color:#a6e22e">c</span>)
+		<span style="color:#75715e">// 최종적으로 extractedJob 구조체 배열형 c (mainC)에 
+</span><span style="color:#75715e"></span>		<span style="color:#75715e">// 검색된 JobCard들이 담김
 </span><span style="color:#75715e"></span>	}
 
-	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">totalPages</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+	<span style="color:#75715e">// 채널로 전달받은 page별 extractedJobs를 
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 로컬 Jobs로 최종 취합
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">totalPages</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
 		<span style="color:#a6e22e">extratedJobs</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">c</span>
 		<span style="color:#a6e22e">jobs</span> = append(<span style="color:#a6e22e">jobs</span>, <span style="color:#a6e22e">extratedJobs</span><span style="color:#f92672">...</span>)
 	}
 
-	<span style="color:#a6e22e">writeJobs</span>(<span style="color:#a6e22e">jobs</span>)
-	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Done : &#34;</span>, len(<span style="color:#a6e22e">jobs</span>))
+	<span style="color:#75715e">// page별로 전달 받은 jobs를 writJobs를 통해 파일로 기록
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">writeJobs</span>(<span style="color:#a6e22e">jobs</span>)
+
+	<span style="color:#75715e">// 최종 jobs의 Length를 출력하며 종료
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Done : &#34;</span>, len(<span style="color:#a6e22e">jobs</span>))
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">getPage</span>(<span style="color:#a6e22e">page</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">url</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">mainC</span> <span style="color:#66d9ef">chan</span><span style="color:#f92672">&lt;-</span> []<span style="color:#a6e22e">extractedJob</span>) {
-	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">jobs</span> []<span style="color:#a6e22e">extractedJob</span>
-	<span style="color:#a6e22e">c</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#a6e22e">extractedJob</span>)
-	<span style="color:#a6e22e">pageURL</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">url</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;&amp;start=&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">strconv</span>.<span style="color:#a6e22e">Itoa</span>(<span style="color:#a6e22e">page</span><span style="color:#f92672">*</span><span style="color:#ae81ff">50</span>)
-	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Request : &#34;</span>, <span style="color:#a6e22e">pageURL</span>)
-	<span style="color:#a6e22e">res</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#a6e22e">pageURL</span>)
-	<span style="color:#a6e22e">checkErr</span>(<span style="color:#a6e22e">err</span>)
-	<span style="color:#a6e22e">checkCode</span>(<span style="color:#a6e22e">res</span>)
+<span style="color:#75715e">// url을 전달 받아 pages를 반환함
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">getPages</span>(<span style="color:#a6e22e">url</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">int</span> {
+	<span style="color:#75715e">// return할 pages를 초기화
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">pages</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
 
-	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Body</span>.<span style="color:#a6e22e">Close</span>()
-	<span style="color:#a6e22e">doc</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">goquery</span>.<span style="color:#a6e22e">NewDocumentFromReader</span>(<span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Body</span>)
-	<span style="color:#a6e22e">checkErr</span>(<span style="color:#a6e22e">err</span>)
+	<span style="color:#75715e">// net/http 패키지의 Get함수를 통해 해당 url의 Response를 반환
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">res</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#a6e22e">url</span>)
 
-	<span style="color:#a6e22e">searchCards</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">doc</span>.<span style="color:#a6e22e">Find</span>(<span style="color:#e6db74">&#34;.jobsearch-SerpJobCard&#34;</span>)
+	<span style="color:#75715e">// net/http Get을 통해 전달 받은 err을 체크 (nil)
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">checkErr</span>(<span style="color:#a6e22e">err</span>)
 
-	<span style="color:#a6e22e">searchCards</span>.<span style="color:#a6e22e">Each</span>(<span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">i</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">card</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">goquery</span>.<span style="color:#a6e22e">Selection</span>) {
-		<span style="color:#66d9ef">go</span> <span style="color:#a6e22e">extractJob</span>(<span style="color:#a6e22e">card</span>, <span style="color:#a6e22e">c</span>)
-		<span style="color:#75715e">//jobs = append(jobs, job)
-</span><span style="color:#75715e"></span>	})
+	<span style="color:#75715e">// net/http Get을 통해 전달 받은 res를 체크 (200)
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">checkCode</span>(<span style="color:#a6e22e">res</span>)
 
-	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">searchCards</span>.<span style="color:#a6e22e">Length</span>(); <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
-		<span style="color:#a6e22e">job</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">c</span>
-		<span style="color:#a6e22e">jobs</span> = append(<span style="color:#a6e22e">jobs</span>, <span style="color:#a6e22e">job</span>)
-	}
+	<span style="color:#75715e">// defer를 통해 response의 Body를 Close
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Body</span>.<span style="color:#a6e22e">Close</span>()
 
-	<span style="color:#a6e22e">mainC</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">jobs</span>
-}
+	<span style="color:#75715e">// BeautifulSoup : HTML,XML에서 data를 추출하는 라이브러리
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// goquery : beautifulsoup 유사 library
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// res.Body에서 document를 추출
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">doc</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">goquery</span>.<span style="color:#a6e22e">NewDocumentFromReader</span>(<span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Body</span>)
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">extractJob</span>(<span style="color:#a6e22e">card</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">goquery</span>.<span style="color:#a6e22e">Selection</span>, <span style="color:#a6e22e">c</span> <span style="color:#66d9ef">chan</span><span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">extractedJob</span>) {
-	<span style="color:#a6e22e">id</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">card</span>.<span style="color:#a6e22e">Attr</span>(<span style="color:#e6db74">&#34;data-jk&#34;</span>)
-	<span style="color:#a6e22e">title</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">cleanString</span>(<span style="color:#a6e22e">card</span>.<span style="color:#a6e22e">Find</span>(<span style="color:#e6db74">&#34;.title&gt;a&#34;</span>).<span style="color:#a6e22e">Text</span>())
-	<span style="color:#a6e22e">location</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">cleanString</span>(<span style="color:#a6e22e">card</span>.<span style="color:#a6e22e">Find</span>(<span style="color:#e6db74">&#34;.sjcl&#34;</span>).<span style="color:#a6e22e">Text</span>())
-	<span style="color:#a6e22e">salary</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">cleanString</span>(<span style="color:#a6e22e">card</span>.<span style="color:#a6e22e">Find</span>(<span style="color:#e6db74">&#34;.salaryText&#34;</span>).<span style="color:#a6e22e">Text</span>())
-	<span style="color:#a6e22e">summary</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">cleanString</span>(<span style="color:#a6e22e">card</span>.<span style="color:#a6e22e">Find</span>(<span style="color:#e6db74">&#34;.summary&#34;</span>).<span style="color:#a6e22e">Text</span>())
+	<span style="color:#75715e">// goquery.NewDocumentFromReader를 통해 전달 받은 err을 체크
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">checkErr</span>(<span style="color:#a6e22e">err</span>)
 
-	<span style="color:#a6e22e">c</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">extractedJob</span>{<span style="color:#a6e22e">id</span>: <span style="color:#a6e22e">id</span>, <span style="color:#a6e22e">title</span>: <span style="color:#a6e22e">title</span>, <span style="color:#a6e22e">location</span>: <span style="color:#a6e22e">location</span>, <span style="color:#a6e22e">salary</span>: <span style="color:#a6e22e">salary</span>, <span style="color:#a6e22e">summary</span>: <span style="color:#a6e22e">summary</span>}
-}
+	println(<span style="color:#e6db74">&#34;Base Url : &#34;</span>, <span style="color:#a6e22e">url</span>)
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">getPages</span>(<span style="color:#a6e22e">url</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">int</span> {
-	<span style="color:#a6e22e">pages</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
-	<span style="color:#a6e22e">res</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#a6e22e">url</span>)
-	<span style="color:#a6e22e">checkErr</span>(<span style="color:#a6e22e">err</span>)
-	<span style="color:#a6e22e">checkCode</span>(<span style="color:#a6e22e">res</span>)
-
-	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Body</span>.<span style="color:#a6e22e">Close</span>()
-	<span style="color:#a6e22e">doc</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">goquery</span>.<span style="color:#a6e22e">NewDocumentFromReader</span>(<span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Body</span>)
-	<span style="color:#a6e22e">checkErr</span>(<span style="color:#a6e22e">err</span>)
-
-	<span style="color:#a6e22e">doc</span>.<span style="color:#a6e22e">Find</span>(<span style="color:#e6db74">&#34;.pagination&#34;</span>).<span style="color:#a6e22e">Each</span>(<span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">i</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">goquery</span>.<span style="color:#a6e22e">Selection</span>) {
-		<span style="color:#a6e22e">pages</span> = <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">Find</span>(<span style="color:#e6db74">&#34;a&#34;</span>).<span style="color:#a6e22e">Length</span>()
+	<span style="color:#75715e">// goquery.NewDocumentFromReader를 통해 전달 받은 doc에서
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 1) pagination 검색
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 2) a herf의 길이를 pages로 전달
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">doc</span>.<span style="color:#a6e22e">Find</span>(<span style="color:#e6db74">&#34;.pagination&#34;</span>).<span style="color:#a6e22e">Each</span>(<span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">i</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">goquery</span>.<span style="color:#a6e22e">Selection</span>) {
+		<span style="color:#75715e">// goquery Length는 element의 수를 return함
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">pages</span> = <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">Find</span>(<span style="color:#e6db74">&#34;a&#34;</span>).<span style="color:#a6e22e">Length</span>()
+		println(<span style="color:#e6db74">&#34;Total Pages : &#34;</span>, <span style="color:#a6e22e">pages</span>)
 	})
 
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">pages</span>
+	<span style="color:#75715e">// pages를 return함
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">pages</span>
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">cleanString</span>(<span style="color:#a6e22e">str</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">string</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Join</span>(<span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Fields</span>(<span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">TrimSpace</span>(<span style="color:#a6e22e">str</span>)), <span style="color:#e6db74">&#34; &#34;</span>)
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">checkErr</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) {
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+<span style="color:#75715e">// net/http Get을 통해 전달받은 err을 체크
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">checkErr</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) {
+	<span style="color:#75715e">// err가 nil이 아니라면 fatalln 호출
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
 		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatalln</span>(<span style="color:#a6e22e">err</span>)
 	}
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">checkCode</span>(<span style="color:#a6e22e">res</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Response</span>) {
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">StatusCode</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">200</span> {
+<span style="color:#75715e">// net/http Get을 통해 전달받은 res를 체크
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">checkCode</span>(<span style="color:#a6e22e">res</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Response</span>) {
+	<span style="color:#75715e">// response의 statusCode가 200이 아니라면 fatalln 호출
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">StatusCode</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">200</span> {
 		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatalln</span>(<span style="color:#e6db74">&#34;Request failed with Status : &#34;</span>, <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">StatusCode</span>)
 	}
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">writeJobs</span>(<span style="color:#a6e22e">jobs</span> []<span style="color:#a6e22e">extractedJob</span>) {
-	<span style="color:#a6e22e">file</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Create</span>(<span style="color:#e6db74">&#34;jobs.csv&#34;</span>)
-	<span style="color:#a6e22e">checkErr</span>(<span style="color:#a6e22e">err</span>)
+<span style="color:#75715e">// Page, BaseUrl, Channel을 전달 받아 Jobs를 return
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">getPage</span>(<span style="color:#a6e22e">page</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">url</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">mainC</span> <span style="color:#66d9ef">chan</span><span style="color:#f92672">&lt;-</span> []<span style="color:#a6e22e">extractedJob</span>) {
+	<span style="color:#75715e">// extractedJob 구조체 배열형 jobs를 선언
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">jobs</span> []<span style="color:#a6e22e">extractedJob</span>
 
-	<span style="color:#a6e22e">w</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">csv</span>.<span style="color:#a6e22e">NewWriter</span>(<span style="color:#a6e22e">file</span>)
-	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Flush</span>()
+	<span style="color:#75715e">// extractedJob 구조체 채널 선언
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">c</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#a6e22e">extractedJob</span>)
 
-	<span style="color:#a6e22e">headers</span> <span style="color:#f92672">:=</span> []<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;Link&#34;</span>, <span style="color:#e6db74">&#34;Title&#34;</span>, <span style="color:#e6db74">&#34;Location&#34;</span>, <span style="color:#e6db74">&#34;Salary&#34;</span>, <span style="color:#e6db74">&#34;Summary&#34;</span>}
-	<span style="color:#a6e22e">wErr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Write</span>(<span style="color:#a6e22e">headers</span>)
-	<span style="color:#a6e22e">checkErr</span>(<span style="color:#a6e22e">wErr</span>)
+	<span style="color:#75715e">// baseUrl에 page수 * 50의 시작 페이지 생성 및 파싱
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">pageURL</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">url</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;&amp;start=&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">strconv</span>.<span style="color:#a6e22e">Itoa</span>(<span style="color:#a6e22e">page</span><span style="color:#f92672">*</span><span style="color:#ae81ff">50</span>)
 
-	<span style="color:#a6e22e">c</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> []<span style="color:#66d9ef">string</span>)
+	<span style="color:#75715e">// Request pageURL 표시
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Request : &#34;</span>, <span style="color:#a6e22e">pageURL</span>)
 
-	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">job</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">jobs</span> {
+	<span style="color:#75715e">// net/http 패키지의 Get함수를 통해 해당 pageURL의 Response를 반환
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">res</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#a6e22e">pageURL</span>)
+
+	<span style="color:#75715e">// net/http Get을 통해 전달 받은 err을 체크 (nil)
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">checkErr</span>(<span style="color:#a6e22e">err</span>)
+
+	<span style="color:#75715e">// net/http Get을 통해 전달 받은 res를 체크 (200)
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">checkCode</span>(<span style="color:#a6e22e">res</span>)
+
+	<span style="color:#75715e">// defer를 통해 response의 Body를 Close
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Body</span>.<span style="color:#a6e22e">Close</span>()
+
+	<span style="color:#75715e">// goquery.NewDocumentFromReader를 통해 res.Body에서 doc를 추출
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">doc</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">goquery</span>.<span style="color:#a6e22e">NewDocumentFromReader</span>(<span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Body</span>)
+
+	<span style="color:#75715e">// goquery.NewDocumentFromReader를 통해 전달 받은 err을 체크
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">checkErr</span>(<span style="color:#a6e22e">err</span>)
+
+	<span style="color:#75715e">// goquery.NewDocumentFromReader를 통해 전달 받은 doc에서
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 1) jobsearch-SerpJobCard를 추출
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">searchCards</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">doc</span>.<span style="color:#a6e22e">Find</span>(<span style="color:#e6db74">&#34;.jobsearch-SerpJobCard&#34;</span>)
+
+	<span style="color:#a6e22e">searchCards</span>.<span style="color:#a6e22e">Each</span>(<span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">i</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">card</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">goquery</span>.<span style="color:#a6e22e">Selection</span>) {
+		<span style="color:#75715e">// go routine을 통해 extractJob 수행
+</span><span style="color:#75715e"></span>		<span style="color:#75715e">// jobcard, channel을 인자로 전달
+</span><span style="color:#75715e"></span>		<span style="color:#66d9ef">go</span> <span style="color:#a6e22e">extractJob</span>(<span style="color:#a6e22e">card</span>, <span style="color:#a6e22e">c</span>)
+	})
+
+	<span style="color:#75715e">// 검색된 Card 수만큼 for를 타며 
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// extractedJob 구조체 배열형 Jobs에
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// extractedJob 구조체형 채널 c로 전달받은
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// extractedJob 구조체형 job을 append
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">searchCards</span>.<span style="color:#a6e22e">Length</span>(); <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+		<span style="color:#a6e22e">job</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">c</span>
+		<span style="color:#a6e22e">jobs</span> = append(<span style="color:#a6e22e">jobs</span>, <span style="color:#a6e22e">job</span>)
+	}
+
+	<span style="color:#75715e">// extractedJob 구조체 배열형 Jobs를 mainC 채널에 전달
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">mainC</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">jobs</span>
+}
+
+<span style="color:#75715e">// pageURL에서 찾은 jobCard 및 channel을 인자로 전달 받음
+</span><span style="color:#75715e">// Channel에 정제된 Data를 전달하여 Return
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">extractJob</span>(<span style="color:#a6e22e">card</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">goquery</span>.<span style="color:#a6e22e">Selection</span>, <span style="color:#a6e22e">c</span> <span style="color:#66d9ef">chan</span><span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">extractedJob</span>) {
+	<span style="color:#75715e">// JobCard의 data-jk를 ID로 전달
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">id</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">card</span>.<span style="color:#a6e22e">Attr</span>(<span style="color:#e6db74">&#34;data-jk&#34;</span>)
+
+	<span style="color:#75715e">// JobCard의 &#34;title&gt;a&#34;의 TEXT를 title로 전달
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 이때 cleanString을 통해 Trim
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">title</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">cleanString</span>(<span style="color:#a6e22e">card</span>.<span style="color:#a6e22e">Find</span>(<span style="color:#e6db74">&#34;.title&gt;a&#34;</span>).<span style="color:#a6e22e">Text</span>())
+
+	<span style="color:#75715e">// JobCard의 &#34;sjcl&#34;&#34;의 TEXT를 location로 전달
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 이때 cleanString을 통해 Trim
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">location</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">cleanString</span>(<span style="color:#a6e22e">card</span>.<span style="color:#a6e22e">Find</span>(<span style="color:#e6db74">&#34;.sjcl&#34;</span>).<span style="color:#a6e22e">Text</span>())
+
+	<span style="color:#75715e">// JobCard의 &#34;salaryText&#34;&#34;의 TEXT를 salary로 전달
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 이때 cleanString을 통해 Trim
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">salary</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">cleanString</span>(<span style="color:#a6e22e">card</span>.<span style="color:#a6e22e">Find</span>(<span style="color:#e6db74">&#34;.salaryText&#34;</span>).<span style="color:#a6e22e">Text</span>())
+
+	<span style="color:#75715e">// JobCard의 &#34;summary&#34;&#34;의 TEXT를 summary로 전달
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 이때 cleanString을 통해 Trim
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">summary</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">cleanString</span>(<span style="color:#a6e22e">card</span>.<span style="color:#a6e22e">Find</span>(<span style="color:#e6db74">&#34;.summary&#34;</span>).<span style="color:#a6e22e">Text</span>())
+
+	<span style="color:#75715e">// extractedJob 구조체형 채널 c에 Trim된 각 추출 항목을 전달
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">c</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">extractedJob</span>{<span style="color:#a6e22e">id</span>: <span style="color:#a6e22e">id</span>, <span style="color:#a6e22e">title</span>: <span style="color:#a6e22e">title</span>, <span style="color:#a6e22e">location</span>: <span style="color:#a6e22e">location</span>, <span style="color:#a6e22e">salary</span>: <span style="color:#a6e22e">salary</span>, <span style="color:#a6e22e">summary</span>: <span style="color:#a6e22e">summary</span>}
+}
+
+<span style="color:#75715e">// 전달 받은 Sring을 Trim하고 공백으로 재연결
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">cleanString</span>(<span style="color:#a6e22e">str</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">string</span> {
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Join</span>(<span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Fields</span>(<span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">TrimSpace</span>(<span style="color:#a6e22e">str</span>)), <span style="color:#e6db74">&#34; &#34;</span>)
+}
+
+<span style="color:#75715e">// extractedJob 구조체 배열형 jobs를 인자로 받음
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">writeJobs</span>(<span style="color:#a6e22e">jobs</span> []<span style="color:#a6e22e">extractedJob</span>) {
+	<span style="color:#75715e">// os.Create를 통해 jobs.csv 파일을 create
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">file</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Create</span>(<span style="color:#e6db74">&#34;jobs.csv&#34;</span>)
+
+	<span style="color:#75715e">// os.Create을 통해 전달 받은 err을 체크 (nil)
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">checkErr</span>(<span style="color:#a6e22e">err</span>)
+
+	<span style="color:#75715e">// csv.NewWriter를 통해 Writer항목을 w로 정의
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">w</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">csv</span>.<span style="color:#a6e22e">NewWriter</span>(<span style="color:#a6e22e">file</span>)
+
+	<span style="color:#75715e">// defer를 통해 종료시 w를 flush
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Flush</span>()
+
+	<span style="color:#75715e">// Header를 스트링 배열로 선언
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">headers</span> <span style="color:#f92672">:=</span> []<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;Link&#34;</span>, <span style="color:#e6db74">&#34;Title&#34;</span>, <span style="color:#e6db74">&#34;Location&#34;</span>, <span style="color:#e6db74">&#34;Salary&#34;</span>, <span style="color:#e6db74">&#34;Summary&#34;</span>}
+
+	<span style="color:#75715e">// csv.Writer의 Write를 통해 string배열인 headers를 기입하고 err를 전달받음
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">wErr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Write</span>(<span style="color:#a6e22e">headers</span>)
+
+	<span style="color:#75715e">// csv.Writer의 Write을 통해 전달 받은 err을 체크 (nil)
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">checkErr</span>(<span style="color:#a6e22e">wErr</span>)
+
+	<span style="color:#75715e">// String 배열의 채널 생성
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">c</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> []<span style="color:#66d9ef">string</span>)
+
+	<span style="color:#75715e">// 나름 백미 : channel을 끝까지 쓰며 분산시킴
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// extractJob 구조체 배열 Jobs의 range 만큼 
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// extractJob 구조체 job의 for를 돌며 
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// job과 c를 전달하며 writeJOb을 고루틴으로 수행
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">job</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">jobs</span> {
 		<span style="color:#66d9ef">go</span> <span style="color:#a6e22e">writeJob</span>(<span style="color:#a6e22e">job</span>, <span style="color:#a6e22e">c</span>)
 		<span style="color:#75715e">//jobSlice := []string{&#34;https://kr.indeed.com/viewjob?jk=&#34; + job.id, job.title, job.location, job.salary, job.summary}
 </span><span style="color:#75715e"></span>		<span style="color:#75715e">//jwErr := w.Write(jobSlice)
 </span><span style="color:#75715e"></span>		<span style="color:#75715e">//checkErr(jwErr)
 </span><span style="color:#75715e"></span>	}
 
-	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; len(<span style="color:#a6e22e">jobs</span>); <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
-		<span style="color:#a6e22e">jSlice</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">c</span>
-		<span style="color:#a6e22e">jwErr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Write</span>(<span style="color:#a6e22e">jSlice</span>)
-		<span style="color:#a6e22e">checkErr</span>(<span style="color:#a6e22e">jwErr</span>)
+	<span style="color:#75715e">// Jobs의 Length 만큼 For로 돔
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; len(<span style="color:#a6e22e">jobs</span>); <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+		<span style="color:#75715e">// String 배열형 채널에서 jSlice로 전달 받음
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">jSlice</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">c</span>
+
+		<span style="color:#75715e">// jSlice를 csv에 기입
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">jwErr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Write</span>(<span style="color:#a6e22e">jSlice</span>)
+
+		<span style="color:#75715e">// csv.Writer의 Write을 통해 전달 받은 err을 체크 (nil)
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">checkErr</span>(<span style="color:#a6e22e">jwErr</span>)
 	}
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">writeJob</span>(<span style="color:#a6e22e">job</span> <span style="color:#a6e22e">extractedJob</span>, <span style="color:#a6e22e">c</span> <span style="color:#66d9ef">chan</span><span style="color:#f92672">&lt;-</span> []<span style="color:#66d9ef">string</span>) {
-	<span style="color:#a6e22e">jobSlice</span> <span style="color:#f92672">:=</span> []<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;https://kr.indeed.com/viewjob?jk=&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">job</span>.<span style="color:#a6e22e">id</span>, <span style="color:#a6e22e">job</span>.<span style="color:#a6e22e">title</span>, <span style="color:#a6e22e">job</span>.<span style="color:#a6e22e">location</span>, <span style="color:#a6e22e">job</span>.<span style="color:#a6e22e">salary</span>, <span style="color:#a6e22e">job</span>.<span style="color:#a6e22e">summary</span>}
+<span style="color:#75715e">// extractedJob 구조체인 job과
+</span><span style="color:#75715e">// string 배열인 c를 인자로 전달 받음
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">writeJob</span>(<span style="color:#a6e22e">job</span> <span style="color:#a6e22e">extractedJob</span>, <span style="color:#a6e22e">c</span> <span style="color:#66d9ef">chan</span><span style="color:#f92672">&lt;-</span> []<span style="color:#66d9ef">string</span>) {
+	<span style="color:#75715e">// string 배열 jobSlice를 선언
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 1) Job ID : 링크항목
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 2) Job Title
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 3) Job Location	
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 4) Job Salary
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 5) Job Summary
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">jobSlice</span> <span style="color:#f92672">:=</span> []<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;https://kr.indeed.com/viewjob?jk=&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">job</span>.<span style="color:#a6e22e">id</span>, <span style="color:#a6e22e">job</span>.<span style="color:#a6e22e">title</span>, <span style="color:#a6e22e">job</span>.<span style="color:#a6e22e">location</span>, <span style="color:#a6e22e">job</span>.<span style="color:#a6e22e">salary</span>, <span style="color:#a6e22e">job</span>.<span style="color:#a6e22e">summary</span>}
 
-	<span style="color:#a6e22e">c</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">jobSlice</span>
+	<span style="color:#75715e">// String 배열 JobSlice를 String 배열형 Channel에 전달
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">c</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">jobSlice</span>
 }
 </code></pre></div>
     </div>

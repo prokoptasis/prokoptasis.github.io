@@ -30,5 +30,16 @@ Account #   account ...  main.go
 package main import ( &amp;#34;fmt&amp;#34; accounts &amp;#34;./accounts&amp;#34; ) func main() { // newAccount 	acct := accounts.NewAccount(&amp;#34;jhook&amp;#34;) fmt.Println(&amp;#34;01 : &amp;#34;, acct) // Deposit 	acct.Deposit(1000) fmt.Println(&amp;#34;02 : &amp;#34;, acct) // Withdraw O 	err := acct.Withdraw(300) fmt.Println(&amp;#34;03 : &amp;#34;, acct) if err != nil { fmt.</description>
     </item>
     
+    <item>
+      <title>GO DB 연결</title>
+      <link>http://prokoptasis.github.io/docs/documents/backend/go/go03/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://prokoptasis.github.io/docs/documents/backend/go/go03/</guid>
+      <description>Go Oralce DB 연결 #   Go의 Godror을 이용한 간단한 Oracle DB 연결 및 조회
+Oracle DB 연결 #   oracle db 연결 ...  main.go
+package main import ( &amp;#34;database/sql&amp;#34; &amp;#34;fmt&amp;#34; &amp;#34;log&amp;#34; _ &amp;#34;github.com/godror/godror&amp;#34; ) type str_item struct { item_cd string item_nm string } type str_item_ls struct { str_item []str_item } func (item_ls *str_item_ls) AddItem(item str_item) []str_item { item_ls.str_item = append(item_ls.str_item, item) return item_ls.str_item } func get_list(sql_str string, item_cnt int, item_list *str_item_ls, c chan bool) { // 본인 계정에 맞는 접속 정보 	db, err := sql.</description>
+    </item>
+    
   </channel>
 </rss>

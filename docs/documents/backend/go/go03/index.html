@@ -4,14 +4,13 @@
 <head>
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Personal log 초기화 진행">
-<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="Personal Log" />
-<meta property="og:description" content="Personal log 초기화 진행" />
+<meta name="description" content="GO Oracle DB 연결">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="GO DB 연결" />
+<meta property="og:description" content="GO Oracle DB 연결" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://prokoptasis.github.io/posts/201022/" />
-<meta property="article:published_time" content="2020-10-22T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-10-22T00:00:00+00:00" />
-<title>Personal Log | Prokoptasis</title>
+<meta property="og:url" content="http://prokoptasis.github.io/docs/documents/backend/go/go03/" />
+
+<title>GO DB 연결 | Prokoptasis</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
@@ -166,7 +165,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-7cff03fc158d9929dd882d45e5e83f84" class="toggle"  />
+    <input type="checkbox" id="section-7cff03fc158d9929dd882d45e5e83f84" class="toggle" checked />
     <label for="section-7cff03fc158d9929dd882d45e5e83f84" class="flex justify-between">
       <a href="http://prokoptasis.github.io/docs/documents/backend/" class="">Back End</a>
       <span>▾</span>
@@ -231,7 +230,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-0d89b8a13399f7331f6db819807b653c" class="toggle"  />
+    <input type="checkbox" id="section-0d89b8a13399f7331f6db819807b653c" class="toggle" checked />
     <label for="section-0d89b8a13399f7331f6db819807b653c" class="flex justify-between">
       <a href="http://prokoptasis.github.io/docs/documents/backend/go/" class="">Go</a>
       <span>▾</span>
@@ -274,7 +273,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://prokoptasis.github.io/docs/documents/backend/go/go03/" class="">GO DB 연결</a>
+    <a href="http://prokoptasis.github.io/docs/documents/backend/go/go03/" class=" active">GO DB 연결</a>
   
 
         </li>
@@ -520,40 +519,122 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>Personal Log</strong>
+  <strong>GO DB 연결</strong>
 
   <label for="toc-control">
     
-    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
-    
   </label>
 </div>
- 
-<aside class="hidden clearfix">
-     <nav id="TableOfContents"></nav>
- 
-</aside>
- 
+  
                 
             </header>
 
             
-<article class="markdown">
-    <h2 style="height: 24px; margin-top: 0px; border-top: 0px; padding-top: 0px; margin-bottom: 16px;">
-        <a href="/posts/201022/">Personal Log</a>
-    </h2>
-    <hr style="height: 0.8px; border: none; background: #adb5bd;"> </hr>
-    
-<h5>October 22, 2020</h5>
+<article class="markdown"><h2 id="go-oralce-db-연결">
+  Go Oralce DB 연결
+  <a class="anchor" href="#go-oralce-db-%ec%97%b0%ea%b2%b0">#</a>
+</h2>
+<hr>
+<p>Go의 Godror을 이용한 간단한  Oracle DB 연결 및 조회</p>
+<h3 id="oracle-db-연결">
+  Oracle DB 연결
+  <a class="anchor" href="#oracle-db-%ec%97%b0%ea%b2%b0">#</a>
+</h3>
 
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>oracle db 연결</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <p>main.go</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;database/sql&#34;</span>
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+	<span style="color:#e6db74">&#34;log&#34;</span>
 
-    <p><hr>
-<p>전체 기록 초기화 진행. 전체 어조 변경 진행. 당 사이트는 개인 기록 용도로 전환. 블로그에서 일자가 과거일 경우 조회가 되지 않는 내용 확인. 블로그 요약 표시는 전반 400자 정도를 추출하여 표시. BOOK 테마 원본 수정 조치 (Summary -&gt; Description 전환)</p>
+	<span style="color:#a6e22e">_</span> <span style="color:#e6db74">&#34;github.com/godror/godror&#34;</span>
+)
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">str_item</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">item_cd</span> <span style="color:#66d9ef">string</span>
+	<span style="color:#a6e22e">item_nm</span> <span style="color:#66d9ef">string</span>
+}
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">str_item_ls</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">str_item</span> []<span style="color:#a6e22e">str_item</span>
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">item_ls</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">str_item_ls</span>) <span style="color:#a6e22e">AddItem</span>(<span style="color:#a6e22e">item</span> <span style="color:#a6e22e">str_item</span>) []<span style="color:#a6e22e">str_item</span> {
+	<span style="color:#a6e22e">item_ls</span>.<span style="color:#a6e22e">str_item</span> = append(<span style="color:#a6e22e">item_ls</span>.<span style="color:#a6e22e">str_item</span>, <span style="color:#a6e22e">item</span>)
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">item_ls</span>.<span style="color:#a6e22e">str_item</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">get_list</span>(<span style="color:#a6e22e">sql_str</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">item_cnt</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">item_list</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">str_item_ls</span>, <span style="color:#a6e22e">c</span> <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">bool</span>) {
+	<span style="color:#75715e">// 본인 계정에 맞는 접속 정보
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">db</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">sql</span>.<span style="color:#a6e22e">Open</span>(<span style="color:#e6db74">&#34;godror&#34;</span>, <span style="color:#e6db74">&#34;db_account/db_password@db_name&#34;</span>)
+	<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">SetMaxOpenConns</span>(<span style="color:#ae81ff">5</span>)
+	<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">SetMaxIdleConns</span>(<span style="color:#ae81ff">3</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>)
+		<span style="color:#66d9ef">return</span>
+	}
+	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">Close</span>()
+
+	<span style="color:#a6e22e">conn</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">Query</span>(<span style="color:#a6e22e">sql_str</span>, <span style="color:#a6e22e">item_cnt</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>)
+		<span style="color:#66d9ef">return</span>
+	}
+	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">conn</span>.<span style="color:#a6e22e">Close</span>()
+
+	<span style="color:#a6e22e">item</span> <span style="color:#f92672">:=</span> new(<span style="color:#a6e22e">str_item</span>)
+
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">item_cd</span> <span style="color:#66d9ef">string</span>
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">item_nm</span> <span style="color:#66d9ef">string</span>
+
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">conn</span>.<span style="color:#a6e22e">Next</span>() {
+		<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">conn</span>.<span style="color:#a6e22e">Scan</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">item_cd</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">item_nm</span>)
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+			<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+		}
+
+		<span style="color:#a6e22e">item</span>.<span style="color:#a6e22e">item_cd</span> = <span style="color:#a6e22e">item_cd</span>
+		<span style="color:#a6e22e">item</span>.<span style="color:#a6e22e">item_nm</span> = <span style="color:#a6e22e">item_nm</span>
+		<span style="color:#a6e22e">item_list</span>.<span style="color:#a6e22e">AddItem</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">item</span>)
+	}
+
+	<span style="color:#a6e22e">c</span> <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">true</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">c</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">bool</span>)
+	<span style="color:#a6e22e">item_list</span> <span style="color:#f92672">:=</span> new(<span style="color:#a6e22e">str_item_ls</span>)
+	<span style="color:#75715e">// 본인 DB 테이블 조회 
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">go</span> <span style="color:#a6e22e">get_list</span>(<span style="color:#e6db74">&#34;select tname,tabtype from tab where substr(tname,1,1) in (&#39;A&#39;,&#39;B&#39;,&#39;C&#39;,&#39;D&#39;,&#39;E&#39;,&#39;F&#39;,&#39;G&#39;,&#39;H&#39;,&#39;I&#39;) and rownum &lt;= :val&#34;</span>, <span style="color:#ae81ff">6</span>, <span style="color:#a6e22e">item_list</span>, <span style="color:#a6e22e">c</span>)
+	<span style="color:#66d9ef">go</span> <span style="color:#a6e22e">get_list</span>(<span style="color:#e6db74">&#34;select tname,tabtype from tab where substr(tname,1,1) in (&#39;J&#39;,&#39;K&#39;,&#39;L&#39;,&#39;M&#39;,&#39;N&#39;,&#39;O&#39;,&#39;P&#39;,&#39;Q&#39;,&#39;R&#39;) and rownum &lt;= :val&#34;</span>, <span style="color:#ae81ff">6</span>, <span style="color:#a6e22e">item_list</span>, <span style="color:#a6e22e">c</span>)
+	<span style="color:#66d9ef">go</span> <span style="color:#a6e22e">get_list</span>(<span style="color:#e6db74">&#34;select tname,tabtype from tab where substr(tname,1,1) in (&#39;S&#39;,&#39;T&#39;,&#39;U&#39;,&#39;V&#39;,&#39;W&#39;,&#39;X&#39;,&#39;Y&#39;,&#39;Z&#39;) and rownum &lt;= :val&#34;</span>, <span style="color:#ae81ff">6</span>, <span style="color:#a6e22e">item_list</span>, <span style="color:#a6e22e">c</span>)
+
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#ae81ff">3</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">c</span>)
+	}
+
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">s</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">item_list</span>.<span style="color:#a6e22e">str_item</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">item_cd</span>, <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">item_nm</span>, <span style="color:#a6e22e">i</span>)
+	}
+}
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
 <br>
-<span style="float:left"><a href="../200928"><< 이전글</a></span>
-<span style="float:right"><a href="../201022">다음글 >></a></span>
-</p>
+<span style="float:left"><a href="../go01"><< 이전글</a></span>
+<span style="float:right"><a href="../go03">다음글 >></a></span>
 </article>
 
             
@@ -603,12 +684,6 @@ https://github.com/alex-shpak/hugo-book
             <label for="menu-control" class="hidden book-menu-overlay"></label>
         </div>
 
-        
-        <aside class="book-toc">
-             <nav id="TableOfContents"></nav>
- 
-            
-        </aside>
         
     </main>
 

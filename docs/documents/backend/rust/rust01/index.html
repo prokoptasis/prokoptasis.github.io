@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.7a8c4339199fc991d7819194c1a3e8342994a54a54502cb3d0abf779b9c2442a.js" integrity="sha256-eoxDORmfyZHXgZGUwaPoNCmUpUpUUCyz0Kv3ebnCRCo="></script>
+<script defer src="/ko.search.min.0a782395553375a7fb2c94aa3d2a63eb45258d2d2ab19f7ae8bcff9b4b0b2be4.js" integrity="sha256-CngjlVUzdaf7LJSqPSpj60UljS0qsZ966Lz/m0sLK&#43;Q="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -261,6 +261,19 @@ https://github.com/alex-shpak/hugo-book
 
   
     <a href="http://prokoptasis.github.io/docs/documents/backend/go/go02/" class="">GO Advanced</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://prokoptasis.github.io/docs/documents/backend/go/go03/" class="">GO DB 연결</a>
   
 
         </li>
@@ -2413,6 +2426,251 @@ Rust는 Shallow Copy를 Move라 표현. 명시적으로 표시하지 않는 이�
     } <span style="color:#66d9ef">else</span> {
         y
     }
+}
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="testing">
+  Testing
+  <a class="anchor" href="#testing">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>test</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <p>src/lib.rs</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#75715e">#[derive(Debug)]</span>
+<span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Rectangle</span> {
+    length: <span style="color:#66d9ef">u32</span>,
+    width: <span style="color:#66d9ef">u32</span>,
+}
+
+<span style="color:#66d9ef">impl</span> Rectangle {
+    <span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">can_hold</span>(<span style="color:#f92672">&amp;</span>self, other: <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">Rectangle</span>) -&gt; <span style="color:#66d9ef">bool</span> {
+        self.length <span style="color:#f92672">&gt;</span> other.length <span style="color:#f92672">&amp;&amp;</span> self.width <span style="color:#f92672">&gt;</span> other.width
+    }
+}
+
+<span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">add_two</span>(a: <span style="color:#66d9ef">i32</span>) -&gt; <span style="color:#66d9ef">i32</span> {
+    a <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>
+}
+
+<span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">greeting</span>(name: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span>) -&gt; String {
+    format<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Hello {}!&#34;</span>, name)
+}
+
+<span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">just_greeting</span>(name: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span>) -&gt; String {
+    format<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Hello!&#34;</span>)
+}
+
+<span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Guess</span> {
+    value: <span style="color:#66d9ef">u32</span>,
+}
+
+<span style="color:#66d9ef">impl</span> Guess {
+    <span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">new</span>(value: <span style="color:#66d9ef">u32</span>) -&gt; <span style="color:#a6e22e">Guess</span> {
+        <span style="color:#66d9ef">if</span> value <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> value <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">100</span> {
+            panic<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Guess value must be between 1 and 100, got {}.&#34;</span>, value);
+        }
+
+        Guess { value }
+    }
+    <span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">new_new</span>(value: <span style="color:#66d9ef">u32</span>) -&gt; <span style="color:#a6e22e">Guess</span> {
+        <span style="color:#66d9ef">if</span> value <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1</span> {
+            panic<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Guess value must be between 1 and 100, got {}.&#34;</span>, value);
+        }
+
+        Guess { value }
+    }
+    <span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">new_new_new</span>(value: <span style="color:#66d9ef">u32</span>) -&gt; <span style="color:#a6e22e">Guess</span> {
+        <span style="color:#66d9ef">if</span> value <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1</span> {
+            panic<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Value &lt; 1, got {}.&#34;</span>, value);
+        } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> value <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">100</span> {
+            panic<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Value &gt; 100, got {}.&#34;</span>, value);
+        }
+
+        Guess { value }
+    }
+}
+
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">prints_and_returns_10</span>(a: <span style="color:#66d9ef">i32</span>) -&gt; <span style="color:#66d9ef">i32</span> {
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;I got the value {}&#34;</span>, a);
+    <span style="color:#ae81ff">10</span>
+}
+
+<span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">add_two_num</span>(a: <span style="color:#66d9ef">i32</span>) -&gt; <span style="color:#66d9ef">i32</span> {
+    internal_adder(a, <span style="color:#ae81ff">2</span>)
+}
+
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">internal_adder</span>(a: <span style="color:#66d9ef">i32</span>, b: <span style="color:#66d9ef">i32</span>) -&gt; <span style="color:#66d9ef">i32</span> {
+    a <span style="color:#f92672">+</span> b
+}
+
+<span style="color:#75715e">#[cfg(test)]</span>
+<span style="color:#66d9ef">mod</span> tests {
+    <span style="color:#75715e">#[test]</span>
+    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">it_works_1</span>() {
+        assert_eq<span style="color:#f92672">!</span>(<span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">4</span>);
+    }
+
+    <span style="color:#75715e">#[test]</span>
+    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">it_works_2</span>() {
+        assert_eq<span style="color:#f92672">!</span>(<span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">6</span>);
+    }
+
+    <span style="color:#75715e">#[test]</span>
+    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">it_works_3</span>() {
+        assert_eq<span style="color:#f92672">!</span>(<span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>);
+    }
+
+    <span style="color:#75715e">#[test]</span>
+    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">it_works_4</span>() {
+        panic<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Make this fail&#34;</span>);
+    }
+
+    <span style="color:#66d9ef">use</span> <span style="color:#66d9ef">super</span>::<span style="color:#f92672">*</span>;
+
+    <span style="color:#75715e">#[test]</span>
+    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">larger_can_hold_smaller</span>() {
+        <span style="color:#66d9ef">let</span> larger <span style="color:#f92672">=</span> Rectangle {
+            length: <span style="color:#ae81ff">8</span>,
+            width: <span style="color:#ae81ff">7</span>,
+        };
+        <span style="color:#66d9ef">let</span> smaller <span style="color:#f92672">=</span> Rectangle {
+            length: <span style="color:#ae81ff">5</span>,
+            width: <span style="color:#ae81ff">1</span>,
+        };
+
+        assert<span style="color:#f92672">!</span>(larger.can_hold(<span style="color:#f92672">&amp;</span>smaller));
+    }
+
+    <span style="color:#75715e">#[test]</span>
+    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">smaller_cannot_hold_larger</span>() {
+        <span style="color:#66d9ef">let</span> larger <span style="color:#f92672">=</span> Rectangle {
+            length: <span style="color:#ae81ff">8</span>,
+            width: <span style="color:#ae81ff">7</span>,
+        };
+        <span style="color:#66d9ef">let</span> smaller <span style="color:#f92672">=</span> Rectangle {
+            length: <span style="color:#ae81ff">5</span>,
+            width: <span style="color:#ae81ff">1</span>,
+        };
+
+        assert<span style="color:#f92672">!</span>(<span style="color:#f92672">!</span>smaller.can_hold(<span style="color:#f92672">&amp;</span>larger));
+    }
+
+    <span style="color:#75715e">#[test]</span>
+    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">it_adds_two</span>() {
+        assert_eq<span style="color:#f92672">!</span>(<span style="color:#ae81ff">4</span>, add_two(<span style="color:#ae81ff">2</span>));
+    }
+
+    <span style="color:#75715e">#[test]</span>
+    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">it_adds_two_ne</span>() {
+        assert_ne<span style="color:#f92672">!</span>(<span style="color:#ae81ff">5</span>, add_two(<span style="color:#ae81ff">2</span>));
+    }
+
+    <span style="color:#75715e">#[test]</span>
+    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">greeting_contains_name</span>() {
+        <span style="color:#66d9ef">let</span> result <span style="color:#f92672">=</span> greeting(<span style="color:#e6db74">&#34;Carol&#34;</span>);
+        assert<span style="color:#f92672">!</span>(result.contains(<span style="color:#e6db74">&#34;Carol&#34;</span>));
+    }
+
+    <span style="color:#75715e">#[test]</span>
+    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">greeting_without_name</span>() {
+        <span style="color:#66d9ef">let</span> result <span style="color:#f92672">=</span> just_greeting(<span style="color:#e6db74">&#34;Carol&#34;</span>);
+        assert<span style="color:#f92672">!</span>(
+            result.contains(<span style="color:#e6db74">&#34;Carol&#34;</span>),
+            <span style="color:#e6db74">&#34;Greeting did not contain name, value was `{}`&#34;</span>,
+            result
+        );
+    }
+
+    <span style="color:#75715e">#[test]</span>
+    <span style="color:#75715e">#[should_panic]</span>
+    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">greater_than_100</span>() {
+        Guess::new(<span style="color:#ae81ff">200</span>);
+    }
+
+    <span style="color:#75715e">#[test]</span>
+    <span style="color:#75715e">#[should_panic]</span>
+    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">greater_than_100_2</span>() {
+        Guess::new_new(<span style="color:#ae81ff">200</span>);
+    }
+
+    <span style="color:#75715e">#[test]</span>
+    <span style="color:#75715e">#[should_panic(expected = </span><span style="color:#e6db74">&#34;Value &gt; 100&#34;</span><span style="color:#75715e">)]</span>
+    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">greater_than_100_3</span>() {
+        Guess::new_new_new(<span style="color:#ae81ff">200</span>);
+    }
+
+    <span style="color:#75715e">#[test]</span>
+    <span style="color:#75715e">#[should_panic(expected = </span><span style="color:#e6db74">&#34;Value &lt; 1&#34;</span><span style="color:#75715e">)]</span>
+    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">greater_than_100_4</span>() {
+        Guess::new_new_new(<span style="color:#ae81ff">200</span>);
+    }
+
+    <span style="color:#75715e">#[test]</span>
+    <span style="color:#75715e">#[should_panic(expected = </span><span style="color:#e6db74">&#34;Value&#34;</span><span style="color:#75715e">)]</span>
+    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">greater_than_100_5</span>() {
+        Guess::new_new_new(<span style="color:#ae81ff">200</span>);
+    }
+
+    <span style="color:#75715e">// cargo test -- --help
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// cargo test -- --test-threads=1
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// cargo test -- --nocapture
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// cargo test this_test_will_pass
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// cargo test this_test_will_pass -- --nocapture
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// cargo test this_test_will
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">#[test]</span>
+    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">this_test_will_pass</span>() {
+        <span style="color:#66d9ef">let</span> value <span style="color:#f92672">=</span> prints_and_returns_10(<span style="color:#ae81ff">4</span>);
+        assert_eq<span style="color:#f92672">!</span>(<span style="color:#ae81ff">10</span>, value);
+    }
+
+    <span style="color:#75715e">#[test]</span>
+    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">this_test_will_fail</span>() {
+        <span style="color:#66d9ef">let</span> value <span style="color:#f92672">=</span> prints_and_returns_10(<span style="color:#ae81ff">8</span>);
+        assert_eq<span style="color:#f92672">!</span>(<span style="color:#ae81ff">5</span>, value);
+    }
+
+    <span style="color:#75715e">// cargo test this_test_will -- --ignored
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">#[test]</span>
+    <span style="color:#75715e">#[ignore]</span>
+    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">this_test_will_expensive_test</span>() {
+        <span style="color:#66d9ef">let</span> value <span style="color:#f92672">=</span> prints_and_returns_10(<span style="color:#ae81ff">8</span>);
+        assert_eq<span style="color:#f92672">!</span>(<span style="color:#ae81ff">5</span>, value);
+    }
+
+    <span style="color:#75715e">// unit test
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">use</span> <span style="color:#66d9ef">super</span>::<span style="color:#f92672">*</span>;
+
+    <span style="color:#75715e">#[test]</span>
+    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">internal</span>() {
+        assert_eq<span style="color:#f92672">!</span>(<span style="color:#ae81ff">4</span>, internal_adder(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>));
+    }
+}
+</code></pre></div><p>tests\intg_test.rs</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">crate</span> rust_test;
+
+<span style="color:#66d9ef">mod</span> common;
+
+<span style="color:#75715e">// cargo test : integrated test
+</span><span style="color:#75715e">// cargo test --test intg_test
+</span><span style="color:#75715e"></span><span style="color:#75715e">#[test]</span>
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">it_adds_twx</span>() {
+	common::setup();
+	assert_eq<span style="color:#f92672">!</span>(<span style="color:#ae81ff">4</span>, rust_test::add_two_num(<span style="color:#ae81ff">2</span>));
+}
+</code></pre></div><p>test\common\mod.rs</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">setup</span>() {
+	println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;TEST WOW&#34;</span>)
 }
 </code></pre></div>
     </div>
