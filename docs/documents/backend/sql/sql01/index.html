@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.b3aac7c2136e694494aa180b1c19cc4f46bbaf6397b3368b2ed6effdedf9db1b.js" integrity="sha256-s6rHwhNuaUSUqhgLHBnMT0a7r2OXszaLLtbv/e352xs="></script>
+<script defer src="/ko.search.min.2ffaed2d750b0b6f623956c311f997ff436af79cdd2063f714188d5ba3383f37.js" integrity="sha256-L/rtLXULC29iOVbDEfmX/0Nq95zdIGP3FBiNW6M4Pzc="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -321,7 +321,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://prokoptasis.github.io/docs/documents/backend/sql/sql02/" class="">SQL Basic 2</a>
+    <a href="http://prokoptasis.github.io/docs/documents/backend/sql/sql02/" class="">SQL Advanced</a>
   
 
         </li>
@@ -1252,6 +1252,70 @@ a.column_2 <span style="color:#f92672">=</span> b.column_2
 <span style="color:#66d9ef">where</span>   substr(column_1,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;김&#39;</span>
 <span style="color:#66d9ef">and</span>     column_2 <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">20</span>
 <span style="color:#66d9ef">group</span>   <span style="color:#66d9ef">by</span> substr(column_1,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>)
+;
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="case-when--to_char--to_date--add_months--last_day">
+  case when / to_char / to_date / add_months / last_day
+  <a class="anchor" href="#case-when--to_char--to_date--add_months--last_day">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>case when / to_char / to_date / add_months </span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span>  column_1,column_2,
+        <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">when</span> column_1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;홍길동&#39;</span> <span style="color:#66d9ef">then</span> <span style="color:#e6db74">&#39;용의자&#39;</span>
+             <span style="color:#66d9ef">when</span> column_1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;박민호&#39;</span> <span style="color:#66d9ef">and</span> column_2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">22</span> <span style="color:#66d9ef">then</span> <span style="color:#e6db74">&#39;용의자&#39;</span>
+             <span style="color:#66d9ef">when</span> column_1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;신영신&#39;</span> <span style="color:#66d9ef">then</span> <span style="color:#e6db74">&#39;용의자&#39;</span>
+        <span style="color:#66d9ef">else</span> <span style="color:#e6db74">&#39;일반시민&#39;</span> <span style="color:#66d9ef">end</span> column_x,
+        <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">when</span> column_1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;홍길동&#39;</span> <span style="color:#66d9ef">then</span> column_2
+             <span style="color:#66d9ef">when</span> column_1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;박민호&#39;</span> <span style="color:#66d9ef">and</span> column_2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">22</span> <span style="color:#66d9ef">then</span> column_2
+             <span style="color:#66d9ef">when</span> column_1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;신영신&#39;</span> <span style="color:#66d9ef">then</span> column_2
+        <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">end</span> column_y,
+        to_char(column_3,<span style="color:#e6db74">&#39;yyyymmdd&#39;</span>) date_to_char_01,
+        to_char(column_3,<span style="color:#e6db74">&#39;yy/mm/dd&#39;</span>) date_to_char_02,
+        to_char(column_3,<span style="color:#e6db74">&#39;mm.dd.yy&#39;</span>) date_to_char_03,
+        to_char(column_3,<span style="color:#e6db74">&#39;hh24:mi:ss&#39;</span>) date_to_char_04,
+        to_char(column_3,<span style="color:#e6db74">&#39;D&#39;</span>) date_to_char_05,
+        to_date(<span style="color:#e6db74">&#39;20200315&#39;</span>,<span style="color:#e6db74">&#39;yyyymmdd&#39;</span>)<span style="color:#f92672">-</span>to_date(<span style="color:#e6db74">&#39;20200215&#39;</span>,<span style="color:#e6db74">&#39;yyyymmdd&#39;</span>) date_calc_01,
+        to_date(<span style="color:#e6db74">&#39;20200315&#39;</span>,<span style="color:#e6db74">&#39;yyyymmdd&#39;</span>)<span style="color:#f92672">+</span><span style="color:#ae81ff">17</span> date_calc_02,
+        trunc(to_date(<span style="color:#e6db74">&#39;20200315&#39;</span>,<span style="color:#e6db74">&#39;yyyymmdd&#39;</span>),<span style="color:#e6db74">&#39;IW&#39;</span>) date_calc_03,
+        add_months(to_date(<span style="color:#e6db74">&#39;20200331&#39;</span>,<span style="color:#e6db74">&#39;yyyymmdd&#39;</span>),<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) date_calc_04,
+        add_months(to_date(<span style="color:#e6db74">&#39;20200331&#39;</span>,<span style="color:#e6db74">&#39;yyyymmdd&#39;</span>),<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>) date_calc_05,
+        last_day(to_date(<span style="color:#e6db74">&#39;20200205&#39;</span>,<span style="color:#e6db74">&#39;yyyymmdd&#39;</span>)) date_calc_06
+<span style="color:#66d9ef">from</span>    my_table_1
+;
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="window-function">
+  window function
+  <a class="anchor" href="#window-function">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>window function</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span>  column_1,column_2,
+        <span style="color:#66d9ef">sum</span>(column_2) over (partition <span style="color:#66d9ef">by</span> substr(column_1,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>)) family_sum,
+        <span style="color:#66d9ef">sum</span>(column_2) over (partition <span style="color:#66d9ef">by</span> substr(column_1,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> column_2) family_cum,
+        <span style="color:#66d9ef">sum</span>(column_2) over (partition <span style="color:#66d9ef">by</span> substr(column_1,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> column_2 <span style="color:#66d9ef">desc</span>) family_dum
+<span style="color:#66d9ef">from</span>    my_table_1
 ;
 </code></pre></div>
     </div>

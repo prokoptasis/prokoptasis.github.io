@@ -4,17 +4,17 @@
 <head>
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="SQL Basic Query 2">
-<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="SQL Basic 2" />
-<meta property="og:description" content="SQL Basic Query 2" />
+<meta name="description" content="SQL Advanced Query">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="SQL Advanced" />
+<meta property="og:description" content="SQL Advanced Query" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://prokoptasis.github.io/docs/documents/backend/sql/sql02/" />
 
-<title>SQL Basic 2 | Prokoptasis</title>
+<title>SQL Advanced | Prokoptasis</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.b3aac7c2136e694494aa180b1c19cc4f46bbaf6397b3368b2ed6effdedf9db1b.js" integrity="sha256-s6rHwhNuaUSUqhgLHBnMT0a7r2OXszaLLtbv/e352xs="></script>
+<script defer src="/ko.search.min.2ffaed2d750b0b6f623956c311f997ff436af79cdd2063f714188d5ba3383f37.js" integrity="sha256-L/rtLXULC29iOVbDEfmX/0Nq95zdIGP3FBiNW6M4Pzc="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -321,7 +321,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://prokoptasis.github.io/docs/documents/backend/sql/sql02/" class=" active">SQL Basic 2</a>
+    <a href="http://prokoptasis.github.io/docs/documents/backend/sql/sql02/" class=" active">SQL Advanced</a>
   
 
         </li>
@@ -519,7 +519,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>SQL Basic 2</strong>
+  <strong>SQL Advanced</strong>
 
   <label for="toc-control">
     
@@ -530,11 +530,169 @@ https://github.com/alex-shpak/hugo-book
             </header>
 
             
-<article class="markdown"><h2 id="sql-basic-2">
-  SQL Basic 2
-  <a class="anchor" href="#sql-basic-2">#</a>
+<article class="markdown"><h2 id="sql-advanced">
+  SQL Advanced
+  <a class="anchor" href="#sql-advanced">#</a>
 </h2>
 <hr>
+<h3 id="exists--not-exists">
+  exists / not exists
+  <a class="anchor" href="#exists--not-exists">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>exists / not exists</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"></code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="pivot--unpivot">
+  pivot / unpivot
+  <a class="anchor" href="#pivot--unpivot">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>pivot</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"></code></pre></div>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>unpivot</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"></code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="lead--lag">
+  lead / lag
+  <a class="anchor" href="#lead--lag">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>lead / lag</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"></code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="rows--range--preceding--following--current--unbounded">
+  rows / range / preceding / following / current / unbounded
+  <a class="anchor" href="#rows--range--preceding--following--current--unbounded">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>rows / range / preceding / following / current / unbounded </span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"></code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="connect-by">
+  connect by
+  <a class="anchor" href="#connect-by">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>connect by </span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"></code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="ratio_to_report">
+  ratio_to_report
+  <a class="anchor" href="#ratio_to_report">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>ratio_to_report </span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"></code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="create-as">
+  create as
+  <a class="anchor" href="#create-as">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>create as </span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"></code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="merge">
+  merge
+  <a class="anchor" href="#merge">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>merge </span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"></code></pre></div>
+    </div>
+  </label>
+</div>
+
 <br>
 <span style="float:left"><a href="../sql01"><< 이전글</a></span>
 <span style="float:right"><a href="../sql02">다음글 >></a></span>

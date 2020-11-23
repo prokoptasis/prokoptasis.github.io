@@ -8,25 +8,6 @@
     <language>kr-ko</language>
     <lastBuildDate>Wed, 07 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://prokoptasis.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>SQL Basic</title>
-      <link>http://prokoptasis.github.io/docs/documents/backend/sql/sql01/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://prokoptasis.github.io/docs/documents/backend/sql/sql01/</guid>
-      <description>SQL BASIC 기본 교육 자료 #   SQL은 Sturctured Query Langugage의 약자로 데이터베이스의 데이터를 관리하기 위해 사용하는 언어. 자료의 검색과 관리, 스키마의 생성과 수정, 객체의 접근 조정 및 관리의 기능 제공. ANSI SQL 기본 문법은 원래 어떤 데이터베이스와도 호환이 가능해야 하나 통상 Vendor들이 표준을 잘지키지않는 편이라 기본적인 수준에서만 호환이 가능. NoSQL 계열의 데이터베이스에서는 사용되지 않음. (다음은 오라클 기준임)
-Live SQL #   Oracle 가입 Oracle Live SQL 접속 &amp;ldquo;Start Coding Now&amp;rdquo; Live SQL 실행  Hello World!</description>
-    </item>
-    
-    <item>
-      <title>SQL Basic 2</title>
-      <link>http://prokoptasis.github.io/docs/documents/backend/sql/sql02/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://prokoptasis.github.io/docs/documents/backend/sql/sql02/</guid>
-      <description>SQL Basic 2 #    다음글  </description>
-    </item>
-    
-    <item>
       <title>GO Basic</title>
       <link>http://prokoptasis.github.io/docs/documents/backend/go/go01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -61,6 +42,16 @@ cargo init rust_hello --bin cd rust_hello cargo run fn main() { println!</descri
     </item>
     
     <item>
+      <title>SQL Basic</title>
+      <link>http://prokoptasis.github.io/docs/documents/backend/sql/sql01/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://prokoptasis.github.io/docs/documents/backend/sql/sql01/</guid>
+      <description>SQL BASIC 기본 교육 자료 #   SQL은 Sturctured Query Langugage의 약자로 데이터베이스의 데이터를 관리하기 위해 사용하는 언어. 자료의 검색과 관리, 스키마의 생성과 수정, 객체의 접근 조정 및 관리의 기능 제공. ANSI SQL 기본 문법은 원래 어떤 데이터베이스와도 호환이 가능해야 하나 통상 Vendor들이 표준을 잘지키지않는 편이라 기본적인 수준에서만 호환이 가능. NoSQL 계열의 데이터베이스에서는 사용되지 않음. (다음은 오라클 기준임)
+Live SQL #   Oracle 가입 Oracle Live SQL 접속 &amp;ldquo;Start Coding Now&amp;rdquo; Live SQL 실행  Hello World!</description>
+    </item>
+    
+    <item>
       <title>GO Advanced</title>
       <link>http://prokoptasis.github.io/docs/documents/backend/go/go02/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -81,6 +72,15 @@ package main import ( &amp;#34;fmt&amp;#34; accounts &amp;#34;./accounts&amp;#34
       <description>Go Oralce DB 연결 #   Go의 Godror을 이용한 간단한 Oracle DB 연결 및 조회
 Oracle DB 연결 #   oracle db 연결 ...  main.go
 package main import ( &amp;#34;database/sql&amp;#34; &amp;#34;fmt&amp;#34; &amp;#34;log&amp;#34; _ &amp;#34;github.com/godror/godror&amp;#34; ) type str_item struct { item_cd string item_nm string } type str_item_ls struct { str_item []str_item } func (item_ls *str_item_ls) AddItem(item str_item) []str_item { item_ls.str_item = append(item_ls.str_item, item) return item_ls.str_item } func get_list(sql_str string, item_cnt int, item_list *str_item_ls, c chan bool) { // 본인 계정에 맞는 접속 정보 	db, err := sql.</description>
+    </item>
+    
+    <item>
+      <title>SQL Advanced</title>
+      <link>http://prokoptasis.github.io/docs/documents/backend/sql/sql02/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://prokoptasis.github.io/docs/documents/backend/sql/sql02/</guid>
+      <description>SQL Advanced #   exists / not exists #   exists / not exists ...      pivot / unpivot #   pivot ...       unpivot ...      lead / lag #   lead / lag ...      rows / range / preceding / following / current / unbounded #   rows / range / preceding / following / current / unbounded  .</description>
     </item>
     
     <item>

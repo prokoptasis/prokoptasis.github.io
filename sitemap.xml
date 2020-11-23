@@ -43,14 +43,6 @@
   </url>
   
   <url>
-    <loc>http://prokoptasis.github.io/docs/documents/backend/sql/sql01/</loc>
-  </url>
-  
-  <url>
-    <loc>http://prokoptasis.github.io/docs/documents/backend/sql/sql02/</loc>
-  </url>
-  
-  <url>
     <loc>http://prokoptasis.github.io/docs/documents/backend/go/go01/</loc>
   </url>
   
@@ -63,11 +55,19 @@
   </url>
   
   <url>
+    <loc>http://prokoptasis.github.io/docs/documents/backend/sql/sql01/</loc>
+  </url>
+  
+  <url>
     <loc>http://prokoptasis.github.io/docs/documents/backend/go/go02/</loc>
   </url>
   
   <url>
     <loc>http://prokoptasis.github.io/docs/documents/backend/go/go03/</loc>
+  </url>
+  
+  <url>
+    <loc>http://prokoptasis.github.io/docs/documents/backend/sql/sql02/</loc>
   </url>
   
   <url>

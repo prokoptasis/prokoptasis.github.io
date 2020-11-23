@@ -17,12 +17,12 @@ Live SQL #   Oracle 가입 Oracle Live SQL 접속 &amp;ldquo;Start Coding Now&am
     </item>
     
     <item>
-      <title>SQL Basic 2</title>
+      <title>SQL Advanced</title>
       <link>http://prokoptasis.github.io/docs/documents/backend/sql/sql02/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://prokoptasis.github.io/docs/documents/backend/sql/sql02/</guid>
-      <description>SQL Basic 2 #    다음글  </description>
+      <description>SQL Advanced #   exists / not exists #   exists / not exists ...      pivot / unpivot #   pivot ...       unpivot ...      lead / lag #   lead / lag ...      rows / range / preceding / following / current / unbounded #   rows / range / preceding / following / current / unbounded  .</description>
     </item>
     
   </channel>
