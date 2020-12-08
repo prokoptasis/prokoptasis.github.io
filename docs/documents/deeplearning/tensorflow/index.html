@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.2ffaed2d750b0b6f623956c311f997ff436af79cdd2063f714188d5ba3383f37.js" integrity="sha256-L/rtLXULC29iOVbDEfmX/0Nq95zdIGP3FBiNW6M4Pzc="></script>
+<script defer src="/ko.search.min.23bd8d09cccfd4441e4c87d146d7967cf0610944515013a2297ed61f7abb901e.js" integrity="sha256-I72NCczP1EQeTIfRRteWfPBhCURRUBOiKX7WH3q7kB4="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -200,7 +200,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://prokoptasis.github.io/docs/documents/backend/rust/rust01/" class="">Rust Basic</a>
+    <a href="http://prokoptasis.github.io/docs/documents/backend/rust/rust02/" class="">Rust Advanced</a>
   
 
         </li>
@@ -213,7 +213,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://prokoptasis.github.io/docs/documents/backend/rust/rust02/" class="">Rust Basic 02</a>
+    <a href="http://prokoptasis.github.io/docs/documents/backend/rust/rust01/" class="">Rust Basic</a>
   
 
         </li>
@@ -584,115 +584,109 @@ style D fill:#ffffff,stroke:#000000,stroke-width:1px
     <input type="checkbox" class="hidden" />
     <div class="book-expand-content markdown-inner">
        <div>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># import library</span>
-<span style="color:#f92672">import</span> tensorflow <span style="color:#f92672">as</span> tf
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> tensorflow <span style="color:#f92672">as</span> tf
 <span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
 
-<span style="color:#75715e"># tensor flow version 확인</span>
 <span style="color:#66d9ef">print</span>(tf<span style="color:#f92672">.</span>__version__)
 
-<span style="color:#75715e"># X,Y 1,2,3 np array 선언 </span>
-X <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>])
-Y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>])
-
-<span style="color:#75715e"># cost_func 정의 (Python형태)</span>
-<span style="color:#75715e"># Weight, X, Y를 인자로 전달</span>
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">cost_func_py</span>(W, X, Y):
-    <span style="color:#75715e"># c 를 0으로 초기화</span>
-    c <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-    <span style="color:#75715e"># X 만큼 Loop를 돌며 (W*X - Y) ^ 2 -&gt; C로 대입</span>
-    <span style="color:#75715e"># C (오차 제곱근)을 X로 평균낸 값을 return</span>
-    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(X)):
-        c <span style="color:#f92672">+=</span> (W <span style="color:#f92672">*</span> X[i] <span style="color:#f92672">-</span> Y[i]) <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span>
-    <span style="color:#66d9ef">return</span> c <span style="color:#f92672">/</span> len(X)
-
-<span style="color:#75715e"># cost_func 정의 (tensorflow형태)</span>
-<span style="color:#75715e"># Weight, X, Y를 인자로 전달</span>
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">cost_func_tf</span>(W, X, Y):
-  hypothesis <span style="color:#f92672">=</span> X <span style="color:#f92672">*</span> W
-  <span style="color:#66d9ef">return</span> tf<span style="color:#f92672">.</span>reduce_mean(tf<span style="color:#f92672">.</span>square(hypothesis <span style="color:#f92672">-</span> Y))
-
-<span style="color:#75715e"># Weight를 -3부터 5까지 9개의 요소로 제공 </span>
-W_values <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">12</span>, num<span style="color:#f92672">=</span><span style="color:#ae81ff">23</span>)
-cost_values <span style="color:#f92672">=</span> []
-
-<span style="color:#75715e"># numpy.linspace (start,end,number)</span>
-<span style="color:#75715e"># 제공된 Weight, X, Y로 Cost를 계산</span>
-<span style="color:#66d9ef">for</span> feed_W <span style="color:#f92672">in</span> W_values:
-    curr_cost_py <span style="color:#f92672">=</span> cost_func_py(feed_W, X, Y)    
-    curr_cost_tf <span style="color:#f92672">=</span> cost_func_tf(feed_W, X, Y)
-    cost_values<span style="color:#f92672">.</span>append(curr_cost_tf)
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;{:6.3f} | {:10.5f} | {:10.5f}&#34;</span><span style="color:#f92672">.</span>format(feed_W, curr_cost_py, curr_cost_tf))
+<span style="color:#75715e"># x_data, y_data 정의</span>
+x_data <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>]
+y_data <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>]
 
 <span style="color:#75715e"># matplot import</span>
 <span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+plt<span style="color:#f92672">.</span>plot(x_data, y_data, <span style="color:#e6db74">&#39;o&#39;</span>)
+plt<span style="color:#f92672">.</span>ylim(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">8</span>)
 
-<span style="color:#75715e"># figure size 지정</span>
-plt<span style="color:#f92672">.</span>rcParams[<span style="color:#e6db74">&#34;figure.figsize&#34;</span>] <span style="color:#f92672">=</span> (<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">6</span>)
-plt<span style="color:#f92672">.</span>plot(W_values, cost_values, <span style="color:#e6db74">&#34;b&#34;</span>)
-plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Cost(W)&#39;</span>)
-plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;W&#39;</span>)
+<span style="color:#75715e"># reduce_mean의 차원감소 평균 사용</span>
+v <span style="color:#f92672">=</span>[<span style="color:#ae81ff">1.</span>, <span style="color:#ae81ff">2.</span>, <span style="color:#ae81ff">3.</span>, <span style="color:#ae81ff">4.</span>]
+tf<span style="color:#f92672">.</span>reduce_mean(v) <span style="color:#75715e"># 2.5</span>
+
+<span style="color:#75715e"># 3의 제곱근</span>
+tf<span style="color:#f92672">.</span>square(<span style="color:#ae81ff">3</span>) <span style="color:#75715e"># 9</span>
+
+<span style="color:#75715e"># x_data, y_data 정의</span>
+x_data <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>]
+y_data <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>]
+
+<span style="color:#75715e"># Weight Bias 정의</span>
+W <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(<span style="color:#ae81ff">2.0</span>)
+b <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(<span style="color:#ae81ff">0.5</span>)
+
+<span style="color:#75715e"># 가설 정의</span>
+hypothesis <span style="color:#f92672">=</span> W <span style="color:#f92672">*</span> x_data <span style="color:#f92672">+</span> b
+
+<span style="color:#75715e"># Weight Bias Numpy 출력</span>
+W<span style="color:#f92672">.</span>numpy(), b<span style="color:#f92672">.</span>numpy()
+
+<span style="color:#75715e"># Hypothesis Numpy 출력</span>
+hypothesis<span style="color:#f92672">.</span>numpy()
+
+<span style="color:#75715e"># x_data, hypothesis -&gt; R</span>
+<span style="color:#75715e"># x_data, y_data -&gt; O</span>
+plt<span style="color:#f92672">.</span>plot(x_data, hypothesis<span style="color:#f92672">.</span>numpy(), <span style="color:#e6db74">&#39;r-&#39;</span>)
+plt<span style="color:#f92672">.</span>plot(x_data, y_data, <span style="color:#e6db74">&#39;o&#39;</span>)
+plt<span style="color:#f92672">.</span>ylim(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">12</span>)
 plt<span style="color:#f92672">.</span>show()
 
-<span style="color:#75715e"># random 사용시 Seed 설정</span>
-tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>set_seed(<span style="color:#ae81ff">0</span>)  <span style="color:#75715e"># for reproducibility</span>
+<span style="color:#75715e"># Cost 함수 정의 Average((H-Y)^2)</span>
+cost <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(tf<span style="color:#f92672">.</span>square(hypothesis <span style="color:#f92672">-</span> y_data))
 
-x_data <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1.</span>, <span style="color:#ae81ff">2.</span>, <span style="color:#ae81ff">3.</span>, <span style="color:#ae81ff">4.</span>]
-y_data <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1.</span>, <span style="color:#ae81ff">3.</span>, <span style="color:#ae81ff">5.</span>, <span style="color:#ae81ff">7.</span>]
+<span style="color:#75715e"># 경사 하강법 Tape 정의</span>
+<span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>GradientTape() <span style="color:#66d9ef">as</span> tape:
+    hypothesis <span style="color:#f92672">=</span> W <span style="color:#f92672">*</span> x_data <span style="color:#f92672">+</span> b
+    cost <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(tf<span style="color:#f92672">.</span>square(hypothesis <span style="color:#f92672">-</span> y_data))
 
-<span style="color:#75715e"># random.normal((배열),mean,stddev)</span>
-W <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal((<span style="color:#ae81ff">1</span>,), <span style="color:#f92672">-</span><span style="color:#ae81ff">100.</span>, <span style="color:#ae81ff">100.</span>))
+<span style="color:#75715e"># Weight, Bias</span>
+W_grad, b_grad <span style="color:#f92672">=</span> tape<span style="color:#f92672">.</span>gradient(cost, [W, b])
+W_grad<span style="color:#f92672">.</span>numpy(), b_grad<span style="color:#f92672">.</span>numpy()
 
-<span style="color:#75715e"># 300까지 for </span>
-<span style="color:#66d9ef">for</span> step <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">300</span>):
-    <span style="color:#75715e"># 가설을 W*X로 정의</span>
-    hypothesis <span style="color:#f92672">=</span> W <span style="color:#f92672">*</span> X
-    <span style="color:#75715e"># TF의 Cost 함수 사용</span>
-    cost <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(tf<span style="color:#f92672">.</span>square(hypothesis <span style="color:#f92672">-</span> Y))
+<span style="color:#75715e"># 학습율</span>
+learning_rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.01</span>
 
-    <span style="color:#75715e"># Learning Rate 0.01</span>
-    alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.01</span>
+<span style="color:#75715e"># Weight - (Weight * Learning Rate)</span>
+W<span style="color:#f92672">.</span>assign_sub(learning_rate <span style="color:#f92672">*</span> W_grad)
 
-    <span style="color:#75715e"># 경사 하강법</span>
-    gradient <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(tf<span style="color:#f92672">.</span>multiply(tf<span style="color:#f92672">.</span>multiply(W, X) <span style="color:#f92672">-</span> Y, X))
+<span style="color:#75715e"># Bias - (Bias * Learning Rate)</span>
+b<span style="color:#f92672">.</span>assign_sub(learning_rate <span style="color:#f92672">*</span> b_grad)
 
-    <span style="color:#75715e"># W - alpha * W&#39;</span>
-    descent <span style="color:#f92672">=</span> W <span style="color:#f92672">-</span> tf<span style="color:#f92672">.</span>multiply(alpha, gradient)
-    W<span style="color:#f92672">.</span>assign(descent)
-    
-    <span style="color:#75715e"># 10 step 마다 로그</span>
-    <span style="color:#66d9ef">if</span> step <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;{:5} | {:15.6f} | {:10.6f}&#39;</span><span style="color:#f92672">.</span>format( step, cost<span style="color:#f92672">.</span>numpy(), W<span style="color:#f92672">.</span>numpy()[<span style="color:#ae81ff">0</span>]) )
+W<span style="color:#f92672">.</span>numpy(), b<span style="color:#f92672">.</span>numpy()
 
-<span style="color:#66d9ef">print</span>(<span style="color:#ae81ff">5.0</span> <span style="color:#f92672">*</span> W)
-<span style="color:#66d9ef">print</span>(<span style="color:#ae81ff">2.5</span> <span style="color:#f92672">*</span> W)		
+plt<span style="color:#f92672">.</span>plot(x_data, hypothesis<span style="color:#f92672">.</span>numpy(), <span style="color:#e6db74">&#39;r-&#39;</span>)
+plt<span style="color:#f92672">.</span>plot(x_data, y_data, <span style="color:#e6db74">&#39;o&#39;</span>)
+plt<span style="color:#f92672">.</span>ylim(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">12</span>)
 
-x_data <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1.</span>, <span style="color:#ae81ff">2.</span>, <span style="color:#ae81ff">3.</span>, <span style="color:#ae81ff">4.</span>]
-y_data <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1.</span>, <span style="color:#ae81ff">3.</span>, <span style="color:#ae81ff">5.</span>, <span style="color:#ae81ff">7.</span>]
+<span style="color:#75715e"># Weight / Bias 정의</span>
+W <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(<span style="color:#ae81ff">2.9</span>)
+b <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(<span style="color:#ae81ff">0.5</span>)
 
-<span style="color:#75715e"># Weight 5부터 접근</span>
-W <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable([<span style="color:#ae81ff">5.0</span>])
+<span style="color:#75715e"># for loop 수행</span>
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">100</span>):
+    <span style="color:#75715e"># Gradient Tap e정의</span>
+    <span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>GradientTape() <span style="color:#66d9ef">as</span> tape:
+        hypothesis <span style="color:#f92672">=</span> W <span style="color:#f92672">*</span> x_data <span style="color:#f92672">+</span> b
+        cost <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(tf<span style="color:#f92672">.</span>square(hypothesis <span style="color:#f92672">-</span> y_data))
 
-<span style="color:#75715e"># 300까지 for </span>
-<span style="color:#66d9ef">for</span> step <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">300</span>):
-    <span style="color:#75715e"># 가설을 W*X로 정의</span>
-    hypothesis <span style="color:#f92672">=</span> W <span style="color:#f92672">*</span> X
-    <span style="color:#75715e"># TF의 Cost 함수 사용</span>
-    cost <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(tf<span style="color:#f92672">.</span>square(hypothesis <span style="color:#f92672">-</span> Y))
+    <span style="color:#75715e"># Weight Bias 정의</span>
+    W_grad, b_grad <span style="color:#f92672">=</span> tape<span style="color:#f92672">.</span>gradient(cost, [W, b])
 
-    <span style="color:#75715e"># Learning Rate 0.01</span>
-    alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.01</span>
+    <span style="color:#75715e"># Weight - (Learning Rate * Weight)</span>
+    W<span style="color:#f92672">.</span>assign_sub(learning_rate <span style="color:#f92672">*</span> W_grad)
+    <span style="color:#75715e"># Bias - (Learning Rate * Bias)</span>
+    b<span style="color:#f92672">.</span>assign_sub(learning_rate <span style="color:#f92672">*</span> b_grad)
 
-    <span style="color:#75715e"># 경사 하강법</span>
-    gradient <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(tf<span style="color:#f92672">.</span>multiply(tf<span style="color:#f92672">.</span>multiply(W, X) <span style="color:#f92672">-</span> Y, X))
+    <span style="color:#75715e"># Step 10에서 출력</span>
+    <span style="color:#66d9ef">if</span> i <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+      <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;{:5}|{:10.4f}|{:10.4f}|{:10.6f}&#34;</span><span style="color:#f92672">.</span>format(i, W<span style="color:#f92672">.</span>numpy(), b<span style="color:#f92672">.</span>numpy(), cost))
+      
+    <span style="color:#75715e"># x_data, y_data 원본</span>
+    plt<span style="color:#f92672">.</span>plot(x_data, y_data, <span style="color:#e6db74">&#39;o&#39;</span>)
+    <span style="color:#75715e"># x_data, hypothesis 가설</span>
+    plt<span style="color:#f92672">.</span>plot(x_data, hypothesis<span style="color:#f92672">.</span>numpy(), <span style="color:#e6db74">&#39;r-&#39;</span>)
+    plt<span style="color:#f92672">.</span>ylim(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">18</span>)
 
-    <span style="color:#75715e"># W - alpha * W&#39;</span>
-    descent <span style="color:#f92672">=</span> W <span style="color:#f92672">-</span> tf<span style="color:#f92672">.</span>multiply(alpha, gradient)
-    W<span style="color:#f92672">.</span>assign(descent)
-    
-    <span style="color:#75715e"># 10 step 마다 로그</span>
-    <span style="color:#66d9ef">if</span> step <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;{:5} | {:10.4f} | {:10.6f}&#39;</span><span style="color:#f92672">.</span>format(step, cost<span style="color:#f92672">.</span>numpy(), W<span style="color:#f92672">.</span>numpy()[<span style="color:#ae81ff">0</span>]))
+<span style="color:#66d9ef">print</span>(W <span style="color:#f92672">*</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">+</span> b)
+<span style="color:#66d9ef">print</span>(W <span style="color:#f92672">*</span> <span style="color:#ae81ff">2.5</span> <span style="color:#f92672">+</span> b)    
 </code></pre></div></div>
     </div>
   </label>
@@ -758,6 +752,7 @@ plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;C
 plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;W&#39;</span>)
 plt<span style="color:#f92672">.</span>show()
 
+<span style="color:#75715e">##################################################################</span>
 <span style="color:#75715e"># random 사용시 Seed 설정</span>
 tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>set_seed(<span style="color:#ae81ff">0</span>)  <span style="color:#75715e"># for reproducibility</span>
 
@@ -777,11 +772,13 @@ W <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Var
     <span style="color:#75715e"># Learning Rate 0.01</span>
     alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.01</span>
 
-    <span style="color:#75715e"># 경사 하강법</span>
+    <span style="color:#75715e"># 경사 하강법 : 1/m * (W*X - Y) * X</span>
     gradient <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(tf<span style="color:#f92672">.</span>multiply(tf<span style="color:#f92672">.</span>multiply(W, X) <span style="color:#f92672">-</span> Y, X))
 
-    <span style="color:#75715e"># W - alpha * W&#39;</span>
+    <span style="color:#75715e"># Weight - Learning Rate * Weight</span>
     descent <span style="color:#f92672">=</span> W <span style="color:#f92672">-</span> tf<span style="color:#f92672">.</span>multiply(alpha, gradient)
+
+    <span style="color:#75715e"># Assing New Weight</span>
     W<span style="color:#f92672">.</span>assign(descent)
     
     <span style="color:#75715e"># 10 step 마다 로그</span>
@@ -791,6 +788,7 @@ W <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Var
 <span style="color:#66d9ef">print</span>(<span style="color:#ae81ff">5.0</span> <span style="color:#f92672">*</span> W)
 <span style="color:#66d9ef">print</span>(<span style="color:#ae81ff">2.5</span> <span style="color:#f92672">*</span> W)
 
+<span style="color:#75715e">##################################################################</span>
 x_data <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1.</span>, <span style="color:#ae81ff">2.</span>, <span style="color:#ae81ff">3.</span>, <span style="color:#ae81ff">4.</span>]
 y_data <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1.</span>, <span style="color:#ae81ff">3.</span>, <span style="color:#ae81ff">5.</span>, <span style="color:#ae81ff">7.</span>]
 
@@ -807,17 +805,468 @@ W <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Var
     <span style="color:#75715e"># Learning Rate 0.01</span>
     alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.01</span>
 
-    <span style="color:#75715e"># 경사 하강법</span>
+    <span style="color:#75715e"># 경사 하강법 : 1/m * (W*X - Y) * X</span>
     gradient <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(tf<span style="color:#f92672">.</span>multiply(tf<span style="color:#f92672">.</span>multiply(W, X) <span style="color:#f92672">-</span> Y, X))
 
-    <span style="color:#75715e"># W - alpha * W&#39;</span>
+    <span style="color:#75715e"># Weight - Learning Rate * Weight</span>
     descent <span style="color:#f92672">=</span> W <span style="color:#f92672">-</span> tf<span style="color:#f92672">.</span>multiply(alpha, gradient)
+
+    <span style="color:#75715e"># Assing New Weight</span>
     W<span style="color:#f92672">.</span>assign(descent)
     
     <span style="color:#75715e"># 10 step 마다 로그</span>
     <span style="color:#66d9ef">if</span> step <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
         <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;{:5} | {:10.4f} | {:10.6f}&#39;</span><span style="color:#f92672">.</span>format(step, cost<span style="color:#f92672">.</span>numpy(), W<span style="color:#f92672">.</span>numpy()[<span style="color:#ae81ff">0</span>]))
 </code></pre></div></div>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>lab-05-1</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+```python
+# LIbrary 선언
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+import tensorflow as tf
+<p>tf.random.set_seed(777)  # for reproducibility
+print(tf.<strong>version</strong>)</p>
+<h1 id="x_train-data-y_train-data-정의">x_train data, y_train data 정의</h1>
+<p>x_train = [[1., 2.],
+[2., 3.],
+[3., 1.],
+[4., 3.],
+[5., 3.],
+[6., 2.]]
+y_train = [[0.],
+[0.],
+[1.],
+[1.],
+[1.],
+[1.]]</p>
+<h1 id="x_test-data-y_test-data">x_test data, y_test data</h1>
+<p>x_test = [[2.,2.]]
+y_test = [[0.]]</p>
+<h1 id="x_train-data의-x의-1열이-x1">x_train data의 x의 1열이 x1</h1>
+<h1 id="x_train-data의-x의-2열이-x2">x_train data의 x의 2열이 x2</h1>
+<p>x1 = [x[0] for x in x_train]
+x2 = [x[1] for x in x_train]</p>
+<h1 id="y_train-data의-y의-0열의-3나누기-나머지">y_train data의 y의 0열의 3나누기 나머지</h1>
+<p>colors = [int(y[0] % 3) for y in y_train]</p>
+<h1 id="x_train-data-scatter-plot">x_train data scatter plot</h1>
+<p>plt.scatter(x1,x2, c=colors , marker=&lsquo;x&rsquo;)</p>
+<h1 id="x_test-data-scatter-plot">x_test data scatter plot</h1>
+<h1 id="test-데이터는-붉은색의-위치와-같이-추론시-1의-값을-가지게-됩니다">Test 데이터는 붉은색의 위치와 같이 추론시 1의 값을 가지게 됩니다.</h1>
+<p>plt.scatter(x_test[0][0],x_test[0][1], c=&ldquo;red&rdquo;)</p>
+<p>plt.xlabel(&ldquo;x1&rdquo;)
+plt.ylabel(&ldquo;x2&rdquo;)
+plt.show()</p>
+<h1 id="학습-dataset-정의">학습 dataset 정의</h1>
+<p>dataset = tf.data.Dataset.from_tensor_slices((x_train, y_train)).batch(len(x_train))#.repeat()</p>
+<h1 id="weight-21-행렬의-0값으로-초기화">Weight 2*1 행렬의 0값으로 초기화</h1>
+<h1 id="bias-1-벡터의-0값으로-초기화">Bias 1 벡터의 0값으로 초기화</h1>
+<p>W = tf.Variable(tf.zeros([2,1]), name=&lsquo;weight&rsquo;)
+b = tf.Variable(tf.zeros([1]), name=&lsquo;bias&rsquo;)</p>
+<h1 id="hypothesis---1--1--exponential-fetures--w--b----sigmoid">hypothesis = ( 1 / (1 + exponential ((fetures * W) + b)) ) &lt;- Sigmoid</h1>
+<h1 id="httpsuploadwikimediaorgwikipediacommons888logistic-curvesvg"><a href="https://upload.wikimedia.org/wikipedia/commons/8/88/Logistic-curve.svg">https://upload.wikimedia.org/wikipedia/commons/8/88/Logistic-curve.svg</a></h1>
+<p>def logistic_regression(features):
+hypothesis  = tf.divide(1., 1. + tf.exp(tf.matmul(features, W) + b))
+return hypothesis</p>
+<h1 id="손실-함수-정의------y--log-hypothesisx---1--y-log1-hypothesis-">손실 함수 정의   - ( y * log( hypothesis(x) ) + (1- y) log(1-hypothesis) )</h1>
+<p>def loss_fn(hypothesis, features, labels):
+cost = -tf.reduce_mean(labels * tf.math.log(logistic_regression(features)) + (1 - labels) * tf.math.log(1 - hypothesis))
+return cost</p>
+<h1 id="activation-sgd로-설정">Activation SGD로 설정</h1>
+<h1 id="learning-rate-001로-설정">Learning Rate 0.01로 설정</h1>
+<p>optimizer = tf.keras.optimizers.SGD(learning_rate=0.01)</p>
+<h1 id="accuracy-function은-hypothesis-labesy를-인자로-받음">Accuracy Function은 hypothesis, labes(Y)를 인자로 받음</h1>
+<h1 id="predicted--type-cast-hypothesis--05-일-경우-float-32">predicted = Type Cast (Hypothesis &gt; 0.5 일 경우 Float 32)</h1>
+<h1 id="accuracy--predicted-labels를-비교하여-boolean을-반납후-int-32로-cast한-값의-평균을-구함">accuracy = predicted, labels를 비교하여 boolean을 반납후 int 32로 cast한 값의 평균을 구함</h1>
+<p>def accuracy_fn(hypothesis, labels):
+predicted = tf.cast(hypothesis &gt; 0.5, dtype=tf.float32)
+accuracy = tf.reduce_mean(tf.cast(tf.equal(predicted, labels), dtype=tf.int32))
+return accuracy</p>
+<h1 id="gradient-tape을-통해-경사값을-계산">Gradient Tape을 통해 경사값을 계산</h1>
+<p>def grad(features, labels):
+with tf.GradientTape() as tape:
+# 손실 값은 loss_fn(logistic_regression(X), X, Y) 으로 정의
+# loss_fn은 Sigmoid
+loss_value = loss_fn(logistic_regression(features),features,labels)
+return tape.gradient(loss_value, [W,b])</p>
+<h1 id="1000회-반복-수행">1000회 반복 수행</h1>
+<p>EPOCHS = 1001</p>
+<h1 id="for-loop-1000회">for loop 1000회</h1>
+<p>for step in range(EPOCHS):
+for features, labels  in iter(dataset):
+# Grad (X, Y)
+grads = grad(features, labels)
+# SGD Optimizer Vriable 설정
+optimizer.apply_gradients(grads_and_vars=zip(grads,[W,b]))
+# 100 Step 마다 loss log
+if step % 100 == 0:
+print(&ldquo;Iter: {}, Loss: {:.4f}&quot;.format(step, loss_fn(logistic_regression(features),features,labels)))</p>
+<h1 id="accuracy-function에-y-y를-대입하고-test-accuracy-산출후-출력">Accuracy Function에 Y', Y를 대입하고 Test Accuracy 산출후 출력</h1>
+<p>test_acc = accuracy_fn(logistic_regression(x_test),y_test)
+print(&ldquo;Testset Accuracy: {:.4f}&quot;.format(test_acc))</p>
+<p>x_test = [[5.,2.]]
+y_test = [[1.]]
+plt.scatter(x_test[0][0],x_test[0][1], c=&ldquo;red&rdquo;)
+plt.xlabel(&ldquo;x1&rdquo;)
+plt.ylabel(&ldquo;x2&rdquo;)
+plt.show()</p>
+<h1 id="accuracy-function에-y-y를-대입하고-test-accuracy-산출후-출력-1">Accuracy Function에 Y', Y를 대입하고 Test Accuracy 산출후 출력</h1>
+<p>test_acc = accuracy_fn(logistic_regression(x_test),y_test)
+print(&ldquo;Testset Accuracy: {:.4f}&quot;.format(test_acc))
+print(&ldquo;Y: &ldquo;,format(y_test),format(logistic_regression(x_test)) )</p>
+<pre><code>&lt;/div&gt;</code></pre>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>lab-05-2</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+import tensorflow as tf
+<p>tf.random.set_seed(777)  # for reproducibility
+print(tf.<strong>version</strong>)</p>
+<h1 id="google-driver-사용을-위한-mount">Google Driver 사용을 위한 Mount</h1>
+<p>from google.colab import drive
+drive.mount('/content/drive')</p>
+<h1 id="csv-data-load">csv data load</h1>
+<p>xy = np.loadtxt('/content/drive/My Drive/Colab Notebooks/dl4all_2/data-03-diabetes.csv', delimiter=',', dtype=np.float32)</p>
+<h1 id="x_train-전체행-1열부터-마지막-전열">x_train 전체행 1열부터 마지막 전열</h1>
+<p>x_train = xy[:, 0:-1]</p>
+<h1 id="y_train-전체행-마지막-열">y_train 전체행 마지막 열</h1>
+<p>y_train = xy[:, [-1]]</p>
+<h1 id="shape-출력">shape 출력</h1>
+<p>print(x_train.shape, y_train.shape)</p>
+<h1 id="xy-출력">xy 출력</h1>
+<p>print(xy)</p>
+<p>dataset = tf.data.Dataset.from_tensor_slices((x_train, y_train)).batch(len(x_train))</p>
+<h1 id="weight와-bias를-random으로-설정">Weight와 Bias를 Random으로 설정</h1>
+<p>W = tf.Variable(tf.random.normal((8, 1)), name=&lsquo;weight&rsquo;)
+b = tf.Variable(tf.random.normal((1,)), name=&lsquo;bias&rsquo;)</p>
+<h1 id="activation--hypothesis--1---1--exponential--x-matmul-w---b-">Activation : Hypothesis = 1 / ( 1 + exponential ( X matmul W ) + b )</h1>
+<p>def logistic_regression(features):
+hypothesis  = tf.divide(1., 1. + tf.exp(tf.matmul(features, W) + b))
+return hypothesis</p>
+<h1 id="손실-함수-정의------y--log-hypothesisx---1--y-log1-hypothesis-">손실 함수 정의   - ( y * log( hypothesis(x) ) + (1- y) log(1-hypothesis) )</h1>
+<p>def loss_fn(hypothesis, features, labels):
+cost = -tf.reduce_mean(labels * tf.math.log(logistic_regression(features)) + (1 - labels) * tf.math.log(1 - hypothesis))
+return cost</p>
+<h1 id="activation-sgd">Activation SGD</h1>
+<h1 id="learning-rate-001">Learning Rate 0.01</h1>
+<p>optimizer = tf.keras.optimizers.SGD(learning_rate=0.01)</p>
+<h1 id="sigmoid-함수를-통해-예측값이-05보다-크면-1을-반환하고-05보다-작으면-0으로-반환">Sigmoid 함수를 통해 예측값이 0.5보다 크면 1을 반환하고 0.5보다 작으면 0으로 반환</h1>
+<p>def accuracy_fn(hypothesis, labels):
+predicted = tf.cast(hypothesis &gt; 0.5, dtype=tf.float32)
+accuracy = tf.reduce_mean(tf.cast(tf.equal(predicted, labels), dtype=tf.int32))
+return accuracy</p>
+<h1 id="gradienttape을-통해-경사값을-계산">GradientTape을 통해 경사값을 계산</h1>
+<p>def grad(hypothesis, features, labels):
+with tf.GradientTape() as tape:
+loss_value = loss_fn(logistic_regression(features),features,labels)
+return tape.gradient(loss_value, [W,b])</p>
+<h1 id="반복횟수-1000회">반복횟수 1000회</h1>
+<p>EPOCHS = 1001</p>
+<h1 id="epochs-만큼-for-loop">Epochs 만큼 for loop</h1>
+<p>for step in range(EPOCHS):
+# dataset에 fetures와 labels 만큼 for loop
+for features, labels  in iter(dataset):
+# gradients 정의
+grads = grad(logistic_regression(features), features, labels)</p>
+<pre><code>    # SGD Optimizer Variable Setting
+    optimizer.apply_gradients(grads_and_vars=zip(grads,[W,b]))
+
+    # 100 Step 마다 로그
+    if step % 100 == 0:
+        print(&quot;Iter: {}, Loss: {:.4f}&quot;.format(step, loss_fn(logistic_regression(features),features,labels)))
+</code></pre>
+<pre><code>&lt;/div&gt;</code></pre>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>lab-06-1</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+```python
+import tensorflow as tf
+import numpy as np
+print(tf.__version__)
+tf.random.set_seed(777)  # for reproducibility
+<h1 id="x_data-y_data-정의">x_data, y_data 정의</h1>
+<p>x_data = [[1, 2, 1, 1],
+[2, 1, 3, 2],
+[3, 1, 3, 4],
+[4, 1, 5, 5],
+[1, 7, 5, 5],
+[1, 2, 5, 6],
+[1, 6, 6, 6],
+[1, 7, 7, 7]]
+y_data = [[0, 0, 1],
+[0, 0, 1],
+[0, 0, 1],
+[0, 1, 0],
+[0, 1, 0],
+[0, 1, 0],
+[1, 0, 0],
+[1, 0, 0]]</p>
+<p>#convert into numpy and float format</p>
+<h1 id="numpy-array-float32-data로-converting">numpy array float32 data로 converting</h1>
+<p>x_data = np.asarray(x_data, dtype=np.float32)
+y_data = np.asarray(y_data, dtype=np.float32)</p>
+<h1 id="dataset을-선언합니다">dataset을 선언합니다.</h1>
+<p>dataset = tf.data.Dataset.from_tensor_slices((x_data, y_data))
+dataset = dataset.repeat().batch(2)
+nb_classes = 3 #class의 개수입니다.</p>
+<p>print(x_data.shape)
+print(y_data.shape)</p>
+<p>#Weight and bias setting</p>
+<h1 id="weight-randomnormal-43">Weight random.normal (4,3)</h1>
+<h1 id="bias-randomnormal-3">Bias random.normal (3)</h1>
+<p>W = tf.Variable(tf.random.normal((4, nb_classes)), name=&lsquo;weight&rsquo;)
+b = tf.Variable(tf.random.normal((nb_classes,)), name=&lsquo;bias&rsquo;)
+variables = [W, b]</p>
+<p>print(W,b)</p>
+<h1 id="tfnnsoftmax-computes-softmax-activations">tf.nn.softmax computes softmax activations</h1>
+<h1 id="softmax--explogits--reduce_sumexplogits-dim">softmax = exp(logits) / reduce_sum(exp(logits), dim)</h1>
+<h1 id="softmax-softmax--x--w--b-">softmax softmax ( X * W + B )</h1>
+<p>def hypothesis(X):
+return tf.nn.softmax(tf.matmul(X, W) + b)</p>
+<h1 id="hx-print">h(x) print</h1>
+<p>print(hypothesis(x_data))</p>
+<h1 id="softmax-onehot-test">Softmax onehot test</h1>
+<h1 id="softmax-테스트">Softmax 테스트</h1>
+<p>sample_db = [[8,2,1,4]]
+sample_db = np.asarray(sample_db, dtype=np.float32)</p>
+<p>print(hypothesis(sample_db))</p>
+<h1 id="cost-function">Cost Function</h1>
+<p>def cost_fn(X, Y):
+# H(X) = Logit
+logits = hypothesis(X)</p>
+<pre><code># Cost =  SUM ( Y * log(H(X)) ) 
+cost = -tf.reduce_sum(Y * tf.math.log(logits), axis=1)
+
+# cost_mean =  mean( cost )
+cost_mean = tf.reduce_mean(cost)
+
+return cost_mean
+</code></pre>
+<p>print(cost_fn(x_data, y_data))</p>
+<h1 id="x--3">x = 3</h1>
+<p>x = tf.constant(3.0)</p>
+<h1 id="gradienttape-정의">GradientTape 정의</h1>
+<p>with tf.GradientTape() as g:
+# g.watch : Ensures that tensor is being traced by this tape.
+g.watch(x)
+y = x * x # x^2</p>
+<h1 id="delta-y--delta-x">delta y , delta x</h1>
+<p>dy_dx = g.gradient(y, x) # Will compute to 6.0
+print(dy_dx)</p>
+<h1 id="gradient-funtion">Gradient Funtion</h1>
+<p>def grad_fn(X, Y):
+with tf.GradientTape() as tape:
+# loss = cost_mean
+loss = cost_fn(X, Y)</p>
+<pre><code>    # gradient ( loss, )
+    grads = tape.gradient(loss, variables)
+
+    return grads
+</code></pre>
+<p>print(grad_fn(x_data, y_data))</p>
+<h1 id="fitting--xy-2000-epochs-verbose-100">fitting : X,Y, 2000 epochs, verbose 100</h1>
+<p>def fit(X, Y, epochs=2000, verbose=100):
+# learning rate setting
+optimizer =  tf.keras.optimizers.SGD(learning_rate=0.1)</p>
+<pre><code># for loop 
+for i in range(epochs):
+    # gradient function X, Y
+    grads = grad_fn(X, Y)
+
+    # Optimizer Variable Seting
+    optimizer.apply_gradients(zip(grads, variables))
+
+    # verbose 100 step log
+    if (i==0) | ((i+1)%verbose==0):
+        print('Loss at epoch %d: %f' %(i+1, cost_fn(X, Y).numpy()))
+</code></pre>
+<h1 id="start-fitting-loop">start fitting loop</h1>
+<p>fit(x_data, y_data)</p>
+<h1 id="sample-2-1-3-2---001">Sample 2, 1, 3, 2 -&gt; 0,0,1</h1>
+<p>sample_data = [[2,1,3,2]] # answer_label [[0,0,1]]
+sample_data = np.asarray(sample_data, dtype=np.float32)</p>
+<p>a = hypothesis(sample_data)</p>
+<p>print(a)
+print(tf.argmax(a, 1)) #index: 2</p>
+<p>sample_data = [[1,6,4,4]]
+sample_data = np.asarray(sample_data, dtype=np.float32)</p>
+<p>a = hypothesis(sample_data)</p>
+<p>print(a)
+print(tf.argmax(a, 1)) #index: 2</p>
+<p>b = hypothesis(x_data)
+print(b)
+print(tf.argmax(b, 1))
+print(tf.argmax(y_data, 1)) # matches with y_data</p>
+<h1 id="softmax-classifer">softmax classifer</h1>
+<p>class softmax_classifer(tf.keras.Model):
+# class initilization
+def <strong>init</strong>(self, nb_classes):
+super(softmax_classifer, self).<strong>init</strong>()
+self.W = tf.Variable(tf.random.normal((4, nb_classes)), name=&lsquo;weight&rsquo;)
+self.b = tf.Variable(tf.random.normal((nb_classes,)), name=&lsquo;bias&rsquo;)</p>
+<pre><code># softmax regression
+def softmax_regression(self, X):
+    return tf.nn.softmax(tf.matmul(X, self.W) + self.b)
+
+# cost_function
+def cost_fn(self, X, Y):
+    logits = self.softmax_regression(X)
+    cost = tf.reduce_mean(-tf.reduce_sum(Y * tf.math.log(logits), axis=1))        
+    return cost
+
+# gradient function
+def grad_fn(self, X, Y):
+    with tf.GradientTape() as tape:
+        cost = self.cost_fn(x_data, y_data)
+        grads = tape.gradient(cost, self.variables)            
+        return grads
+
+# fitting
+def fit(self, X, Y, epochs=2000, verbose=500):
+    optimizer =  tf.keras.optimizers.SGD(learning_rate=0.1)
+
+    for i in range(epochs):
+        grads = self.grad_fn(X, Y)
+        optimizer.apply_gradients(zip(grads, self.variables))
+        if (i==0) | ((i+1)%verbose==0):
+            print('Loss at epoch %d: %f' %(i+1, self.cost_fn(X, Y).numpy()))
+</code></pre>
+<p>model = softmax_classifer(nb_classes)
+model.fit(x_data, y_data)</p>
+<pre><code>&lt;/div&gt;</code></pre>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>lab-06-2</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+```python
+import tensorflow as tf
+import numpy as np
+print(tf.__version__)
+tf.random.set_seed(777)  # for reproducibility
+<h1 id="google-driver-사용을-위한-mount">Google Driver 사용을 위한 Mount</h1>
+<p>from google.colab import drive
+drive.mount('/content/drive')</p>
+<h1 id="csv-data-load">csv data load</h1>
+<p>xy = np.loadtxt('/content/drive/My Drive/Colab Notebooks/dl4all_2/data-04-zoo.csv', delimiter=',', dtype=np.float32)</p>
+<h1 id="x_data-전체행-1열부터-마지막-전열">x_data 전체행 1열부터 마지막 전열</h1>
+<p>x_data = xy[:, 0:-1]</p>
+<h1 id="y_data-전체행-마지막열">y_data 전체행 마지막열</h1>
+<p>y_data = xy[:, -1]</p>
+<h1 id="nb_classes-7">nb_classes 7</h1>
+<p>nb_classes = 7  # 0 ~ 6</p>
+<h1 id="make-y-data-as-onehot-shape">Make Y data as onehot shape</h1>
+<h1 id="y-data-one-hot-encoding">Y Data One-Hot Encoding</h1>
+<p>Y_one_hot = tf.one_hot(y_data.astype(np.int32), nb_classes)</p>
+<p>print(x_data.shape, Y_one_hot.shape, y_data.shape, Y_one_hot, y_data)</p>
+<h1 id="weight-and-bias-setting">Weight and bias setting</h1>
+<h1 id="weight--16-7">Weight = 16, 7</h1>
+<h1 id="bias--16">Bias = 16</h1>
+<p>W = tf.Variable(tf.random.normal((16, nb_classes)), name=&lsquo;weight&rsquo;)
+b = tf.Variable(tf.random.normal((nb_classes,)), name=&lsquo;bias&rsquo;)
+variables = [W, b]</p>
+<h1 id="tfnnsoftmax-computes-softmax-activations">tf.nn.softmax computes softmax activations</h1>
+<h1 id="softmax--explogits--reduce_sumexplogits-dim">softmax = exp(logits) / reduce_sum(exp(logits), dim)</h1>
+<h1 id="logit-function--x--w--b">Logit Function = X * W + B</h1>
+<h1 id="cross_entropy_with_logist에서-logit_fn을-받음">cross_entropy_with_logist에서 logit_fn을 받음</h1>
+<p>def logit_fn(X):
+return tf.matmul(X, W) + b</p>
+<h1 id="hypothesis--softmax--logit-function-">Hypothesis = Softmax ( Logit Function )</h1>
+<h1 id="prediction에서-hypothesis-받음">prediction에서 hypothesis 받음</h1>
+<p>def hypothesis(X):
+return tf.nn.softmax(logit_fn(X))</p>
+<h1 id="cost-function">Cost Function</h1>
+<h1 id="logits--logit-function">Logits = Logit Function</h1>
+<h1 id="cost_i--cross-entropy--y--logit-">Cost_i = Cross Entropy ( Y , Logit )</h1>
+<h1 id="cost-reduce-mean--cost_i-">Cost Reduce Mean ( Cost_i )</h1>
+<p>def cost_fn(X, Y):
+logits = logit_fn(X)
+cost_i = tf.keras.losses.categorical_crossentropy(y_true=Y, y_pred=logits, from_logits=True) <br>
+cost = tf.reduce_mean(cost_i) <br>
+return cost</p>
+<h1 id="gradient-tape">Gradient Tape</h1>
+<p>def grad_fn(X, Y):
+with tf.GradientTape() as tape:
+# Cost Function ( X, Y )
+loss = cost_fn(X, Y)
+grads = tape.gradient(loss, variables)
+return grads</p>
+<h1 id="prediction--argmax-hypothesisx-1">Prediction : ArgMax (Hypothesis(X), 1)</h1>
+<h1 id="correct-prediction">Correct Prediction</h1>
+<h1 id="accuracy--average--prediction-float-32-type-casting-">Accuracy = Average ( Prediction Float 32 Type Casting )</h1>
+<p>def prediction(X, Y):
+# Argument 중 Max값을 Prediction Value로 선택
+pred = tf.argmax(hypothesis(X), 1)
+# Prediction과 Argument Max의 동일 여부를 선택
+correct_prediction = tf.equal(pred, tf.argmax(Y, 1))
+accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))</p>
+<pre><code>return accuracy
+</code></pre>
+<h1 id="fitting-function">fitting function</h1>
+<p>def fit(X, Y, epochs=1000, verbose=100):
+# SGD Optimizer : Learning Rate 0.1
+optimizer =  tf.keras.optimizers.SGD(learning_rate=0.1)</p>
+<pre><code># Epochs for loop
+for i in range(epochs):
+    grads = grad_fn(X, Y)
+    optimizer.apply_gradients(zip(grads, variables))
+
+    if (i==0) | ((i+1)%verbose==0):
+</code></pre>
+<h1 id="printloss-at-epoch-d-f-i1-cost_fnx-ynumpy">print(&lsquo;Loss at epoch %d: %f&rsquo; %(i+1, cost_fn(X, Y).numpy()))</h1>
+<pre><code>        acc = prediction(X, Y).numpy()
+        loss = cost_fn(X, Y).numpy() 
+        print('Steps: {} Loss: {}, Acc: {}'.format(i+1, loss, acc))
+</code></pre>
+<p>fit(x_data, Y_one_hot)</p>
+<pre><code>&lt;/div&gt;</code></pre>
     </div>
   </label>
 </div>

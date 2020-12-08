@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.2ffaed2d750b0b6f623956c311f997ff436af79cdd2063f714188d5ba3383f37.js" integrity="sha256-L/rtLXULC29iOVbDEfmX/0Nq95zdIGP3FBiNW6M4Pzc="></script>
+<script defer src="/ko.search.min.23bd8d09cccfd4441e4c87d146d7967cf0610944515013a2297ed61f7abb901e.js" integrity="sha256-I72NCczP1EQeTIfRRteWfPBhCURRUBOiKX7WH3q7kB4="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -199,7 +199,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://prokoptasis.github.io/docs/documents/backend/rust/rust01/" class=" active">Rust Basic</a>
+    <a href="http://prokoptasis.github.io/docs/documents/backend/rust/rust02/" class="">Rust Advanced</a>
   
 
         </li>
@@ -212,7 +212,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://prokoptasis.github.io/docs/documents/backend/rust/rust02/" class="">Rust Basic 02</a>
+    <a href="http://prokoptasis.github.io/docs/documents/backend/rust/rust01/" class=" active">Rust Basic</a>
   
 
         </li>
@@ -2673,6 +2673,168 @@ Rust는 Shallow Copy를 Move라 표현. 명시적으로 표시하지 않는 이�
 	println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;TEST WOW&#34;</span>)
 }
 </code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="command-line-program">
+  Command Line Program
+  <a class="anchor" href="#command-line-program">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>grep</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <p>src/lib.rs</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">use</span> std::env;
+<span style="color:#66d9ef">use</span> std::error::Error;
+<span style="color:#66d9ef">use</span> std::fs::File;
+<span style="color:#66d9ef">use</span> std::io::prelude::<span style="color:#f92672">*</span>;
+
+<span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Config</span> {
+	<span style="color:#66d9ef">pub</span> pgnm: String,
+	<span style="color:#66d9ef">pub</span> quer: String,
+	<span style="color:#66d9ef">pub</span> file: String,
+	<span style="color:#66d9ef">pub</span> case: <span style="color:#66d9ef">bool</span>,
+}
+
+<span style="color:#66d9ef">impl</span> Config {
+	<span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">new</span>(args: <span style="color:#66d9ef">&amp;</span>[String]) -&gt; Result<span style="color:#f92672">&lt;</span>Config, <span style="color:#f92672">&amp;</span>&#39;static <span style="color:#66d9ef">str</span><span style="color:#f92672">&gt;</span> {
+		<span style="color:#66d9ef">if</span> args.len() <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">3</span> {
+			panic<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;not enough arguments&#34;</span>);
+		}
+
+		<span style="color:#66d9ef">let</span> pgnm <span style="color:#f92672">=</span> args[<span style="color:#ae81ff">0</span>].clone();
+		<span style="color:#66d9ef">let</span> quer <span style="color:#f92672">=</span> args[<span style="color:#ae81ff">1</span>].clone();
+		<span style="color:#66d9ef">let</span> file <span style="color:#f92672">=</span> args[<span style="color:#ae81ff">2</span>].clone();
+		<span style="color:#66d9ef">let</span> case <span style="color:#f92672">=</span> env::var(<span style="color:#e6db74">&#34;CASE&#34;</span>).is_err();
+
+		Ok(Config {
+			pgnm,
+			quer,
+			file,
+			case,
+		})
+	}
+}
+
+<span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">run</span>(conf: <span style="color:#a6e22e">Config</span>) -&gt; Result<span style="color:#f92672">&lt;</span>(), Box<span style="color:#f92672">&lt;</span>Error<span style="color:#f92672">&gt;&gt;</span> {
+	<span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> f <span style="color:#f92672">=</span> File::open(conf.file)<span style="color:#f92672">?</span>;
+	<span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> cont <span style="color:#f92672">=</span> String::new();
+	f.read_to_string(<span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> cont)<span style="color:#f92672">?</span>;
+
+	<span style="color:#66d9ef">let</span> rslt <span style="color:#f92672">=</span> <span style="color:#66d9ef">if</span> conf.case {
+		search(<span style="color:#f92672">&amp;</span>conf.quer, <span style="color:#f92672">&amp;</span>cont)
+	} <span style="color:#66d9ef">else</span> {
+		search_case_insensitive(<span style="color:#f92672">&amp;</span>conf.quer, <span style="color:#f92672">&amp;</span>cont)
+	};
+
+	<span style="color:#75715e">//println!(&#34;With text:\n {}&#34;, cont);
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">for</span> line <span style="color:#66d9ef">in</span> rslt {
+		println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, line)
+	}
+
+	Ok(())
+}
+
+<span style="color:#75715e">#[cfg(test)]</span>
+<span style="color:#66d9ef">mod</span> test {
+	<span style="color:#66d9ef">use</span> <span style="color:#66d9ef">super</span>::<span style="color:#f92672">*</span>;
+
+	<span style="color:#75715e">#[test]</span>
+	<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">one_result</span>() {
+		<span style="color:#66d9ef">let</span> quer <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;duct&#34;</span>;
+		<span style="color:#66d9ef">let</span> cont <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">&#34;\</span>
+Rust:<span style="color:#a6e22e">alloc</span>
+safe, fast, productive.
+Pick three.<span style="color:#960050;background-color:#1e0010">&#34;</span>;
+
+		assert_eq<span style="color:#f92672">!</span>(vec<span style="color:#f92672">!</span>[<span style="color:#e6db74">&#34;safe, fast, productive.&#34;</span>], search(quer, cont));
+	}
+
+	<span style="color:#75715e">#[test]</span>
+	<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">case_insensitive</span>() {
+		<span style="color:#66d9ef">let</span> quer <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;rUsT&#34;</span>;
+		<span style="color:#66d9ef">let</span> cont <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">&#34;\</span>
+Rust:
+<span style="color:#a6e22e">safe</span>, fast, productive.
+Pick three.
+Trust me.<span style="color:#960050;background-color:#1e0010">&#34;</span>;
+
+		assert_eq<span style="color:#f92672">!</span>(
+			vec<span style="color:#f92672">!</span>[<span style="color:#e6db74">&#34;Rust:&#34;</span>, <span style="color:#e6db74">&#34;Trust me.&#34;</span>],
+			search_case_insensitive(quer, cont)
+		);
+	}
+}
+
+<span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">search</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">&#39;a</span><span style="color:#f92672">&gt;</span>(quer: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span>, cont: <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">&#39;a</span> <span style="color:#66d9ef">str</span>) -&gt; Vec<span style="color:#f92672">&lt;&amp;</span><span style="color:#a6e22e">&#39;a</span> <span style="color:#66d9ef">str</span><span style="color:#f92672">&gt;</span> {
+	<span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> rslt <span style="color:#f92672">=</span> Vec::new();
+
+	<span style="color:#66d9ef">for</span> line <span style="color:#66d9ef">in</span> cont.lines() {
+		<span style="color:#66d9ef">if</span> line.contains(quer) {
+			rslt.push(line);
+		}
+	}
+	rslt
+}
+
+<span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">search_case_insensitive</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">&#39;a</span><span style="color:#f92672">&gt;</span>(quer: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span>, cont: <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">&#39;a</span> <span style="color:#66d9ef">str</span>) -&gt; Vec<span style="color:#f92672">&lt;&amp;</span><span style="color:#a6e22e">&#39;a</span> <span style="color:#66d9ef">str</span><span style="color:#f92672">&gt;</span> {
+	<span style="color:#66d9ef">let</span> quer <span style="color:#f92672">=</span> quer.to_lowercase();
+	<span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> rslt <span style="color:#f92672">=</span> Vec::new();
+
+	<span style="color:#66d9ef">for</span> line <span style="color:#66d9ef">in</span> cont.lines() {
+		<span style="color:#66d9ef">if</span> line.to_lowercase().contains(<span style="color:#f92672">&amp;</span>quer) {
+			rslt.push(line);
+		}
+	}
+
+	rslt
+}
+</code></pre></div><p>src/main.rs</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">crate</span> rust_grep;
+
+<span style="color:#66d9ef">use</span> rust_grep::Config;
+<span style="color:#66d9ef">use</span> std::env;
+<span style="color:#66d9ef">use</span> std::process;
+
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#66d9ef">let</span> args: Vec<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> env::args().collect();
+    <span style="color:#75715e">//let conf = parse_config(&amp;args);
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> conf <span style="color:#f92672">=</span> Config::new(<span style="color:#f92672">&amp;</span>args).unwrap_or_else(<span style="color:#f92672">|</span>err<span style="color:#f92672">|</span> {
+        println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Problem parsing arguments: {}&#34;</span>, err);
+        process::exit(<span style="color:#ae81ff">1</span>);
+    });
+
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Program Name : {}&#34;</span>, conf.pgnm);
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Searching for : {}&#34;</span>, conf.quer);
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;In file : {}&#34;</span>, conf.file);
+
+    <span style="color:#75715e">// let mut f = File::open(conf.file).expect(&#34;file not found&#34;);
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// let mut cont = String::new();
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// f.read_to_string(&amp;mut cont)
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//     .expect(&#34;Something went wrong reading the file&#34;);
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// println!(&#34;With text:\n {}&#34;, cont);
+</span><span style="color:#75715e"></span>
+    <span style="color:#66d9ef">if</span> <span style="color:#66d9ef">let</span> Err(e) <span style="color:#f92672">=</span> rust_grep::run(conf) {
+        eprintln<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Application Error : {}&#34;</span>, e);
+        process::exit(<span style="color:#ae81ff">1</span>);
+    }
+}
+
+<span style="color:#75715e">// fn parse_config(args: &amp;[String]) -&gt; Config {
+</span><span style="color:#75715e">//     let pgnm = args[0].clone();
+</span><span style="color:#75715e">//     let quer = args[1].clone();
+</span><span style="color:#75715e">//     let file = args[2].clone();
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">//     Config { pgnm, quer, file }
+</span><span style="color:#75715e">// }
+</span></code></pre></div>
     </div>
   </label>
 </div>
