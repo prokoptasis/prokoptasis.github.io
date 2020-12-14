@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.11f86386394661f38b7c16df045ecc0782bb15fb58ef3f4b05cc8baf3650c81d.js" integrity="sha256-EfhjhjlGYfOLfBbfBF7MB4K7FftY7z9LBcyLrzZQyB0="></script>
+<script defer src="/ko.search.min.601b7c026535d42d863a49867997389b56d679764e2580f095c17353af2d1357.js" integrity="sha256-YBt8AmU11C2GOkmGeZc4m1bWeXZOJYDwlcFzU68tE1c="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -1324,7 +1324,7 @@ variables <span style="color:#f92672">=</span> [W, b]
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fit</span>(X, Y, epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>, verbose<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>):
     <span style="color:#75715e"># SGD Optimizer : Learning Rate 0.1</span>
     optimizer <span style="color:#f92672">=</span>  tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>optimizers<span style="color:#f92672">.</span>SGD(learning_rate<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>)
-
+e
     <span style="color:#75715e"># Epochs for loop</span>
     <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(epochs):
         grads <span style="color:#f92672">=</span> grad_fn(X, Y)
@@ -1337,6 +1337,709 @@ variables <span style="color:#f92672">=</span> [W, b]
             <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Steps: {} Loss: {}, Acc: {}&#39;</span><span style="color:#f92672">.</span>format(i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, loss, acc))
 
 fit(x_data, Y_one_hot)
+</code></pre></div></div>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>lab-07-1</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># import</span>
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">%</span>matplotlib inline
+<span style="color:#f92672">import</span> tensorflow <span style="color:#f92672">as</span> tf
+<span style="color:#f92672">from</span> mpl_toolkits.mplot3d <span style="color:#f92672">import</span> Axes3D
+
+tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>set_seed(<span style="color:#ae81ff">777</span>)  <span style="color:#75715e"># for reproducibility</span>
+
+<span style="color:#66d9ef">print</span>(tf<span style="color:#f92672">.</span>__version__)
+
+<span style="color:#75715e"># x_train data</span>
+x_train <span style="color:#f92672">=</span> [[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>],
+          [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>],
+          [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>],
+          [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">5</span>],
+          [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">5</span>],
+          [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">5</span>],
+          [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">6</span>],
+          [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">7</span>]]
+
+<span style="color:#75715e"># y_train data</span>
+y_train <span style="color:#f92672">=</span> [[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>],
+          [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>],
+          [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>],
+          [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>],
+          [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>],
+          [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>],
+          [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>],
+          [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>]]
+
+<span style="color:#75715e"># Evaluation our model using this test dataset</span>
+<span style="color:#75715e"># x_test data</span>
+x_test <span style="color:#f92672">=</span> [[<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>],
+          [<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>],
+          [<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>]]
+<span style="color:#75715e"># y_test data</span>
+y_test <span style="color:#f92672">=</span> [[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>],
+          [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>],
+          [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>]]
+
+<span style="color:#75715e"># x_train data</span>
+x1 <span style="color:#f92672">=</span> [x[<span style="color:#ae81ff">0</span>] <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> x_train]
+x2 <span style="color:#f92672">=</span> [x[<span style="color:#ae81ff">1</span>] <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> x_train]
+x3 <span style="color:#f92672">=</span> [x[<span style="color:#ae81ff">2</span>] <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> x_train]
+
+<span style="color:#75715e"># plot figure 3d</span>
+fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure()
+ax <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">111</span>, projection<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;3d&#39;</span>)
+ax<span style="color:#f92672">.</span>scatter(x1, x2, x3, c<span style="color:#f92672">=</span>y_train, marker<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;^&#39;</span>)
+
+<span style="color:#75715e"># test data </span>
+ax<span style="color:#f92672">.</span>scatter(x_test[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>], x_test[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">1</span>], x_test[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">2</span>], c<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;red&#34;</span>, marker<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;x&#39;</span>)
+ax<span style="color:#f92672">.</span>scatter(x_test[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>], x_test[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">1</span>], x_test[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">2</span>], c<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;red&#34;</span>, marker<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;x&#39;</span>)
+ax<span style="color:#f92672">.</span>scatter(x_test[<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">0</span>], x_test[<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">1</span>], x_test[<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">2</span>], c<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;red&#34;</span>, marker<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;x&#39;</span>)
+
+ax<span style="color:#f92672">.</span>set_xlabel(<span style="color:#e6db74">&#39;X Label&#39;</span>)
+ax<span style="color:#f92672">.</span>set_ylabel(<span style="color:#e6db74">&#39;Y Label&#39;</span>)
+ax<span style="color:#f92672">.</span>set_zlabel(<span style="color:#e6db74">&#39;Z Label&#39;</span>)
+
+plt<span style="color:#f92672">.</span>show()
+
+<span style="color:#75715e"># Tensorflow data API를 통해 학습시킬 값을 담는다 (Batch Size는 한번에 학습시킬 Size로 정함)</span>
+<span style="color:#75715e"># dataset 정의</span>
+dataset <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>Dataset<span style="color:#f92672">.</span>from_tensor_slices((x_train, y_train))<span style="color:#f92672">.</span>batch(len(x_train))<span style="color:#75715e">#.repeat()</span>
+
+<span style="color:#75715e"># Weight Bias Random 정의</span>
+W <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal((<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>)))
+b <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal((<span style="color:#ae81ff">3</span>,)))
+
+<span style="color:#75715e"># Softmax를 가설로 선언 : Softmax를 통해 가장 높은 값을 구함</span>
+<span style="color:#75715e"># softmax_fn 선언 (Hypothesis = Softmax( F(x)를 Return))</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">softmax_fn</span>(features):
+    <span style="color:#75715e"># hypothesis = softmax ( fetures (x) * Weight + Bias )</span>
+    hypothesis <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>softmax(tf<span style="color:#f92672">.</span>matmul(features, W) <span style="color:#f92672">+</span> b)
+    <span style="color:#66d9ef">return</span> hypothesis
+
+<span style="color:#75715e"># 가설을 검증할 Cost 함수를 정의</span>
+<span style="color:#75715e"># Average ( - SUM ( Labels (Y) * Log (Softmax(H(X))) ) )</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">loss_fn</span>(hypothesis, features, labels):
+    cost <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(<span style="color:#f92672">-</span>tf<span style="color:#f92672">.</span>reduce_sum(labels <span style="color:#f92672">*</span> tf<span style="color:#f92672">.</span>math<span style="color:#f92672">.</span>log(hypothesis), axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>))
+    <span style="color:#66d9ef">return</span> cost
+
+<span style="color:#75715e"># Boolean is_decay 설정</span>
+is_decay <span style="color:#f92672">=</span> True
+
+<span style="color:#75715e"># Start Learning Rate 0.1 설정</span>
+starter_learning_rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>
+
+<span style="color:#75715e"># Decaying the learning rate</span>
+<span style="color:#75715e"># tf.train.exponential_decay : This function applies an exponential decay function to a provided initial learning rate</span>
+<span style="color:#75715e"># tf.train.inverse_time_decay : It is often recommended to lower the learning rate as the training progresses</span>
+<span style="color:#75715e"># tf.train.natural_exp_decay : This function applies an exponential decay function to a provided initial learning rate</span>
+<span style="color:#75715e"># tf.train.piecewise_constant : Piecewise constant from boundaries and interval values.</span>
+<span style="color:#75715e"># tf.train.polynomial_decay : It is commonly observed that a monotonically decreasing learning rate, whose degree of change is carefully chosen, results in a better performing model.</span>
+<span style="color:#75715e"># tf.train.cosine_decay : When training a model, it is often recommended to lower the learning rate as the training progresses.</span>
+<span style="color:#75715e"># tf.train.linear_cosine_decay : Note that linear cosine decay is more aggressive than cosine decay and larger initial learning rates can typically be used.</span>
+<span style="color:#75715e"># tf.train.noisy_linear_cosine_decay : Note that linear cosine decay is more aggressive than cosine decay and larger initial learning rates can typically be used.</span>
+
+<span style="color:#75715e"># is_decay true 일경우</span>
+<span style="color:#66d9ef">if</span>(is_decay):    
+    <span style="color:#75715e"># Learning Rate = Exponential Deacy ( 시작 LR, Step, Rate, Staricase 여부 )</span>
+    <span style="color:#75715e"># exp_rate = starter_rate * exp ( decay_rate * t )</span>
+    <span style="color:#75715e"># initial_learning_rate : The inital Learning Rate</span>
+    <span style="color:#75715e"># global_step : 현재 학습 횟수, Global step to use for the decay computation. Must not be negative.</span>
+    <span style="color:#75715e"># decay_steps : 총학습 횟수, Must be positive</span>
+    <span style="color:#75715e"># decay_rate : 감소 비율, * decay_rate</span>
+    <span style="color:#75715e"># staricase : 이산적 학습 속도 감속 유무 ( global_step / decay_steps ) 의 제곱 적용 여부</span>
+    <span style="color:#75715e"># decayed_learning_rate = learning_rate * decay_rate ^ (global_step / decay_steps)</span>
+    learning_rate <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>optimizers<span style="color:#f92672">.</span>schedules<span style="color:#f92672">.</span>ExponentialDecay(initial_learning_rate<span style="color:#f92672">=</span>starter_learning_rate,
+                                                                 decay_steps<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>,
+                                                                 decay_rate<span style="color:#f92672">=</span><span style="color:#ae81ff">0.96</span>,
+                                                                 staircase<span style="color:#f92672">=</span>True)
+    <span style="color:#75715e"># SGD Optimizer</span>
+    optimizer <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>optimizers<span style="color:#f92672">.</span>SGD(learning_rate)
+<span style="color:#66d9ef">else</span>:
+    <span style="color:#75715e"># is_decay가 false면 초기 Learning Rate 적용</span>
+    optimizer <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>optimizers<span style="color:#f92672">.</span>SGD(learning_rate<span style="color:#f92672">=</span>starter_learning_rate)
+
+<span style="color:#75715e"># Gradient Tape</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">grad</span>(hypothesis, features, labels):
+    <span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>GradientTape() <span style="color:#66d9ef">as</span> tape:
+        <span style="color:#75715e"># Loss Value = Loss Function ( softmax (X) , x , y )</span>
+        loss_value <span style="color:#f92672">=</span> loss_fn(softmax_fn(features),features,labels)
+    <span style="color:#75715e"># Gradient Tape ( cost , [w, b] )</span>
+    <span style="color:#66d9ef">return</span> tape<span style="color:#f92672">.</span>gradient(loss_value, [W,b])
+
+<span style="color:#75715e"># Accuracy Function</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">accuracy_fn</span>(hypothesis, labels):
+    <span style="color:#75715e"># Prediction = Hypothesis중 Max</span>
+    prediction <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>argmax(hypothesis, <span style="color:#ae81ff">1</span>)
+    <span style="color:#75715e"># Equal 판정</span>
+    is_correct <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>equal(prediction, tf<span style="color:#f92672">.</span>argmax(labels, <span style="color:#ae81ff">1</span>))
+    <span style="color:#75715e"># 정확도 측정</span>
+    accuracy <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(tf<span style="color:#f92672">.</span>cast(is_correct, tf<span style="color:#f92672">.</span>float32))
+    <span style="color:#75715e"># Accuracy Return</span>
+    <span style="color:#66d9ef">return</span> accuracy
+
+<span style="color:#75715e"># epochs 1000</span>
+EPOCHS <span style="color:#f92672">=</span> <span style="color:#ae81ff">1001</span>
+
+<span style="color:#75715e"># epoch 만큼 for loop</span>
+<span style="color:#66d9ef">for</span> step <span style="color:#f92672">in</span> range(EPOCHS):
+    <span style="color:#75715e"># dataset 의 x, y 만큼 for loop</span>
+    <span style="color:#66d9ef">for</span> features, labels  <span style="color:#f92672">in</span> iter(dataset):
+        <span style="color:#75715e"># features (x)  type cast</span>
+        features <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>cast(features, tf<span style="color:#f92672">.</span>float32)
+        <span style="color:#75715e"># labes (y) type cast</span>
+        labels <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>cast(labels, tf<span style="color:#f92672">.</span>float32)
+        <span style="color:#75715e"># Gradient Tape</span>
+        grads <span style="color:#f92672">=</span> grad(softmax_fn(features), features, labels)
+        <span style="color:#75715e"># Optimizer</span>
+        optimizer<span style="color:#f92672">.</span>apply_gradients(grads_and_vars<span style="color:#f92672">=</span>zip(grads,[W,b]))
+        <span style="color:#75715e"># verbose 100 </span>
+        <span style="color:#66d9ef">if</span> step <span style="color:#f92672">%</span> <span style="color:#ae81ff">100</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Iter: {}, Loss: {:.4f}&#34;</span><span style="color:#f92672">.</span>format(step, loss_fn(softmax_fn(features),features,labels)))
+
+<span style="color:#75715e"># Test Set 수행</span>
+x_test <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>cast(x_test, tf<span style="color:#f92672">.</span>float32)
+y_test <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>cast(y_test, tf<span style="color:#f92672">.</span>float32)
+test_acc <span style="color:#f92672">=</span> accuracy_fn(softmax_fn(x_test),y_test)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Testset Accuracy: {:.4f}&#34;</span><span style="color:#f92672">.</span>format(test_acc))
+</code></pre></div></div>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>lab-07-2</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<span style="color:#75715e"># import</span>
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">%</span>matplotlib inline
+<span style="color:#f92672">import</span> tensorflow <span style="color:#f92672">as</span> tf
+
+tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>set_seed(<span style="color:#ae81ff">777</span>)  <span style="color:#75715e"># for reproducibility</span>
+
+<span style="color:#66d9ef">print</span>(tf<span style="color:#f92672">.</span>__version__)
+
+<span style="color:#75715e"># xy 정의</span>
+xy <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">828.659973</span>, <span style="color:#ae81ff">833.450012</span>, <span style="color:#ae81ff">908100</span>, <span style="color:#ae81ff">828.349976</span>, <span style="color:#ae81ff">831.659973</span>],
+               [<span style="color:#ae81ff">823.02002</span>, <span style="color:#ae81ff">828.070007</span>, <span style="color:#ae81ff">1828100</span>, <span style="color:#ae81ff">821.655029</span>, <span style="color:#ae81ff">828.070007</span>],
+               [<span style="color:#ae81ff">819.929993</span>, <span style="color:#ae81ff">824.400024</span>, <span style="color:#ae81ff">1438100</span>, <span style="color:#ae81ff">818.97998</span>, <span style="color:#ae81ff">824.159973</span>],
+               [<span style="color:#ae81ff">816</span>, <span style="color:#ae81ff">820.958984</span>, <span style="color:#ae81ff">1008100</span>, <span style="color:#ae81ff">815.48999</span>, <span style="color:#ae81ff">819.23999</span>],
+               [<span style="color:#ae81ff">819.359985</span>, <span style="color:#ae81ff">823</span>, <span style="color:#ae81ff">1188100</span>, <span style="color:#ae81ff">818.469971</span>, <span style="color:#ae81ff">818.97998</span>],
+               [<span style="color:#ae81ff">819</span>, <span style="color:#ae81ff">823</span>, <span style="color:#ae81ff">1198100</span>, <span style="color:#ae81ff">816</span>, <span style="color:#ae81ff">820.450012</span>],
+               [<span style="color:#ae81ff">811.700012</span>, <span style="color:#ae81ff">815.25</span>, <span style="color:#ae81ff">1098100</span>, <span style="color:#ae81ff">809.780029</span>, <span style="color:#ae81ff">813.669983</span>],
+               [<span style="color:#ae81ff">809.51001</span>, <span style="color:#ae81ff">816.659973</span>, <span style="color:#ae81ff">1398100</span>, <span style="color:#ae81ff">804.539978</span>, <span style="color:#ae81ff">809.559998</span>]])
+
+<span style="color:#75715e"># x_train 전행, 1열부터 마지막 전열</span>
+<span style="color:#75715e"># y_train 전행, 마지막열</span>
+x_train <span style="color:#f92672">=</span> xy[:, <span style="color:#ae81ff">0</span>:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+y_train <span style="color:#f92672">=</span> xy[:, [<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]]
+
+<span style="color:#75715e"># 이상치에 의해 값이 왜곡됨</span>
+plt<span style="color:#f92672">.</span>plot(x_train, <span style="color:#e6db74">&#39;ro&#39;</span>)
+plt<span style="color:#f92672">.</span>plot(y_train)
+plt<span style="color:#f92672">.</span>show()
+
+<span style="color:#75715e"># Tensorflow data API를 통해 학습시킬 값을 담음 (Batch Size는 한번에 학습시킬 Size로 정함)</span>
+<span style="color:#75715e"># X(features),Y(labels)는 실재 학습에 쓰일 Data (연산을 위해 Type를 맞춰줌)</span>
+dataset <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>Dataset<span style="color:#f92672">.</span>from_tensor_slices((x_train, y_train))<span style="color:#f92672">.</span>batch(len(x_train))
+
+<span style="color:#75715e"># Weight, Bias Random 초기화</span>
+W <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal((<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">1</span>)), dtype<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>float32)
+b <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal((<span style="color:#ae81ff">1</span>,)), dtype<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>float32)
+
+<span style="color:#75715e"># Linear Regression Hypothesis 정의 : X * Weight + Bias</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">linearReg_fn</span>(features):
+    hypothesis <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>matmul(features, W) <span style="color:#f92672">+</span> b
+    <span style="color:#66d9ef">return</span> hypothesis
+
+<span style="color:#75715e"># Loss Function 정의 : Average ( ( F(x) - Y ) ^ 2 )</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">loss_fn</span>(hypothesis, features, labels):
+    cost <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(tf<span style="color:#f92672">.</span>square(hypothesis <span style="color:#f92672">-</span> labels))
+    <span style="color:#66d9ef">return</span> cost
+
+<span style="color:#75715e"># SGD Optimizer 선택 : Learning Rate 0.00005</span>
+optimizer <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>optimizers<span style="color:#f92672">.</span>SGD(learning_rate<span style="color:#f92672">=</span><span style="color:#ae81ff">1e-5</span>)
+
+<span style="color:#75715e"># Gradient Tape </span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">grad</span>(hypothesis, features, labels):
+    <span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>GradientTape() <span style="color:#66d9ef">as</span> tape:
+        <span style="color:#75715e"># Loss Value = Loss Function ( LinearRegression ( x ) , x, y )</span>
+        loss_value <span style="color:#f92672">=</span> loss_fn(linearReg_fn(features),features,labels)
+    <span style="color:#66d9ef">return</span> tape<span style="color:#f92672">.</span>gradient(loss_value, [W,b]), loss_value
+
+<span style="color:#75715e"># Epochs 100회</span>
+EPOCHS <span style="color:#f92672">=</span> <span style="color:#ae81ff">101</span>
+
+<span style="color:#75715e"># For loop </span>
+<span style="color:#66d9ef">for</span> step <span style="color:#f92672">in</span> range(EPOCHS):
+    <span style="color:#75715e"># Dataset X, Y</span>
+    <span style="color:#66d9ef">for</span> features, labels  <span style="color:#f92672">in</span> dataset:
+        <span style="color:#75715e"># X 의 Type Cast</span>
+        features <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>cast(features, tf<span style="color:#f92672">.</span>float32)
+
+        <span style="color:#75715e"># Y 의 Type Case</span>
+        labels <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>cast(labels, tf<span style="color:#f92672">.</span>float32)
+
+        <span style="color:#75715e"># Hypothesis Value = Linear Regression Function ( X )</span>
+        hypo_value <span style="color:#f92672">=</span> linearReg_fn(features)
+
+        <span style="color:#75715e"># GradientDecenst Value</span>
+        grads, loss_value <span style="color:#f92672">=</span> grad(linearReg_fn(features), features, labels)        
+        optimizer<span style="color:#f92672">.</span>apply_gradients(grads_and_vars<span style="color:#f92672">=</span>zip(grads,[W,b]))    
+    <span style="color:#75715e"># Log without Verbose</span>
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Iter: {}, Loss: {:.4f}, Prediction: {}&#34;</span><span style="color:#f92672">.</span>format(step, loss_value, hypo_value))
+
+<span style="color:#75715e"># xy 정의</span>
+xy <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">828.659973</span>, <span style="color:#ae81ff">833.450012</span>,  <span style="color:#ae81ff">908100</span>, <span style="color:#ae81ff">828.349976</span>, <span style="color:#ae81ff">831.659973</span>],
+               [<span style="color:#ae81ff">823.02002</span>,  <span style="color:#ae81ff">828.070007</span>, <span style="color:#ae81ff">1828100</span>, <span style="color:#ae81ff">821.655029</span>, <span style="color:#ae81ff">828.070007</span>],
+               [<span style="color:#ae81ff">819.929993</span>, <span style="color:#ae81ff">824.400024</span>, <span style="color:#ae81ff">1438100</span>, <span style="color:#ae81ff">818.97998</span>,  <span style="color:#ae81ff">824.159973</span>],
+               [<span style="color:#ae81ff">816</span>,        <span style="color:#ae81ff">820.958984</span>, <span style="color:#ae81ff">1008100</span>, <span style="color:#ae81ff">815.48999</span>,  <span style="color:#ae81ff">819.23999</span>],
+               [<span style="color:#ae81ff">819.359985</span>, <span style="color:#ae81ff">823</span>,        <span style="color:#ae81ff">1188100</span>, <span style="color:#ae81ff">818.469971</span>, <span style="color:#ae81ff">818.97998</span>],
+               [<span style="color:#ae81ff">819</span>,        <span style="color:#ae81ff">823</span>,        <span style="color:#ae81ff">1198100</span>, <span style="color:#ae81ff">816</span>,        <span style="color:#ae81ff">820.450012</span>],
+               [<span style="color:#ae81ff">811.700012</span>, <span style="color:#ae81ff">815.25</span>,     <span style="color:#ae81ff">1098100</span>, <span style="color:#ae81ff">809.780029</span>, <span style="color:#ae81ff">813.669983</span>],
+               [<span style="color:#ae81ff">809.51001</span>,  <span style="color:#ae81ff">816.659973</span>, <span style="color:#ae81ff">1398100</span>, <span style="color:#ae81ff">804.539978</span>, <span style="color:#ae81ff">809.559998</span>]])
+
+<span style="color:#75715e"># Normalization 정의 </span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">normalization</span>(data):
+    <span style="color:#75715e"># data 를 인자로 받음</span>
+    <span style="color:#75715e"># numerator = 개별 data - 열의 min값 </span>
+    numerator <span style="color:#f92672">=</span> data <span style="color:#f92672">-</span> np<span style="color:#f92672">.</span>min(data, <span style="color:#ae81ff">0</span>)
+    <span style="color:#75715e"># denominator = 열의 Max값 - 열의 Min값</span>
+    denominator <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>max(data, <span style="color:#ae81ff">0</span>) <span style="color:#f92672">-</span> np<span style="color:#f92672">.</span>min(data, <span style="color:#ae81ff">0</span>)
+    <span style="color:#75715e"># print(&#34;data : &#34;, data, &#34;np_min : &#34;, np.min(data,0), &#34;np_max : &#34;, np.max(data,0),&#34;num : &#34;, numerator, &#34;den : &#34;, denominator)</span>
+    <span style="color:#75715e"># 열의 값을 Min 0 ~ Max 1의 비율로 Normalization</span>
+    <span style="color:#66d9ef">return</span> numerator <span style="color:#f92672">/</span> denominator
+
+<span style="color:#66d9ef">print</span>(xy)
+
+xy <span style="color:#f92672">=</span> normalization(xy)
+
+<span style="color:#66d9ef">print</span>(xy)
+
+x_train <span style="color:#f92672">=</span> xy[:, <span style="color:#ae81ff">0</span>:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+y_train <span style="color:#f92672">=</span> xy[:, [<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]]
+
+plt<span style="color:#f92672">.</span>plot(x_train, <span style="color:#e6db74">&#39;ro&#39;</span>)
+plt<span style="color:#f92672">.</span>plot(y_train)
+
+plt<span style="color:#f92672">.</span>show()
+
+<span style="color:#75715e"># dataset, Weight, Bias 정의</span>
+dataset <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>Dataset<span style="color:#f92672">.</span>from_tensor_slices((x_train, y_train))<span style="color:#f92672">.</span>batch(len(x_train))
+W <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal((<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">1</span>)), dtype<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>float32)
+b <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal((<span style="color:#ae81ff">1</span>,)), dtype<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>float32)
+
+<span style="color:#75715e"># L2 Norm Function 정의</span>
+<span style="color:#75715e"># https://junklee.tistory.com/29</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">l2_loss</span>(loss, beta <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.01</span>):
+    <span style="color:#75715e"># Weight Regularization * Beta (Weight 이상치의 영향을 최소화하는 정규화)</span>
+    W_reg <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>l2_loss(W) <span style="color:#75715e"># output = sum(t ** 2) / 2</span>
+    loss <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(loss <span style="color:#f92672">+</span> W_reg <span style="color:#f92672">*</span> beta)
+    <span style="color:#66d9ef">return</span> loss
+
+<span style="color:#75715e"># Flag가 True일때만 L2 Norm 으로 Cost 정의</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">loss_fn2</span>(hypothesis, features, labels, flag <span style="color:#f92672">=</span> False):
+    cost <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(tf<span style="color:#f92672">.</span>square(hypothesis <span style="color:#f92672">-</span> labels))
+    <span style="color:#66d9ef">if</span>(flag):
+        cost <span style="color:#f92672">=</span> l2_loss(cost)
+    <span style="color:#66d9ef">return</span> cost    
+
+<span style="color:#75715e"># Learning Rate Decay True</span>
+is_decay <span style="color:#f92672">=</span> True
+
+<span style="color:#75715e"># 0.1</span>
+starter_learning_rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>
+
+<span style="color:#75715e"># 50 Steap, 0.96, 이산 학습속도 감속 적용</span>
+<span style="color:#75715e"># decayed_learning_rate = learning_rate * decay_rate ^ (global_step / decay_steps)</span>
+<span style="color:#66d9ef">if</span>(is_decay):    
+    learning_rate <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>optimizers<span style="color:#f92672">.</span>schedules<span style="color:#f92672">.</span>ExponentialDecay(initial_learning_rate<span style="color:#f92672">=</span>starter_learning_rate,
+                                                                  decay_steps<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>,
+                                                                  decay_rate<span style="color:#f92672">=</span><span style="color:#ae81ff">0.96</span>,
+                                                                  staircase<span style="color:#f92672">=</span>True)
+    optimizer <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>optimizers<span style="color:#f92672">.</span>SGD(learning_rate)
+<span style="color:#66d9ef">else</span>:
+    optimizer <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>optimizers<span style="color:#f92672">.</span>SGD(learning_rate<span style="color:#f92672">=</span>starter_learning_rate)
+
+<span style="color:#75715e"># Gradient Tape 정의</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">grad</span>(hypothesis, features, labels, l2_flag):
+    <span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>GradientTape() <span style="color:#66d9ef">as</span> tape:
+        loss_value <span style="color:#f92672">=</span> loss_fn2(linearReg_fn(features),features,labels, l2_flag)
+    <span style="color:#66d9ef">return</span> tape<span style="color:#f92672">.</span>gradient(loss_value, [W,b]), loss_value
+
+<span style="color:#75715e"># 100회</span>
+EPOCHS <span style="color:#f92672">=</span> <span style="color:#ae81ff">101</span>
+
+<span style="color:#66d9ef">for</span> step <span style="color:#f92672">in</span> range(EPOCHS):
+    <span style="color:#66d9ef">for</span> features, labels  <span style="color:#f92672">in</span> dataset:
+        <span style="color:#75715e"># X, Y Type Case</span>
+        features <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>cast(features, tf<span style="color:#f92672">.</span>float32)
+        labels <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>cast(labels, tf<span style="color:#f92672">.</span>float32)
+        <span style="color:#75715e"># Gradient Tape</span>
+        grads, loss_value <span style="color:#f92672">=</span> grad(linearReg_fn(features), features, labels, False)
+        optimizer<span style="color:#f92672">.</span>apply_gradients(grads_and_vars<span style="color:#f92672">=</span>zip(grads,[W,b]))        
+    <span style="color:#75715e"># Verbose 10</span>
+    <span style="color:#66d9ef">if</span> step <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Iter: {}, Loss: {:.4f}&#34;</span><span style="color:#f92672">.</span>format(step, loss_value))
+
+<span style="color:#75715e"># 100회</span>
+EPOCHS <span style="color:#f92672">=</span> <span style="color:#ae81ff">101</span>
+
+<span style="color:#66d9ef">for</span> step <span style="color:#f92672">in</span> range(EPOCHS):
+    <span style="color:#66d9ef">for</span> features, labels  <span style="color:#f92672">in</span> dataset:
+        <span style="color:#75715e"># X, Y Type Case</span>
+        features <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>cast(features, tf<span style="color:#f92672">.</span>float32)
+        labels <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>cast(labels, tf<span style="color:#f92672">.</span>float32)
+        <span style="color:#75715e"># Gradient Tape</span>
+        grads, loss_value <span style="color:#f92672">=</span> grad(linearReg_fn(features), features, labels, True)
+        optimizer<span style="color:#f92672">.</span>apply_gradients(grads_and_vars<span style="color:#f92672">=</span>zip(grads,[W,b]))          
+    <span style="color:#75715e"># Verbose 10</span>
+    <span style="color:#66d9ef">if</span> step <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Iter: {}, Loss: {:.4f}&#34;</span><span style="color:#f92672">.</span>format(step, loss_value))
+</code></pre></div></div>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>lab-07-4</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> tensorflow <span style="color:#f92672">as</span> tf
+
+tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>set_seed(<span style="color:#ae81ff">777</span>)  <span style="color:#75715e"># for reproducibility</span>
+<span style="color:#66d9ef">print</span>(tf<span style="color:#f92672">.</span>__version__)
+
+<span style="color:#75715e"># MNIST Dataset 정의</span>
+mnist <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>datasets<span style="color:#f92672">.</span>mnist
+
+<span style="color:#75715e"># Train Data와 Test Data Load</span>
+(x_train, y_train),(x_test, y_test) <span style="color:#f92672">=</span> mnist<span style="color:#f92672">.</span>load_data()
+x_train, x_test <span style="color:#f92672">=</span> x_train <span style="color:#f92672">/</span> <span style="color:#ae81ff">255.0</span>, x_test <span style="color:#f92672">/</span> <span style="color:#ae81ff">255.0</span>
+
+<span style="color:#75715e"># Kera Model Data</span>
+model <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>models<span style="color:#f92672">.</span>Sequential([
+  tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Flatten(),
+  tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dense(<span style="color:#ae81ff">512</span>, activation<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>relu),
+  tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dropout(<span style="color:#ae81ff">0.2</span>),
+  tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dense(<span style="color:#ae81ff">10</span>, activation<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>softmax)
+])
+
+<span style="color:#75715e"># Model : Adam Optimizer / Cros Entropy Loss 선언</span>
+model<span style="color:#f92672">.</span>compile(optimizer<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;adam&#39;</span>,
+              loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sparse_categorical_crossentropy&#39;</span>,
+              metrics<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;accuracy&#39;</span>])
+
+<span style="color:#75715e"># 5 Epoch 학습 수행</span>
+model<span style="color:#f92672">.</span>fit(x_train, y_train, epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)
+
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">%</span>matplotlib inline
+
+sample <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+image <span style="color:#f92672">=</span> x_test[sample]
+
+fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure
+plt<span style="color:#f92672">.</span>imshow(image, cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray_r&#39;</span>)
+plt<span style="color:#f92672">.</span>show
+
+num <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+images <span style="color:#f92672">=</span> x_train[:num]
+labels <span style="color:#f92672">=</span> y_train[:num]
+
+num_row <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+num_col <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+fig, axes <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(num_row,num_col, figsize <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1.5</span><span style="color:#f92672">*</span>num_col,<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>num_row))
+
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(num) :
+  ax <span style="color:#f92672">=</span> axes[i<span style="color:#f92672">//</span>num_col, i<span style="color:#f92672">%</span>num_col]
+  ax<span style="color:#f92672">.</span>imshow(images[i], cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray_r&#39;</span>)
+  ax<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#39;Label: {}&#39;</span><span style="color:#f92672">.</span>format(labels[i]))
+
+plt<span style="color:#f92672">.</span>tight_layout()
+plt<span style="color:#f92672">.</span>show()
+
+<span style="color:#75715e"># 모델 평가</span>
+model<span style="color:#f92672">.</span>evaluate(x_test, y_test)
+
+img_index <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+plt<span style="color:#f92672">.</span>imshow(x_test[img_index]<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">28</span>), cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray_r&#39;</span>)
+pred <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>predict(x_test[img_index]<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">1</span>))
+<span style="color:#66d9ef">print</span>(pred<span style="color:#f92672">.</span>argmax())
+
+num <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+images <span style="color:#f92672">=</span> x_test[:num]
+labels <span style="color:#f92672">=</span> y_test[:num]
+
+num_row <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+num_col <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+fig, axes <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(num_row,num_col, figsize <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1.5</span><span style="color:#f92672">*</span>num_col,<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>num_row))
+
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(num) :
+  ax <span style="color:#f92672">=</span> axes[i<span style="color:#f92672">//</span>num_col, i<span style="color:#f92672">%</span>num_col]
+  ax<span style="color:#f92672">.</span>imshow(images[i], cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray_r&#39;</span>)
+  pred <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>predict(x_test[i]<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">1</span>))  
+  ax<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#39;Label: {}&#39;</span><span style="color:#f92672">.</span>format(pred<span style="color:#f92672">.</span>argmax()))
+
+plt<span style="color:#f92672">.</span>tight_layout()
+plt<span style="color:#f92672">.</span>show()
+
+<span style="color:#66d9ef">print</span>(x_test<span style="color:#f92672">.</span>shape)
+
+</code></pre></div></div>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>lab-07-5</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> tensorflow <span style="color:#f92672">as</span> tf
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">from</span> tensorflow <span style="color:#f92672">import</span> keras
+
+tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>set_seed(<span style="color:#ae81ff">777</span>)  <span style="color:#75715e"># for reproducibility</span>
+<span style="color:#66d9ef">print</span>(tf<span style="color:#f92672">.</span>__version__)
+
+<span style="color:#75715e"># fashion_mnist 선언</span>
+fashion_mnist <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>datasets<span style="color:#f92672">.</span>fashion_mnist
+
+<span style="color:#75715e"># train_data, train_label, test_data, test_label 선언</span>
+(train_images, train_labels), (test_images, test_labels) <span style="color:#f92672">=</span> fashion_mnist<span style="color:#f92672">.</span>load_data()
+
+<span style="color:#75715e"># 0 - T-shirt/Top</span>
+<span style="color:#75715e"># 1 - Trouser</span>
+<span style="color:#75715e"># 2 - Pullover</span>
+<span style="color:#75715e"># 3 - Dress</span>
+<span style="color:#75715e"># 4 - Coat</span>
+<span style="color:#75715e"># 5 - Sandal</span>
+<span style="color:#75715e"># 6 - Shirt</span>
+<span style="color:#75715e"># 7 - Sneaker</span>
+<span style="color:#75715e"># 8 - Bag</span>
+<span style="color:#75715e"># 9 - Ankle Boot</span>
+class_names <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;T-shirt/top&#39;</span>, <span style="color:#e6db74">&#39;Trouser&#39;</span>, <span style="color:#e6db74">&#39;Pullover&#39;</span>, <span style="color:#e6db74">&#39;Dress&#39;</span>, <span style="color:#e6db74">&#39;Coat&#39;</span>, <span style="color:#e6db74">&#39;Sandal&#39;</span>, <span style="color:#e6db74">&#39;Shirt&#39;</span>, <span style="color:#e6db74">&#39;Sneaker&#39;</span>, <span style="color:#e6db74">&#39;Bag&#39;</span>, <span style="color:#e6db74">&#39;Ankle boot&#39;</span>]
+
+plt<span style="color:#f92672">.</span>figure()
+plt<span style="color:#f92672">.</span>imshow(train_images[<span style="color:#ae81ff">0</span>])
+plt<span style="color:#f92672">.</span>colorbar()
+plt<span style="color:#f92672">.</span>grid(False)
+
+num <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>
+images <span style="color:#f92672">=</span> train_images[:num]<span style="color:#f92672">/</span><span style="color:#ae81ff">255.0</span>
+labels <span style="color:#f92672">=</span> train_labels[:num]<span style="color:#f92672">/</span><span style="color:#ae81ff">255.0</span>
+
+num_col <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+num_row <span style="color:#f92672">=</span> int(num <span style="color:#f92672">/</span> num_col)
+
+fig, axes <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(num_row, num_col, figsize <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1.5</span><span style="color:#f92672">*</span>num_col, <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>num_row))
+
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(num) :
+  ax <span style="color:#f92672">=</span> axes[i<span style="color:#f92672">//</span>num_col, i<span style="color:#f92672">%</span>num_col]
+  ax<span style="color:#f92672">.</span>imshow(train_images[i], cmap<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>binary)
+  ax<span style="color:#f92672">.</span>spines[<span style="color:#e6db74">&#39;bottom&#39;</span>]<span style="color:#f92672">.</span>set_color(<span style="color:#e6db74">&#39;white&#39;</span>)
+  ax<span style="color:#f92672">.</span>spines[<span style="color:#e6db74">&#39;top&#39;</span>]<span style="color:#f92672">.</span>set_color(<span style="color:#e6db74">&#39;white&#39;</span>)
+  ax<span style="color:#f92672">.</span>yaxis<span style="color:#f92672">.</span>label<span style="color:#f92672">.</span>set_color(<span style="color:#e6db74">&#39;white&#39;</span>)
+  ax<span style="color:#f92672">.</span>xaxis<span style="color:#f92672">.</span>label<span style="color:#f92672">.</span>set_color(<span style="color:#e6db74">&#39;white&#39;</span>)
+  ax<span style="color:#f92672">.</span>title<span style="color:#f92672">.</span>set_color(<span style="color:#e6db74">&#39;white&#39;</span>)
+  ax<span style="color:#f92672">.</span>tick_params(axis<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;y&#39;</span>, colors<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;white&#34;</span>)  
+  ax<span style="color:#f92672">.</span>tick_params(axis<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;x&#39;</span>, colors<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;white&#39;</span>)
+  ax<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#39;Label: {}&#39;</span><span style="color:#f92672">.</span>format(train_labels[i]))
+
+plt<span style="color:#f92672">.</span>tight_layout()
+plt<span style="color:#f92672">.</span>figure()
+plt<span style="color:#f92672">.</span>show()
+
+train_images <span style="color:#f92672">=</span> train_images <span style="color:#f92672">/</span> <span style="color:#ae81ff">255.0</span>
+test_images <span style="color:#f92672">=</span> test_images <span style="color:#f92672">/</span> <span style="color:#ae81ff">255.0</span>
+
+plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">10</span>))
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">25</span>):
+    plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">5</span>,i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
+    plt<span style="color:#f92672">.</span>xticks([])
+    plt<span style="color:#f92672">.</span>yticks([])
+    plt<span style="color:#f92672">.</span>grid(True)
+    plt<span style="color:#f92672">.</span>imshow(train_images[i], cmap<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>binary)
+    plt<span style="color:#f92672">.</span>xlabel(class_names[train_labels[i]])
+
+model <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>Sequential([
+    keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Flatten(input_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">28</span>, <span style="color:#ae81ff">28</span>)),
+    keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dense(<span style="color:#ae81ff">128</span>, activation<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>relu),
+    keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dense(<span style="color:#ae81ff">10</span>, activation<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>softmax)
+])
+
+model<span style="color:#f92672">.</span>compile(optimizer<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;adam&#39;</span>,
+              loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sparse_categorical_crossentropy&#39;</span>,
+              metrics<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;accuracy&#39;</span>])
+model<span style="color:#f92672">.</span>fit(train_images, train_labels, epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)
+
+test_loss, test_acc <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>evaluate(test_images, test_labels)
+
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Test accuracy:&#39;</span>, test_acc)
+</code></pre></div></div>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>lab-07-6</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> tensorflow <span style="color:#f92672">as</span> tf
+<span style="color:#f92672">from</span> tensorflow <span style="color:#f92672">import</span> keras
+
+tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>set_seed(<span style="color:#ae81ff">777</span>)  <span style="color:#75715e"># for reproducibility</span>
+<span style="color:#66d9ef">print</span>(tf<span style="color:#f92672">.</span>__version__)
+
+<span style="color:#75715e"># 50,000 Movie Reviews IMDB (10000개의 빈도수가 높은 단어를 학습시 Vector에 사용)</span>
+imdb <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>datasets<span style="color:#f92672">.</span>imdb
+
+<span style="color:#75715e"># train_data, train_labels, test_data, test_labels</span>
+(train_data, train_labels), (test_data, test_labels) <span style="color:#f92672">=</span> imdb<span style="color:#f92672">.</span>load_data(num_words<span style="color:#f92672">=</span><span style="color:#ae81ff">10000</span>)
+
+<span style="color:#75715e"># train_data, train_labels</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Training entries: {}, labels: {}&#34;</span><span style="color:#f92672">.</span>format(len(train_data), len(train_labels)))
+<span style="color:#66d9ef">print</span>(train_data[<span style="color:#ae81ff">0</span>])
+
+<span style="color:#75715e"># IMDB Data를 Vector을 실재 값으로 변환하여 출력</span>
+<span style="color:#75715e"># A dictionary mapping words to an integer index</span>
+<span style="color:#75715e"># 딕셔너리 단어를 인티져 인덱스로 맵핑</span>
+word_index <span style="color:#f92672">=</span> imdb<span style="color:#f92672">.</span>get_word_index()
+
+<span style="color:#75715e"># The first indices are reserved</span>
+<span style="color:#75715e"># Data Check : Start 1 and &#39;the&#39;</span>
+<span style="color:#66d9ef">for</span> k,v <span style="color:#f92672">in</span> word_index<span style="color:#f92672">.</span>items() :
+  <span style="color:#75715e">#print(len(k))</span>
+  <span style="color:#66d9ef">if</span> k <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;bad&#39;</span> : 
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;K : &#34;</span>,k, <span style="color:#e6db74">&#34; V : &#34;</span>, v<span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>)
+  <span style="color:#66d9ef">if</span> v <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> :
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;K : &#34;</span>,k, <span style="color:#e6db74">&#34; V : &#34;</span>, v)
+  <span style="color:#66d9ef">if</span> v <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> :
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;K : &#34;</span>,k, <span style="color:#e6db74">&#34; V : &#34;</span>, v)
+
+<span style="color:#75715e"># 최초 익덱스들은 Reserved : 0~3 예약어로 저장</span>
+word_index <span style="color:#f92672">=</span> {k:(v<span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>) <span style="color:#66d9ef">for</span> k,v <span style="color:#f92672">in</span> word_index<span style="color:#f92672">.</span>items()}
+word_index[<span style="color:#e6db74">&#34;&lt;PAD&gt;&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+word_index[<span style="color:#e6db74">&#34;&lt;START&gt;&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+word_index[<span style="color:#e6db74">&#34;&lt;UNK&gt;&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>  <span style="color:#75715e"># unknown</span>
+word_index[<span style="color:#e6db74">&#34;&lt;UNUSED&gt;&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
+
+reverse_word_index <span style="color:#f92672">=</span> dict([(value, key) <span style="color:#66d9ef">for</span> (key, value) <span style="color:#f92672">in</span> word_index<span style="color:#f92672">.</span>items()])
+
+<span style="color:#75715e"># Word List : 0~3, 4~88587</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;check : &#39;</span>, reverse_word_index<span style="color:#f92672">.</span>get(<span style="color:#ae81ff">0</span>,<span style="color:#e6db74">&#39;?&#39;</span>))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;check : &#39;</span>, reverse_word_index<span style="color:#f92672">.</span>get(<span style="color:#ae81ff">88587</span>,<span style="color:#e6db74">&#39;?&#39;</span>))
+<span style="color:#66d9ef">print</span>(len(reverse_word_index))
+
+<span style="color:#75715e"># Review를 Decode</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decode_review</span>(text):
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">.</span>join([reverse_word_index<span style="color:#f92672">.</span>get(i, <span style="color:#e6db74">&#39;?&#39;</span>) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> text])
+
+check_data_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
+
+<span style="color:#66d9ef">print</span>(len(train_data[check_data_id]))
+
+<span style="color:#75715e"># Train Data Value Print</span>
+<span style="color:#66d9ef">print</span>(train_data[check_data_id])
+
+<span style="color:#75715e"># Print label </span>
+<span style="color:#66d9ef">print</span>(train_labels[check_data_id])
+
+<span style="color:#75715e"># Train Data Decode Print</span>
+decode_review(train_data[check_data_id])
+
+<span style="color:#75715e"># 학습과 평가를 위해 동일길이인 256길이의 단어로 PAD값을 주어 맞춰줌 (뒤의 길이는 0값으로 맞춰줌)</span>
+train_data <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>preprocessing<span style="color:#f92672">.</span>sequence<span style="color:#f92672">.</span>pad_sequences(train_data,
+                                                        value<span style="color:#f92672">=</span>word_index[<span style="color:#e6db74">&#34;&lt;PAD&gt;&#34;</span>],
+                                                        padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;post&#39;</span>,
+                                                        maxlen<span style="color:#f92672">=</span><span style="color:#ae81ff">256</span>)
+
+test_data <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>preprocessing<span style="color:#f92672">.</span>sequence<span style="color:#f92672">.</span>pad_sequences(test_data,
+                                                       value<span style="color:#f92672">=</span>word_index[<span style="color:#e6db74">&#34;&lt;PAD&gt;&#34;</span>],
+                                                       padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;post&#39;</span>,
+                                                       maxlen<span style="color:#f92672">=</span><span style="color:#ae81ff">256</span>)
+
+<span style="color:#66d9ef">print</span>(len(train_data[check_data_id]), len(test_data[check_data_id]))
+<span style="color:#66d9ef">print</span>(train_data[check_data_id])
+
+<span style="color:#75715e"># Tensorflow keras API를 통해 모델에 대한 정의</span>
+<span style="color:#75715e"># 입력 Size와 학습시킬 Layer의 크기와 Activation Function 정의</span>
+<span style="color:#75715e"># input shape is the vocabulary count used for the movie reviews (10,000 words)</span>
+vocab_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">10000</span>
+
+model <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>Sequential()
+model<span style="color:#f92672">.</span>add(keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Embedding(vocab_size, <span style="color:#ae81ff">16</span>))
+model<span style="color:#f92672">.</span>add(keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>GlobalAveragePooling1D())
+model<span style="color:#f92672">.</span>add(keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dense(<span style="color:#ae81ff">16</span>, activation<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>relu))
+model<span style="color:#f92672">.</span>add(keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dense(<span style="color:#ae81ff">1</span>, activation<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>sigmoid))
+
+<span style="color:#75715e"># Model Summary 출력</span>
+model<span style="color:#f92672">.</span>summary()
+
+<span style="color:#75715e"># Adam Optimizer과 Cross Entropy Loss 선언</span>
+model<span style="color:#f92672">.</span>compile(optimizer<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;adam&#39;</span>,
+              loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;binary_crossentropy&#39;</span>,
+              metrics<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;accuracy&#39;</span>])
+
+<span style="color:#75715e"># 모델을 평가할 Test 데이타에 대한 정의(10000을 기준으로 학습과 평가 수행)</span>
+<span style="color:#75715e"># 총 : 25000 평가 ~10000 / 학습 10001~</span>
+x_val <span style="color:#f92672">=</span> train_data[:<span style="color:#ae81ff">10000</span>]
+partial_x_train <span style="color:#f92672">=</span> train_data[<span style="color:#ae81ff">10000</span>:]
+
+y_val <span style="color:#f92672">=</span> train_labels[:<span style="color:#ae81ff">10000</span>]
+partial_y_train <span style="color:#f92672">=</span> train_labels[<span style="color:#ae81ff">10000</span>:]
+
+history <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>fit(partial_x_train,
+                    partial_y_train,
+                    epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">40</span>,
+                    batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">512</span>,
+                    validation_data<span style="color:#f92672">=</span>(x_val, y_val),
+                    verbose<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+
+results <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>evaluate(test_data, test_labels)
+<span style="color:#66d9ef">print</span>(results)
 </code></pre></div></div>
     </div>
   </label>
