@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.34e0e1df019ed8c2d96f419aa4bece6167541ae3e9327a2dac837cd8566c19c8.js" integrity="sha256-NODh3wGe2MLZb0GapL7OYWdUGuPpMnotrIN82FZsGcg="></script>
+<script defer src="/ko.search.min.ae3e2f8c962d5b102a3430df6d5e1d4b167e0c7a67113636654820618ad75002.js" integrity="sha256-rj4vjJYtWxAqNDDfbV4dSxZ&#43;DHpnETY2ZUggYYrXUAI="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -2336,6 +2336,195 @@ plt<span style="color:#f92672">.</span>tick_params(axis<span style="color:#f9267
 plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;x1&#34;</span>,color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;white&#34;</span>)
 plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;x2&#34;</span>,color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;white&#34;</span>)
 plt<span style="color:#f92672">.</span>show()
+
+<span style="color:#75715e"># XOR 문제를 Deep Neural Network 활용 풀이</span>
+<span style="color:#75715e"># dataset </span>
+dataset <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>Dataset<span style="color:#f92672">.</span>from_tensor_slices((x_data, y_data))<span style="color:#f92672">.</span>batch(len(x_data))
+nb_classes <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">wide_deep_nn</span>():
+  <span style="color:#75715e"># 초기화</span>
+  <span style="color:#66d9ef">def</span> __init__(self, nb_classes):
+      <span style="color:#75715e"># 초기화</span>
+      super(wide_deep_nn, self)<span style="color:#f92672">.</span>__init__()
+      <span style="color:#75715e"># W1,b1,W2,b2,W3,b3,W4,b4 정의</span>
+      self<span style="color:#f92672">.</span>W1 <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal((<span style="color:#ae81ff">2</span>, nb_classes)), name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;weight1&#39;</span>)
+      self<span style="color:#f92672">.</span>b1 <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal((nb_classes,)), name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bias1&#39;</span>)
+      self<span style="color:#f92672">.</span>W2 <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal((nb_classes, nb_classes)), name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;weight2&#39;</span>)
+      self<span style="color:#f92672">.</span>b2 <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal((nb_classes,)), name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bias2&#39;</span>)
+      self<span style="color:#f92672">.</span>W3 <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal((nb_classes, nb_classes)), name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;weight3&#39;</span>)
+      self<span style="color:#f92672">.</span>b3 <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal((nb_classes,)), name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bias3&#39;</span>)
+      self<span style="color:#f92672">.</span>W4 <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal((nb_classes,<span style="color:#ae81ff">1</span>)), name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;weight4&#39;</span>)
+      self<span style="color:#f92672">.</span>b4 <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal((<span style="color:#ae81ff">1</span>,)), name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bias4&#39;</span>)
+      self<span style="color:#f92672">.</span>variables <span style="color:#f92672">=</span> [self<span style="color:#f92672">.</span>W1, self<span style="color:#f92672">.</span>b1,self<span style="color:#f92672">.</span>W2, self<span style="color:#f92672">.</span>b2, self<span style="color:#f92672">.</span>W3, self<span style="color:#f92672">.</span>b3, self<span style="color:#f92672">.</span>W4, self<span style="color:#f92672">.</span>b4]
+
+  <span style="color:#75715e"># data preprocessing</span>
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">preprocess_data</span>(self, features, labels):
+    features <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>cast(features, tf<span style="color:#f92672">.</span>float32)
+    labels <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>cast(labels, tf<span style="color:#f92672">.</span>float32)
+    <span style="color:#66d9ef">return</span> features, labels
+
+  <span style="color:#75715e"># 4Layer의 Neural Network를 통해 학습시킨 후 모델을 생성</span>
+  <span style="color:#75715e"># layer1-&gt;layer2-&gt;layer3-&gt;hypothesis</span>
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">deep_nn</span>(self, features):
+    layer1 <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>sigmoid(tf<span style="color:#f92672">.</span>matmul(features, self<span style="color:#f92672">.</span>W1)<span style="color:#f92672">+</span>self<span style="color:#f92672">.</span>b1)
+    layer2 <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>sigmoid(tf<span style="color:#f92672">.</span>matmul(layer1, self<span style="color:#f92672">.</span>W2)<span style="color:#f92672">+</span>self<span style="color:#f92672">.</span>b2)
+    layer3 <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>sigmoid(tf<span style="color:#f92672">.</span>matmul(layer2, self<span style="color:#f92672">.</span>W3)<span style="color:#f92672">+</span>self<span style="color:#f92672">.</span>b3)
+    hypothesis <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>sigmoid(tf<span style="color:#f92672">.</span>matmul(layer3, self<span style="color:#f92672">.</span>W4)<span style="color:#f92672">+</span>self<span style="color:#f92672">.</span>b4)
+    <span style="color:#66d9ef">return</span> hypothesis
+
+  <span style="color:#75715e"># loss function </span>
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">loss_fn</span>(self, hypothesis, features, labels):
+    cost <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>tf<span style="color:#f92672">.</span>reduce_mean(labels<span style="color:#f92672">*</span>tf<span style="color:#f92672">.</span>math<span style="color:#f92672">.</span>log(hypothesis)<span style="color:#f92672">+</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">-</span>labels)<span style="color:#f92672">*</span>tf<span style="color:#f92672">.</span>math<span style="color:#f92672">.</span>log(<span style="color:#ae81ff">1</span><span style="color:#f92672">-</span>hypothesis))
+    <span style="color:#66d9ef">return</span> cost
+
+  <span style="color:#75715e"># accuracy function</span>
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">accuracy_fn</span>(self, hypothesis,labels):
+    predicted <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>cast(hypothesis <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0.5</span>, dtype<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>float32)
+    accuracy <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(tf<span style="color:#f92672">.</span>cast(tf<span style="color:#f92672">.</span>equal(predicted, labels), dtype<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>float32))
+    <span style="color:#66d9ef">return</span> accuracy
+
+  <span style="color:#75715e"># Gradient Tape </span>
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">grad</span>(self, hypothesis, features, labels):
+    <span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>GradientTape() <span style="color:#66d9ef">as</span> tape:
+      loss_value<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>loss_fn(self<span style="color:#f92672">.</span>deep_nn(features),features,labels)
+    <span style="color:#66d9ef">return</span> tape<span style="color:#f92672">.</span>gradient(loss_value,self<span style="color:#f92672">.</span>variables)
+
+  <span style="color:#75715e"># epochs 2000, verbose 500</span>
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fit</span>(self, dataset, EPOCHS<span style="color:#f92672">=</span><span style="color:#ae81ff">20000</span>, verbose<span style="color:#f92672">=</span><span style="color:#ae81ff">500</span>):
+    optimizer <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>optimizers<span style="color:#f92672">.</span>SGD(learning_rate<span style="color:#f92672">=</span><span style="color:#ae81ff">0.01</span>)
+    <span style="color:#66d9ef">for</span> step <span style="color:#f92672">in</span> range(EPOCHS):
+      <span style="color:#66d9ef">for</span> features, labels <span style="color:#f92672">in</span> dataset:
+        features, labels <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>preprocess_data(features, labels)
+        grads <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>grad(self<span style="color:#f92672">.</span>deep_nn(features),features,labels)
+        optimizer<span style="color:#f92672">.</span>apply_gradients(grads_and_vars<span style="color:#f92672">=</span>zip(grads, self<span style="color:#f92672">.</span>variables))
+        <span style="color:#66d9ef">if</span> step <span style="color:#f92672">%</span> verbose <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+          <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Iter: {}, Loss: {:.4f}&#34;</span><span style="color:#f92672">.</span>format(step, self<span style="color:#f92672">.</span>loss_fn(self<span style="color:#f92672">.</span>deep_nn(features),features,labels)))
+  <span style="color:#75715e"># Model Test</span>
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_model</span>(self,x_data,y_data):
+    <span style="color:#75715e"># Test Data preprocessing</span>
+    x_data,y_data <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>preprocess_data(x_data,y_data)
+    <span style="color:#75715e"># Accuracy check</span>
+    test_acc <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>accuracy_fn(self<span style="color:#f92672">.</span>deep_nn(x_data),y_data)
+    <span style="color:#75715e"># Accuracy Printing</span>
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Testset Accuracy: {:.4f}&#34;</span><span style="color:#f92672">.</span>format(test_acc))
+
+<span style="color:#75715e"># model 정의</span>
+model <span style="color:#f92672">=</span> wide_deep_nn(nb_classes)
+
+<span style="color:#75715e"># fitting</span>
+model<span style="color:#f92672">.</span>fit(dataset)
+
+<span style="color:#75715e"># test data accuracy</span>
+model<span style="color:#f92672">.</span>test_model(x_data, y_data)
+
+<span style="color:#75715e"># dataset 정의</span>
+dataset <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>Dataset<span style="color:#f92672">.</span>from_tensor_slices((x_data,y_data))<span style="color:#f92672">.</span>batch(len(x_data))
+
+<span style="color:#75715e"># data preprocessing 정의</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">preprocess_data</span>(features, labels):
+  features <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>cast(features, tf<span style="color:#f92672">.</span>float32)
+  labels <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>cast(labels, tf<span style="color:#f92672">.</span>float32)
+  <span style="color:#66d9ef">return</span> features, labels
+
+<span style="color:#75715e"># summary 값을 logs폴더에 저장하고 아래 명령어로 실행해서 확인</span>
+<span style="color:#75715e"># tensorboard --logdir=./logs/xor</span>
+log_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;./logs/xor&#34;</span>
+writer <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>summary<span style="color:#f92672">.</span>create_file_writer(log_path)
+
+<span style="color:#75715e"># 위의 Data를 4Layer의 Neural Network를 통해 학습시킨 후 모델을 생성</span>
+<span style="color:#75715e"># 각각의 값을 histogram으로 tensorboard에 저장 (Model)</span>
+<span style="color:#75715e"># 각각의 값을 scalar값으로 tensorboard에 저장 (cost, accuracy)</span>
+<span style="color:#75715e"># W1,b1,W2,b2,W3,b3,W4,b4 정의 및 선언</span>
+W1 <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal((<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">10</span>)), name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;weight1&#39;</span>)
+b1 <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal((<span style="color:#ae81ff">10</span>,)), name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bias1&#39;</span>)
+W2 <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal((<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">10</span>)),name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;weight2&#39;</span>)
+b2 <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal((<span style="color:#ae81ff">10</span>,)),name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bias2&#39;</span>)
+W3 <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal((<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">10</span>)),name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;weight3&#39;</span>)
+b3 <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal((<span style="color:#ae81ff">10</span>,)),name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bias3&#39;</span>)
+W4 <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal((<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">1</span>)), name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;weight4&#39;</span>)
+b4 <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal((<span style="color:#ae81ff">1</span>,)), name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bias4&#39;</span>)
+
+<span style="color:#75715e"># layer1 -&gt; layer2 -&gt; layer3 -&gt; hypothesis</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">neural_net</span>(features, step):
+  layer1 <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>sigmoid(tf<span style="color:#f92672">.</span>matmul(features, W1) <span style="color:#f92672">+</span> b1)
+  layer2 <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>sigmoid(tf<span style="color:#f92672">.</span>matmul(layer1, W2) <span style="color:#f92672">+</span> b2)
+  layer3 <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>sigmoid(tf<span style="color:#f92672">.</span>matmul(layer2, W3) <span style="color:#f92672">+</span> b3)
+  hypothesis <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>sigmoid(tf<span style="color:#f92672">.</span>matmul(layer3,W4) <span style="color:#f92672">+</span> b4)
+
+  <span style="color:#75715e"># tensorboard에 저장</span>
+  <span style="color:#66d9ef">with</span> writer<span style="color:#f92672">.</span>as_default():
+    tf<span style="color:#f92672">.</span>summary<span style="color:#f92672">.</span>histogram(<span style="color:#e6db74">&#34;weights1&#34;</span>,W1,step<span style="color:#f92672">=</span>step)
+    tf<span style="color:#f92672">.</span>summary<span style="color:#f92672">.</span>histogram(<span style="color:#e6db74">&#34;biases1&#34;</span>,b1,step<span style="color:#f92672">=</span>step)
+    tf<span style="color:#f92672">.</span>summary<span style="color:#f92672">.</span>histogram(<span style="color:#e6db74">&#34;layer1&#34;</span>,layer1,step<span style="color:#f92672">=</span>step)
+    tf<span style="color:#f92672">.</span>summary<span style="color:#f92672">.</span>histogram(<span style="color:#e6db74">&#34;weights2&#34;</span>,W2,step<span style="color:#f92672">=</span>step)
+    tf<span style="color:#f92672">.</span>summary<span style="color:#f92672">.</span>histogram(<span style="color:#e6db74">&#34;biases2&#34;</span>,b2,step<span style="color:#f92672">=</span>step)
+    tf<span style="color:#f92672">.</span>summary<span style="color:#f92672">.</span>histogram(<span style="color:#e6db74">&#34;layer2&#34;</span>,layer2,step<span style="color:#f92672">=</span>step)
+    tf<span style="color:#f92672">.</span>summary<span style="color:#f92672">.</span>histogram(<span style="color:#e6db74">&#34;weight3&#34;</span>,W3,step<span style="color:#f92672">=</span>step)
+    tf<span style="color:#f92672">.</span>summary<span style="color:#f92672">.</span>histogram(<span style="color:#e6db74">&#34;biases3&#34;</span>,b3,step<span style="color:#f92672">=</span>step)
+    tf<span style="color:#f92672">.</span>summary<span style="color:#f92672">.</span>histogram(<span style="color:#e6db74">&#34;layer3&#34;</span>,layer3,step<span style="color:#f92672">=</span>step)
+    tf<span style="color:#f92672">.</span>summary<span style="color:#f92672">.</span>histogram(<span style="color:#e6db74">&#34;weights4&#34;</span>,W4,step<span style="color:#f92672">=</span>step)
+    tf<span style="color:#f92672">.</span>summary<span style="color:#f92672">.</span>histogram(<span style="color:#e6db74">&#34;biases4&#34;</span>,b4, step<span style="color:#f92672">=</span>step)
+    tf<span style="color:#f92672">.</span>summary<span style="color:#f92672">.</span>histogram(<span style="color:#e6db74">&#34;hypothesis&#34;</span>,hypothesis,step<span style="color:#f92672">=</span>step)
+  <span style="color:#66d9ef">return</span> hypothesis
+
+<span style="color:#75715e"># loss function</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">loss_fn</span>(hypothesis,labels):
+  cost <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>tf<span style="color:#f92672">.</span>reduce_mean(labels <span style="color:#f92672">*</span> tf<span style="color:#f92672">.</span>math<span style="color:#f92672">.</span>log(hypothesis) <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span><span style="color:#f92672">-</span>labels) <span style="color:#f92672">*</span> tf<span style="color:#f92672">.</span>math<span style="color:#f92672">.</span>log(<span style="color:#ae81ff">1</span><span style="color:#f92672">-</span>hypothesis))
+  <span style="color:#66d9ef">with</span> writer<span style="color:#f92672">.</span>as_default():
+    tf<span style="color:#f92672">.</span>summary<span style="color:#f92672">.</span>scalar(<span style="color:#e6db74">&#39;loss&#39;</span>,cost,step<span style="color:#f92672">=</span>step)
+  <span style="color:#66d9ef">return</span> cost
+
+<span style="color:#75715e"># Optimizers SGD 정의 (Learning Rate 0.,1)</span>
+optimizer <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>optimizers<span style="color:#f92672">.</span>SGD(learning_rate<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>)
+
+<span style="color:#75715e"># Accuracy Function</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">accuracy_fn</span>(hypothesis, labels):
+  predicted <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>cast(hypothesis <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0.5</span>, dtype<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>float32)
+  accuracy <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(tf<span style="color:#f92672">.</span>cast(tf<span style="color:#f92672">.</span>equal(predicted, labels), dtype<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>float32))
+  <span style="color:#66d9ef">return</span> accuracy
+
+<span style="color:#75715e"># GradientTape</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">grad</span>(hypothesis, features, labels, step):
+  <span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>GradientTape() <span style="color:#66d9ef">as</span> tape:
+    loss_value <span style="color:#f92672">=</span> loss_fn(neural_net(features, step),labels)
+  <span style="color:#66d9ef">return</span> tape<span style="color:#f92672">.</span>gradient(loss_value, [W1,W2,W3,W4,b1,b2,b3,b4])
+
+<span style="color:#75715e"># Epochs 3000회</span>
+EPOCHS <span style="color:#f92672">=</span> <span style="color:#ae81ff">3000</span>
+
+<span style="color:#75715e"># Step - 3000</span>
+<span style="color:#66d9ef">for</span> step <span style="color:#f92672">in</span> range(EPOCHS):
+  <span style="color:#75715e"># dataset x, y</span>
+  <span style="color:#66d9ef">for</span> features, labels <span style="color:#f92672">in</span> dataset:
+    <span style="color:#75715e"># data preprocessing</span>
+    features, labels <span style="color:#f92672">=</span> preprocess_data(features, labels)
+    <span style="color:#75715e"># gradient</span>
+    grads <span style="color:#f92672">=</span> grad(neural_net(features,step), features, labels, step)
+    <span style="color:#75715e"># optimizer</span>
+    optimizer<span style="color:#f92672">.</span>apply_gradients(grads_and_vars<span style="color:#f92672">=</span>zip(grads,[W1,W2,W3,W4,b1,b2,b3,b4]))
+
+    <span style="color:#75715e"># verbose 50</span>
+    <span style="color:#66d9ef">if</span> step <span style="color:#f92672">%</span> <span style="color:#ae81ff">50</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+      loss_value <span style="color:#f92672">=</span> loss_fn(neural_net(features, step), labels)
+      <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Iter: {}, Loss: {:4f}&#34;</span><span style="color:#f92672">.</span>format(step, loss_value))
+
+<span style="color:#75715e"># preprocessing</span>
+x_data, y_data <span style="color:#f92672">=</span> preprocess_data(x_data,y_data)
+
+<span style="color:#75715e"># accuracy</span>
+test_acc <span style="color:#f92672">=</span> accuracy_fn(neural_net(x_data,step),y_data)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Testset Accuracy: {:.4f}&#34;</span><span style="color:#f92672">.</span>format(test_acc))
+
+<span style="color:#75715e"># Jupyter Notebook에서 Tensorboard 실행</span>
+<span style="color:#75715e"># Load the TensorBoard notebook extension</span>
+<span style="color:#f92672">%</span>load_ext tensorboard
+
+<span style="color:#e6db74">&#39;&#39;&#39;Start TensorBoard through the command line or within a notebook experience.
+</span><span style="color:#e6db74">The two interfaces are generally the same. In notebooks, use the %tensorboard line magic.
+</span><span style="color:#e6db74">On the command line, run the same command without &#39;%&#34;. &#39;&#39;&#39;</span>
+
+<span style="color:#f92672">%</span>tensorboard <span style="color:#f92672">--</span>logdir logs<span style="color:#f92672">/</span>xor
 
 </code></pre></div></div>
     </div>
