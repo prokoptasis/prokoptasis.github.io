@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.ae3e2f8c962d5b102a3430df6d5e1d4b167e0c7a67113636654820618ad75002.js" integrity="sha256-rj4vjJYtWxAqNDDfbV4dSxZ&#43;DHpnETY2ZUggYYrXUAI="></script>
+<script defer src="/ko.search.min.d4d788e81c0bdda964c3fea379c7883684cb650d2303b8131f03763f33f4dd70.js" integrity="sha256-1NeI6BwL3alkw/6jeceINoTLZQ0jA7gTHwN2PzP03XA="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -2525,7 +2525,884 @@ test_acc <span style="color:#f92672">=</span> accuracy_fn(neural_net(x_data,step
 </span><span style="color:#e6db74">On the command line, run the same command without &#39;%&#34;. &#39;&#39;&#39;</span>
 
 <span style="color:#f92672">%</span>tensorboard <span style="color:#f92672">--</span>logdir logs<span style="color:#f92672">/</span>xor
+</code></pre></div></div>
+    </div>
+  </label>
+</div>
 
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>lab-10-1</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># tensorflow import</span>
+<span style="color:#f92672">import</span> tensorflow <span style="color:#f92672">as</span> tf
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">from</span> tensorflow.keras.utils <span style="color:#f92672">import</span> to_categorical
+<span style="color:#f92672">from</span> tensorflow.keras.datasets <span style="color:#f92672">import</span> mnist
+<span style="color:#f92672">from</span> time <span style="color:#f92672">import</span> time
+<span style="color:#f92672">import</span> os
+<span style="color:#66d9ef">print</span>(tf<span style="color:#f92672">.</span>__version__)
+
+<span style="color:#75715e"># 전체 좋은 설명 : https://engineer-mole.tistory.com/m/18?category=911427</span>
+<span style="color:#75715e"># Load : Check point function </span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">load</span>(model, checkpoint_dir):
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34; [*] Reading checkpoints...&#34;</span>)
+
+    <span style="color:#75715e"># check point state를 저장</span>
+    ckpt <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>get_checkpoint_state(checkpoint_dir)
+
+    <span style="color:#75715e"># ckpt가 존재하면 </span>
+    <span style="color:#66d9ef">if</span> ckpt :
+        <span style="color:#75715e"># ckpt_name 가져옴</span>
+        ckpt_name <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>basename(ckpt<span style="color:#f92672">.</span>model_checkpoint_path)
+
+        <span style="color:#75715e"># checkpoint model</span>
+        checkpoint <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>Checkpoint(dnn<span style="color:#f92672">=</span>model)
+
+        <span style="color:#75715e"># save path 지정 restore</span>
+        checkpoint<span style="color:#f92672">.</span>restore(save_path<span style="color:#f92672">=</span>os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(checkpoint_dir, ckpt_name))
+
+        <span style="color:#75715e"># check point split &#39;-&#39; countrer</span>
+        counter <span style="color:#f92672">=</span> int(ckpt_name<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;-&#39;</span>)[<span style="color:#ae81ff">1</span>])
+
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34; [*] Success to read {}&#34;</span><span style="color:#f92672">.</span>format(ckpt_name))
+        <span style="color:#66d9ef">return</span> True, counter
+    <span style="color:#66d9ef">else</span>:
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34; [*] Failed to find a checkpoint&#34;</span>)
+        <span style="color:#66d9ef">return</span> False, <span style="color:#ae81ff">0</span>
+
+<span style="color:#75715e"># folder check</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">check_folder</span>(dir):
+    <span style="color:#75715e"># 경로가 존재하지 않을 경우 생성</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(dir):
+        os<span style="color:#f92672">.</span>makedirs(dir)
+    <span style="color:#66d9ef">return</span> dir
+
+<span style="color:#75715e"># Data :Load</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">load_mnist</span>() :
+    <span style="color:#75715e"># train_x, train_y, test_x, test_y : mnist data load</span>
+    (train_data, train_labels), (test_data, test_labels) <span style="color:#f92672">=</span> mnist<span style="color:#f92672">.</span>load_data()
+    <span style="color:#75715e"># train_data dimension 변경</span>
+    train_data <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>expand_dims(train_data, axis<span style="color:#f92672">=-</span><span style="color:#ae81ff">1</span>) <span style="color:#75715e"># [N, 28, 28] -&gt; [N, 28, 28, 1]</span>
+    <span style="color:#75715e"># train_data dimension 변경</span>
+    test_data <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>expand_dims(test_data, axis<span style="color:#f92672">=-</span><span style="color:#ae81ff">1</span>) <span style="color:#75715e"># [N, 28, 28] -&gt; [N, 28, 28, 1]</span>
+
+    <span style="color:#75715e"># train_data, test_data normalize</span>
+    <span style="color:#75715e"># https://goodtogreate.tistory.com/entry/Neural-Network-%EC%A0%81%EC%9A%A9-%EC%A0%84%EC%97%90-Input-data%EB%A5%BC-Normalize-%ED%95%B4%EC%95%BC-%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0</span>
+    train_data, test_data <span style="color:#f92672">=</span> normalize(train_data, test_data)
+
+    <span style="color:#75715e"># train_y, test_y 10 categorization</span>
+    train_labels <span style="color:#f92672">=</span> to_categorical(train_labels, <span style="color:#ae81ff">10</span>) <span style="color:#75715e"># [N,] -&gt; [N, 10]</span>
+    test_labels <span style="color:#f92672">=</span> to_categorical(test_labels, <span style="color:#ae81ff">10</span>) <span style="color:#75715e"># [N,] -&gt; [N, 10]</span>
+
+    <span style="color:#66d9ef">return</span> train_data, train_labels, test_data, test_labels
+
+<span style="color:#75715e"># Data pre-processing</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">normalize</span>(train_data, test_data):
+
+    <span style="color:#75715e"># 0~255를 0~1로 정규화</span>
+    train_data <span style="color:#f92672">=</span> train_data<span style="color:#f92672">.</span>astype(np<span style="color:#f92672">.</span>float32) <span style="color:#f92672">/</span> <span style="color:#ae81ff">255.0</span>
+    test_data <span style="color:#f92672">=</span> test_data<span style="color:#f92672">.</span>astype(np<span style="color:#f92672">.</span>float32) <span style="color:#f92672">/</span> <span style="color:#ae81ff">255.0</span>
+
+    <span style="color:#66d9ef">return</span> train_data, test_data
+
+<span style="color:#75715e"># loss function</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">loss_fn</span>(model, images, labels):
+    <span style="color:#75715e"># Logits 정의, Training = True 일경우 Dropout을 사용 (False는 반대)</span>
+    logits <span style="color:#f92672">=</span> model(images, training<span style="color:#f92672">=</span>True)    
+
+    <span style="color:#75715e"># loss = average ( cross_entropy( logits, labels ))</span>
+    <span style="color:#75715e"># Category 분류의 문제 : categorical crossentropy</span>
+    <span style="color:#75715e"># Output이 logit 상태가 아님으로 from_logits= True로 설정 </span>
+    <span style="color:#75715e"># https://hwiyong.tistory.com/335 (softmax를 거치느냐 안거치느냐로 설명중)</span>
+    loss <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>losses<span style="color:#f92672">.</span>categorical_crossentropy(y_pred<span style="color:#f92672">=</span>logits, y_true<span style="color:#f92672">=</span>labels, from_logits<span style="color:#f92672">=</span>True))
+    <span style="color:#66d9ef">return</span> loss
+
+<span style="color:#75715e"># Accuracy Function</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">accuracy_fn</span>(model, images, labels):
+    <span style="color:#75715e"># Logits 정의</span>
+    logits <span style="color:#f92672">=</span> model(images, training<span style="color:#f92672">=</span>False)
+
+    <span style="color:#75715e"># Logits와 Label의 Equal 여부를 Prediction으로 정의</span>
+    prediction <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>equal(tf<span style="color:#f92672">.</span>argmax(logits, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>), tf<span style="color:#f92672">.</span>argmax(labels, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>))
+
+    <span style="color:#75715e"># Prediction Boolean을 float으로 전환후 accuracy return</span>
+    accuracy <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(tf<span style="color:#f92672">.</span>cast(prediction, tf<span style="color:#f92672">.</span>float32))
+    <span style="color:#66d9ef">return</span> accuracy
+
+<span style="color:#75715e"># Gradient Tape</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">grad</span>(model, images, labels):
+    <span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>GradientTape() <span style="color:#66d9ef">as</span> tape:
+        <span style="color:#75715e"># Loss Function 정의</span>
+        loss <span style="color:#f92672">=</span> loss_fn(model, images, labels)
+    <span style="color:#66d9ef">return</span> tape<span style="color:#f92672">.</span>gradient(loss, model<span style="color:#f92672">.</span>variables)
+
+<span style="color:#75715e"># Model Function</span>
+<span style="color:#75715e"># Layer Flatten 처리</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">flatten</span>() :
+    <span style="color:#66d9ef">return</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Flatten()
+
+<span style="color:#75715e"># Layer의 Dense 설정</span>
+<span style="color:#75715e"># units는 Output 채널 개수를 설정</span>
+<span style="color:#75715e"># use_bias는 bias 사용 여부 설정</span>
+<span style="color:#75715e"># kernel initializer는 weight 초기화</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">dense</span>(label_dim, weight_init) :
+    <span style="color:#66d9ef">return</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dense(units<span style="color:#f92672">=</span>label_dim, use_bias<span style="color:#f92672">=</span>True, kernel_initializer<span style="color:#f92672">=</span>weight_init)
+
+<span style="color:#75715e"># Layer Activation Sigmoid</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sigmoid</span>() :
+    <span style="color:#66d9ef">return</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Activation(tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>activations<span style="color:#f92672">.</span>sigmoid)
+
+<span style="color:#75715e"># Layer Activation Relu</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">relu</span>() :
+    <span style="color:#66d9ef">return</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Activation(tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>activations<span style="color:#f92672">.</span>relu)
+
+<span style="color:#75715e"># overfitting 방지를 위해 0~1사이의 rate로 dropout 사용을 설정</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">dropout</span>(rate) : 
+    <span style="color:#66d9ef">return</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dropout(rate)
+
+<span style="color:#75715e"># overfitting 방지를 위해 Batch Normalization을 사용하는 경우 정의</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">batch_norm</span>() : 
+    <span style="color:#66d9ef">return</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>BatchNormalization()
+
+<span style="color:#75715e"># model class 생성</span>
+<span style="color:#75715e"># keras Model 상속 필요</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">create_model_class</span>(tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>Model):
+    <span style="color:#75715e"># logits의 최종 아웃풋 개수 label_dim = 10</span>
+    <span style="color:#66d9ef">def</span> __init__(self, label_dim):
+        <span style="color:#75715e"># class 모델  초기화</span>
+        super(create_model_class, self)<span style="color:#f92672">.</span>__init__()
+
+        <span style="color:#75715e"># Weight 초기화 : RandomNormal() 은 평균이 0 분산이 1인 가우시안 분포로 랜덤한 수를 생성하여 Weght로 설정</span>
+        <span style="color:#75715e"># 10-1-1, 10-1-2</span>
+        <span style="color:#75715e"># weight_init = tf.keras.initializers.RandomNormal()</span>
+
+        <span style="color:#75715e"># 10-2-1 xavier</span>
+        <span style="color:#75715e"># https://flonelin.wordpress.com/2018/01/28/weight-initalizer-%EC%A2%85%EB%A5%98/</span>
+        <span style="color:#75715e"># Relu : 0이하의 신호를 제거</span>
+        <span style="color:#75715e"># Glorot : input / output neuron 수에 기반 초기화의 스케일을 결정</span>
+        <span style="color:#75715e"># He : Relu가 0 이하의 신호를 제거함으로 분산을 두배 주어 분산을 유지</span>
+        <span style="color:#75715e"># Orthogonal : SVD(Singular Value Decomposition)으로 가중치 행렬 각행이 모두 수직으로 만듬</span>
+        weight_init <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>initializers<span style="color:#f92672">.</span>glorot_uniform()
+
+        <span style="color:#75715e"># 리스트 자료구조 타입</span>
+        self<span style="color:#f92672">.</span>model <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>Sequential()
+
+        <span style="color:#75715e"># Convolution을 이용할 경우 Flatten과정이 필요치 않음</span>
+        self<span style="color:#f92672">.</span>model<span style="color:#f92672">.</span>add(flatten())
+
+        <span style="color:#75715e"># [N,784] -&gt; [N,256] -&gt; [N,256]</span>
+        <span style="color:#75715e"># 10-1-1, 10-1-2, 10-2-1</span>
+        <span style="color:#75715e"># for i in range(2):</span>
+        <span style="color:#75715e"># 10-2-2 Xavier Deep</span>
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">4</span>) :
+            <span style="color:#75715e"># 채널을 256으로 하고 Sigmoid를 쓸수있게 바꿈</span>
+            <span style="color:#75715e"># 10-1-1, 10-1-2, 10-2-1</span>
+            <span style="color:#75715e"># self.model.add(dense(256, weight_init))            </span>
+            <span style="color:#75715e"># 10-2-2</span>
+            self<span style="color:#f92672">.</span>model<span style="color:#f92672">.</span>add(dense(<span style="color:#ae81ff">512</span>, weight_init))
+
+            <span style="color:#75715e"># 10-1-1 sigmoid 사용시</span>
+            <span style="color:#75715e"># self.model.add(sigmoid())</span>
+
+            <span style="color:#75715e"># 10-1-2 relu 사용시</span>
+            <span style="color:#75715e"># self.model.add(relu())</span>
+
+            <span style="color:#75715e"># 10-3 dropout 설정</span>
+            <span style="color:#75715e"># self.model.add(dropout(rate=0.5))</span>
+
+            <span style="color:#75715e"># 10-4 batch normalization 사용</span>
+            <span style="color:#75715e"># drop out 사용시와 순서가 다름</span>
+            self<span style="color:#f92672">.</span>model<span style="color:#f92672">.</span>add(batch_norm())
+            self<span style="color:#f92672">.</span>model<span style="color:#f92672">.</span>add(relu())
+            
+        <span style="color:#75715e"># logit을 구할때 10개 output이 출력됨</span>
+        self<span style="color:#f92672">.</span>model<span style="color:#f92672">.</span>add(dense(label_dim, weight_init))
+
+    <span style="color:#75715e"># call 함수를 통해 아웃풀 출력을 정의</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">call</span>(self, x, training<span style="color:#f92672">=</span>None, mask<span style="color:#f92672">=</span>None):
+        x <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>model(x)
+        <span style="color:#66d9ef">return</span> x
+
+<span style="color:#75715e"># Function 형태 Create Model</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_model_function</span>(label_dim) :
+    <span style="color:#75715e"># Weight 초기화</span>
+    <span style="color:#75715e"># 10-1-1, 10-1-2</span>
+    <span style="color:#75715e"># weight_init = tf.keras.initializers.RandomNormal()</span>
+
+    <span style="color:#75715e"># 10-2-1 xavier</span>
+    weight_init <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>initializers<span style="color:#f92672">.</span>glorot_uniform()
+
+    model <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>Sequential()
+    model<span style="color:#f92672">.</span>add(flatten())
+
+    <span style="color:#75715e"># 10-1-1, 10-1-2, 10-2-1</span>
+    <span style="color:#75715e"># for i in range(2) :</span>
+    <span style="color:#75715e"># 10-2-2 Xavier Deep</span>
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">4</span>) :
+        <span style="color:#75715e"># 10-1-1, 10-1-2, 10-2-1</span>
+        <span style="color:#75715e"># model.add(dense(256, weight_init))</span>
+        <span style="color:#75715e"># 10-2-2</span>
+        model<span style="color:#f92672">.</span>add(dense(<span style="color:#ae81ff">512</span>,weight_init))
+
+        <span style="color:#75715e"># 10-1-1 sigmoid 사용시</span>
+        <span style="color:#75715e"># model.add(sigmoid())</span>
+        
+        <span style="color:#75715e"># 10-1-2 relu 사용시</span>
+        <span style="color:#75715e"># model.add(relu())</span>
+        
+        <span style="color:#75715e"># 10-3</span>
+        <span style="color:#75715e"># model.add(dropout(rate=0.5))</span>
+
+        <span style="color:#75715e"># 10-4 Batch Normalization</span>
+        model<span style="color:#f92672">.</span>add(batch_norm())
+        model<span style="color:#f92672">.</span>add(relu())
+
+    model<span style="color:#f92672">.</span>add(dense(label_dim, weight_init))
+
+    <span style="color:#66d9ef">return</span> model
+
+<span style="color:#75715e"># Define data &amp; hyper-parameter</span>
+<span style="color:#75715e"># dataset load</span>
+<span style="color:#e6db74">&#34;&#34;&#34; dataset &#34;&#34;&#34;</span>
+train_x, train_y, test_x, test_y <span style="color:#f92672">=</span> load_mnist()
+
+<span style="color:#75715e"># parameters 설정</span>
+<span style="color:#e6db74">&#34;&#34;&#34; parameters &#34;&#34;&#34;</span>
+learning_rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.001</span>
+batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">128</span>
+training_epochs <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+
+<span style="color:#75715e"># 60000 / 128 = 468</span>
+training_iterations <span style="color:#f92672">=</span> len(train_x) <span style="color:#f92672">//</span> batch_size
+
+label_dim <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+
+train_flag <span style="color:#f92672">=</span> True
+
+<span style="color:#75715e"># data를 batch_size로 학습</span>
+<span style="color:#75715e"># Shuffle : buffer_size는 input data 보다 커야함</span>
+<span style="color:#75715e"># prefetch는 네트워크가 설정한 batch_size만큼 학습시 메모리에 batch_size만큼 적재</span>
+<span style="color:#75715e"># batch_size 설정</span>
+<span style="color:#75715e"># .\ 이후 space에 에러 출력됨</span>
+<span style="color:#e6db74">&#34;&#34;&#34; Graph Input using Dataset API &#34;&#34;&#34;</span>
+train_dataset <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>Dataset<span style="color:#f92672">.</span>from_tensor_slices((train_x, train_y))<span style="color:#f92672">.</span>\
+    shuffle(buffer_size<span style="color:#f92672">=</span><span style="color:#ae81ff">100000</span>)<span style="color:#f92672">.</span>\
+    prefetch(buffer_size<span style="color:#f92672">=</span>batch_size)<span style="color:#f92672">.</span>\
+    batch(batch_size, drop_remainder<span style="color:#f92672">=</span>True)
+
+test_dataset <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>Dataset<span style="color:#f92672">.</span>from_tensor_slices((test_x, test_y))<span style="color:#f92672">.</span>\
+    shuffle(buffer_size<span style="color:#f92672">=</span><span style="color:#ae81ff">100000</span>)<span style="color:#f92672">.</span>\
+    prefetch(buffer_size<span style="color:#f92672">=</span>len(test_x))<span style="color:#f92672">.</span>\
+    batch(len(test_x))
+
+<span style="color:#75715e"># 모델 / 옵티마이저 / 롸이터 정의</span>
+<span style="color:#e6db74">&#34;&#34;&#34; Model &#34;&#34;&#34;</span>
+network <span style="color:#f92672">=</span> create_model_function(label_dim)
+
+<span style="color:#75715e"># Adam Optimizer</span>
+<span style="color:#e6db74">&#34;&#34;&#34; Training &#34;&#34;&#34;</span>
+optimizer <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>optimizers<span style="color:#f92672">.</span>Adam(learning_rate<span style="color:#f92672">=</span>learning_rate)
+
+<span style="color:#75715e"># Writer 정의</span>
+<span style="color:#75715e"># 10-1-1 sigmoid 사용시</span>
+<span style="color:#75715e"># model_dir = &#39;nn_softmax&#39;</span>
+<span style="color:#75715e"># 10-1-2 relu 사용시</span>
+<span style="color:#75715e"># model_dir = &#39;nn_relu&#39;</span>
+<span style="color:#75715e"># 10-2-1 xavier 사용시</span>
+<span style="color:#75715e"># model_dir = &#39;nn_xavier&#39;</span>
+<span style="color:#75715e"># 10-2-2 xavier deep</span>
+<span style="color:#75715e"># model_dir = &#39;nn_deep&#39;</span>
+<span style="color:#75715e"># 10-3 relu dropout</span>
+<span style="color:#75715e"># model_dir = &#39;nn_dropout&#39;</span>
+<span style="color:#75715e"># 10-4 Batch Normalization</span>
+
+<span style="color:#e6db74">&#34;&#34;&#34; Writer &#34;&#34;&#34;</span>
+checkpoint_dir <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;checkpoints&#39;</span>
+logs_dir <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;logs&#39;</span>
+
+model_dir <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;nn_batchnorm&#39;</span>
+
+checkpoint_dir <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(checkpoint_dir, model_dir)
+check_folder(checkpoint_dir)
+checkpoint_prefix <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(checkpoint_dir, model_dir)
+logs_dir <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(logs_dir, model_dir)
+
+<span style="color:#75715e"># Train / Test 여부에 따라 분기</span>
+<span style="color:#66d9ef">if</span> train_flag :
+    <span style="color:#75715e"># 체크포인트는 재학습시 변경되었던 Weight를 복원함</span>
+    checkpoint <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>Checkpoint(dnn<span style="color:#f92672">=</span>network)
+
+    <span style="color:#75715e"># 텐저보드를 위한 롸이터 생성</span>
+    <span style="color:#75715e"># create writer for tensorboard</span>
+    summary_writer <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>summary<span style="color:#f92672">.</span>create_file_writer(logdir<span style="color:#f92672">=</span>logs_dir)
+
+    <span style="color:#75715e"># 시작 시간</span>
+    start_time <span style="color:#f92672">=</span> time()
+
+    <span style="color:#75715e"># 체크포인트 존재시 Resotre</span>
+    <span style="color:#75715e"># restore check-point if it exits</span>
+    could_load, checkpoint_counter <span style="color:#f92672">=</span> load(network, checkpoint_dir)    
+
+    <span style="color:#75715e"># Check point 존재시 해당 값으로 설정</span>
+    <span style="color:#66d9ef">if</span> could_load:
+        <span style="color:#75715e"># start_epoch = (int)(checkpoint_counter / training_iterations)        </span>
+        <span style="color:#75715e"># counter = checkpoint_counter    </span>
+        start_epoch <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        start_iteration <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        counter <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34; [*] Load SUCCESS&#34;</span>)
+    <span style="color:#66d9ef">else</span>:
+        start_epoch <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        start_iteration <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        counter <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34; [!] Load failed...&#34;</span>)
+    
+    <span style="color:#75715e"># train phase</span>
+    <span style="color:#66d9ef">with</span> summary_writer<span style="color:#f92672">.</span>as_default():  <span style="color:#75715e"># for tensorboard</span>
+        <span style="color:#75715e"># epoch와 iteration에 대한 중첩 for 문 수행</span>
+        <span style="color:#66d9ef">for</span> epoch <span style="color:#f92672">in</span> range(start_epoch, training_epochs):
+            <span style="color:#66d9ef">for</span> idx, (train_input, train_label) <span style="color:#f92672">in</span> enumerate(train_dataset):            
+                grads <span style="color:#f92672">=</span> grad(network, train_input, train_label)
+                <span style="color:#75715e"># optimizer.apply_gradients를 호출하여 gradient를 적용하여 네트워크를 학습</span>
+                optimizer<span style="color:#f92672">.</span>apply_gradients(grads_and_vars<span style="color:#f92672">=</span>zip(grads, network<span style="color:#f92672">.</span>variables))
+
+                <span style="color:#75715e"># Loss Function</span>
+                train_loss <span style="color:#f92672">=</span> loss_fn(network, train_input, train_label)
+
+                <span style="color:#75715e"># Accuracy Function</span>
+                train_accuracy <span style="color:#f92672">=</span> accuracy_fn(network, train_input, train_label)
+                
+                <span style="color:#75715e"># Test Dataset</span>
+                <span style="color:#66d9ef">for</span> test_input, test_label <span style="color:#f92672">in</span> test_dataset:                
+                    test_accuracy <span style="color:#f92672">=</span> accuracy_fn(network, test_input, test_label)
+
+                <span style="color:#75715e"># Summary Scalar형 텐서 사용</span>
+                tf<span style="color:#f92672">.</span>summary<span style="color:#f92672">.</span>scalar(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;train_loss&#39;</span>, data<span style="color:#f92672">=</span>train_loss, step<span style="color:#f92672">=</span>counter)
+                tf<span style="color:#f92672">.</span>summary<span style="color:#f92672">.</span>scalar(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;train_accuracy&#39;</span>, data<span style="color:#f92672">=</span>train_accuracy, step<span style="color:#f92672">=</span>counter)
+                tf<span style="color:#f92672">.</span>summary<span style="color:#f92672">.</span>scalar(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;test_accuracy&#39;</span>, data<span style="color:#f92672">=</span>test_accuracy, step<span style="color:#f92672">=</span>counter)
+
+                <span style="color:#66d9ef">print</span>(
+                    <span style="color:#e6db74">&#34;Epoch: [</span><span style="color:#e6db74">%2d</span><span style="color:#e6db74">] [</span><span style="color:#e6db74">%5d</span><span style="color:#e6db74">/</span><span style="color:#e6db74">%5d</span><span style="color:#e6db74">] time: </span><span style="color:#e6db74">%4.2f</span><span style="color:#e6db74">, tr_loss: </span><span style="color:#e6db74">%.4f</span><span style="color:#e6db74">, tr_acc: </span><span style="color:#e6db74">%.4f</span><span style="color:#e6db74">, ts_acc: </span><span style="color:#e6db74">%.4f</span><span style="color:#e6db74">&#34;</span> \
+                    <span style="color:#f92672">%</span> (epoch, idx, training_iterations, time() <span style="color:#f92672">-</span> start_time, train_loss, train_accuracy,
+                       test_accuracy))
+                counter <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>             
+        <span style="color:#75715e"># 체크 포인트 저장</span>
+        checkpoint<span style="color:#f92672">.</span>save(file_prefix<span style="color:#f92672">=</span>checkpoint_prefix <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;-{}&#39;</span><span style="color:#f92672">.</span>format(counter))
+        
+<span style="color:#75715e"># test phase      </span>
+<span style="color:#66d9ef">else</span> :
+    _, _ <span style="color:#f92672">=</span> load(network, checkpoint_dir)
+    <span style="color:#66d9ef">for</span> test_input, test_label <span style="color:#f92672">in</span> test_dataset:    
+        test_accuracy <span style="color:#f92672">=</span> accuracy_fn(network, test_input, test_label)
+
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;test_Accuracy: </span><span style="color:#e6db74">%.4f</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (test_accuracy))
+</code></pre></div></div>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>lab-11-0</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> __future__ <span style="color:#f92672">import</span> absolute_import
+<span style="color:#f92672">from</span> __future__ <span style="color:#f92672">import</span> division
+<span style="color:#f92672">from</span> __future__ <span style="color:#f92672">import</span> print_function
+
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> tensorflow <span style="color:#f92672">as</span> tf
+<span style="color:#f92672">from</span> tensorflow <span style="color:#f92672">import</span> keras
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+
+<span style="color:#66d9ef">print</span>(tf<span style="color:#f92672">.</span>__version__)
+<span style="color:#66d9ef">print</span>(keras<span style="color:#f92672">.</span>__version__)
+
+<span style="color:#75715e"># 1X3X3X1 shape</span>
+image <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>constant([ [ [ [<span style="color:#ae81ff">1</span>],[<span style="color:#ae81ff">2</span>],[<span style="color:#ae81ff">3</span>] ],[ [<span style="color:#ae81ff">4</span>],[<span style="color:#ae81ff">5</span>],[<span style="color:#ae81ff">6</span>] ], [ [<span style="color:#ae81ff">7</span>],[<span style="color:#ae81ff">8</span>],[<span style="color:#ae81ff">9</span>] ] ] ], dtype<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>float32)
+<span style="color:#66d9ef">print</span>(image<span style="color:#f92672">.</span>shape)
+
+<span style="color:#75715e"># Grey Shape</span>
+plt<span style="color:#f92672">.</span>imshow(image<span style="color:#f92672">.</span>numpy()<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>), cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Greys&#39;</span>)
+plt<span style="color:#f92672">.</span>show()
+
+<span style="color:#75715e"># 12,16,24,28 shape -&gt; plt.show (check)</span>
+check <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>constant([ [ [ [<span style="color:#ae81ff">12.</span>] ],[ [<span style="color:#ae81ff">16.</span>] ] ],[ [ [<span style="color:#ae81ff">24.</span>] ],[ [<span style="color:#ae81ff">28.</span>] ] ] ], dtype<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>float32)
+plt<span style="color:#f92672">.</span>imshow(check<span style="color:#f92672">.</span>numpy()<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>), cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Greys&#39;</span>)
+plt<span style="color:#f92672">.</span>show()
+
+<span style="color:#75715e"># Image : 1,3,3,1  Filter : 2,2,1,1  Stride : 1X1  Padding : Valid</span>
+<span style="color:#75715e"># 1  2  3    1  1    12  16</span>
+<span style="color:#75715e"># 4  5  6  + 1  1 -&gt; 24  28</span>
+<span style="color:#75715e"># 7  8  9 </span>
+<span style="color:#75715e"># 1 filter (22,11) with padding : valid</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;image.shape&#34;</span>, image<span style="color:#f92672">.</span>shape)
+
+<span style="color:#75715e"># Weight 설정</span>
+weight <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([ [ [ [<span style="color:#ae81ff">1.</span>] ],[ [<span style="color:#ae81ff">1.</span>] ] ],[ [ [<span style="color:#ae81ff">1.</span>] ],[ [<span style="color:#ae81ff">1.</span>] ] ] ])
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;weight.shape&#34;</span>, weight<span style="color:#f92672">.</span>shape)
+
+weight_init <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>constant_initializer(weight)
+conv2d <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Conv2D(filters<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;VALID&#39;</span>, kernel_initializer<span style="color:#f92672">=</span>weight_init)(image)
+
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;conv2d.shape&#34;</span>, conv2d<span style="color:#f92672">.</span>shape)
+<span style="color:#66d9ef">print</span>(conv2d<span style="color:#f92672">.</span>numpy()<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>))
+
+plt<span style="color:#f92672">.</span>imshow(conv2d<span style="color:#f92672">.</span>numpy()<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>), cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
+plt<span style="color:#f92672">.</span>show()
+
+<span style="color:#75715e"># Image : 1,3,3,1  Filter : 2,2,1,1  Stride : 1X1  Padding : SAME (3X3)</span>
+<span style="color:#75715e"># 1  2  3  0      1  1      12  16   9</span>
+<span style="color:#75715e"># 4  5  6  0  -&gt;  1  1  -&gt;  24  28  15</span>
+<span style="color:#75715e"># 7  8  9  0                15  17   9</span>
+<span style="color:#75715e"># 0  0  0  0 </span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;image.shape&#34;</span>, image<span style="color:#f92672">.</span>shape)
+
+weight <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[[[<span style="color:#ae81ff">1.</span>]],[[<span style="color:#ae81ff">1.</span>]]],[[[<span style="color:#ae81ff">1.</span>]],[[<span style="color:#ae81ff">1.</span>]]]])
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;weight.shape&#34;</span>, weight<span style="color:#f92672">.</span>shape)
+
+weight_init <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>constant_initializer(weight)
+conv2d <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Conv2D(filters<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;SAME&#39;</span>, kernel_initializer<span style="color:#f92672">=</span>weight_init)(image)
+
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;conv2d.shape&#34;</span>, conv2d<span style="color:#f92672">.</span>shape)
+<span style="color:#66d9ef">print</span>(conv2d<span style="color:#f92672">.</span>numpy()<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>))
+
+plt<span style="color:#f92672">.</span>imshow(conv2d<span style="color:#f92672">.</span>numpy()<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>), cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
+plt<span style="color:#f92672">.</span>show()
+
+<span style="color:#75715e"># image shape 1,3,3,1</span>
+<span style="color:#75715e"># print(&#34;imag:\n&#34;, image)</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;image.shape&#34;</span>, image<span style="color:#f92672">.</span>shape)
+
+<span style="color:#75715e"># wieght shape 2,2,1,3</span>
+weight <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([ [ [ [<span style="color:#ae81ff">1.</span>,<span style="color:#ae81ff">10.</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1.</span>] ] ,
+                      [ [<span style="color:#ae81ff">1.</span>,<span style="color:#ae81ff">10.</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1.</span>] ] ] , 
+                    [ [ [<span style="color:#ae81ff">1.</span>,<span style="color:#ae81ff">10.</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1.</span>] ],
+                      [ [<span style="color:#ae81ff">1.</span>,<span style="color:#ae81ff">10.</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1.</span>] ] ] ])
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;weight.shape&#34;</span>, weight<span style="color:#f92672">.</span>shape)
+weight_init <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>constant_initializer(weight)
+
+<span style="color:#75715e">################################################################################</span>
+<span style="color:#75715e"># Image : 1,3,3,1  Filter : 2,2,1,(1)  Stride : 1X1  Padding : SAME (3X3)</span>
+<span style="color:#75715e"># 1  2  3        1   1      12  16   9</span>
+<span style="color:#75715e"># 4  5  6   -&gt;   1   1  -&gt;  24  28  15</span>
+<span style="color:#75715e"># 7  8  9                   15  17   9</span>
+<span style="color:#75715e">################################################################################</span>
+<span style="color:#75715e"># Image : 1,3,3,1  Filter : 2,2,1,(2)  Stride : 1X1  Padding : SAME (3X3)</span>
+<span style="color:#75715e"># 1  2  3       10  10      120 160  90</span>
+<span style="color:#75715e"># 4  5  6   -&gt;  10  10  -&gt;  240 280 150</span>
+<span style="color:#75715e"># 7  8  9                   150 170  90</span>
+<span style="color:#75715e">################################################################################</span>
+<span style="color:#75715e"># Image : 1,3,3,1  Filter : 2,2,1,(3)  Stride : 1X1  Padding : SAME (3X3)</span>
+<span style="color:#75715e"># 1  2  3       -1  -1      -12 -16  -9</span>
+<span style="color:#75715e"># 4  5  6   -&gt;  -1  -1  -&gt;  -24 -28 -15</span>
+<span style="color:#75715e"># 7  8  9                   -15 -17  -9</span>
+conv2d <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Conv2D(filters<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;SAME&#39;</span>, kernel_initializer<span style="color:#f92672">=</span>weight_init)(image)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;conv2d.shape&#34;</span>, conv2d<span style="color:#f92672">.</span>shape)
+
+<span style="color:#75715e"># 행/열 교체 : 0 -&gt; 4차원 / 3 -&gt; 1차원 </span>
+feature_maps <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>swapaxes(conv2d, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;feature_maps&#34;</span>, feature_maps<span style="color:#f92672">.</span>shape)
+
+<span style="color:#75715e"># swapaxes / reshape / tranpose </span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;weight&#34;</span>, weight<span style="color:#f92672">.</span>shape)
+weight_swap <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>swapaxes(weight, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>) <span style="color:#75715e"># 2,2,1,3 -&gt; 2,2,3,1</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;weight_swap1&#34;</span>, weight_swap<span style="color:#f92672">.</span>shape)
+weight_swap <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>swapaxes(weight, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span>) <span style="color:#75715e"># 2,2,3,1 -&gt; 1,2,3,2</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;weight_swap2&#34;</span>, weight_swap<span style="color:#f92672">.</span>shape)
+weight_reshape <span style="color:#f92672">=</span> weight<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#75715e"># 2,2,1,3 -&gt; 1,2,3,2</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;weight_reshape1&#34;</span>, weight_reshape<span style="color:#f92672">.</span>shape)
+weight_reshape <span style="color:#f92672">=</span> weight<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">1</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#75715e"># 2,2,1,3 -&gt; 1,2,3,2</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;weight_reshape2&#34;</span>, weight_reshape<span style="color:#f92672">.</span>shape)
+weight_trans <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>transpose(weight)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;weight_trans&#34;</span>, weight_trans<span style="color:#f92672">.</span>shape)
+
+<span style="color:#66d9ef">for</span> i, feature_map <span style="color:#f92672">in</span> enumerate(feature_maps):
+    <span style="color:#66d9ef">print</span>(feature_map<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>))
+    plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">3</span>,i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>), plt<span style="color:#f92672">.</span>imshow(feature_map<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>), cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
+plt<span style="color:#f92672">.</span>show()
+
+image <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>constant([ [ [ [<span style="color:#ae81ff">1</span>], [<span style="color:#ae81ff">1</span>], [<span style="color:#ae81ff">2</span>], [<span style="color:#ae81ff">4</span>] ],
+                        [ [<span style="color:#ae81ff">5</span>], [<span style="color:#ae81ff">6</span>], [<span style="color:#ae81ff">7</span>], [<span style="color:#ae81ff">8</span>] ],
+                        [ [<span style="color:#ae81ff">3</span>], [<span style="color:#ae81ff">2</span>], [<span style="color:#ae81ff">1</span>], [<span style="color:#ae81ff">0</span>] ],
+                        [ [<span style="color:#ae81ff">1</span>], [<span style="color:#ae81ff">2</span>], [<span style="color:#ae81ff">3</span>], [<span style="color:#ae81ff">4</span>] ]  ] ], dtype<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>float32)
+<span style="color:#66d9ef">print</span>(image<span style="color:#f92672">.</span>shape)
+
+<span style="color:#75715e">#  1  1  2  4      </span>
+<span style="color:#75715e">#  5  6  7  8  -&gt;   6   7   8</span>
+<span style="color:#75715e">#  3  2  1  0       6   7   8</span>
+<span style="color:#75715e">#  1  2  3  4       3   3   4</span>
+pool <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>MaxPool2D(pool_size<span style="color:#f92672">=</span>(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>), strides<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;VALID&#39;</span>)(image)
+<span style="color:#66d9ef">print</span>(pool<span style="color:#f92672">.</span>shape)
+<span style="color:#66d9ef">print</span>(pool<span style="color:#f92672">.</span>numpy())
+
+<span style="color:#75715e">#  1  1  2  4      </span>
+<span style="color:#75715e">#  5  6  7  8  -&gt;   6   8</span>
+<span style="color:#75715e">#  3  2  1  0       3   4</span>
+<span style="color:#75715e">#  1  2  3  4       </span>
+pool <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>MaxPool2D(pool_size<span style="color:#f92672">=</span>(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>), strides<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;VALID&#39;</span>)(image)
+<span style="color:#66d9ef">print</span>(pool<span style="color:#f92672">.</span>shape)
+<span style="color:#66d9ef">print</span>(pool<span style="color:#f92672">.</span>numpy())
+
+<span style="color:#75715e"># image : 1X2X2X1</span>
+<span style="color:#75715e">#  4  3  -&gt; 4</span>
+<span style="color:#75715e">#  2  1</span>
+image <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>constant([ [ [ [<span style="color:#ae81ff">4</span>], [<span style="color:#ae81ff">3</span>] ],
+                          [ [<span style="color:#ae81ff">2</span>],[<span style="color:#ae81ff">1</span>] ] ] ], dtype<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>float32)
+<span style="color:#66d9ef">print</span>(image<span style="color:#f92672">.</span>shape)
+
+pool <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>MaxPool2D(pool_size<span style="color:#f92672">=</span>(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>), strides<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;VALID&#39;</span>)(image)
+<span style="color:#66d9ef">print</span>(pool<span style="color:#f92672">.</span>shape)
+<span style="color:#66d9ef">print</span>(pool<span style="color:#f92672">.</span>numpy())
+
+<span style="color:#75715e"># image : 1X2X2X1</span>
+<span style="color:#75715e">#  4  3  0  -&gt;  4  3</span>
+<span style="color:#75715e">#  2  1  0      2  1</span>
+<span style="color:#75715e">#  0  0  0</span>
+image <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>constant([[[[<span style="color:#ae81ff">4</span>],[<span style="color:#ae81ff">3</span>]],[[<span style="color:#ae81ff">2</span>],[<span style="color:#ae81ff">1</span>]]]], dtype<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>float32)
+pool <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>MaxPool2D(pool_size<span style="color:#f92672">=</span>(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>), strides<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;SAME&#39;</span>)(image)
+<span style="color:#66d9ef">print</span>(pool<span style="color:#f92672">.</span>shape)
+<span style="color:#66d9ef">print</span>(pool<span style="color:#f92672">.</span>numpy())
+
+<span style="color:#75715e"># header</span>
+mnist <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>datasets<span style="color:#f92672">.</span>mnist
+class_names <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;0&#39;</span>, <span style="color:#e6db74">&#39;1&#39;</span>, <span style="color:#e6db74">&#39;2&#39;</span>, <span style="color:#e6db74">&#39;3&#39;</span>, <span style="color:#e6db74">&#39;4&#39;</span>, <span style="color:#e6db74">&#39;5&#39;</span>, <span style="color:#e6db74">&#39;6&#39;</span>, <span style="color:#e6db74">&#39;7&#39;</span>, <span style="color:#e6db74">&#39;8&#39;</span>, <span style="color:#e6db74">&#39;9&#39;</span>]
+
+<span style="color:#75715e">#mnist = keras.datasets.fashion_mnist</span>
+<span style="color:#75715e">#class_names = [&#39;T-shirt/top&#39;, &#39;Trouser&#39;, &#39;Pullover&#39;, &#39;Dress&#39;, &#39;Coat&#39;, &#39;Sandal&#39;, &#39;Shirt&#39;, &#39;Sneaker&#39;, &#39;Bag&#39;, &#39;Ankle boot&#39;]</span>
+
+<span style="color:#75715e"># load data</span>
+(train_images, train_labels), (test_images, test_labels) <span style="color:#f92672">=</span> mnist<span style="color:#f92672">.</span>load_data()
+
+<span style="color:#75715e"># nomalizaiton</span>
+train_images <span style="color:#f92672">=</span> train_images<span style="color:#f92672">.</span>astype(np<span style="color:#f92672">.</span>float32) <span style="color:#f92672">/</span> <span style="color:#ae81ff">255.</span>
+test_images <span style="color:#f92672">=</span> test_images<span style="color:#f92672">.</span>astype(np<span style="color:#f92672">.</span>float32) <span style="color:#f92672">/</span> <span style="color:#ae81ff">255.</span>
+
+<span style="color:#75715e"># print image 0</span>
+img <span style="color:#f92672">=</span> train_images[<span style="color:#ae81ff">0</span>]
+plt<span style="color:#f92672">.</span>imshow(img, cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
+plt<span style="color:#f92672">.</span>show()
+
+<span style="color:#75715e"># img redefine</span>
+img <span style="color:#f92672">=</span> train_images[<span style="color:#ae81ff">0</span>]
+
+<span style="color:#75715e"># img reshape</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Before reshape&#34;</span>, img<span style="color:#f92672">.</span>shape)
+img <span style="color:#f92672">=</span> img<span style="color:#f92672">.</span>reshape(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">1</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;After reshape&#34;</span>, img<span style="color:#f92672">.</span>shape)
+
+<span style="color:#75715e"># image를 tensor로 정의</span>
+<span style="color:#75715e"># 벡터 축에 대한 행렬을 일반화</span>
+img <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>convert_to_tensor(img)
+
+<span style="color:#75715e"># 변형) Random 대신 지정</span>
+<span style="color:#75715e"># 초기 Weight Random 저장</span>
+<span style="color:#75715e"># weight_init = keras.initializers.RandomNormal(stddev=0.01)</span>
+
+<span style="color:#75715e"># wieght shape 3,3,1,5</span>
+weight <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([ [ [ [ <span style="color:#ae81ff">1.</span>,<span style="color:#ae81ff">0.01</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1.</span>,<span style="color:#ae81ff">0.</span>,<span style="color:#ae81ff">10.</span>] ], [ [ <span style="color:#ae81ff">1.</span>,<span style="color:#ae81ff">0.01</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1.</span>,<span style="color:#ae81ff">0.</span>,<span style="color:#ae81ff">10.</span>] ], [ [ <span style="color:#ae81ff">1.</span>,<span style="color:#ae81ff">0.01</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1.</span>,<span style="color:#ae81ff">0.</span>,<span style="color:#ae81ff">10.</span>] ] ],
+                    [ [ [ <span style="color:#ae81ff">1.</span>,<span style="color:#ae81ff">0.01</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1.</span>,<span style="color:#ae81ff">0.</span>,<span style="color:#ae81ff">10.</span>] ], [ [ <span style="color:#ae81ff">1.</span>,<span style="color:#ae81ff">0.01</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1.</span>,<span style="color:#ae81ff">0.</span>,<span style="color:#ae81ff">10.</span>] ], [ [ <span style="color:#ae81ff">1.</span>,<span style="color:#ae81ff">0.01</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1.</span>,<span style="color:#ae81ff">0.</span>,<span style="color:#ae81ff">10.</span>] ] ],
+                    [ [ [ <span style="color:#ae81ff">1.</span>,<span style="color:#ae81ff">0.01</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1.</span>,<span style="color:#ae81ff">0.</span>,<span style="color:#ae81ff">10.</span>] ], [ [ <span style="color:#ae81ff">1.</span>,<span style="color:#ae81ff">0.01</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1.</span>,<span style="color:#ae81ff">0.</span>,<span style="color:#ae81ff">10.</span>] ], [ [ <span style="color:#ae81ff">1.</span>,<span style="color:#ae81ff">0.01</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1.</span>,<span style="color:#ae81ff">0.</span>,<span style="color:#ae81ff">10.</span>] ] ] ])
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;weight.shape&#34;</span>, weight<span style="color:#f92672">.</span>shape)
+weight_init <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>constant_initializer(weight)
+
+<span style="color:#75715e"># 1X28X28X1 -&gt; 2X2 -&gt; 1X14X14X5</span>
+conv2d <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Conv2D(filters<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, strides<span style="color:#f92672">=</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>), padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;SAME&#39;</span>, kernel_initializer<span style="color:#f92672">=</span>weight_init)(img)
+<span style="color:#66d9ef">print</span>(conv2d<span style="color:#f92672">.</span>shape)
+
+<span style="color:#75715e"># 4차원 - 1차원 Swap</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Before swapaxes : &#34;</span>,conv2d<span style="color:#f92672">.</span>shape)
+feature_maps <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>swapaxes(conv2d, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;After swapaxes : &#34;</span>,feature_maps<span style="color:#f92672">.</span>shape)
+
+<span style="color:#75715e"># Filter 수만큼 For loop</span>
+<span style="color:#66d9ef">for</span> i, feature_map <span style="color:#f92672">in</span> enumerate(feature_maps):
+    plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">5</span>,i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>), plt<span style="color:#f92672">.</span>imshow(feature_map<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">14</span>,<span style="color:#ae81ff">14</span>), cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
+plt<span style="color:#f92672">.</span>show()
+
+<span style="color:#75715e"># maxpool 수행</span>
+pool <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>MaxPool2D(pool_size<span style="color:#f92672">=</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>), strides<span style="color:#f92672">=</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>), padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;SAME&#39;</span>)(conv2d)
+<span style="color:#66d9ef">print</span>(pool<span style="color:#f92672">.</span>shape)
+
+<span style="color:#75715e"># swap 축</span>
+feature_maps <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>swapaxes(pool, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span>)
+
+<span style="color:#75715e"># filter 만큼 for loop</span>
+<span style="color:#66d9ef">for</span> i, feature_map <span style="color:#f92672">in</span> enumerate(feature_maps):
+    plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">5</span>,i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>), plt<span style="color:#f92672">.</span>imshow(feature_map<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">7</span>), cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
+plt<span style="color:#f92672">.</span>show()
+
+<span style="color:#75715e"># img redefine</span>
+img <span style="color:#f92672">=</span> train_images[<span style="color:#ae81ff">0</span>]
+
+<span style="color:#75715e"># img reshape</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Before reshape&#34;</span>, img<span style="color:#f92672">.</span>shape)
+img <span style="color:#f92672">=</span> img<span style="color:#f92672">.</span>reshape(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">1</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;After reshape&#34;</span>, img<span style="color:#f92672">.</span>shape)
+
+<span style="color:#75715e"># image를 tensor로 정의</span>
+<span style="color:#75715e"># 벡터 축에 대한 행렬을 일반화</span>
+img <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>convert_to_tensor(img)
+
+<span style="color:#75715e"># 초기 Weight Random 저장</span>
+weight_init <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>initializers<span style="color:#f92672">.</span>RandomNormal(stddev<span style="color:#f92672">=</span><span style="color:#ae81ff">0.01</span>)
+
+<span style="color:#75715e"># 1X28X28X1 -&gt; 2X2 -&gt; 1X14X14X5</span>
+conv2d <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Conv2D(filters<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, strides<span style="color:#f92672">=</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>), padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;SAME&#39;</span>, kernel_initializer<span style="color:#f92672">=</span>weight_init)(img)
+<span style="color:#66d9ef">print</span>(conv2d<span style="color:#f92672">.</span>shape)
+
+<span style="color:#75715e"># 4차원 - 1차원 Swap</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Before swapaxes : &#34;</span>,conv2d<span style="color:#f92672">.</span>shape)
+feature_maps <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>swapaxes(conv2d, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;After swapaxes : &#34;</span>,feature_maps<span style="color:#f92672">.</span>shape)
+
+<span style="color:#75715e"># Filter 수만큼 For loop</span>
+<span style="color:#66d9ef">for</span> i, feature_map <span style="color:#f92672">in</span> enumerate(feature_maps):
+    plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">5</span>,i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>), plt<span style="color:#f92672">.</span>imshow(feature_map<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">14</span>,<span style="color:#ae81ff">14</span>), cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
+plt<span style="color:#f92672">.</span>show()
+
+pool <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>MaxPool2D(pool_size<span style="color:#f92672">=</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>), strides<span style="color:#f92672">=</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>), padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;SAME&#39;</span>)(conv2d)
+<span style="color:#66d9ef">print</span>(pool<span style="color:#f92672">.</span>shape)
+
+feature_maps <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>swapaxes(pool, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span>)
+<span style="color:#66d9ef">for</span> i, feature_map <span style="color:#f92672">in</span> enumerate(feature_maps):
+    plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">5</span>,i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>), plt<span style="color:#f92672">.</span>imshow(feature_map<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">7</span>), cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div></div>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>lab-11-1</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+       <div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> __future__ <span style="color:#f92672">import</span> absolute_import
+<span style="color:#f92672">from</span> __future__ <span style="color:#f92672">import</span> division
+<span style="color:#f92672">from</span> __future__ <span style="color:#f92672">import</span> print_function
+
+<span style="color:#f92672">import</span> tensorflow <span style="color:#f92672">as</span> tf
+<span style="color:#f92672">from</span> tensorflow <span style="color:#f92672">import</span> keras
+<span style="color:#f92672">from</span> tensorflow.keras.utils <span style="color:#f92672">import</span> to_categorical
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">import</span> os
+
+<span style="color:#66d9ef">print</span>(tf<span style="color:#f92672">.</span>__version__)
+<span style="color:#66d9ef">print</span>(keras<span style="color:#f92672">.</span>__version__)
+
+<span style="color:#75715e"># Hyper Parameters 설정</span>
+learning_rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.001</span>
+training_epochs <span style="color:#f92672">=</span> <span style="color:#ae81ff">15</span>
+batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+
+tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>set_seed(<span style="color:#ae81ff">777</span>)
+
+<span style="color:#75715e"># Creating a Checkpoint Directory </span>
+cur_dir <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>getcwd()
+<span style="color:#66d9ef">print</span>(cur_dir)
+
+ckpt_dir_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;checkpoints&#39;</span>
+model_dir_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;minst_cnn_seq&#39;</span>
+
+checkpoint_dir <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(cur_dir, ckpt_dir_name, model_dir_name)
+<span style="color:#66d9ef">print</span>(checkpoint_dir)
+
+os<span style="color:#f92672">.</span>makedirs(checkpoint_dir, exist_ok<span style="color:#f92672">=</span>True)
+
+checkpoint_prefix <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(checkpoint_dir, model_dir_name)
+<span style="color:#66d9ef">print</span>(checkpoint_prefix)
+
+<span style="color:#75715e">## MNIST Dataset #########################################################</span>
+mnist <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>datasets<span style="color:#f92672">.</span>mnist
+class_names <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;0&#39;</span>, <span style="color:#e6db74">&#39;1&#39;</span>, <span style="color:#e6db74">&#39;2&#39;</span>, <span style="color:#e6db74">&#39;3&#39;</span>, <span style="color:#e6db74">&#39;4&#39;</span>, <span style="color:#e6db74">&#39;5&#39;</span>, <span style="color:#e6db74">&#39;6&#39;</span>, <span style="color:#e6db74">&#39;7&#39;</span>, <span style="color:#e6db74">&#39;8&#39;</span>, <span style="color:#e6db74">&#39;9&#39;</span>]
+<span style="color:#75715e">##########################################################################</span>
+
+<span style="color:#75715e">## Fashion MNIST Dataset #################################################</span>
+<span style="color:#75715e">#mnist = keras.datasets.fashion_mnist</span>
+<span style="color:#75715e">#class_names = [&#39;T-shirt/top&#39;, &#39;Trouser&#39;, &#39;Pullover&#39;, &#39;Dress&#39;, &#39;Coat&#39;, &#39;Sandal&#39;, &#39;Shirt&#39;, &#39;Sneaker&#39;, &#39;Bag&#39;, &#39;Ankle boot&#39;]</span>
+<span style="color:#75715e">##########################################################################</span>
+
+<span style="color:#75715e"># Datasets Load</span>
+(train_images, train_labels), (test_images, test_labels) <span style="color:#f92672">=</span> mnist<span style="color:#f92672">.</span>load_data()    
+    
+<span style="color:#75715e"># Train Data Normalization</span>
+train_images <span style="color:#f92672">=</span> train_images<span style="color:#f92672">.</span>astype(np<span style="color:#f92672">.</span>float32) <span style="color:#f92672">/</span> <span style="color:#ae81ff">255.</span>
+test_images <span style="color:#f92672">=</span> test_images<span style="color:#f92672">.</span>astype(np<span style="color:#f92672">.</span>float32) <span style="color:#f92672">/</span> <span style="color:#ae81ff">255.</span>
+
+<span style="color:#75715e"># Train Data 마지막 차원 추가</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Before : &#34;</span>,train_images<span style="color:#f92672">.</span>shape)
+train_images <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>expand_dims(train_images, axis<span style="color:#f92672">=-</span><span style="color:#ae81ff">1</span>)
+test_images <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>expand_dims(test_images, axis<span style="color:#f92672">=-</span><span style="color:#ae81ff">1</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;After : &#34;</span>,train_images<span style="color:#f92672">.</span>shape)
+
+<span style="color:#75715e"># Label 카테고리 지정</span>
+<span style="color:#75715e"># Converts a class vector (integers) to binary class matrix.</span>
+train_labels <span style="color:#f92672">=</span> to_categorical(train_labels, <span style="color:#ae81ff">10</span>)
+test_labels  <span style="color:#f92672">=</span> to_categorical(test_labels, <span style="color:#ae81ff">10</span>)    
+
+<span style="color:#75715e"># 이미지 경로 또는 RAW 데이터를 TF를 사용해 DataSet으로 전환</span>
+train_dataset <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>Dataset<span style="color:#f92672">.</span>from_tensor_slices((train_images, train_labels))<span style="color:#f92672">.</span>shuffle(buffer_size<span style="color:#f92672">=</span><span style="color:#ae81ff">100000</span>)<span style="color:#f92672">.</span>batch(batch_size)
+test_dataset  <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>Dataset<span style="color:#f92672">.</span>from_tensor_slices((test_images , test_labels ))<span style="color:#f92672">.</span>batch(batch_size)
+
+<span style="color:#75715e"># 모델 생성 (sequential-eager)</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_model_seq</span>():
+    model <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>Sequential()
+    
+    <span style="color:#75715e"># 28 X 28 X 32</span>
+    model<span style="color:#f92672">.</span>add(keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Conv2D(filters<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>, kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, activation<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>relu, padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;SAME&#39;</span>, input_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">28</span>, <span style="color:#ae81ff">28</span>, <span style="color:#ae81ff">1</span>)))
+    model<span style="color:#f92672">.</span>add(keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>MaxPool2D(padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;SAME&#39;</span>))
+    
+    <span style="color:#75715e"># 14 X 14 X 64</span>
+    model<span style="color:#f92672">.</span>add(keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Conv2D(filters<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span>, kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, activation<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>relu, padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;SAME&#39;</span>))
+    model<span style="color:#f92672">.</span>add(keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>MaxPool2D(padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;SAME&#39;</span>))
+
+    <span style="color:#75715e"># 7 X 7 X 128</span>
+    model<span style="color:#f92672">.</span>add(keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Conv2D(filters<span style="color:#f92672">=</span><span style="color:#ae81ff">128</span>, kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, activation<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>relu, padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;SAME&#39;</span>))
+    model<span style="color:#f92672">.</span>add(keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>MaxPool2D(padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;SAME&#39;</span>))
+    
+    <span style="color:#75715e"># 4 X X 128 -&gt; 2048</span>
+    model<span style="color:#f92672">.</span>add(keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Flatten())
+
+    <span style="color:#75715e"># 256</span>
+    model<span style="color:#f92672">.</span>add(keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dense(<span style="color:#ae81ff">256</span>, activation<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>relu))
+    
+    <span style="color:#75715e"># Dropout 0.4</span>
+    model<span style="color:#f92672">.</span>add(keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dropout(<span style="color:#ae81ff">0.4</span>))
+
+    <span style="color:#75715e"># 10</span>
+    model<span style="color:#f92672">.</span>add(keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dense(<span style="color:#ae81ff">10</span>))
+    <span style="color:#66d9ef">return</span> model
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_model_fuc</span>() :
+    inputs <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>Input(shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">1</span>))
+    conv1 <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Conv2D(filters<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>, kernel_size<span style="color:#f92672">=</span>[<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>],padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;SAME&#39;</span>, activation<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>relu)(inputs)
+    pool1 <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>MaxPool2D(padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;SAME&#39;</span>)(conv1)
+    conv2 <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Conv2D(filters<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span>, kernel_size<span style="color:#f92672">=</span>[<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>],padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;SAME&#39;</span>, activation<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>relu)(pool1)
+    pool2 <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>MaxPool2D(padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;SAME&#39;</span>)(conv2)
+    conv3 <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Conv2D(filters<span style="color:#f92672">=</span><span style="color:#ae81ff">128</span>, kernel_size<span style="color:#f92672">=</span>[<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>],padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;SAME&#39;</span>, activation<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>relu)(pool2)
+    pool3 <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>MaxPool2D(padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;SAME&#39;</span>)(conv3)
+    pool3_flat <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Flatten()(pool3)
+    dense4 <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dense(units<span style="color:#f92672">=</span><span style="color:#ae81ff">256</span>, activation<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>relu)(pool3_flat)
+    drop4 <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dropout(rate<span style="color:#f92672">=</span><span style="color:#ae81ff">0.4</span>)(dense4)
+    logits <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dense(units<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)(drop4)
+    <span style="color:#66d9ef">return</span> keras<span style="color:#f92672">.</span>Model(inputs<span style="color:#f92672">=</span>inputs, outputs<span style="color:#f92672">=</span>logits)
+
+<span style="color:#75715e">#model = create_model_seq()</span>
+model <span style="color:#f92672">=</span> create_model_fuc()
+
+<span style="color:#75715e"># Model Summary 출력</span>
+model<span style="color:#f92672">.</span>summary()
+
+<span style="color:#75715e"># tf.function : decorator </span>
+<span style="color:#75715e"># 즉시 실행이 가능한 Tensorflow Graph로 전환</span>
+<span style="color:#75715e"># Loss Function </span>
+<span style="color:#a6e22e">@tf.function</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">loss_fn</span>(model, images, labels):
+    logits <span style="color:#f92672">=</span> model(images, training<span style="color:#f92672">=</span>True)
+    loss <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>losses<span style="color:#f92672">.</span>categorical_crossentropy(
+        y_pred<span style="color:#f92672">=</span>logits, y_true<span style="color:#f92672">=</span>labels, from_logits<span style="color:#f92672">=</span>True))    
+    <span style="color:#66d9ef">return</span> loss   
+
+<span style="color:#75715e"># Calculating Gradient</span>
+<span style="color:#a6e22e">@tf.function</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">grad</span>(model, images, labels):
+    <span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>GradientTape() <span style="color:#66d9ef">as</span> tape:
+        loss <span style="color:#f92672">=</span> loss_fn(model, images, labels)
+    <span style="color:#66d9ef">return</span> tape<span style="color:#f92672">.</span>gradient(loss, model<span style="color:#f92672">.</span>variables)
+
+<span style="color:#75715e"># Calculating Model&#39;s Accuracy</span>
+<span style="color:#a6e22e">@tf.function</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">evaluate</span>(model, images, labels):
+    logits <span style="color:#f92672">=</span> model(images, training<span style="color:#f92672">=</span>False)
+    correct_prediction <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>equal(tf<span style="color:#f92672">.</span>argmax(logits, <span style="color:#ae81ff">1</span>), tf<span style="color:#f92672">.</span>argmax(labels, <span style="color:#ae81ff">1</span>))
+    accuracy <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(tf<span style="color:#f92672">.</span>cast(correct_prediction, tf<span style="color:#f92672">.</span>float32))
+    <span style="color:#66d9ef">return</span> accuracy
+
+<span style="color:#75715e"># ADAM Optimizer</span>
+<span style="color:#75715e"># Learning_rate = 0.001</span>
+optimizer <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>optimizers<span style="color:#f92672">.</span>Adam(learning_rate<span style="color:#f92672">=</span>learning_rate)
+
+<span style="color:#75715e"># Creating Checkpoint</span>
+checkpoint <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>Checkpoint(cnn<span style="color:#f92672">=</span>model)
+
+<span style="color:#75715e"># Train Function Define</span>
+<span style="color:#a6e22e">@tf.function</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">train</span>(model, images, labels):
+    grads <span style="color:#f92672">=</span> grad(model, images, labels)
+    optimizer<span style="color:#f92672">.</span>apply_gradients(zip(grads, model<span style="color:#f92672">.</span>trainable_variables))
+
+<span style="color:#75715e"># Train Model</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Learning Started...&#39;</span>)
+
+<span style="color:#75715e"># Epoch만큼 for loop</span>
+<span style="color:#66d9ef">for</span> epoch <span style="color:#f92672">in</span> range(training_epochs):
+    <span style="color:#75715e"># default setting</span>
+    avg_loss <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.</span>
+    avg_train_acc <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.</span>
+    avg_test_acc <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.</span>
+    train_step <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    test_step <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>    
+    
+    <span style="color:#75715e"># train_dataset에서 for loop</span>
+    <span style="color:#66d9ef">for</span> images, labels <span style="color:#f92672">in</span> train_dataset:
+        <span style="color:#75715e"># train</span>
+        train(model, images, labels)
+        <span style="color:#75715e">#grads = grad(model, images, labels)                </span>
+        <span style="color:#75715e">#optimizer.apply_gradients(zip(grads, model.variables))</span>
+        
+        <span style="color:#75715e"># loss</span>
+        loss <span style="color:#f92672">=</span> loss_fn(model, images, labels)
+        
+        <span style="color:#75715e"># evaluate</span>
+        acc <span style="color:#f92672">=</span> evaluate(model, images, labels)
+        
+        <span style="color:#75715e"># loss cum</span>
+        avg_loss <span style="color:#f92672">=</span> avg_loss <span style="color:#f92672">+</span> loss
+        
+        <span style="color:#75715e"># acc cum</span>
+        avg_train_acc <span style="color:#f92672">=</span> avg_train_acc <span style="color:#f92672">+</span> acc
+        
+        <span style="color:#75715e"># for loop</span>
+        train_step <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+    
+    <span style="color:#75715e"># avg_loss  / avg_train_acc</span>
+    avg_loss <span style="color:#f92672">=</span> avg_loss <span style="color:#f92672">/</span> train_step
+    avg_train_acc <span style="color:#f92672">=</span> avg_train_acc <span style="color:#f92672">/</span> train_step
+    
+    <span style="color:#75715e"># test_dataset에서 for loop</span>
+    <span style="color:#66d9ef">for</span> images, labels <span style="color:#f92672">in</span> test_dataset:        
+        <span style="color:#75715e"># evaluate </span>
+        acc <span style="color:#f92672">=</span> evaluate(model, images, labels)        
+        avg_test_acc <span style="color:#f92672">=</span> avg_test_acc <span style="color:#f92672">+</span> acc
+        test_step <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>    
+    
+    <span style="color:#75715e"># test acc average</span>
+    avg_test_acc <span style="color:#f92672">=</span> avg_test_acc <span style="color:#f92672">/</span> test_step    
+
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;EPCH : &#39;</span>, <span style="color:#e6db74">&#39;{}&#39;</span><span style="color:#f92672">.</span>format(epoch <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>), <span style="color:#e6db74">&#39;| LOSS : &#39;</span>, <span style="color:#e6db74">&#39;{:.8f}&#39;</span><span style="color:#f92672">.</span>format(avg_loss), <span style="color:#e6db74">&#39;| TR_ACC : &#39;</span>, <span style="color:#e6db74">&#39;{:.4f}&#39;</span><span style="color:#f92672">.</span>format(avg_train_acc), <span style="color:#e6db74">&#39;| TS_ACC : &#39;</span>, <span style="color:#e6db74">&#39;{:.4f}&#39;</span><span style="color:#f92672">.</span>format(avg_test_acc))
+    
+    checkpoint<span style="color:#f92672">.</span>save(file_prefix<span style="color:#f92672">=</span>checkpoint_prefix)
+
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Learning Finished...&#39;</span>)
 </code></pre></div></div>
     </div>
   </label>
