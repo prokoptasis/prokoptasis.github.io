@@ -22,7 +22,7 @@ Live SQL #   Oracle 가입 Oracle Live SQL 접속 &amp;ldquo;Start Coding Now&am
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://prokoptasis.github.io/docs/documents/backend/sql/sql02/</guid>
-      <description>SQL Advanced #   exists / not exists #   exists / not exists ...      pivot / unpivot #   pivot ...       unpivot ...      lead / lag #   lead / lag ...      rows / range / preceding / following / current / unbounded #   rows / range / preceding / following / current / unbounded  .</description>
+      <description>SQL Advanced #   exists / not exists #   exists / not exists ...  select * from my_table_1 a where exists ( select &amp;#39;x&amp;#39; from my_table_1 x where x.column_1 = a.column_1 and x.column_2 = a.column_2 and x.column_2 &amp;lt;= 30 ) ; select * from my_table_1 a where not exists ( select &amp;#39;x&amp;#39; from my_table_1 x where x.column_1 = a.column_1 and x.column_2 = a.column_2 and x.column_2 &amp;lt;= 30 ) ;     pivot / unpivot #   pivot .</description>
     </item>
     
   </channel>

@@ -6,7 +6,17 @@
     <description>Recent content in diary on Prokoptasis</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>kr-ko</language>
-    <lastBuildDate>Thu, 22 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://prokoptasis.github.io/tags/diary/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 27 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://prokoptasis.github.io/tags/diary/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Update 재개</title>
+      <link>http://prokoptasis.github.io/posts/210727/</link>
+      <pubDate>Tue, 27 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://prokoptasis.github.io/posts/210727/</guid>
+      <description> 더 안쓰다가는 잊어먹을 듯 하여 조금이라도 업데이트를 재개함. 무더위 와중 RUST를 좀더 공부해보려고 계획 중. 일단 한번 훑어봤다고 생각했지만 안쓰니 다시 생소해져 버렸음. 손에 익을때까지 뭔가를 해보았으면 좋겠는데 게을러서 자꾸 느슨해지게 됨. 어찌되었건 다시 조금씩이라도 갱신하려고 손보고 있음.
+ 다음글  </description>
+    </item>
+    
     <item>
       <title>Personal Log</title>
       <link>http://prokoptasis.github.io/posts/201022/</link>

@@ -80,7 +80,7 @@ package main import ( &amp;#34;database/sql&amp;#34; &amp;#34;fmt&amp;#34; &amp;
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://prokoptasis.github.io/docs/documents/backend/sql/sql02/</guid>
-      <description>SQL Advanced #   exists / not exists #   exists / not exists ...      pivot / unpivot #   pivot ...       unpivot ...      lead / lag #   lead / lag ...      rows / range / preceding / following / current / unbounded #   rows / range / preceding / following / current / unbounded  .</description>
+      <description>SQL Advanced #   exists / not exists #   exists / not exists ...  select * from my_table_1 a where exists ( select &amp;#39;x&amp;#39; from my_table_1 x where x.column_1 = a.column_1 and x.column_2 = a.column_2 and x.column_2 &amp;lt;= 30 ) ; select * from my_table_1 a where not exists ( select &amp;#39;x&amp;#39; from my_table_1 x where x.column_1 = a.column_1 and x.column_2 = a.column_2 and x.column_2 &amp;lt;= 30 ) ;     pivot / unpivot #   pivot .</description>
     </item>
     
     <item>
@@ -106,6 +106,16 @@ I&amp;rsquo;m in the middle of a meeting. Can I call you back in just a minute?<
       <description>English Expression Diary #   A little bird told me #  동문서답으로 &amp;lsquo;그냥 주워들었어&amp;rsquo; 표현. &amp;lsquo;Tell me. Where did you hear that?&amp;rsquo; &amp;lsquo;A little bird told me.&amp;rsquo;
 Bigger fish to fry #  &amp;lsquo;좀 더 중요하고 큰 다른 것&amp;rsquo;이란 의미. &amp;lsquo;Why did you turn down their offer?&amp;rsquo; &amp;lsquo;Oh, I have bigger fish to fry.&amp;rsquo;
 Can of Worms #  &amp;lsquo;심각한 문제를 초래할 수 있는 위험&amp;rsquo;. &amp;lsquo;What do you think about the new tax law?</description>
+    </item>
+    
+    <item>
+      <title>Update 재개</title>
+      <link>http://prokoptasis.github.io/posts/210727/</link>
+      <pubDate>Tue, 27 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://prokoptasis.github.io/posts/210727/</guid>
+      <description> 더 안쓰다가는 잊어먹을 듯 하여 조금이라도 업데이트를 재개함. 무더위 와중 RUST를 좀더 공부해보려고 계획 중. 일단 한번 훑어봤다고 생각했지만 안쓰니 다시 생소해져 버렸음. 손에 익을때까지 뭔가를 해보았으면 좋겠는데 게을러서 자꾸 느슨해지게 됨. 어찌되었건 다시 조금씩이라도 갱신하려고 손보고 있음.
+ 다음글  </description>
     </item>
     
     <item>

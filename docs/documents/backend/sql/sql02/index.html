@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.d4d788e81c0bdda964c3fea379c7883684cb650d2303b8131f03763f33f4dd70.js" integrity="sha256-1NeI6BwL3alkw/6jeceINoTLZQ0jA7gTHwN2PzP03XA="></script>
+<script defer src="/ko.search.min.49c0e21bb22bea14291de075c62cac9fa4ca0bd221814dbe3a2658dd6cb38316.js" integrity="sha256-ScDiG7Ir6hQpHeB1xiysn6TKC9IhgU2&#43;OiZY3WyzgxY="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -656,7 +656,30 @@ https://github.com/alex-shpak/hugo-book
     </div>
     <input type="checkbox" class="hidden" />
     <div class="book-expand-content markdown-inner">
-      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"></code></pre></div>
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span>  <span style="color:#f92672">*</span>
+<span style="color:#66d9ef">from</span>    my_table_1 a
+<span style="color:#66d9ef">where</span>   <span style="color:#66d9ef">exists</span>
+        (
+        <span style="color:#66d9ef">select</span>  <span style="color:#e6db74">&#39;x&#39;</span>
+        <span style="color:#66d9ef">from</span>    my_table_1 x
+        <span style="color:#66d9ef">where</span>   x.column_1 <span style="color:#f92672">=</span> a.column_1
+        <span style="color:#66d9ef">and</span>     x.column_2 <span style="color:#f92672">=</span> a.column_2
+        <span style="color:#66d9ef">and</span>     x.column_2 <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">30</span>
+        )
+;
+
+<span style="color:#66d9ef">select</span>  <span style="color:#f92672">*</span>
+<span style="color:#66d9ef">from</span>    my_table_1 a
+<span style="color:#66d9ef">where</span>   <span style="color:#66d9ef">not</span> <span style="color:#66d9ef">exists</span>
+        (
+        <span style="color:#66d9ef">select</span>  <span style="color:#e6db74">&#39;x&#39;</span>
+        <span style="color:#66d9ef">from</span>    my_table_1 x
+        <span style="color:#66d9ef">where</span>   x.column_1 <span style="color:#f92672">=</span> a.column_1
+        <span style="color:#66d9ef">and</span>     x.column_2 <span style="color:#f92672">=</span> a.column_2
+        <span style="color:#66d9ef">and</span>     x.column_2 <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">30</span>
+        )
+;
+</code></pre></div>
     </div>
   </label>
 </div>
@@ -674,7 +697,15 @@ https://github.com/alex-shpak/hugo-book
     </div>
     <input type="checkbox" class="hidden" />
     <div class="book-expand-content markdown-inner">
-      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"></code></pre></div>
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span>  round(hong,<span style="color:#ae81ff">2</span>) hong,round(kim,<span style="color:#ae81ff">2</span>) kim,round(lee,<span style="color:#ae81ff">2</span>) lee,round(park,<span style="color:#ae81ff">2</span>) park,round(shin,<span style="color:#ae81ff">2</span>) shin,round(choi,<span style="color:#ae81ff">2</span>) choi
+<span style="color:#66d9ef">from</span>    (
+        <span style="color:#66d9ef">select</span>  substr(column_1,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>) fnm,<span style="color:#66d9ef">avg</span>(column_2) avg_age
+        <span style="color:#66d9ef">from</span>    my_table_1 a
+        <span style="color:#66d9ef">group</span>   <span style="color:#66d9ef">by</span> substr(column_1,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>)
+        )
+pivot   (<span style="color:#66d9ef">avg</span>(avg_age) <span style="color:#66d9ef">for</span> fnm <span style="color:#66d9ef">in</span> (<span style="color:#e6db74">&#39;홍&#39;</span> <span style="color:#66d9ef">as</span> hong,<span style="color:#e6db74">&#39;김&#39;</span> <span style="color:#66d9ef">as</span> kim,<span style="color:#e6db74">&#39;이&#39;</span> <span style="color:#66d9ef">as</span> lee,<span style="color:#e6db74">&#39;박&#39;</span> <span style="color:#66d9ef">as</span> park,<span style="color:#e6db74">&#39;신&#39;</span> <span style="color:#66d9ef">as</span> shin,<span style="color:#e6db74">&#39;최&#39;</span> <span style="color:#66d9ef">as</span> choi))
+;
+</code></pre></div>
     </div>
   </label>
 </div>
@@ -688,7 +719,21 @@ https://github.com/alex-shpak/hugo-book
     </div>
     <input type="checkbox" class="hidden" />
     <div class="book-expand-content markdown-inner">
-      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"></code></pre></div>
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">with</span>    fmnm_list <span style="color:#66d9ef">as</span>
+(
+<span style="color:#66d9ef">select</span>  round(hong,<span style="color:#ae81ff">2</span>) hong,round(kim,<span style="color:#ae81ff">2</span>) kim,round(lee,<span style="color:#ae81ff">2</span>) lee,round(park,<span style="color:#ae81ff">2</span>) park,round(shin,<span style="color:#ae81ff">2</span>) shin,round(choi,<span style="color:#ae81ff">2</span>) choi
+<span style="color:#66d9ef">from</span>    (
+        <span style="color:#66d9ef">select</span>  substr(column_1,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>) fnm,<span style="color:#66d9ef">avg</span>(column_2) avg_age
+        <span style="color:#66d9ef">from</span>    my_table_1 a
+        <span style="color:#66d9ef">group</span>   <span style="color:#66d9ef">by</span> substr(column_1,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>)
+        )
+pivot   (<span style="color:#66d9ef">avg</span>(avg_age) <span style="color:#66d9ef">for</span> fnm <span style="color:#66d9ef">in</span> (<span style="color:#e6db74">&#39;홍&#39;</span> <span style="color:#66d9ef">as</span> hong,<span style="color:#e6db74">&#39;김&#39;</span> <span style="color:#66d9ef">as</span> kim,<span style="color:#e6db74">&#39;이&#39;</span> <span style="color:#66d9ef">as</span> lee,<span style="color:#e6db74">&#39;박&#39;</span> <span style="color:#66d9ef">as</span> park,<span style="color:#e6db74">&#39;신&#39;</span> <span style="color:#66d9ef">as</span> shin,<span style="color:#e6db74">&#39;최&#39;</span> <span style="color:#66d9ef">as</span> choi))
+)
+<span style="color:#66d9ef">select</span>  <span style="color:#f92672">*</span>
+<span style="color:#66d9ef">from</span>    fmnm_list a
+unpivot (age <span style="color:#66d9ef">for</span> fnm <span style="color:#66d9ef">in</span> (hong <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;H&#39;</span>,kim <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;K&#39;</span>,lee <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;L&#39;</span>,park <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;P&#39;</span>,shin <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;S&#39;</span>,choi <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;C&#39;</span>))
+;
+</code></pre></div>
     </div>
   </label>
 </div>
