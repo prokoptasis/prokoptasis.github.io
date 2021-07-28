@@ -14,7 +14,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.001ba32d1ef4d2469d055e28d66fd96b16bfeddee698f1e2729af3a54ed86b8b.css" integrity="sha256-ABujLR700kadBV4o1m/Zaxa/7d7mmPHicprzpU7Ya4s=">
-<script defer src="/ko.search.min.49c0e21bb22bea14291de075c62cac9fa4ca0bd221814dbe3a2658dd6cb38316.js" integrity="sha256-ScDiG7Ir6hQpHeB1xiysn6TKC9IhgU2&#43;OiZY3WyzgxY="></script>
+<script defer src="/ko.search.min.ab87a40cd492d348788589e9972966715f5f70b61b1526857062a13bb067418d.js" integrity="sha256-q4ekDNSS00h4hYnplylmcV9fcLYbFSaFcGKhO7BnQY0="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -751,7 +751,18 @@ unpivot (age <span style="color:#66d9ef">for</span> fnm <span style="color:#66d9
     </div>
     <input type="checkbox" class="hidden" />
     <div class="book-expand-content markdown-inner">
-      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"></code></pre></div>
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span>  column_1,column_2,
+        lead(column_1,<span style="color:#ae81ff">1</span>,<span style="color:#e6db74">&#39;-&#39;</span>)  over (partition <span style="color:#66d9ef">by</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> column_2) lead_col,
+        lag(column_1,<span style="color:#ae81ff">1</span>,<span style="color:#e6db74">&#39;-&#39;</span>)  over (partition <span style="color:#66d9ef">by</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> column_2) lag_col
+<span style="color:#66d9ef">from</span>    my_table_1
+<span style="color:#66d9ef">order</span>   <span style="color:#66d9ef">by</span> column_2
+;
+
+<span style="color:#66d9ef">select</span>  listagg(column_1,<span style="color:#e6db74">&#39;,&#39;</span>) within <span style="color:#66d9ef">group</span> (<span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> column_2) name_list
+<span style="color:#66d9ef">from</span>    my_table_1
+;
+
+</code></pre></div>
     </div>
   </label>
 </div>
@@ -769,7 +780,18 @@ unpivot (age <span style="color:#66d9ef">for</span> fnm <span style="color:#66d9
     </div>
     <input type="checkbox" class="hidden" />
     <div class="book-expand-content markdown-inner">
-      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"></code></pre></div>
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">
+<span style="color:#66d9ef">select</span>  column_1,column_2,
+        <span style="color:#66d9ef">sum</span>(column_2) over (partition <span style="color:#66d9ef">by</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> column_1 <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">between</span> <span style="color:#ae81ff">2</span> preceding <span style="color:#66d9ef">and</span> <span style="color:#ae81ff">1</span> preceding) before_two_rows,
+        <span style="color:#66d9ef">sum</span>(column_2) over (partition <span style="color:#66d9ef">by</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> column_1 <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">between</span> <span style="color:#ae81ff">1</span> following <span style="color:#66d9ef">and</span> <span style="color:#ae81ff">2</span> following) after_two_rows,
+        <span style="color:#66d9ef">sum</span>(column_2) over (partition <span style="color:#66d9ef">by</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> column_1 <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">between</span> unbounded preceding <span style="color:#66d9ef">and</span> <span style="color:#66d9ef">current</span> <span style="color:#66d9ef">row</span>) before_all_rows,
+        <span style="color:#66d9ef">avg</span>(column_2) over (partition <span style="color:#66d9ef">by</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> column_1 <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">between</span> unbounded preceding <span style="color:#66d9ef">and</span> <span style="color:#66d9ef">current</span> <span style="color:#66d9ef">row</span>) row_sample,
+        <span style="color:#66d9ef">avg</span>(column_2) over (partition <span style="color:#66d9ef">by</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> column_1 range <span style="color:#66d9ef">between</span> unbounded preceding <span style="color:#66d9ef">and</span> <span style="color:#66d9ef">current</span> <span style="color:#66d9ef">row</span>) range_sample
+<span style="color:#66d9ef">from</span>    my_table_1
+<span style="color:#66d9ef">order</span>   <span style="color:#66d9ef">by</span> column_1
+;
+
+</code></pre></div>
     </div>
   </label>
 </div>
@@ -787,7 +809,26 @@ unpivot (age <span style="color:#66d9ef">for</span> fnm <span style="color:#66d9
     </div>
     <input type="checkbox" class="hidden" />
     <div class="book-expand-content markdown-inner">
-      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"></code></pre></div>
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">with</span>    data_set <span style="color:#66d9ef">as</span>
+(
+<span style="color:#66d9ef">select</span>  <span style="color:#e6db74">&#39;A&#39;</span> frid, <span style="color:#e6db74">&#39;D&#39;</span> toid <span style="color:#66d9ef">from</span> dual <span style="color:#66d9ef">union</span> <span style="color:#66d9ef">all</span>
+<span style="color:#66d9ef">select</span>  <span style="color:#e6db74">&#39;D&#39;</span> frid, <span style="color:#e6db74">&#39;B&#39;</span> toid <span style="color:#66d9ef">from</span> dual <span style="color:#66d9ef">union</span> <span style="color:#66d9ef">all</span>
+<span style="color:#66d9ef">select</span>  <span style="color:#e6db74">&#39;B&#39;</span> frid, <span style="color:#e6db74">&#39;C&#39;</span> toid <span style="color:#66d9ef">from</span> dual <span style="color:#66d9ef">union</span> <span style="color:#66d9ef">all</span>
+<span style="color:#66d9ef">select</span>  <span style="color:#e6db74">&#39;C&#39;</span> frid, <span style="color:#e6db74">&#39;G&#39;</span> toid <span style="color:#66d9ef">from</span> dual <span style="color:#66d9ef">union</span> <span style="color:#66d9ef">all</span>
+<span style="color:#66d9ef">select</span>  <span style="color:#e6db74">&#39;C&#39;</span> frid, <span style="color:#e6db74">&#39;H&#39;</span> toid <span style="color:#66d9ef">from</span> dual <span style="color:#66d9ef">union</span> <span style="color:#66d9ef">all</span>
+<span style="color:#66d9ef">select</span>  <span style="color:#e6db74">&#39;G&#39;</span> frid, <span style="color:#e6db74">&#39;E&#39;</span> toid <span style="color:#66d9ef">from</span> dual <span style="color:#66d9ef">union</span> <span style="color:#66d9ef">all</span>
+<span style="color:#66d9ef">select</span>  <span style="color:#e6db74">&#39;H&#39;</span> frid, <span style="color:#e6db74">&#39;I&#39;</span> toid <span style="color:#66d9ef">from</span> dual
+)
+<span style="color:#66d9ef">select</span>  <span style="color:#66d9ef">level</span> lvl,
+        connect_by_root(a.frid) root,
+        a.frid,a.toid,
+        sys_connect_by_path(frid,<span style="color:#e6db74">&#39;&gt;&#39;</span>)<span style="color:#f92672">||</span><span style="color:#e6db74">&#39;&gt;&#39;</span><span style="color:#f92672">||</span>toid conn_str
+<span style="color:#66d9ef">from</span>    data_set a
+<span style="color:#66d9ef">start</span>   <span style="color:#66d9ef">with</span> frid <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;A&#39;</span>
+<span style="color:#66d9ef">connect</span> <span style="color:#66d9ef">by</span> <span style="color:#66d9ef">prior</span> toid <span style="color:#f92672">=</span> frid
+<span style="color:#66d9ef">order</span>   <span style="color:#66d9ef">by</span> <span style="color:#66d9ef">level</span>
+;
+</code></pre></div>
     </div>
   </label>
 </div>
@@ -805,7 +846,13 @@ unpivot (age <span style="color:#66d9ef">for</span> fnm <span style="color:#66d9
     </div>
     <input type="checkbox" class="hidden" />
     <div class="book-expand-content markdown-inner">
-      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"></code></pre></div>
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span>  column_1,column_2,
+        <span style="color:#66d9ef">sum</span>(column_2) over (partition <span style="color:#66d9ef">by</span> <span style="color:#ae81ff">1</span>) age_sum,
+        column_2<span style="color:#f92672">/</span><span style="color:#66d9ef">sum</span>(column_2) over (partition <span style="color:#66d9ef">by</span> <span style="color:#ae81ff">1</span>) age_rto_1,
+        ratio_to_report(column_2) over (partition <span style="color:#66d9ef">by</span> <span style="color:#ae81ff">1</span>) age_rto_2
+<span style="color:#66d9ef">from</span>    my_table_1
+;
+</code></pre></div>
     </div>
   </label>
 </div>
@@ -823,7 +870,16 @@ unpivot (age <span style="color:#66d9ef">for</span> fnm <span style="color:#66d9
     </div>
     <input type="checkbox" class="hidden" />
     <div class="book-expand-content markdown-inner">
-      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"></code></pre></div>
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">create</span>  <span style="color:#66d9ef">table</span> my_table_2 <span style="color:#66d9ef">as</span>
+<span style="color:#66d9ef">select</span>  <span style="color:#f92672">*</span>
+<span style="color:#66d9ef">from</span>    my_table_1
+;
+
+<span style="color:#66d9ef">create</span>  <span style="color:#66d9ef">table</span> my_table_3 <span style="color:#66d9ef">as</span>
+<span style="color:#66d9ef">select</span>  column_1 <span style="color:#66d9ef">as</span> co1,column_2 <span style="color:#66d9ef">as</span> co2
+<span style="color:#66d9ef">from</span>    my_table_1
+;
+</code></pre></div>
     </div>
   </label>
 </div>
@@ -841,7 +897,24 @@ unpivot (age <span style="color:#66d9ef">for</span> fnm <span style="color:#66d9
     </div>
     <input type="checkbox" class="hidden" />
     <div class="book-expand-content markdown-inner">
-      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"></code></pre></div>
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">merge   <span style="color:#66d9ef">into</span> my_table_1 a
+<span style="color:#66d9ef">using</span>   (
+        <span style="color:#66d9ef">select</span>  column_1,column_2<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span> column_2,column_3
+        <span style="color:#66d9ef">from</span>    my_table_1
+        <span style="color:#66d9ef">where</span>   substr(column_1,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">in</span> (<span style="color:#e6db74">&#39;홍&#39;</span>,<span style="color:#e6db74">&#39;박&#39;</span>,<span style="color:#e6db74">&#39;신&#39;</span>)
+        <span style="color:#66d9ef">union</span> <span style="color:#66d9ef">all</span>
+        <span style="color:#66d9ef">select</span>  <span style="color:#e6db74">&#39;유소영&#39;</span> column_1,<span style="color:#ae81ff">27</span> column_2,sysdate column_3
+        <span style="color:#66d9ef">from</span>    dual
+        ) b
+<span style="color:#66d9ef">on</span>      (
+        a.column_1 <span style="color:#f92672">=</span> b.column_1
+        )
+<span style="color:#66d9ef">when</span> matched <span style="color:#66d9ef">then</span> <span style="color:#66d9ef">update</span> <span style="color:#66d9ef">set</span>
+        a.column_2 <span style="color:#f92672">=</span> column_2
+<span style="color:#66d9ef">when</span> <span style="color:#66d9ef">not</span> matched <span style="color:#66d9ef">then</span> <span style="color:#66d9ef">insert</span> (a.column_1,a.column_2,a.column_3)
+        <span style="color:#66d9ef">values</span> (b.column_1,b.column_2,b.column_3)
+;
+</code></pre></div>
     </div>
   </label>
 </div>
